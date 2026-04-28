@@ -1,0 +1,275 @@
+\section{Introduction}
+Since Einstein introduced the theory of general relativity in 1915 \cite{Einstein1915}, 
+it has remained consistent with all experimental tests to date. 
+General relativity has fundamentally transformed our understanding of space and time, 
+explaining phenomena ranging from the anomalous precession of Mercury to the operation 
+of atomic clocks in GPS satellites, and predicting the existence of compact objects 
+such as neutron stars and black holes, as well as gravitational waves \cite{Carroll2004, MisnerThorneWheeler1973}.
+
+Gravitational waves were first directly detected by LIGO in 2015 \cite{Abbott2016b}. 
+These signals originate from some of the most energetic events in the universe, such as mergers of neutron stars and black holes. 
+However, the signals detected by LIGO are extremely weak; the detectors are sensitive enough to measure relative length changes 
+on the order of $10^{-21}$, corresponding to displacements smaller than a proton diameter \cite{LIGO_Facts}. 
+Despite this extraordinary sensitivity, gravitational wave signals remain weak relative to background noise. 
+The highest signal-to-noise ratio (SNR) observed to date is on the order of $\sim 80$ \cite{Abac2025GW250114}.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/LIGO_measurement_of_gravitational_waves.svg.png}
+    \caption{Schematic illustration of the LIGO interferometer used to detect gravitational waves through differential arm length changes.}
+    \label{fig:ligo_detector}
+\end{figure}
+
+Interpreting gravitational wave detections requires accurate theoretical models of the expected signals. 
+In practice, this is achieved by comparing observational data to waveform templates generated through numerical simulations. 
+This comparison allows us to statstically determine key physical properties of the source, such as masses and spins.
+
+Making theoretical models of binary black hole mergers is not trivial. In GR, analytic solutions in general relativity are typically restricted to highly symmetric systems and cannot describe the full dynamics of binary black hole mergers. 
+As a result, numerical relativity simulations are essential. 
+A number of codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR-Athena++, and Dendro-GR. \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,White2016, Fernando2023}
+
+Simulating binary black hole mergers is computationally demanding. 
+It requires solving a coupled system of nonlinear partial differential equations across multiple length scales, including the scale of the black holes, 
+the binary orbital scale, and the radiation zone \cite{BaumgarteShapiro2010, BaumgarteShapiro2021}. 
+In this work, we make use of the Dendro numerical relativity framework \cite{Fernando2023}.
+
+For standard general relativity (GR), substantial progress has been made, and extensive waveform catalogs now cover much of the parameter space, 
+particularly for near-equal-mass systems (We here define  the mass ratio q as $q = \frac{M_{\text{larger}}}{M_{\text{smaller}}} \ge 1$). 
+The LIGO--Virgo--KAGRA (LVK) collaboration has reported hundreds of detected events using these models \cite{Abbott2019}. 
+However, two key challenges remain: improving the fidelity of GR simulations and developing waveform catalogs for alternative theories of gravity .
+
+The next generation of gravitational wave detectors is expected to significantly improve the signal-to-noise ratio of observed signals. Meeting this challenge will require higher-fidelity numerical simulations and more accurate waveform models.
+
+In general, higher-fidelity simulations—particularly those with larger mass ratios—require finer grid resolution, leading to a substantial increase in computational cost. This trend is illustrated in Fig.~\ref{fig:Walltime}. Current simulations with mass ratios $q < 8$ can require weeks of runtime on modern supercomputers, and further increases in resolution would significantly amplify this cost.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/walltime.png}
+    \caption{Walltime of numerical relativity simulations as a function of mass ratio.}
+    \label{fig:Walltime}
+\end{figure}
+
+To obtain more accurate waveforms, there are two main approaches: running existing codes at higher resolution or improving the underlying numerical methods. A drawback of the brute-force approach—simply increasing resolution—is that the timescale of the problem is constrained by the CFL factor. This, in turn, requires more timesteps, significantly increasing the total runtime of the simulation.
+
+One potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods—although highly accurate—are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. In tests within our Maxwell solver, CFDs often perform comparably to explicit methods at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains limited \cite{Daszuta2023}.
+
+Gravitational wave observations provide a powerful probe of gravity in the strongly nonlinear, dynamical regime, where deviations from general relativity (GR) may become apparent. To search for such deviations, waveform templates from alternative theories of gravity are required. While some work has been carried out in theories such as Chern--Simons gravity, scalar--tensor theories, Einstein--Gauss--Bonnet gravity, and Einstein--Maxwell--dilaton theory, waveform catalogs in these frameworks remain incomplete.
+
+In this dissertation, we focus on Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA is of particular interest because it admits a well-posed initial value formulation and arises as the low-energy limit of string theory. In contrast to the no-hair theorem in standard GR, which states the black holes can be completely defined by their mass spin and charge,  EMDA black holes possess additional degrees of freedom associated with the dilaton and axion fields.
+
+We present a numerical relativity framework for simulating binary black hole mergers in EMDA theory. We analyze the resulting waveforms and investigate whether deviations from GR may be observable in gravitational wave signals.
+
+\section{Background}
+We focus on the study of black hole dynamics. As such, we begin with Einstein’s field equations:
+\begin{equation}
+    G_{ab} = 8 \pi T_{ab} + \Lambda g_{ab}.
+\end{equation}
+The left-hand side describes the geometry of spacetime, while the right-hand side encodes the matter and energy content.\cite{Wald1984,DInverno1992} We briefly examine each term in turn.
+
+The tensor $G_{ab}$ is the Einstein tensor, which is constructed from quantities that encode the curvature of spacetime. The stress-energy tensor $T_{ab}$ describes the distribution of matter and energy. The metric tensor $g_{ab}$ defines distances and causal structure in spacetime. The constant $\Lambda$ is the cosmological constant, which is generally assumed to be very small. On the scales considered in this work, it is negligible, and we therefore set $\Lambda = 0$.
+
+In standard general relativity simulations of binary black hole mergers, we consider vacuum spacetimes, for which
+\begin{equation}
+    G_{ab} = 0.
+\end{equation}
+This provides the system of partial differential equations that must be solved in vacuum GR. Before proceeding further, we review some essential geometric concepts.
+
+We begin with the metric, which encodes the notion of separation in spacetime. As an example, the Minkowski metric describing flat spacetime can be written as
+\begin{equation}
+    ds^2 = -dt^2 + dx^2 + dy^2 + dz^2,
+\end{equation}
+or equivalently in matrix form as
+\begin{equation}
+\eta_{\mu\nu} =
+\begin{pmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix}.
+\end{equation}
+Here we use $\eta_{ab}$ to denote the flat spacetime metric. The negative sign in the time component reflects our choice of signature $(-,+,+,+)$.
+
+The Minkowski metric can also be expressed in different coordinate systems. For example, in spherical coordinates it takes the form
+\begin{equation}
+\eta_{\mu\nu} =
+\begin{pmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & r^2 & 0 \\
+0 & 0 & 0 & r^2 \sin^2\theta
+\end{pmatrix}.
+\end{equation}
+Although these representations appear different, they describe the same flat spacetime. This illustrates that the form of the metric depends on the choice of coordinates.
+
+A natural question is how to determine whether a given metric describes flat spacetime. A necessary and sufficient condition is that the Riemann curvature tensor vanishes everywhere. Given a metric, the Riemann tensor is defined as
+\begin{equation}
+R^{a}{}_{bcd}
+= \partial_c \Gamma^{a}{}_{bd}
+- \partial_d \Gamma^{a}{}_{bc}
++ \Gamma^{a}{}_{ec}\,\Gamma^{e}{}_{bd}
+- \Gamma^{a}{}_{ed}\,\Gamma^{e}{}_{bc},
+\end{equation}
+where $\Gamma^{a}{}_{bc}$ are the Christoffel symbols, given by
+\begin{equation}
+\Gamma^{a}{}_{bc}
+= \frac{1}{2} g^{ad}
+\left(
+\partial_b g_{dc}
++ \partial_c g_{bd}
+- \partial_d g_{bc}
+\right).
+\end{equation}
+These quantities encode the curvature of spacetime.
+
+Contracting the Riemann tensor yields the Ricci tensor,
+\begin{equation}
+    R_{ab} = g^{cd} R_{acbd},
+\end{equation}
+and further contraction gives the Ricci scalar,
+\begin{equation}
+    R = g^{ab} R_{ab}.
+\end{equation}
+The Einstein tensor is then constructed as
+\begin{equation}
+    G_{ab} = R_{ab} - \frac{1}{2} g_{ab} R,
+\end{equation}
+which satisfies the contracted Bianchi identities and ensures local conservation of energy and momentum.
+
+With the Einstein tensor in hand, we can rewrite the field equations as a set of coupled second-order partial differential equations. To evolve these equations numerically, we must decompose them into a form suitable for time evolution. This requires splitting spacetime into three spatial dimensions and one time dimension.
+
+The most straightforward approach leads to the ADM (Arnowitt--Deser--Misner) formulation. However, the ADM system is only weakly hyperbolic and can become unstable over long evolutions. Several modified formulations have been developed to address this issue. In this work, we use the BSSN (Baumgarte--Shapiro--Shibata--Nakamura) formulation, which is strongly hyperbolic and can be evolved stably for long periods of time. Given this formulation, we require suitable initial data, after which the system can be evolved forward in time.
+
+To provide an overview of this procedure, we briefly consider simpler examples: a scalar field and Maxwell's equations.
+
+We begin with the scalar wave equation with a source term:
+\begin{equation}
+    \square \psi = \nabla_a \nabla^a \psi = 4 \pi \rho.
+\end{equation}
+This equation is written in fully covariant form. Expanding it in flat spacetime using the Minkowski metric, we obtain
+\begin{equation}
+    \square \psi = \eta^{ab} \nabla_a \nabla_b \psi = \left(-\partial_t^2 + D^2 \right)\psi,
+\end{equation}
+where $D$ denotes purely spatial derivatives.
+
+This provides a simple example of a $3+1$ decomposition. The scalar wave equation is a second-order hyperbolic equation with well-posed initial value properties: solutions exist and are unique. Importantly, there are no constraint equations in this system, meaning we are free to choose $\psi$ and $\rho$ arbitrarily as initial data. As we will see, this is not the case for Maxwell's equations or general relativity, where constraint equations must be satisfied.
+
+We now turn to the more complex case of Maxwell's equations:
+\begin{align}
+\nabla \cdot \mathbf{E} &= 4\pi \rho, \\
+\nabla \cdot \mathbf{B} &= 0, \\
+\frac{\partial \mathbf{E}}{\partial t} &= \nabla \times \mathbf{B} - 4\pi \mathbf{J}, \\
+\frac{\partial \mathbf{B}}{\partial t} &= -\nabla \times \mathbf{E}.
+\end{align}
+
+We present the full $3+1$ decomposition of Maxwell's equations in the appendix. However, an important feature is already evident: there are eight equations, but only six dynamical variables ($E_x, E_y, E_z, B_x, B_y, B_z$). The remaining two equations act as constraints on the system.
+
+Maxwell's equations can be separated into evolution equations:
+\begin{align}
+    \frac{\partial \mathbf{E}}{\partial t} &= \nabla \times \mathbf{B} - 4\pi \mathbf{J}, \\
+    \frac{\partial \mathbf{B}}{\partial t} &= -\nabla \times \mathbf{E},
+\end{align}
+and constraint equations:
+\begin{align}
+    \nabla \cdot \mathbf{E} &= 4\pi \rho, \\
+    \nabla \cdot \mathbf{B} &= 0.
+\end{align}
+
+Specifically, Gauss's law and the absence of magnetic monopoles must be satisfied at all times. If the initial data satisfy these constraints, then in the continuum limit the evolution equations will preserve them. However, in numerical simulations we work with finite precision, and violations of the constraint equations provide a useful measure of numerical error.
+
+Solving the Cauchy problem for Einstein's equations is nontrivial, as we must satisfy both the Hamiltonian and momentum constraints. There are established techniques for solving these constraints. In particular, the momentum constraints are often addressed using the Bowen--York formalism. The Hamiltonian constraint reduces to an elliptic equation that must be solved numerically.
+
+In EMDA, solving the Cauchy problem is further complicated by the presence of additional source terms. The stress-energy tensor $T_{ab}$ encodes all contributions from matter and energy apart from gravity.In standard GR this is 0, in EMDA, this includes electromagnetic fields as well as scalar fields. The solution for single black holes is known analytically for the certain coupling strengths ($\alpha_0=\alpha_1 =1$) but numerically one could also imagine varying the coupling strength to see how the evolutions change.  This dissertation will address the challenges associated with constructing consistent initial data and evolving these systems.
+
+Once we have constructed suitable initial data and evolved the system, we obtain a gravitational waveform. We compute this waveform using the Newman--Penrose formalism, in which it is represented by the scalar $\Psi_4$. Details of how $\Psi_4$ is calculated are provided in the appendix.
+
+From $\Psi_4$, we can reconstruct the gravitational-wave strain measured by LIGO. This allows us to compare our simulated waveforms with observed signals. To quantify the difference between two waveforms, we compute the mismatch, defined as
+\begin{equation}
+    \mathrm{mismatch}(h_1, h_2) = 1 - \max \mathcal{O}(h_1, h_2),
+\end{equation}
+where the maximum is taken over time shifts and polarization angles.
+
+From the mismatch, we can estimate the minimum signal-to-noise ratio (SNR) required to distinguish between the two waveforms. This is given by
+\begin{equation}
+    \mathrm{SNR}(h_1, h_2) = \frac{1}{\sqrt{2\,\mathrm{mismatch}(h_1, h_2)}}.
+\end{equation}
+
+Despite this framework, interpreting differences between waveforms remains challenging. The parameter space is often degenerate; for example, it may not be immediately clear whether observed differences arise from spin, charge, or other physical effects.
+
+We additionally present the work we have done incorporating compact finite differences into our numerical relativity code. To begin, we first discuss the methods currently used in the code.
+
+On a discrete grid, we can approximate derivatives using finite differences. For example, a second-order accurate centered approximation to the first derivative is given by
+\begin{equation}
+\left.\frac{df}{dx}\right|_{i}
+= \frac{f_{i+1} - f_{i-1}}{2\,\Delta x}
++ \mathcal{O}(\Delta x^2).
+\end{equation}
+For higher-order accuracy, we can use a Taylor series expansion to construct more accurate approximations. For instance, a fourth-order accurate stencil is
+\begin{equation}
+\left.\frac{df}{dx}\right|_{i}
+= \frac{-f_{i+2} + 8 f_{i+1} - 8 f_{i-1} + f_{i-2}}{12\,\Delta x}
++ \mathcal{O}(\Delta x^4).
+\end{equation}
+
+These are examples of explicit finite difference schemes. Alternatively, we can seek an approximation to the first derivative using a compact (implicit) scheme of the form
+\begin{equation}
+\beta f'_{i-2} + \alpha f'_{i-1} + f'_i + \alpha f'_{i+1} + \beta f'_{i+2}
+=
+c\,\frac{f_{i+3} - f_{i-3}}{6 \Delta x}
++ b\,\frac{f_{i+2} - f_{i-2}}{4 \Delta x}
++ a\,\frac{f_{i+1} - f_{i-1}}{2 \Delta x}.
+\end{equation}
+
+The coefficients can be determined by matching Taylor series expansions to the desired order of accuracy (a more detailed derivation is provided in the appendix):
+\begin{align}
+a + b + c &= 1 + 2\alpha + 2\beta 
+&& \text{(2nd order)}, \\
+a + 2^2 b + 3^2 c &= 2 \frac{3!}{2!}\left(\alpha + 2^2 \beta \right) 
+&& \text{(4th order)}, \\
+a + 2^4 b + 3^4 c &= 2 \frac{5!}{4!}\left(\alpha + 2^4 \beta \right) 
+&& \text{(6th order)}.
+\end{align}
+
+This approach is more complex and leads to an implicit scheme. However, the trade-off is improved accuracy and enhanced spectral resolution compared to explicit methods. This improvement in spectral resolution is illustrated in Fig.~\ref{fig:spectral_resolution}. 
+
+There are many possible compact finite difference operators that can be constructed. In this work, we describe our methodology for identifying accurate and stable compact derivative operators and evaluate their performance relative to their explicit counterparts.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/1stDerivativeSpectralIntTest.png}
+    \caption{Comparison of spectral resolution for explicit and compact fourth-order first-derivative operators.}
+    \label{fig:spectral_resolution}
+\end{figure}
+\section{Summary of Dissertation}
+In this dissertation, we primarily present results from binary black hole simulations in EMDA theory. The dissertation is organized as follows. Chapter 2 discusses the formulation of the initial data and presents results from head-on collision simulations. Chapter 3 presents inspiral and merger results in EMDA theory. Chapter 4 explores interpolated EMDA models in which the coupling strengths are varied. Chapter 5 investigates the implementation of compact finite difference operators in numerical relativity codes.
+
+The results presented in this dissertation are currently in preparation for publication.
+
+Each of these projects involved multiple collaborators. The EMDA work builds on earlier contributions by Hyun Lim (LANL) and was carried out collaboratively with Eric Hirschmann (BYU), David van Komen (University of Utah), Sebastian Vander Ploeg Fallon (Cornell), and David Neilsen (BYU). The compact finite difference (CFD) project was conducted in collaboration with Eric Hirschmann (BYU), David van Komen (University of Utah), David Neilsen (BYU), as well as Nathaneil Garey and Luke Papenfuss (BYU).
+
+\section{Conventions}
+
+In this work, we adopt geometrized units such that
+\begin{itemize}
+    \item $c = G = 1$.
+    \item Lengths and masses are expressed in units of a characteristic mass scale $M$.
+    \item Distance: $d = M \;\Rightarrow\; d = GM/c^2$.
+    \item Time: $t = M \;\Rightarrow\; t = GM/c^3$.
+    \item We use the metric signature $(-,+,+,+)$.
+    \item Einstein summation convention is assumed unless otherwise stated.
+    \item Spacetime indices $a,b,c,\dots$ run over $0,1,2,3$, while spatial indices $i,j,k,\dots$ run over $1,2,3$.
+    \item The symmetric and antisymmetric parts of a tensor are defined as
+    \[
+    T_{(ab)} \equiv \frac{1}{2}\left(T_{ab} + T_{ba}\right), 
+    \qquad
+    T_{[ab]} \equiv \frac{1}{2}\left(T_{ab} - T_{ba}\right).
+    \]
+    \item Partial derivatives are denoted by $\partial_i g$ or equivalently $g_{,i}$.
+    \item Covariant derivatives are written as $\nabla_a f_b$ or equivalently $f_{b;a}$.
+    \item The Lie derivative of a tensor $X^a$ along a vector field $\beta^a$ is denoted by $\mathcal{L}_{\beta} X^a$.
+  \item In general, we refer to objects associated with
+    \begin{itemize}
+        \item the spacetime manifold $\mathcal{M}$ as $g_{ab}$, ${}^{(4)}\Gamma^{a}{}_{bc}$, $\nabla_a$, ${}^{(4)}R_{ab}$, etc.,
+        \item a spatial slice $\Sigma$ as $\gamma_{ij}$, $\Gamma^{i}{}_{jk}$, $D_i$, $R_{ij}$, etc.,
+        \item a conformally related space as $\bar{\gamma}_{ij}$, $\bar{\Gamma}^{i}{}_{jk}$, $\bar{D}_i$, $\bar{R}_{ij}$, etc.
+    \end{itemize}
+\end{itemize}

@@ -1,0 +1,76 @@
+\section{Wavelet adaptive mesh refinement}
+We can construct a sparse representation of the fields using a set of nested dyadic grids:  
+\begin{equation}
+    V_j = \left\{ x^{j,k} = 2^{-j}k\,\Delta x \right\},
+\end{equation}
+where \(V_j\) denotes the grid level, and \(x^{j,k}\) denotes the points on the grids.  
+
+I show an example below: the red dots indicate the points included only in the alternative grids \(W_j\). Notice that all points in a given \(V_j\) will also appear in all subsequent refinement levels. The grids do not need to separately save the points already included at coarser levels; the points unique to finer grids are highlighted in red.  
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    % V0 line
+    \draw[thick] (0,0) -- (4,0);
+    \node[left] at (0,0) {$V_0$};
+    \node[above] at (2,0) {$\Delta x$};
+    % Endpoints for V0
+    \filldraw (0,0) circle (1.2pt);
+    \filldraw (4,0) circle (1.2pt);
+
+    % V1 line
+    \draw[thick] (0,-0.8) -- (4,-0.8);
+    \node[left] at (0,-0.8) {$V_1$};
+    \node[right, red] at (4,-0.8) {$W_1$};
+    \filldraw[red] (2,-0.8) circle (2pt); % midpoint red dot
+    % Endpoints for V1
+    \filldraw (0,-0.8) circle (1.2pt);
+    \filldraw (4,-0.8) circle (1.2pt);
+
+    % V2 line
+    \draw[thick] (0,-1.6) -- (4,-1.6);
+    \node[left] at (0,-1.6) {$V_2$};
+    \node[right, red] at (4,-1.6) {$W_2$};
+    % Red dots
+    \filldraw[red] (1,-1.6) circle (2pt);
+    \filldraw[red] (3,-1.6) circle (2pt);
+    \node[below] at (2,-1.6) {$x^{2,2}$};
+    % Endpoints for V2
+    \filldraw (0,-1.6) circle (1.2pt);
+    \filldraw (4,-1.6) circle (1.2pt);
+
+    % Ticks
+    \foreach \x in {1,2,3} {
+        \draw (\x,-1.5) -- (\x,-1.7);
+    }
+\end{tikzpicture}
+\end{center}
+
+We start with a field defined on the points of the grid. The field is represented by \(u^{j,k}\). We can extend the values to higher levels by interpolation. For points already included at coarser resolutions, we have \(u^{j+1, 2k} = u^{j,k}\). For new points, interpolation gives
+\begin{equation}
+    u^{j+1,\,2k+1} = \sum_m h^{j+1,\,2k+1}_{j,m}\, u^{j,m}.
+\end{equation}
+
+We can represent this interpolation with a series of basis functions:
+\begin{equation}
+    \phi_{j,k}(x) = \sum_l c^l\, \phi_{j+1,\,l}(x),
+\end{equation}
+where \(c^l\) are the interpolation weights.  
+
+To represent the full grid, including the alternative grids \(W_j\) (the red dots above), we can write:
+\begin{equation}
+    u(x) = \sum_{k \in S_0} u^{0,k}\, \phi_{0,k}(x)
+         + \sum_{j=1} \sum_{k \in S_j} d^{j,k}\, \phi_{j,k}(x),
+\end{equation}
+where \(d^{j,k}\) are the wavelet coefficients. The \(u^{0,k}\) values are the field values at base level points, \(u^{0,k} = u(x^{0,k})\), and \(u^{j,k} = u(x^{j,k})\).  
+
+The wavelet coefficients are computed by comparing the interpolation from the previous level to the actual field value:
+\begin{equation}
+    d^{j,k} = u^{j,k} - P(x^{j,k}, j-1),
+\end{equation}
+where \(P(x^{j,k}, j-1)\) is the interpolated value from level \(j-1\).  
+
+The wavelet coefficient measures how well the interpolation captures the field at that point. We can set a threshold \(\epsilon\) such that refinement occurs only where
+\[
+|d^{j,k}| > \epsilon.
+\]
+\section{Spacefilling curves and the octree}

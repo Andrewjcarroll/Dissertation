@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\setstretch{1.15}
+\setlist[itemize]{leftmargin=2em}
+\setlist[enumerate]{leftmargin=2.5em}
+
+\title{Dissertation Outline}
+\author{Andrew Carroll}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+% \newpage
+
+\section{Working Title}
+\begin{itemize}
+    \item Proposed dissertation title: EMDA and CFD in Numerical Relativity: (something wittier in the works) 
+\end{itemize}
+
+\section{Abstract Sketch}
+
+\subsection{Problem}
+Introduction of the EMDA extension of binary black hole mergers that we will study. Discussion of how these systems may be distinguishable from GR. Explanation of compact finite difference (CFD) methods and why they are of interest.
+
+\subsection{Method}
+Explanation of the numerical relativity code. Description of initial data generation and evolution methods.
+
+\subsection{Results}
+Comparison of EMDA and GR waveforms. Evaluation of CFD operators compared to explicit finite difference operators.
+
+\subsection{Significance}
+Discussion of EMDA detectability and implications of CFD performance for numerical relativity.
+
+\section{Chapter-by-Chapter Outline}
+
+\subsection{Chapter 1: Introduction and Background}
+\begin{itemize}
+    \item Introduction
+    \item Background
+    \item Summary of the dissertation
+\end{itemize}
+
+\subsection{Chapter 2: EMDA Stability and Initial Data}
+\begin{itemize}
+    \item Introduction and prior work
+    \item Action and equations
+    \item 3+1 decomposition and BSSN formalism
+    \item Initial data construction
+    \item Results (head-on waveforms)
+\end{itemize}
+
+\subsection{Chapter 3: EMDA Inspiraling Binary Black Hole Mergers}
+\begin{itemize}
+    \item Introduction
+    \item Initial data
+    \item Eccentricity reduction discussion
+    \item Description of parameter space
+    \item Waveform mismatch with GR (detectability)
+\end{itemize}
+
+\subsection{Chapter 4: Interpolated EMDA Black Holes}
+\begin{itemize}
+    \item Introduction
+    \item Description of interpolated parameter space
+    \item Initial data
+    \item Effects of coupling parameters
+    \item Mismatch and detectability analysis
+\end{itemize}
+
+\subsection{Chapter 5: Compact Finite Difference Operators}
+\begin{itemize}
+    \item Explanation of CFD methods
+    \item Construction of operators
+    \item Electromagnetic test results
+    \item BSSN test results
+    \item Conclusions
+\end{itemize}
+
+\section{Conclusion}
+\begin{itemize}
+    \item Summary of scientific questions addressed
+    \item Key results
+    \item Interpretation
+    \item Limitations
+    \item Future work
+\end{itemize}
+
+\appendix
+
+\section{Mathematical Foundations}
+\subsection{Introduction to Numerical Relativity}
+\subsection{3+1 Decomposition and BSSN/EMDA Derivations}
+
+\section{EMDA Black Hole Solutions}
+\subsection{Analytic EMDA Black Holes}
+\subsection{Properties and Limits}
+
+\section{Waveform Analysis}
+\subsection{Mismatch Calculations}
+\subsection{Waveform Catalog}
+
+\section{Code and Implementation Details}
+\subsection{Dendro Framework Notes}
+\subsection{Algorithmic Details}
+
+\section{Compact Finite Difference Operators}
+\subsection{Derivations}
+\subsection{Operator Tables}
+
+\section{Software and Usage}
+\subsection{Running EMDA Simulations}
+\subsection{Using the CFD operators}
+\subsection{Visualization (ParaView, etc.)}
+
+% \section{Outstanding Tasks}
+% \begin{itemize}
+%     \item Finish simulation set
+%     \item Make final plots
+%     \item Write literature review
+%     \item Clean up methods chapter
+%     \item Draft conclusion
+% \end{itemize}
+
+\section{Timeline}
+TBD
+% \begin{itemize}
+%     \item Month 1
+%     \item Month 2
+%     \item Month 3
+%     \item Month 4
+% \end{itemize}
+
+% \section{Advisor Feedback Questions}
+% \begin{itemize}
+%     \item Is the chapter structure reasonable?
+%     \item Are the main claims too broad or too narrow?
+%     \item What should be cut?
+%     \item What needs stronger evidence?
+% \end{itemize}
+
+\end{document}

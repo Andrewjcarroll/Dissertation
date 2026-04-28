@@ -1,0 +1,258 @@
+% ****** Start of file apssamp.tex ******
+%
+%   This file is part of the APS files in the REVTeX 4.2 distribution.
+%   Version 4.2a of REVTeX, December 2014
+%
+%   Copyright (c) 2014 The American Physical Society.
+%
+%   See the REVTeX 4 README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+
+
+
+
+%\usepackage{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+
+%\tableofcontents
+
+\section{Introduction}
+\label{sec:intro}
+The increasing sensitivity of gravitational-wave detectors has enabled progressively more stringent tests of General Relativity (GR) \cite{Meidam2014,Berti2015,Yang2017}. Recent advances in gravitational-wave astronomy have led to the detection of signals from compact binary mergers, granting direct access to strongly gravitating, nonlinear regimes. All observed mergers to date are consistent with the predictions of GR \cite{Abbott2016,Abbott2016b,Abbott2019}.
+
+Despite this agreement, the long-standing tension between GR and quantum mechanics remains unresolved. The broader field of quantum gravity seeks to address this discrepancy, motivating the exploration of alternative theories of gravity. Examples include Horndeski gravity \cite{Kobayashi2019_HorndeskiReview}, Lovelock gravity \cite{Padmanabhan2013_Lovelock,Lovelock1971_EinsteinTensor}, scalar Gauss–Bonnet gravity \cite{Mignemi1993_ChargedStringBH, Elley2022,Silva2021DynamicalDescalarization}, and Einstein–Maxwell–Dilaton–Axion (EMDA) theory \cite{Sen1992,Sen2008}.
+
+In this work, we focus on the EMDA framework, examining the stability of its black-hole solutions as a prerequisite for producing inspiral waveforms.
+
+As detector sensitivity improves and additional signals are recorded, increasingly precise tests of GR will become possible \cite{Yunes2013_LRR_GRTests,Yagi2016_BHTestsGR}. Waveforms predicted by alternative theories play a dual role: they guide searches for new signatures and provide benchmarks for testing those theories. Such comparisons may ultimately reveal measurable deviations from GR. Alternative theories generally lack the extensive waveform catalogs available in GR; current efforts often rely on phenomenological approaches, including post-Newtonian expansions and numerical-relativity simulations \cite{Yunes2009,Agathos2014}.
+
+In standard GR, black holes are “bald”—that is, they are completely described by their mass, spin, and charge \cite{Israel1967,Carter1971}. By contrast, several extensions of GR predict scalarized black holes. For instance, recent studies have examined scalarization during mergers in scalar Gauss–Bonnet gravity \cite{Elley2022,Silva2021DynamicalDescalarization}. The EMDA theory, which arises in the low-energy limit of heterotic string theory, introduces both a scalar dilaton and an axion while retaining a well-posed initial-data formulation. The existence of scalar hair in EMDA depends on charge and spin. In the limit of vanishing axion coupling, EMDA reduces to the simpler Einstein–Maxwell–Dilaton (EMD) theory.
+
+
+Although numerical simulations of binary black holes in the EMDA theory remain limited, progress has been made in the Einstein–Maxwell–Dilaton setting \cite{Julie2017,Hirschmann2018}, establishing a foundation for extending such studies to the full EMDA framework. It is not immediately clear whether the scalar hair predicted by the EMDA theory remains stable or eventually radiates away, leaving behind a remnant black hole characterized solely by its mass, spin, and charge. Previous studies have explored the related phenomena of scalarization and descalarization in other modified gravity theories \cite{Sotiriou2012,Cardoso2013,Sotiriou2014}.EMDA is a particularly compelling theory as it allows for direct tests of low energy string theory. Establishing the stability of Kerr–Sen black holes therefore represents an important direction for future investigation.
+
+Previous work has explored astrophysical observations for potential evidence of Kerr–Sen black holes. Analyses of Event Horizon Telescope (EHT) shadow data suggest that Sgr A* favors the Kerr–Sen solution, while M87* favors Kerr but remains consistent with Kerr–Sen within current observational uncertainties \cite{Sahoo2024PRD, Sahoo2025}.
+
+In this study, we extend these investigations by simulating head-on mergers governed by the full EMDA equations. We analyze the resulting waveforms and examine the stability of the remnants, thereby gaining insight into the persistence of scalar hair within the theory. Specifically, we evolve several head-on collisions of black holes in EMDA to determine the conditions under which the dilaton and axion fields survive the merger. An additional key question is to determine under what conditions initially unscalarized black holes will undergo scalarization.
+
+% The paper is organized as follows. Section~\ref{sec:emda} provides a brief summary of the EMDA theory and the nature of the “hair’’ we aim to identify. Section~\ref{sec:methods} describes our numerical methods, Section~\ref{sec:results} presents our results, and discusses their implications and outlines directions for future work. Section~\ref{sec:conclusion} concludes with a summary of our findings and remarks on future extensions of this study.
+
+\section{Einstein--Maxwell--Dilaton--Axion}
+\label{sec:emda}
+EMDA arises from low-energy string theory. This includes a U(1) gauge field and a scalar field that couples to the gauge field. In particular the action for low-energy heterotic string theory is::
+\begin{equation}
+\begin{aligned}
+S=\int \mathrm{d}^4 x\,\sqrt{-g}\Big[
+&\frac{R}{8\pi G}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2\\
+&-\tfrac12 e^{4\alpha_1\phi}(\nabla\kappa)^2-\kappa\,F_{ab}({}^*F)^{ab}
+\Big].
+\end{aligned}
+\end{equation}
+Here, $g$ denotes the determinant of the metric, $R$ the Ricci scalar, $\phi$ the dilaton, $F_{ab}$ the Faraday tensor, and $\kappa$ the axion. In the absence of charge, the equations reduce to the standard Einstein equations. In contrast to the no-hair theorem, the EMDA theory admits two additional fields—the dilaton $\phi$ and the axion $\kappa$—which couple to the electromagnetic field and together constitute the “hair.” The parameters $\alpha_0$ and $\alpha_1$ set the coupling strengths; in this work we take $\alpha_0=\alpha_1=1$, corresponding to the low-energy limit of heterotic string theory. Setting $\alpha_0=\alpha_1=0$ reduces the theory to Einstein–Maxwell with minimally coupled scalar and axion fields.
+
+
+To perform numerical evolutions of Kerr--Sen black holes, we formulate the equations as a Cauchy problem and use the BSSN formulation\cite{Shibata1995_BSSN, Baumgarte1999_BSSN, Baumgarte2010} of the Einstein equations, supplemented with the necessary terms to account for  electromagnetic fields, axion and dilaton. We also employ the puncture gauge condition\cite{Campanelli2006,Baker2006}. Initial data are prepared for head--on black hole collisions. The full equations of motion and the $3+1$ decomposition are presented in Appendix~\ref{sec:appx:eom}.
+
+\section{Numerical methods}
+\label{sec:methods}
+
+\subsection{Code Description} 
+For these simulations, we modified the existing numerical-relativity framework \texttt{Dendro-GR}. \texttt{Dendro-GR} is a portable code that combines an octree-based adaptive multiresolution framework with automatic code generation for solving the EMDA equations. Spatial derivatives are computed using sixth-order finite-difference stencils, and time integration is performed with a fourth-order Runge--Kutta scheme. More details on \texttt{Dendro-GR} can be found in \cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}.
+
+\subsection{Initial Data}
+Valid initial data must satisfy the constraint equations; in particular, we must satisfy the Hamiltonian, momentum, and Maxwell constraints. In natural units, these are given by
+\begin{equation}
+R + K^2 - K_{ij}K^{ij} = 16 \pi \rho,
+\end{equation}
+\begin{equation}
+D_j(K^{ij} - \gamma^{ij}K) = 8 \pi J^i,
+\end{equation}
+where $\mathcal{R}$ is the three-dimensional Ricci scalar associated with the metric, $K_{ij}$ is the extrinsic curvature, $K$ is the trace of the extrinsic curvature, $\rho$ is the energy density, and $J^i$ is the current density.
+\begin{equation}
+D_i E^i = 0,
+\qquad
+D_i B^i = 0,
+\end{equation}
+The energy and current densities are defined as
+\begin{equation}
+\begin{split}
+\rho \equiv& \Pi^2 + (D\phi)^2
++ e^{-2 \alpha_0 \phi}\big( E_a  E^a + B_a B^a\big) \\
+&+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big(\Xi^2 + (D\kappa)^2\big),
+\end{split}
+\end{equation}
+\begin{equation}
+J^i \equiv 2 \Pi D^i \phi
++ 2 e^{-2 \alpha_0 \phi} \epsilon^{ijk} E_j B_k
++ \tfrac{1}{2} e^{4 \alpha_1 \phi} \Xi D^i \kappa.
+\end{equation}
+The EMDA theory possesses a mathematical structure that admits well-posed initial data. The formulation of such data has not been extensively investigated in the literature, although there have been some approaches to generating initial data for charged black holes \cite{Alcubierre2009,Bowen1985_ChargedInitialData,Mukherjee2022_ConformallyCurvedChargedSpinning,Zilhao2014,Zilhao2012}. In this work, we adapt techniques originally developed for constructing the initial data of charged black holes. Specifically, we employ an elliptic solver based on a modified version of the two-charged-punctures solver introduced in \cite{Bozzola2019}, augmented to incorporate contributions from the dilaton. A more detailed discussion of the initial-data construction is provided in Appendix~\ref{sec:appx:id}.
+
+To analyze the numerical data, we compute the Newman--Penrose scalar $\Psi_4$, as well as the radiated electromagnetic quantities, extracting their multipole moments at $r \approx 100M$. Further details on the Waveform extraction are in Appendix C. 
+% The properties of black holes are determined by calculating the ADM quantities at $(r = 250)$.
+% \subsection{Mass and charge Calculations}
+% We can calculate the total mass of the space-time as:
+% \begin{equation}
+%     M_{ADM} = \frac{1}{16 \pi }\int (\tilde{\Gamma}^i - 8 \tilde{\gamma}^{ij}\partial_j e^{\phi}) d S_l
+% \end{equation}
+% The charge we will calculate using Gauss's law, if we extract far enough out we can simply use the same method we would use in flat space.
+
+% \begin{equation}
+%    Q_{ADM}=  \int E \cdot dA = Q
+% \end{equation}
+
+% \begin{equation}
+%     D_{ADM} = \frac{1}{4 \pi}\int d S^a \nabla_a \phi
+% \end{equation}
+%  similarly we define for the axion
+% \begin{equation}
+%     K_{ADM} = \frac{1}{4 \pi}\int d S^a \nabla_a \kappa
+%     \end{equation}
+
+%     For a stationary Kerr–Sen black hole, the associated dilaton (D) and  axion($\mathcal{A}$) charges are given by:\cite{Zhang2023}
+ 
+% \begin{equation}
+%     D = \frac{p^2-q^2}{2m}
+% \end{equation}
+% \begin{equation}
+%     \mathcal{A}= \frac{qp}{m}
+% \end{equation}
+% where $p$ and $q$ are the magnetic and electric fields, respectively. In the simulations considered in this paper, we will only consider the case where we have only an electric charge and no magnetic charge. The axion charge we expect to be close to 0 in the absence of a magnetic charge, and this is what we observe to within machine precision. 
+
+
+\subsection{Simulation Setup}  
+A summary of the black hole parameters used in the simulations is provided in Appendix~\ref{sec:appx:sim_tab}.
+
+\section{Results}
+\label{sec:results}
+We performed tests on a number of black holes in the nonextremal limit of the parameter space; our search was limited to equal–mass–ratio black holes with low to moderate charge and low spin. We present here a representative example of the waveform and energy radiated. The total mass of the system is 1, and the charge of the system lies between $0.0625 \leq \frac{Q}{M} \leq 0.5$, with spins in the range $0.05 \leq \chi \leq 0.2$. A full summary can be seen in Appendix~C.  
+The waveforms of a head-on collision corresponding to two identical black holes with $\chi = 0.2$ and $\frac{Q}{M} = 0.5$ at an initial separation of $x = 8$ are shown in Fig.~\ref{fig:gw_l2m0}. The results from this configuration are largely representative of the overall behavior observed in our tests.
+% ---------------------------------------------------------
+% Waveforms (stacked subfigures)
+% ---------------------------------------------------------
+% \begin{figure}[!t]
+%   \centering
+
+%   \subfloat[Real part of the $(2,0)$ mode of $\Psi_4$ extracted at $R_{\mathrm{ex}} = 100$.%
+%     \label{fig:gw_l2m0}%
+%   ]{%
+%     \includegraphics[width=\linewidth]{Figures/Chapter_1/emda_prof_GW_l2_m0_r5.pdf}%
+%   }\\[0.6em]
+
+%   \subfloat[Real part of the $(2,0)$ mode of $\xi_2$ extracted at $R_{\mathrm{ex}} = 100$.%
+%     \label{fig:phi2_l2m0}%
+%   ]{%
+%     \includegraphics[width=\linewidth]{Figures/Chapter_1/emda_prof_PHI2_l2_m0_r5.pdf}%
+%   }\\[0.6em]
+
+%   \subfloat[Real part of the $(2,0)$ mode of $\Phi$ extracted at $R_{\mathrm{ex}} = 100$.%
+%     \label{fig:dil_l2m0}%
+%   ]{%
+%     \includegraphics[width=\linewidth]{Figures/Chapter_1/emda_prof_Dilaton_l2_m0_r5.pdf}%
+%   }
+
+%   % Optional overall caption for the stack:
+%   % \caption{Real parts of the $(2,0)$ modes of $\Psi_4$, $\xi_2$, and $\Phi$ extracted at $R_{\mathrm{ex}} = 100$.}
+%   % \label{fig:waveforms_l2m0}
+% \end{figure}
+
+The radiated energy as a function of time is shown in Fig.~\ref{fig:flux_chi02_Q05}.
+
+% ---------------------------------------------------------
+% Radiated energy / flux figure
+% ---------------------------------------------------------
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\linewidth]{Figures/Chapter_1/combined_flux_linear_with_inset.pdf}
+  \caption{Radiated fluxes for the case $\chi = 0.2$ and $Q/M = 0.5$. 
+  The curves have been aligned such that $t = 0$ corresponds to the global maximum. 
+  The inset plots show the same data with the $y$-axis on a logarithmic scale.}
+  \label{fig:flux_chi02_Q05}
+\end{figure}
+
+In this case, the gravitational wave is the dominant form of energy released. The electromagnetic radiation is the next most significant, followed by the dilaton radiation. The contribution from the axion remains comparatively small. We see that the energy from the scalar fields quickly dies off after the merger occurs. This indicates that once the merger has taken place, the field remains in a relatively stable state. In our experiments, we find that the scalar fields persist and do not radiate away after the merger.
+
+A non-trivial axion field persists after the merger, as illustrated in Fig.~\ref{fig:scalar_fields}.
+
+% -------- Scalar field profiles (stacked top-to-bottom) --------
+% \begin{figure}[!t]
+%   \centering
+
+%   \subfloat[Axion\label{fig:axion}]{
+%     \includegraphics[width=0.95\linewidth]{Figures/Chapter_1/scalar field plots/KAPPA_panel.png}
+%   }\\[1em]
+
+%   \subfloat[Dilaton\label{fig:dilaton}]{
+%     \includegraphics[width=0.95\linewidth]{Figures/Chapter_1/scalar field plots/Dilaton_panel.png}
+%   }
+
+%   \caption{The scalar fields on the $z=0$ plane for the case $\chi = 0.2$ and $\frac{Q}{M} = 0.5$. We show the amplitude of the scalar fields $\phi$ and $\kappa$ at the beginning of the evolution (top left), a short time before merger (top right), just after merger (bottom left), and a long time after merger (bottom right).}
+%   \label{fig:scalar_fields}
+% \end{figure}
+
+
+
+
+\subsection{Initially Unscalarized Black Holes}
+
+To further assess the stability of scalar hair, we conducted a series of tests initialized with a Gaussian distribution of axion and dilaton fields centered at the origin, with amplitudes ranging from $10^{-1}$ to $10^{-7}$. These initial perturbations propagate outward, enabling us to examine whether initially unscalarized black holes can acquire and sustain scalar fields. Our results confirm that they do: a Kerr–Newman black hole in the EMDA theory rapidly scalarizes, developing both dilaton and axion hair. 
+
+Remarkably, even in the absence of any initial scalar fields in the background, the system evolves to generate nontrivial scalar structure. This demonstrates that scalarization occurs dynamically and does not require preexisting scalar hair. The conserved quantities, including the total mass and charge, remain effectively constant throughout the evolution. Variations in the conserved quantities over the course of the evolution in both mass and charge are below \(0.2\,\%\). This indicates that our quantities remain stable and  conserved overtime. Figure~\ref{fig:unscalarized} illustrates the evolution of the scalar fields for the case without initial scalar hair.
+
+% -------- Scalar field profiles (stacked top-to-bottom) --------
+% \begin{figure}[!t]
+%   \centering
+
+%   \subfloat[Axion\label{fig:axion}]{
+%     \includegraphics[width=0.95\linewidth]{scalar_kappa.png}
+%   }\\[1em]
+
+%   \subfloat[Dilaton\label{fig:dilaton}]{
+%     \includegraphics[width=0.95\linewidth]{scalar-dil.png}
+%   }
+
+%   \caption{The scalar fields on the $z=0$ plane for the case $\chi = 0.2$ and $\frac{Q}{M} = 0.5$. 
+%   We show the amplitude of the scalar fields $\phi$ and $\kappa$ at various stages of the evolution: 
+%   the initial stage (top left), where both fields begin at zero; 
+%   a short time later as the fields start to develop (top right); 
+%   just before merger (bottom left); 
+%   just after merger (bottom right); 
+%   and a long time after merger (bottom right).}
+%   \label{fig:unscalarized}
+% \end{figure}
+
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+We have simulated a range of different parameters for the head-on collisions of Kerr--Sen black holes. We have primarily been concerned with the persistence of hair.  
+In summary, our simulations show that the scalar fields do not radiate away entirely, so long as there is a nonzero charge (and spin for the axion). We have found that Kerr--Sen black holes are stable. In particular, we find that if the remnant black hole has a nonzero charge, the dilaton field persists. If it has both nonzero charge and spin, the axion field also persists after merger. These results suggest that Kerr--Sen black holes are stable under the conditions and time frames we considered.  
+
+A natural follow-up study would be the analysis of waveforms produced by inspiraling black holes, an area where the available results remain relatively limited. In this paper, we have further assumed that we are working within the low-energy sector of string theory. A more detailed investigation of the theory space parameterized by $\alpha_0$ could be intriguing; in particular, the coupling $\alpha_0 = \sqrt{3}$ corresponds to the Kaluza--Klein theory \cite{Horne1992}. Future work may explore interpolations between these theories.  
+
+
+
+
+
+%
+% ****** End of file apssamp.tex ******

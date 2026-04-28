@@ -1,0 +1,124 @@
+\documentclass[etd,oneside,phd]{BYUPhys}
+
+\usepackage{amsmath}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage[caption=false]{subfig}
+\usepackage{pifont}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{tikz}
+\everymath{\displaystyle}
+%\graphicspath{{Figures/Extracted_quantites/}{Figures/scalar field plots/}{Figures/Waveforms/}}
+
+\newcommand{\cmark}{{\color{green!60!black}\ding{51}}}
+\newcommand{\xmark}{{\color{red!70!black}\ding{55}}}
+% If you'd like to print your thesis using double-sided printing,
+% remove the etd option and change the oneside argument to twoside, like this:
+%
+%\documentclass[twoside,masters]{BYUPhys}
+
+% Your name
+  \Author{Andrew James Carroll}
+
+% Enter the year your thesis is approved (for senior thesis or capstone)
+  \Year{[2026]}
+
+% If you have a long title, split it between multiple lines using the \\ command
+  \Title{EMDA and CFD in Numerical Relativity
+  }
+
+% Your research advisor
+\AdvisorTitle{Advisors}
+  \Advisor{Eric Hirschmann}
+
+% The text of your abstract
+  \Abstract{ [The abstract is a summary of the thesis/dissertation
+  with emphasis on the findings of the study. The abstract must not
+  exceed 350 words in length and fit on one page, single spaced.] }
+
+ \Keywords{[A comma-separated list of descriptive words for search purposes]}
+
+% Acknowledge those who helped and supported you
+  \Acknowledgments{
+  }
+
+%% The members of your committee (masters only need A and B, PhD need all 4)
+ \MemberA{David Neilsen}
+ \MemberB{Gus Hart}
+ \MemberC{Chris Verharen}
+ \MemberD{Ben Frandsen}
+
+
+\begin{document}
+
+ % Start page counting in roman numerals
+ \frontmatter
+
+ % This command makes the formal preliminary pages.
+ % You can comment it out during the drafting process if you want to save paper.
+ \makepreliminarypages
+
+ % Make the table of contents.
+ \tableofcontents
+
+ % Start regular page counting at page 1
+ \mainmatter
+
+% OK. Everything is set up. Type your thesis here.
+\chapter{Introduction}
+\include{Introduction}
+\chapter{EMDA Chapter 1}
+\include{EMDA_Chapter_1}
+\chapter{EMDA Chapter 2}
+\include{EMDA_Chapter_2}
+\chapter{EMDA Chapter 3}
+\include{EMDA_Chapter_3}
+\chapter{CFD Chapter 1}
+\include{CFD_Chapter_1}
+\chapter{Conclusion}
+\include{Conclusion}
+\cleardoublepage
+\begin{appendices}
+
+\chapter{Mathematical Overview}
+\include{Mathematical_overview}
+
+\chapter{EMDA Black Holes}
+\include{EMDA_Black_holes}
+
+\chapter{Computation of \texorpdfstring{$\Psi_4$}{Psi4}}
+\include{appendix_psi_4}
+
+\chapter{Dendro Notes}
+\include{Dendro_notes}
+
+\chapter{CFD Notes}
+\include{CFD_notes}
+
+\chapter{Software Notes}
+\include{Software_notes}
+
+\chapter{General Notes}
+\include{appendix_general}
+
+\chapter{Waveform Catalog}
+\include{Waveform_catalog}
+\end{appendices}
+
+
+% Make the bibliography.
+\bibliography{references}
+
+% Make the index
+\printindex
+
+% Make the index
+ \printindex
+
+\end{document}

@@ -1,0 +1,2 @@
+ 
+Ligo waveform: By B. P. Abbott et al. (LIGO Scientific Collaboration and Virgo Collaboration) — full list at the end of the article - http://physics.aps.org/featured-article-pdf/10.1103/PhysRevLett.116.061102 . See also the associated Jupyter notebook., CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=46987868

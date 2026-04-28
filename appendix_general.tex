@@ -1,0 +1,698 @@
+\section{Equations of Motion}
+\label{sec:appx:eom}
+
+We start with the equations of motion for EMDA. We begin with the action in the Einstein frame:
+\begin{equation}
+\begin{aligned}
+S=\int \mathrm{d}^4 x\,\sqrt{-g}\Big[
+&\frac{R}{8\pi G}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2\\
+&-\tfrac12 e^{4\alpha_1\phi}(\nabla\kappa)^2-\kappa\,F_{ab}({}*F)^{ab}
+\Big].
+\end{aligned}
+\end{equation}
+
+Here, $\kappa$ is the axion, related to the three-form potential by $H_{abc}= \frac{1}{2}e^{4\phi}\epsilon_{abc}{}^{d}\partial_d \kappa$, and $\alpha_0$ and $\alpha_1$ parameterize the theory. In this instance, we are interested in the sector of low-energy string theory where $\alpha_0 = \alpha_1 = 1$.  
+
+The covariant equations of motion are:
+\begin{align}
+0 &= \nabla^a \nabla_a \phi
+   + \tfrac{1}{2}\alpha_0 e^{-2\alpha_0 \phi} F^2
+   - \tfrac{1}{2}\alpha_1 e^{4\alpha_1 \phi} (\nabla \kappa)^2, \label{eq:phi} \\[1ex]
+0 &= \nabla^a \!\left( e^{4\alpha_1 \phi} \nabla_a \kappa \right)
+   - F_{ab} (\ast F)^{ab}, \label{eq:kappa} \\[1ex]
+0 &= \nabla_a \!\left( e^{-2\alpha_0 \phi} F^{ab} \right)
+   + (\ast F)^{ab} \nabla_a \kappa. \label{eq:Maxwell}
+\end{align}
+
+The Einstein equation takes the form
+\begin{align}
+R_{ab} - \tfrac{1}{2} g_{ab} R 
+&= 8 \pi G \Bigg[
+   2\Big(\nabla_a \phi \nabla_b \phi 
+   - \tfrac{1}{2} g_{ab} (\nabla \phi)^2\Big) \notag \\
+&\quad + 2 e^{-2\alpha_0 \phi} 
+   \Big(F_{ac} F_b{}^c - \tfrac{1}{4} g_{ab} F^2 \Big) \notag \\
+&\quad + \tfrac{1}{2} e^{4\alpha_1 \phi} 
+   \Big(\nabla_a \kappa \, \nabla_b \kappa 
+   - \tfrac{1}{2} g_{ab} (\nabla \kappa)^2 \Big)
+   \Bigg]. \label{eq:Einstein}
+\end{align}
+
+To the Maxwell constraints we add constraint damping so that violations propagate away at the speed of light. In particular, we introduce two scalar fields $\Phi$ and $\Psi$:
+\begin{align}
+\nabla^{b}\left(F_{ba} + g_{ba}\Psi \right) 
+  &= \kappa_{1} n_{a} \Psi 
+     + 2 \alpha_{0} \nabla^{b}\phi\, F_{ba} \nonumber \\
+  &\quad + e^{2\alpha_0 \phi} (*F)_{ab}\nabla_b \kappa, \\[6pt]
+\nabla^{b}\!\left( (\ast F)_{ba} + g_{ba}\Phi \right) 
+  &= \kappa_{2} n_{a} \Phi .
+\end{align}
+
+For the gravitational part we have
+\begin{align}
+(\partial_t - \mathcal{L}_\beta)\,\tilde{\gamma}_{ij} &= -2\alpha\,\tilde{A}_{ij},\\[4pt]
+(\partial_t - \mathcal{L}_\beta)\,\chi &= \tfrac{2}{3}\alpha\,\chi\,K,\\[4pt]
+(\partial_t - \mathcal{L}_\beta)\,K &= [\ldots] + 4\pi\alpha\,(\rho + T),\\[4pt]
+(\partial_t - \mathcal{L}_\beta)\,\tilde{A}_{ij} &= [\ldots] - 8\pi\alpha\left(\chi T_{ij} - \tfrac{T}{3}\tilde{\gamma}_{ij}\right),\\[4pt]
+(\partial_t - \mathcal{L}_\beta)\,\tilde{\Gamma}^i &= [\ldots] - 16\pi\alpha\,\chi^{-1} J^{\,i},
+\\[4pt]
+\tilde{\Gamma}^i = \tilde{\gamma}^{jk}\tilde{\Gamma}^{\,i}{}_{jk}.
+\end{align}
+
+\noindent
+\textit{Here $[\ldots]$ denotes the standard right-hand side of the BSSN equations in the absence of source terms.}
+
+The quantities $T_{ij}$, $T$, $J^i$, and $\rho$ are defined as
+\begin{align}
+J^i 
+&\equiv -h^{ia} T_{ab} n^b \notag \\
+&= \frac{1}{8 \pi }\bigl( 2 \Pi D^i \phi 
+   + 2 e^{-2 \alpha_0 \phi} \epsilon^{ijk} \,  E_j  B_k
+   + \tfrac{1}{2} e^{4 \alpha_1 \phi} \, \Xi D^i \kappa \bigr)\\[1ex]
+T_{ij} 
+&\equiv T_{ab} h^a{}_i h^b{}_j \notag \\
+&= \frac{1}{8\pi} \bigl[2 \Bigl[
+      D_i \phi D_j \phi 
+      - \tfrac{1}{2} h_{ij} \bigl( (D \phi)^2 - \Pi^2 \bigr)
+   \Bigr] \notag \\
+&\quad - 2 e^{-2 \alpha_0 \phi} \Bigl[
+       E_i  E_j 
+      +  B_i  B_j
+      - \tfrac{1}{2} h_{ij} 
+        \bigl( E_k  E^k +  B_k  B^k \bigr)
+   \Bigr] \notag \\
+&\quad + \tfrac{1}{2} e^{4 \alpha_1 \phi} \Bigl[
+      D_i \kappa D_j \kappa
+      - \tfrac{1}{2} h_{ij} \bigl( (D \kappa)^2 - \Xi^2 \bigr)
+   \Bigr]\bigr].
+\end{align}
+\begin{equation}
+    T = T^{ij}\gamma_{ij},
+\end{equation}
+\begin{equation}
+\begin{split}
+\rho \equiv {} & \frac{1}{8\pi} \Bigl(
+  \Pi^2 + (D\phi)^2
+  + e^{-2\alpha_0 \phi}
+    \bigl( E_a  E^a +  B_a B^a \bigr) \\
+& \qquad
+  + \tfrac{1}{4}\, e^{4\alpha_1 \phi}
+    \bigl( \Xi^2 + (D\kappa)^2 \bigr)
+\Bigr)
+\end{split}
+\end{equation}
+
+For the matter equations we have:
+\begin{equation}
+(\partial_t - \mathcal{L}_{\beta}) \phi
+= - \alpha \Pi .
+\end{equation}
+
+\begin{equation}
+(\partial_t - \mathcal{L}_{\beta}) \kappa
+= - \alpha \Xi .
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+(\partial_t - \mathcal{L}_{\beta}) \Pi
+&= \alpha K \Pi
+\\[3pt]
+&\quad
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \phi
+- \chi\, \tilde{\gamma}^{ij}\, \partial_i \alpha\, \partial_j \phi
+\\[3pt]
+&\quad
++ \alpha \chi\, \tilde{\Gamma}^i \partial_i \phi
++ \frac{\alpha}{2}\, \tilde{\gamma}^{ij}\, \partial_i \chi\, \partial_j \phi
+\\[6pt]
+&\quad
+- \frac{\alpha \alpha_0}{\chi}\,
+  e^{-2\alpha_0 \phi}\,
+  \tilde{\gamma}_{ij} B^i B^j
++ \frac{\alpha \alpha_0}{\chi}\,
+  e^{-2\alpha_0 \phi}\,
+  \tilde{\gamma}_{ij} E^i E^j
+\\[6pt]
+&\quad
++ \frac{\alpha \alpha_1}{2}\,
+  e^{4\alpha_1 \phi}\,
+  \chi\, \tilde{\gamma}^{ij}\,
+  \partial_i \kappa\, \partial_j \kappa
+- \frac{\alpha \alpha_1}{2}\,
+  e^{4\alpha_1 \phi}\,
+  \Xi^2 .
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+(\partial_t - \mathcal{L}_{\beta}) \Xi
+&= \alpha K \Xi
+\\[3pt]
+&\quad
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \kappa
+- \chi\, \tilde{\gamma}^{ij}\, \partial_i \alpha\, \partial_j \kappa
+\\[3pt]
+&\quad
++ \alpha \chi\, \tilde{\Gamma}^i \partial_i \kappa
++ \frac{\alpha}{2}\, \tilde{\gamma}^{ij}\, \partial_i \kappa\, \partial_j \chi
+\\[6pt]
+&\quad
+- 4 \alpha \alpha_1 \chi\, \tilde{\gamma}^{ij}\,
+  \partial_i \kappa\, \partial_j \phi
++ 4 \alpha \alpha_1 \Pi \Xi
+\\[6pt]
+&\quad
++ \frac{4\alpha}{\chi}\,
+  e^{-4\alpha_1 \phi}\,
+  \tilde{\gamma}_{ij} B^i E^j .
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+(\partial_t - \mathcal{L}_{\beta}) \Psi
+&= - \alpha\, \partial_i E^i
+\\[3pt]
+&\quad
++ \frac{3\alpha}{2\chi}\, E^i \partial_i \chi
++ 2 \alpha_0 \alpha\, E^i \partial_i \phi
+\\[3pt]
+&\quad
++ \alpha e^{2\alpha_0 \phi}\, B^i \partial_i \kappa
+- \alpha \eta_1 \Psi .
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+(\partial_t - \mathcal{L}_{\beta}) \Phi
+&= \alpha\, \partial_i B^i
+\\[3pt]
+&\quad
+- \frac{3\alpha}{2\chi}\, B^i \partial_i \chi
+- \alpha \eta_2 \Phi .
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{split}
+(\partial_t - \mathcal{L}_{\beta}) E^i
+&= \alpha K E^i
+\\[4pt]
+&\quad
++ 2 \alpha \alpha_0 \chi^{1/2}\,
+  \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \phi
+- 2 \alpha \alpha_0 E^i \Pi
+\\[6pt]
+&\quad
++ \alpha e^{2\alpha_0 \phi} \chi^{1/2}\,
+  \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \kappa
+- \alpha e^{2\alpha_0 \phi} \Xi B^i
+\\[6pt]
+&\quad
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_j \Psi
+- \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \alpha
+\\[4pt]
+&\quad
+- \alpha \chi^{1/2}\, \epsilon^{jik} B^l \partial_j \tilde{\gamma}_{kl}
+- \alpha \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} \partial_j B^l
+\\[4pt]
+&\quad
++ \alpha \chi^{-1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \chi .
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+(\partial_t - \mathcal{L}_\beta) B^i
+&= \alpha K B^i
++ \alpha \chi\, \tilde{\gamma}^{ij} \partial_j \Phi
+\\[6pt]
+&\quad
+- \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \alpha
++ \alpha \chi^{-1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \chi
+\\[4pt]
+&\quad
+- \alpha \chi^{1/2}\, \epsilon^{ijk} E^l \partial_j \tilde{\gamma}_{kl}
+- \alpha \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} \partial_j E^l .
+\end{split}
+\end{equation}
+
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_\beta)\,\phi
+% &=  - \alpha \Pi ,
+% \end{align}
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_\beta)\, \Pi
+% &= \alpha K \Pi
+% \nonumber\\
+% &\quad
+% - \alpha \psi^{-p}
+% \Bigg[
+%   \tilde{\gamma}^{ij} \partial_i \partial_j \phi
+%   - \tilde{\Gamma}^k \partial_k \phi
+%   + \frac{p}{2\psi} \tilde{\gamma}^{ij} (\partial_i \psi)(\partial_j \phi)
+% \Bigg]
+% \nonumber\\
+% &\quad
+% - \psi^{-p} \tilde{\gamma}^{ij} (\partial_i \alpha)(\partial_j \phi)
+% \nonumber\\
+% &\quad
+% - 2 \alpha_0 \alpha e^{-2\alpha_0 \phi}
+%   \psi^{p} \tilde{\gamma}_{ij}
+%   \big( B^i B^j - E^i E^j \big)
+% \nonumber\\
+% &\quad
+% + \frac{1}{2}\alpha_1 \alpha e^{4\alpha_1 \phi}
+% \Big[
+%   \psi^{-p} \tilde{\gamma}^{ij} \partial_i \kappa \partial_j \kappa
+%   - \Xi^2
+% \Big] ,
+% \end{align}
+
+% \begin{align}
+% \partial_t \kappa
+% &= \beta^i \partial_i \kappa - \alpha \Xi ,
+% \end{align}
+
+% \begin{align}
+% \partial_t \Xi
+% &= \beta^i \partial_i \Xi + \alpha K \Xi
+% \nonumber\\
+% &\quad
+% - \alpha \psi^{-p}
+% \Bigg[
+%   \tilde{\gamma}^{ij} \partial_i \partial_j \kappa
+%   - \tilde{\Gamma}^k \partial_k \kappa
+%   + \frac{p}{2\psi} \tilde{\gamma}^{ij} (\partial_i \psi)(\partial_j \kappa)
+% \Bigg]
+% \nonumber\\
+% &\quad
+% - \psi^{-p} \tilde{\gamma}^{ij} (\partial_i \alpha)(\partial_j \kappa)
+% \nonumber\\
+% &\quad
+% + 4 \alpha \alpha_1 e^{-4\alpha_1 \phi}
+%   \psi^{p} \tilde{\gamma}_{ij} E^i B^j
+% \nonumber\\
+% &\quad
+% - 4 \alpha_1 \alpha
+% \Big[
+%   \psi^{-p} \tilde{\gamma}^{ij} (\partial_i \phi)(\partial_j \kappa)
+%   - \Pi \Xi
+% \Big] ,
+% \end{align}
+
+% \begin{align}
+% \partial_t \Psi
+% &= \beta^i \partial_i \Psi
+%   - \alpha \partial_i E^i
+%   - \alpha \frac{3p}{2\psi} (\partial_i \psi) E^i
+% \nonumber\\
+% &\quad
+% + 2\alpha_0 \alpha (\partial_i \phi) E^i
+%   + \alpha e^{2\alpha_0 \phi} (\partial_i \kappa) B^i
+%   - \eta_1 \alpha \Psi ,
+% \end{align}
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_\beta) E^i
+% &= \alpha K E^i
+% \nonumber\\
+% &\quad
+% + \psi^{-3p/2} \epsilon^{ijk}
+% \Big[
+%   (\partial_j \alpha)\, \psi^{p} \tilde{\gamma}_{kl} B^l
+%   + \alpha \partial_j ( \psi^{p} \tilde{\gamma}_{kl} B^l )
+% \Big]
+% \nonumber\\
+% &\quad
+% - 2 \alpha_0 \alpha
+% \Big[
+%   \psi^{-3p/2} \epsilon^{ijk}
+%   (\partial_j \phi)\, \psi^{p} \tilde{\gamma}_{kl} B^l
+%   + \Pi E^i
+% \Big]
+% \nonumber\\
+% &\quad
+% + \alpha e^{2\alpha_0 \phi}
+% \Big[
+%   \psi^{-3p/2} \epsilon^{ijk}
+%   (\partial_j \kappa)\, \psi^{p} \tilde{\gamma}_{kl} E^l
+%   - \Xi B^i
+% \Big]
+% \nonumber\\
+% &\quad
+% - \alpha \psi^{-p} \tilde{\gamma}^{ij} \partial_j \Psi ,
+% \end{align}
+
+% \begin{align}
+% \partial_t \Phi
+% &= \beta^i \partial_i \Phi
+%   + \alpha \partial_i B^i
+%   + \alpha \frac{3p}{2\psi} (\partial_i \psi) B^i
+%   - \eta_2 \alpha \Phi ,
+% \end{align}
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_\beta) B^i
+% &= \alpha K B^i
+% \nonumber\\
+% &\quad
+% - \psi^{-3p/2} \epsilon^{ijk}
+% \Big[
+%   (\partial_j \alpha)\, \psi^{p} \tilde{\gamma}_{kl} E^l
+%   + \alpha \partial_j ( \psi^{p} \tilde{\gamma}_{kl} E^l )
+% \Big]
+% \nonumber\\
+% &\quad
+% + \alpha \psi^{-p} \tilde{\gamma}^{ij} \partial_j \Phi .
+% \end{align}
+
+% For the axion, dilaton, and electromagnetic fields we have
+% \begin{equation}
+%     (\partial_t - \mathcal{L}_{\beta}) \phi = - \alpha \Pi,
+% \end{equation}
+% \begin{equation}
+%     (\partial_t - \mathcal{L}_{\beta}) \kappa = - \alpha \Xi,
+% \end{equation}
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) \Pi
+% &= K \alpha \, \Pi
+%    - \alpha \chi D^2 \phi
+%    - \chi \, D^i \alpha \, D_i \phi
+%    + \alpha \chi \Gamma^i D_i \phi \notag \\[1ex]
+% &\quad + \tfrac{1}{2}\alpha \, D^i \chi \, D_i \phi
+%    - \alpha_0 \alpha e^{-2 \alpha_0 \phi} (B^2 + E^2) \chi^{-1} \notag \\[1ex]
+% &\quad + \tfrac{1}{2} \alpha_1 \alpha  e^{4 \alpha_1 \phi} D^2 \kappa \, \chi
+%    - \tfrac{1}{2} \alpha_1 \alpha \, e^{4\alpha_1 \phi} \, \Xi^2,
+% \end{align}
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) \Xi
+% &= K \alpha \, \Xi
+%    - \alpha \chi D^2 \kappa
+%    - \chi \, D^i \alpha \, D_i \kappa
+%    + \alpha \chi \Gamma^i D_i \kappa \notag \\[1ex]
+% &\quad + \tfrac{1}{2}\alpha \, D^i \chi \, D_i \kappa
+%    - 4 \alpha_1 \alpha \chi D^i \kappa D_i \phi \notag \\[1ex]
+% &\quad + 4 \alpha_1 \Pi \Xi + 4 \alpha  e^{-4 \alpha_1 \phi} B^i E_i \chi^{-1},
+% \end{align}
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) \Psi
+% &= - \alpha \, D_i E^i
+%    + \tfrac{3}{2} \chi^{-1} \alpha E^i D_i \chi \notag \\[1ex]
+% &\quad + 2 \alpha_0 \alpha E^i D_i \phi
+%    + \alpha e^{2 \alpha_0 \phi} B^i D_i \kappa
+%    - \alpha \eta_1 \Psi,
+% \end{align}
+% \begin{equation}
+%     (\partial_t - \mathcal{L}_{\beta}) \Phi
+%     = \alpha D_i B^i
+%     - \tfrac{3}{2}\chi^{-1} B^i \partial_i \chi
+%     - \alpha \eta_2 \Phi,
+% \end{equation}
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) E^i
+% &= \alpha K E^i 
+%   - 2 \alpha \alpha_0  \chi^{1/2} \epsilon^{ijk} B_k D_j \phi 
+%   - 2 \alpha \alpha_0 E^i \Pi \notag \\
+% &\quad + \alpha e^{-2 \alpha_0 \phi}\chi^{1/2} \epsilon^{ijk} E_l D_j \kappa 
+%   - \alpha e^{2 \alpha_0 \phi} \Xi B^i  \notag \\
+% &\quad - \alpha \chi D^j \Psi
+%   + \chi^{1/2} \epsilon^{ijk} D_j \!\left( B^l \gamma_{kl} \alpha \right),
+% \end{align}
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) B^i
+% &= \alpha K B^i 
+%    + \alpha \chi D^j \Phi
+%    - \chi^{1/2} \epsilon^{ijk} D_j \!\left( B^l \gamma_{kl} \alpha \right).
+% \end{align}
+
+% \begin{align}
+% (\partial_t - \mathcal{L}_{\beta}) B^i
+% &= \alpha K (\perp B)^i
+%    + \alpha \chi \tilde{\gamma}^{ij} \partial_j \Phi
+% \nonumber\\
+% &\quad
+%    - \epsilon^{ijk} \Big[
+%       \chi^{1/2} \tilde{\gamma}_{kl} (\perp E)^l \partial_j \alpha
+%       - \chi^{-1/2} \alpha \tilde{\gamma}_{kl} (\perp E)^l \partial_j \chi
+% \nonumber\\
+% &\qquad\qquad
+%       + \alpha \chi^{1/2} (\perp E)^l \partial_j \tilde{\gamma}_{kl}
+%       + \alpha \chi^{1/2} \tilde{\gamma}_{kl} \partial_j (\perp E)^l
+%    \Big].
+% \end{align}
+
+We also make use of the slow-start lapse proposed in \cite{Etienne2024}. Using this approach reduces the amount of computational resources spent refining junk radiation. 
+
+\section{Initial Data}
+\label{sec:appx:id}
+
+As a first step, we assume conformally flat space; that is, we decompose the metric as
+\begin{equation}
+    \gamma_{ij}= \psi^4 \tilde{\gamma}_{ij},
+\end{equation}
+where a tilde denotes conformal variables and $\psi$ is the conformal factor. The assumption of conformal flatness simplifies the following computations and is a reasonable choice for the systems we study. However, Kerr spacetimes are known not to admit conformally flat slices \cite{ValienteKroon2004,Price2000}. Alternative approaches have been proposed to construct initial data for highly spinning black holes \cite{Lousto2012}. Notwithstanding this, Bowen--York black holes can reach spin values of order $\chi \sim 0.9$ \cite{Dain2002}. Since our simulations remain below this limit, the approximation should be acceptable.  
+
+We nevertheless anticipate the appearance of ``junk radiation'' at the beginning of the simulation, as has been observed in vacuum GR \cite{Gleiser1998} and in charged cases \cite{Bozzola2021}. This spurious radiation decays as the system relaxes to quasi-equilibrium. We adopt maximal slicing conditions, $K=0$. Using a conformally rescaled extrinsic curvature, we can express it in terms of a vector $V^i$ as
+\begin{equation}
+    \tilde{A}^{ij} = 2 \delta^{ik}\delta^{jh}V_{(h,k)} - \frac{2}{3}\delta^{ij}\partial_k V^k.
+\end{equation} 
+
+Under these assumptions, the problem reduces to determining the vector $V^i$ and the conformal factor $\psi$ to fully specify $\gamma_{ij}$ and $\tilde{A}_{ij}$. The constraint equations take the form
+\begin{equation}
+    \nabla^2 \psi + \tfrac{1}{8} \psi^{-7} \tilde{A}_{ij} \tilde{A}^{ij} + 2\pi \psi^5 \rho = 0,
+\end{equation}
+\begin{equation}
+    (\nabla^2 V)^i + \tfrac{1}{3}\delta^{ij}\partial_j(\partial_k V^k ) - 8 \pi J^i = 0. 
+\end{equation}
+
+We also impose the Gauss and no-monopole constraints. Following \cite{Alcubierre2009,Zilhao2012}, we rescale the electromagnetic fields as
+\begin{equation}
+    \tilde{E}^i = \psi^6 E^i, 
+    \qquad
+    \tilde{B}^i = \psi^6 B^i,
+\end{equation}
+which makes the Maxwell constraints
+\begin{equation}
+    \partial_i \tilde{E}^i = 0, 
+    \qquad
+    \partial_i \tilde{B}^i = 0,
+\end{equation}
+independent of $\psi$ and therefore solvable separately from the spacetime variables. Since the equations are linear, solutions may be superimposed. Following \cite{Bozzola2019}, we neglect contributions from the magnetic field.  
+
+The momentum constraint is linear and does not depend on $\psi$, allowing us to decompose the solution into vacuum GR and matter contributions:
+\begin{equation}
+    V^i = V^i_{\text{GR}} + V^i_{\text{M}}.
+\end{equation}
+For $V^i_{\text{GR}}$, we use the standard Bowen--York solutions \cite{Bowen1980}. For the matter contribution, we solve
+\begin{equation}
+    \nabla^2 V^i + \tfrac{1}{3}\delta^{ij}\partial_j ( \partial_k V^k ) - 8 \pi J^i = 0,
+\end{equation}
+where
+\begin{equation}
+    J^i = 2 \Pi D^i \phi 
+    + 2 e^{-2 \alpha_0 \phi} \epsilon^{ijk} E_j B_k 
+    + \tfrac{1}{2}e^{4 \alpha_1 \phi} \Xi D^i \kappa.
+\end{equation}
+
+Assuming maximal slicing, time symmetry, and neglecting contributions from the magnetic field and axion, we obtain $J^i = 0$. Thus $V^i_{\text{M}}=0$, and the momentum constraints reduce to the standard Bowen--York form.  
+
+The Hamiltonian constraint becomes
+\begin{equation}
+    \nabla^2 \psi + \tfrac{1}{8} \psi^{-7} \tilde{A}_{ij} \tilde{A}^{ij} + 2\pi \psi^5 \rho = 0.
+\end{equation}
+
+Separating the singular part of $\psi$ from the finite correction $u$ yields
+\begin{equation}
+    \psi = \sqrt{\left(1+u +\sum_{n=1}^{N_p}\frac{M_n}{2R_n}\right)^2 
+    -\left( \sum_{n=1}^{N_p}\frac{Q_n}{2R_n} \right)^2 }.
+\end{equation} 
+
+This corresponds to a Reissner--Nordström black hole plus corrections. Following \cite{Bozzola2019}, we define
+\begin{equation}
+    \eta = \sum_{n=1}^{N_p}\frac{M_n}{2R_n}, \quad 
+    \xi = \sum_{n=1}^{N_p}\frac{Q_n}{2R_n}, \quad 
+    \kappa = 1+ u + \eta,
+\end{equation}
+so that the conformal factor can be written as
+\begin{equation}
+    \psi = \sqrt{\eta^2 - \xi^2 }.
+\end{equation}
+
+Rearranging the Hamiltonian constraint gives
+\begin{multline}
+    \nabla^2 u = -\frac{1}{\kappa} \Big(
+    \partial_a \kappa \partial^a \kappa 
+    - \partial_a \xi \partial^a \xi 
+    - \partial_a \psi \partial^a \psi \\
+    + \tfrac{1}{8} \psi^{-6} \tilde{A}_{ij} \tilde{A}^{ij}
+    + 2 \pi \psi^{5} \rho
+    \Big),
+\end{multline}
+with
+\begin{equation}
+\begin{split}
+    \rho \equiv\;& \Pi^2 + (D\phi)^2 
+    + e^{-2 \alpha_0 \phi}\big( E_a  E^a +  B_a  B^a\big) \\
+    &+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big(\Xi^2 + (D\kappa)^2\big).
+\end{split}
+\end{equation}
+
+Under the same simplifying assumptions as before, $\rho$ reduces to
+\begin{equation}
+    \rho \rightarrow (D\phi)^2 + e^{-2 \alpha_0 \phi}(\ E_a E^a).
+\end{equation}
+
+This follows \cite{Bozzola2019} closely, except that we include dilaton contributions in $\rho$. Specifically, we employ a Reissner--Nordström electric field for the electric component and add a dilaton field for a single, spinless black hole. The axion is initialized to zero and allowed to relax to a quasi-equilibrium state during evolution.  
+
+The electric and dilaton fields are defined as:
+\begin{align}
+M_i &\equiv \text{physical mass of puncture } i, \\[4pt]
+q_i &\equiv \text{electric charge of puncture } i, \\[6pt]
+m_i &\equiv M_i - \frac{q_i^{\,2}}{2M_i}, \\[6pt]
+\alpha_i &\equiv \tanh^{-1}\!\left(\frac{q_i}{M_i\sqrt{2}}\right), \\[6pt]
+f_i(r_i) &\equiv \left(r_i + \tfrac{1}{2} m_i \right)^{2}, \\[6pt]
+\bar{\rho}_i^{\,2}(r_i)
+&\equiv f_i(r_i)^{2}
+     + 2 m_i \, f_i(r_i)\, r_i \, \sinh^{2}(\alpha_i), \\[6pt]
+\Phi_i(r_i)
+&\equiv -\tfrac{1}{2}\,\ln\!\left(
+\frac{\bar{\rho}_i^{\,2}(r_i)}{f_i(r_i)^{2}}
+\right), \\[6pt]
+\Phi(r)
+&\equiv \sum_{i=1}^{N_p}\Phi_i(r_i).
+\end{align}
+
+
+
+% \begin{align}
+% \alpha_i &= \tanh^{-1}\!\left(\frac{q_i}{m_i \sqrt{2}}\right), \\[6pt]
+% f_i(r_i) &= \left(r_i + \tfrac{1}{2} m_i \right)^{2}, \\[6pt]
+% \bar{\rho}_i^{\,2}(r_i) &= f_i(r_i)^{2} + 2 m_i \, f_i(r_i)\, r_i \, \sinh^{2}(\alpha_i), \\[6pt]
+% \Phi_i(r_i) &= -\tfrac{1}{2}\,\ln\!\left(\frac{\bar{\rho}_i^{\,2}(r_i)}{f_i(r_i)^{2}}\right), \\[6pt]
+% \Phi(r) &= \Phi_1(r_1;m_1,q_1) + \Phi_2(r_2;m_2,q_2).
+% \end{align}
+and 
+\begin{equation}
+     E^i = \psi^{-6}\sum_{i=1}^{N_p} \frac{q_i}{r_i}.
+\end{equation}
+
+Perhaps future approaches making use of hyperbolic constraint formulations, such as those proposed in \cite{Tootle2025,Assumpcao2021_NRPyElliptic,Assumpcao2022_HyperbolicRelaxation,Ruter2018_HypRelax}, could be adapted to produce improved initial data in the future.\\
+
+\section{Wave Extractions}  
+The gravitational wave signals are given by the Newman--Penrose scalar derived from the Weyl tensor as:
+\begin{equation}
+    \Psi_4 = C_{\alpha \beta \gamma \delta} k^{\alpha} \bar{m}^{\beta} k^{\gamma} \bar{m}^{\delta}.
+\end{equation}
+Here, $k$ and $\bar{m}$ are part of a null tetrad, which we define below.  
+The extraction of the radiated electromagnetic energy is given by two scalar quantities calculated in the Newman--Penrose formalism \cite{Newman1962,Zilhao2014,Bruegmann2011}.  
+The triads are constructed to be orthogonal to the normal unit vector $n^{\nu}$, and they are defined as:
+\begin{equation}
+    l^{\alpha} = \frac{1}{\sqrt{2}}\left(n^{\alpha} + u^{\alpha}\right),
+\end{equation}
+\begin{equation}
+    k^{\alpha} = \frac{1}{\sqrt{2}}\left(n^{\alpha} - u^{\alpha}\right),
+\end{equation}
+\begin{equation}
+    m^{\alpha} = \frac{1}{\sqrt{2}}\left(v^{\alpha} - i w^{\alpha}\right).
+\end{equation}
+
+Asymptotically, the triad vectors \(u\), \(v\), and \(w\) behave as unit radial, polar, and azimuthal vectors \(\hat{r}\), \(\hat{\theta}\), and \(\hat{\phi}\), respectively.  
+Similarly, we can construct analogous quantities for the electromagnetic radiation.  
+With this construction, the two radiative quantities are defined as:
+\[
+\xi_1 \equiv \frac{1}{2} F_{\mu \nu} \left(l^{\mu} k^{\nu} + \bar{m}^{\mu} m^{\nu}\right),
+\]
+\[
+\xi_2 \equiv F_{\mu \nu} \bar{m}^{\mu} k^{\nu}.
+\]
+
+The radiative terms for the dilaton and axion are defined in a similar way.  
+For the dilaton, we have:
+\begin{equation}
+    \Phi = \Pi + r^i D_i \phi,
+\end{equation}
+and similarly, for the axion, we have:
+\begin{equation}
+    \bm{\kappa} = \Xi + r^i D_i \kappa,
+\end{equation}
+where $\Pi$ and $\Xi$ are the time derivatives of the dilaton and axion, respectively.  
+
+At a given extraction radius $R_{\mathrm{ex}}$, we perform a multipolar decomposition by projecting $\Psi_4$, $\xi_1$, $\xi_2$, $\Phi$, and $\bm{\kappa}$ onto spherical harmonics of spin weights $s = -2$, $0$, and $-1$:
+\begin{align}
+\Psi_4(t,\theta,\phi) &= \sum_{l,m} \psi^{lm}(t)\, Y^{-2}_{lm}(\theta,\phi), \label{eq:psi4_decomp} \\
+\xi_1(t,\theta,\phi) &= \sum_{l,m} \xi^{lm}_{1}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:xi1_decomp} \\
+\xi_2(t,\theta,\phi) &= \sum_{l,m} \xi^{lm}_{2}(t)\, Y^{-1}_{lm}(\theta,\phi), \label{eq:xi2_decomp} \\
+\Phi(t,\theta,\phi) &= \sum_{l,m} \Phi^{lm}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:phi_decomp} \\
+\bm{\kappa}(t,\theta,\phi) &= \sum_{l,m} \bm{\kappa}^{lm}(t)\, Y^{0}_{lm}(\theta,\phi). \label{eq:kappa_decomp}
+\end{align}
+
+We can calculate the radiated energy from the gravitational, electromagnetic, axion, and dilaton fields as follows \cite{Zilhao2012}:
+\begin{align}
+F_{\mathrm{GW}}
+&= \frac{dE_{\mathrm{GW}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{16\pi}
+\sum_{l,m} \left| \int_{-\infty}^{t} dt'\, \psi^{lm}(t') \right|^2, \\
+F_{\mathrm{M}}
+&= \frac{dE_{\mathrm{M}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{4\pi}
+\sum_{l,m} \left| \phi^{lm}_2(t) \right|^2.
+\end{align}
+ % keep earlier floats below this heading
+
+\section{Table of Tests Done}
+\label{sec:appx:sim_tab}
+% ----- single-column merged table -----
+\begin{center}
+{\label{tab:bh_hair_combined}%
+Binary black hole configurations }
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.1}
+
+
+% ---------- FIRST SECTION ----------
+\textbf{(a)  Kerr–Sen Same-Sign Charge and Spin-Aligned Black Hole Tests} \\[0.4em]
+\begin{tabular}{lllcc}
+$(\chi_1, Q_1)$ & $(\chi_2, Q_2)$ & \textrm{Dilaton $\boldsymbol{\phi}$} & \textrm{Axion $\boldsymbol{\kappa}$} \\ \hline
+$\chi_1 = 0.20$, $Q_1 \in \{0.50, 0.25, 0.125, 0.0624\}$ &
+$\chi_2 \in \{0.20, 0.10, 0.05\}$, $Q_2 \in \{0.50, 0.25, 0.125, 0.0624\}$ &
+\cmark & \cmark \\[0.3em]
+$\chi_1 = 0.10$, $Q_1 \in \{0.50, 0.25, 0.125, 0.0624\}$ &
+$\chi_2 \in \{0.10, 0.05\}$, $Q_2$ as above &
+\cmark & \cmark \\[0.3em]
+$\chi_1 = 0.05$, $Q_1 \in \{0.50, 0.25, 0.125, 0.0624\}$ &
+$\chi_2 = 0.05$, $Q_2$ as above &
+\cmark & \cmark \\
+\end{tabular}
+
+\vspace{1.2em} % spacing between subtables
+
+% ---------- SECOND SECTION ----------
+\textbf{(b) Collisions with Other Black Holes} \\[0.4em]
+\begin{tabular}{llcc}
+\textrm{Black Hole 1( Q,$\chi$)} & \textrm{Black Hole 2 ( Q,$\chi$)} & $\boldsymbol{\phi}$ & $\boldsymbol{\kappa}$ \\
+\hline
+Kerr--Sen $(0.5,\,0.2)$   & Kerr--Sen $(0.5,\,0.2)$   & \cmark & \cmark \\
+Kerr--Sen $(0.5,\,0.2)$   & Kerr $(0.0,\,0.2)$        & \cmark & \cmark \\
+Kerr--Sen $(0.5,\,0.2)$   & Kerr--Sen $(-0.5,\,0.2)$  & \xmark & \xmark \\
+Kerr--Sen $(0.5,\,-0.2)$  & Kerr--Sen $(0.5,\,0.2)$   & \cmark & \xmark \\
+RN $(0.5,\,0.0)$          & Kerr $(0.0,\,0.2)$        & \cmark & \cmark \\
+KN $(0.5,\,0.2)^{\dagger}$& KN $(0.5,\,0.2)^{\dagger}$& \cmark & \cmark \\
+\end{tabular}
+
+\endgroup
+\end{center}
+% ----- end single-column content -----
+
+% return to two-column mode
+
