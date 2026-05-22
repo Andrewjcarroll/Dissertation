@@ -1,0 +1,481 @@
+\section{Electricity and Magnetism}
+
+We give here an example of how to perform a \(3+1\) decomposition for electricity and magnetism. We follow an approach similar to that of \textit{Numerical Relativity from Scratch}~\cite{BaumgarteShapiro2021}.
+
+We begin with Maxwell's equations written in terms of the Faraday tensor:
+\begin{equation}
+    \nabla_b F^{ab} = 4\pi j^a ,
+    \label{eq:maxwell_equation}
+\end{equation}
+and
+\begin{equation}
+    \nabla_{[a}F_{bc]}=0 ,
+\end{equation}
+where we have defined the four-current as
+\begin{equation}
+    j^a = (\rho, j^i).
+\end{equation}
+We note that the continuity equation can be written as
+\begin{equation}
+    \nabla_a j^a = 0 .
+\end{equation}
+In general relativity, there is a similar conservation law associated with the Bianchi identity.
+
+We further note that the Maxwell tensor can be written in terms of the vector potential \(A^a\) as
+\begin{equation}
+    F^{ab} = \nabla^a A^b - \nabla^b A^a .
+\end{equation}
+With this definition, the second of Maxwell's equations is satisfied automatically. Substituting this expression into the first Maxwell equation, Eq.~\eqref{eq:maxwell_equation}, gives
+\begin{equation}
+    \nabla_b \nabla^a A^b - \nabla_b \nabla^b A^a = 4\pi j^a .
+    \label{eq:maxwell_vector_potential}
+\end{equation}
+Here \(A^a\) is the vector potential. In a manner similar to the four-current, we write the vector potential as
+\begin{equation}
+    A^a = (\phi, A^i).
+\end{equation}
+
+We now first consider the time component of Eq.~\eqref{eq:maxwell_vector_potential}. Setting the index \(a\) to the time component, \(t\), we have
+\begin{equation}
+    \nabla_b \nabla^t A^b - \nabla_b \nabla^b A^t
+    =
+    \nabla_b \nabla^t A^b - \nabla_j \nabla^j \phi
+    =
+    4 \pi j^t
+    =
+    4 \pi \rho .
+\end{equation}
+Here we have changed the index from \(b\) to \(j\) because the remaining components are purely spatial. We also note that, when \(b=t\), the two terms cancel. In special relativity, corresponding to flat spacetime, we make the following identifications:
+\begin{equation}
+    \nabla_j = D_j,
+    \qquad
+    \nabla_t = \partial_t .
+\end{equation}
+We also have \(\nabla^t = \eta^{ta}\nabla_a = -\partial_t\), and therefore
+\begin{equation}
+    D_j \left( \partial_t A^j - D^j \phi \right) = 4 \pi \rho .
+\end{equation}
+We can now make the identification
+\begin{equation}
+    E^i = F^{ti} = -\partial_t A^i - D^i \phi .
+\end{equation}
+This can also be rearranged to obtain the evolution equation
+\begin{equation}
+    \partial_t A^i = -E^i - D^i \phi .
+\end{equation}
+As a result, we recover Gauss's law,
+\begin{equation}
+    D_i E^i = 4 \pi \rho ,
+\end{equation}
+which gives the constraint equation.
+
+We now consider the spatial components of Eq.~\eqref{eq:maxwell_vector_potential}, corresponding to \(a=i\):
+\begin{equation}
+    \nabla_t \left(\nabla^i A^t - \nabla^t A^i \right)
+    =
+    - \nabla_j \nabla^i A^j
+    + \nabla_j \nabla^j A^i
+    + 4 \pi j^i .
+\end{equation}
+Here we have grouped the terms with \(b=t\) on the left-hand side and the terms with \(b=j\) on the right-hand side. We then obtain
+\begin{equation}
+    \partial_t E_i
+    =
+    - D_j D^j A_i
+    + D_i D^j A_j
+    - 4 \pi j_i .
+\end{equation}
+We now have both the evolution and constraint equations. We will follow the same pattern as in general relativity, but we will have to contend with non-flat spacetime.
+
+To summarize, we have six evolution equations:
+\begin{equation}
+    \partial_t E_i
+    =
+    - D_j D^j A_i
+    + D_i D^j A_j
+    - 4 \pi j_i .
+\end{equation}
+\begin{equation}
+    \partial_t A^i = -E^i - D^i \phi .
+\end{equation}
+and two constraint equations:
+\begin{equation}
+    D_i E^i = 4 \pi \rho ,
+\end{equation}
+\begin{equation}
+    D_i B^i = 0 .
+\end{equation}
+\section{Spacetime and Kinematics}
+
+We now allow for more general slices of spacetime. This increased freedom is needed for solving the Cauchy problem in general relativity and in alternative theories of gravity. The surfaces we embed in spacetime can be thought of as hypersurfaces. We assume that these hypersurfaces are spacelike, so that they represent slices of constant time.
+
+We can define the gradient of \(t\) as
+\begin{equation}
+    \nabla_a t = \partial_a t .
+\end{equation}
+This quantity is perpendicular to the constant-time hypersurfaces. We then introduce the normal \(n_a\) to the slices as proportional to this gradient:
+\begin{equation}
+    n_a = -\alpha \nabla_a t .
+\end{equation}
+We choose \(n_a\) to have unit magnitude:
+\begin{equation}
+    n_a n^a = g^{ab} n_a n_b = -1 .
+\end{equation}
+Because the slices are spacelike, the normal four-vector must be timelike, and we therefore normalize it to negative unity. The quantity \(\alpha\) measures the ratio of coordinate time to proper time. In general, \(\alpha\) is a coordinate-dependent quantity.
+
+In this coordinate system,
+\begin{equation}
+    \nabla_a t = \partial_a t = \frac{\partial t}{\partial x^a},
+\end{equation}
+so the only nonzero component occurs when \(a=t\). The normal vector then reduces to
+\begin{equation}
+    n_a = (-\alpha,0,0,0).
+\end{equation}
+We can write \(\alpha\) in terms of the proper time interval \(d\tau\) as
+\begin{equation}
+    d\tau = \alpha dt .
+\end{equation}
+We often call \(\alpha\) the lapse function.
+
+The normalization condition can be satisfied by writing
+\begin{equation}
+    n^a = \frac{1}{\alpha}(1,\beta^i).
+\end{equation}
+This holds with our normalization condition for any \(\beta^i\). Viewing \(n^a\) as the four-velocity of a normal observer, \(\beta^i\) measures the extent to which the spatial coordinates change as the normal observer moves through spacetime. This quantity is called the shift vector.
+
+We can also use the normal vector to decompose the metric into spatial and temporal parts. We write
+\begin{equation}
+    g^a{}_b = \gamma^a{}_b - n^a n_b .
+\end{equation}
+Here \(\gamma^a{}_b\) is the spatial part of the metric and is called the projection operator.
+
+Changes in the normal vector determine how the spatial hypersurfaces are embedded in spacetime. We can decompose this as
+\begin{align}
+    \nabla_a n_b
+    &=
+    g_a{}^c g_b{}^d \nabla_c n_d \nonumber \\
+    &=
+    \left(\gamma_a{}^c - n^c n_a\right)
+    \left(\gamma_b{}^d - n^d n_b\right)
+    \nabla_c n_d \nonumber \\
+    &=
+    \gamma_a{}^c \gamma_b{}^d \nabla_c n_d
+    - \gamma_a{}^c n_b n^d \nabla_c n_d
+    - n_a n^c \gamma_b{}^d \nabla_c n_d
+    + n_a n^c n_b n^d \nabla_c n_d .
+\end{align}
+The Lie derivative measures how a tensor field changes as it is dragged along the flow generated by a vector field. For a covector $A_d$, the Lie derivative along $n^a$ is
+\begin{equation}
+    \mathcal{L}_n A_d
+    =
+    n^c \nabla_c A_d
+    +
+    A_c \nabla_d n^c .
+\end{equation}
+Unlike the covariant derivative, the Lie derivative does not require any additional connection structure; it depends only on the vector field that generates the flow.
+
+One important property is that the Lie derivative of a spatial tensor along $\alpha n^a$ is again spatial. Since we want our spatial quantities to remain spatial during the evolution, we decompose the coordinate time-evolution vector $t^a$ into normal and tangential parts:
+\begin{equation}
+    t^a = \alpha n^a + \beta^a ,
+\end{equation}
+or equivalently,
+\begin{equation}
+    \alpha n^a = t^a - \beta^a .
+    \label{eq:normal}
+\end{equation}
+Here $\alpha$ is the lapse function, which controls the rate of proper time elapsed between neighboring slices, and $\beta^a$ is the shift vector, which describes how spatial coordinates move from one slice to the next.
+
+We also define the extrinsic curvature by
+\begin{equation}
+    K_{ab}
+    =
+    - \gamma_a{}^c \gamma_b{}^d \nabla_c n_d .
+\end{equation}
+The minus sign is a convention that we adopt.
+Before we move on, we will also define the covariant derivative and the Christoffel symbols.
+
+For the covariant derivative, we need a derivative operator that transforms like a tensor. For scalars, we can use the ordinary partial derivative, but for higher-rank tensors this is not sufficient. The partial derivative only accounts for changes in the components of the tensor, while ignoring changes in the basis vectors. To account for changes in the basis vectors, we introduce the Christoffel symbols, which are not themselves tensors.
+
+For a vector $A^b$, the covariant derivative is defined by
+\begin{equation}
+    \nabla_a A^b
+    =
+    \partial_a A^b
+    +
+    \Gamma^b{}_{ac} A^c .
+\end{equation}
+Here $\Gamma^b{}_{ac}$ is the Christoffel symbol. For the Levi-Civita connection, which is compatible with the metric and torsion-free, the Christoffel symbols are given by
+\begin{equation}
+    \Gamma^a{}_{bc}
+    =
+    \frac{1}{2} g^{ad}
+    \left(
+        \partial_b g_{dc}
+        +
+        \partial_c g_{db}
+        -
+        \partial_d g_{bc}
+    \right).
+\end{equation}
+\section{General Relativity}
+
+To decompose Einstein's equations in a similar way, we need the spacetime metric $g_{ab}$. Recall Einstein's equation:
+\begin{equation}
+    G_{ab} + \Lambda g_{ab} = 8 \pi T_{ab}.
+\end{equation}
+At first, this appears to provide ten equations for the ten independent components of $G_{ab}$. However, the Bianchi identity,
+\begin{equation}
+    \nabla_a G^{ab} = 0,
+\end{equation}
+must always be satisfied. This plays a role similar to the constraints in electromagnetism. It also tells us that four of Einstein's equations are not independent. We therefore expect four constraint equations in general relativity, along with a fourfold gauge freedom.
+
+We can now decompose both the variables and the equations. As mentioned above, the spacetime metric can be decomposed using the spatial projection operator:
+\begin{equation}
+  g_{ab}
+  =
+  g^c{}_a g^d{}_b g_{cd}
+  =
+  \left(\gamma^c{}_a - n^c n_a\right)
+  \left(\gamma^d{}_b - n^d n_b\right) g_{cd}
+  =
+  \gamma^c{}_a \gamma^d{}_b g_{cd} - n_a n_b .
+\end{equation}
+The first term on the right-hand side is
+\begin{equation}
+    \gamma^c{}_a \gamma^d{}_b g_{cd}
+    =
+    g_{ab} + n_a n_b .
+\end{equation}
+This defines the spatial metric, which also acts as the projection tensor:
+\begin{equation}
+    \gamma_{ab} = g_{ab} + n_a n_b .
+\end{equation}
+The spatial metric performs the same role on each spatial slice that the spacetime metric performs in the full four-dimensional spacetime. However, because $\gamma_{ab}$ is purely spatial, its components normal to the slice vanish.
+
+We can therefore write the inverse spacetime metric as
+\begin{equation}
+    g^{ab}
+    =
+    \gamma^{ab} - n^a n^b
+    =
+    \begin{pmatrix}
+        -\alpha^{-2} & \alpha^{-2} \beta^i \\
+        \alpha^{-2}\beta^j & \gamma^{ij} - \alpha^{-2}\beta^i\beta^j
+    \end{pmatrix}.
+\end{equation}
+The line element then becomes
+\begin{equation}
+    ds^2
+    =
+    g_{ab} dx^a dx^b
+    =
+    -\alpha^2 dt^2
+    +
+    \gamma_{ij}
+    \left(dx^i + \beta^i dt\right)
+    \left(dx^j + \beta^j dt\right).
+\end{equation}
+The quantity $ds^2$ encodes the notion of distance in spacetime and can be thought of as the spacetime analogue of the Pythagorean theorem.
+
+The extrinsic curvature can also be related to the time evolution of the spatial metric. In particular, one can show that
+\begin{equation}
+    K_{ab}
+    =
+    -\frac{1}{2}\mathcal{L}_n \gamma_{ab}.
+    \label{eq:extrinsic-curvature-lie}
+\end{equation}
+Using Eq.~\eqref{eq:normal} and Eq.~\eqref{eq:extrinsic-curvature-lie}, this can be rewritten in terms of the coordinate time derivative as
+\begin{equation}
+    \partial_t \gamma_{ij}
+    =
+    -2 \alpha K_{ij}
+    +
+    \mathcal{L}_{\beta}\gamma_{ij}.
+\end{equation}
+Thus, the extrinsic curvature measures how the spatial metric changes in time, up to the lapse and shift. The spatial metric $\gamma_{ij}$ and the extrinsic curvature $K_{ij}$ together form the basic dynamical variables in the ADM decomposition.
+
+From here, we need to further decompose the equations into purely spatial quantities. The spatial covariant derivative is defined in the same way as the spacetime covariant derivative, but with the connection associated with the spatial metric $\gamma_{ij}$. For a spatial vector $V^j$, we have
+\begin{equation}
+    D_i V^j
+    =
+    \partial_i V^j
+    +
+    \Gamma^j{}_{ik} V^k .
+\end{equation}
+Here $\Gamma^i{}_{jk}$ is the Christoffel symbol associated with the spatial metric:
+\begin{equation}
+    \Gamma^i{}_{jk}
+    =
+    \frac{1}{2} \gamma^{il}
+    \left(
+        \partial_j \gamma_{lk}
+        +
+        \partial_k \gamma_{lj}
+        -
+        \partial_l \gamma_{jk}
+    \right).
+\end{equation}
+
+To obtain the spatial decompositions of the Riemann and Ricci tensors, we use the Gauss--Codazzi relations. One useful projection is
+The spatial projections of the spacetime curvature are related to the intrinsic curvature of the spatial slice and the extrinsic curvature through the Gauss--Codazzi relations. These equations allow us to rewrite spacetime curvature quantities in terms of purely spatial quantities and the extrinsic curvature.
+
+The Gauss equation is
+\begin{equation}
+    \gamma^a{}_i \gamma^b{}_j \gamma^c{}_k \gamma^d{}_l
+    {}^{(4)}R_{abcd}
+    =
+    {}^{(3)}R_{ijkl}
+    +
+    K_{ik}K_{jl}
+    -
+    K_{il}K_{jk}.
+\end{equation}
+Here ${}^{(4)}R_{abcd}$ is the four-dimensional spacetime Riemann tensor, while ${}^{(3)}R_{ijkl}$ is the three-dimensional Riemann tensor associated with the spatial metric $\gamma_{ij}$.
+
+The Codazzi equation is
+\begin{equation}
+    \gamma^a{}_i \gamma^b{}_j \gamma^c{}_k n^d
+    {}^{(4)}R_{abcd}
+    =
+    D_j K_{ik}
+    -
+    D_i K_{jk}.
+\end{equation}
+This relates the mixed spatial-normal projection of the spacetime curvature to spatial derivatives of the extrinsic curvature.
+
+The Ricci equation, which involves two projections along the normal direction, is
+\begin{equation}
+    \gamma^a{}_i \gamma^b{}_j n^c n^d
+    {}^{(4)}R_{acbd}
+    =
+    \mathcal{L}_n K_{ij}
+    +
+    \frac{1}{\alpha} D_i D_j \alpha
+    +
+    K_{ik}K^k{}_j .
+\end{equation}
+Together, these relations provide the geometric bridge between the four-dimensional spacetime curvature and the three-dimensional geometry of each spatial slice.
+The preceding definitions come from differential geometry. To obtain the ADM equations, we now insert them into Einstein's equation and equate the projections of the Einstein tensor with the corresponding projections of the stress-energy tensor in Eq.~\eqref{eq:Einstein}.
+
+Projecting Einstein's equation twice along the normal direction gives the Hamiltonian constraint:
+\begin{equation}
+    R + K^2 - K_{ij}K^{ij}
+    =
+    16\pi \rho .
+    \label{eq:hamiltonian}
+\end{equation}
+Here
+\begin{equation}
+    \rho = n^a n^b T_{ab}
+\end{equation}
+is the energy density measured by an observer moving normal to the spatial slice. The quantity $K$ is the trace of the extrinsic curvature,
+\begin{equation}
+    K = \gamma^{ij}K_{ij}.
+\end{equation}
+
+A mixed projection, with one index projected along the normal direction and one projected onto the spatial slice, gives the momentum constraint:
+\begin{equation}
+    D_j \left( K^{ij} - \gamma^{ij}K \right)
+    =
+    8\pi j^i .
+    \label{eq:momentum}
+\end{equation}
+Here
+\begin{equation}
+    j^i
+    =
+    - \gamma^{ia} n^b T_{ab}
+\end{equation}
+is the momentum density measured by the normal observer.
+
+A complete spatial projection gives the evolution equation for the extrinsic curvature:
+\begin{equation}
+    \partial_t K_{ij}
+    =
+    \alpha
+    \left(
+        R_{ij}
+        - 2K_{ik}K^k{}_j
+        + K K_{ij}
+    \right)
+    - D_i D_j \alpha
+    - 4\pi \alpha M_{ij}
+    + \mathcal{L}_{\beta} K_{ij}.
+    \label{eq:adm-k-evolution}
+\end{equation}
+In this expression, we have used the abbreviation
+\begin{equation}
+    M_{ij}
+    =
+    2S_{ij}
+    -
+    \gamma_{ij}\left(S-\rho\right),
+\end{equation}
+where
+\begin{equation}
+    S_{ij}
+    =
+    \gamma^a{}_i \gamma^b{}_j T_{ab}
+\end{equation}
+is the spatial projection of the stress-energy tensor, and
+\begin{equation}
+    S = \gamma^{ij}S_{ij}
+\end{equation}
+is its trace.
+
+Together with the evolution equation for the spatial metric,
+\begin{equation}
+    \partial_t \gamma_{ij}
+    =
+    -2\alpha K_{ij}
+    +
+    \mathcal{L}_{\beta}\gamma_{ij},
+    \label{eq:adm-gamma-evolution}
+\end{equation}
+these equations form the ADM system. The variables $\gamma_{ij}$ and $K_{ij}$ are the dynamical variables, while $\alpha$ and $\beta^i$ encode the gauge freedom associated with the choice of spacetime coordinates.
+
+\begin{equation}
+\boxed{
+\begin{aligned}
+    R + K^2 - K_{ij}K^{ij}
+    &=
+    16\pi \rho,
+    &&\text{Hamiltonian constraint},
+    \\[0.5em]
+    D_j \left( K^{ij} - \gamma^{ij}K \right)
+    &=
+    8\pi j^i,
+    &&\text{Momentum constraint},
+    \\[0.5em]
+    \partial_t \gamma_{ij}
+    &=
+    -2\alpha K_{ij}
+    +
+    \mathcal{L}_{\beta}\gamma_{ij},
+    &&\text{Metric evolution},
+    \\[0.5em]
+    \partial_t K_{ij}
+    &=
+    \alpha
+    \left(
+        R_{ij}
+        - 2K_{ik}K^k{}_j
+        + K K_{ij}
+    \right)
+    - D_i D_j \alpha
+    \\
+    &\quad
+    - 4\pi \alpha
+    \left[
+        2S_{ij}
+        -
+        \gamma_{ij}(S-\rho)
+    \right]
+    +
+    \mathcal{L}_{\beta}K_{ij},
+    &&\text{Extrinsic-curvature evolution}.
+\end{aligned}
+}
+\end{equation}
+\subsection{Reformulating the Einstein Equations}
+THE ADM equations are actually only weakly hyperbolic, unfortunately they in general have been shown to be numerically unstable. We therefore need to Reformulate them. It has been shown how to reformaulte them into a strongly hyperbolic system of equations. 
