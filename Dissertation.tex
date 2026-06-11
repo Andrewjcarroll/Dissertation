@@ -13,6 +13,7 @@
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{tikz}
+\usepackage{caption}
 \everymath{\displaystyle}
 %\graphicspath{{Figures/Extracted_quantites/}{Figures/scalar field plots/}{Figures/Waveforms/}}
 
@@ -22,7 +23,13 @@
 % remove the etd option and change the oneside argument to twoside, like this:
 %
 %\documentclass[twoside,masters]{BYUPhys}
+\newcommand{\fignote}[1]{%
+  \caption*{\textit{Note.} #1}%
+}
 
+\newcommand{\tabnote}[1]{%
+  \caption*{\textit{Note.} #1}%
+}
 % Your name
   \Author{Andrew James Carroll}
 
@@ -66,7 +73,11 @@
 
  % Make the table of contents.
  \tableofcontents
+\cleardoublepage
+\listoffigures
 
+\cleardoublepage
+\listoftables
  % Start regular page counting at page 1
  \mainmatter
 
@@ -101,9 +112,8 @@
 \chapter{CFD Notes}
 \include{CFD_notes}
 
-\chapter{Software Notes}
 \include{Software_notes}
-
+\include{Paraview}
 \chapter{General Notes}
 \include{appendix_general}
 

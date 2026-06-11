@@ -1,0 +1,330 @@
+
+\chapter{ParaView}
+
+This chapter provides a brief introduction to some of the basic functions in
+ParaView. We begin by loading simulation output files and then discuss how to
+select the appropriate ParaView data file.
+
+\section{Opening a File in ParaView}
+
+To load data into ParaView, click the \textbf{Open File} button in the top-left
+toolbar. This button is highlighted in Figure~\ref{fig:paraview-open}.
+
+\begin{figure}[h!]
+\centering
+
+\begin{tikzpicture}
+    % Image
+    \node[anchor=south west, inner sep=0] (img) at (0,0)
+        {\includegraphics[width=\textwidth]{Paraview/Paraview_1.png}};
+
+    % Coordinates are scaled so that (0,0) is the bottom-left
+    % of the image and (1,1) is the top-right.
+    \begin{scope}[
+        x={(img.south east)},
+        y={(img.north west)}
+    ]
+
+        % Red box around the Open File icon
+        \draw[red, very thick]
+            (0.003,0.930) rectangle (0.018,0.968);
+
+        % Arrow and label
+        \draw[red, very thick, ->]
+            (0.120,0.900) -- (0.018,0.955);
+
+        \node[red, fill=white, draw=red, thick, rounded corners,
+              font=\small] at (0.180,0.890)
+            {Open File};
+
+    \end{scope}
+\end{tikzpicture}
+
+\caption{The ParaView interface with the \textbf{Open File} icon highlighted.}
+\label{fig:paraview-open}
+
+\end{figure}
+
+After clicking the \textbf{Open File} button, navigate to the directory where
+your data is saved. Dendro commonly outputs data in \texttt{.vtu} format, which
+stands for \emph{VTK Unstructured Grid}. For parallel runs, the output is often
+organized using a \texttt{.pvtu} file. The \texttt{.pvtu} file acts as a wrapper
+that tells ParaView how the individual \texttt{.vtu} pieces fit together.
+
+In most cases, you should open only the \texttt{.pvtu} file rather than opening
+the individual \texttt{.vtu} files by hand.
+
+\section{Creating a Slice}
+
+Once the data has been loaded, a common operation is to create a
+two-dimensional slice through the three-dimensional dataset. In this example,
+the \textbf{Z\_slice} button is used to create a slice through the data, as
+shown in Figure~\ref{fig:paraview-slice-button}.
+
+\begin{figure}[h!]
+\centering
+
+\begin{tikzpicture}
+    % Main screenshot
+    \node[anchor=south west, inner sep=0] (img) at (0,0)
+        {\includegraphics[width=\textwidth]{Paraview/Paraview_3.png}};
+
+    % Normalized image coordinates:
+    % (0,0) = bottom-left, (1,1) = top-right.
+    \begin{scope}[
+        x={(img.south east)},
+        y={(img.north west)}
+    ]
+% Box around the Slice toolbar button
+\draw[red, very thick]
+    (0.04415,0.847) rectangle (0.05842,0.877);
+
+% Arrow and label for Slice
+\draw[red, very thick, ->]
+    (0.3215,0.70) -- (0.06,0.860);
+
+\node[
+    red,
+    fill=white,
+    draw=red,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.33,0.69)
+    {Slice};
+
+
+% Box around the Calculator toolbar button
+\draw[blue, very thick]
+    (0.006,0.84) rectangle (0.018,0.88);
+
+% Arrow and label for Calculator
+\draw[blue, very thick, ->]
+    (0.25,0.36) -- (0.018,0.840);
+
+\node[
+    blue,
+    fill=white,
+    draw=blue,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.25,0.36)
+    {Calculator};
+
+    \end{scope}
+\end{tikzpicture}
+
+\caption{The ParaView interface with the \textbf{Z\_slice} button highlighted.}
+\label{fig:paraview-slice-button}
+
+\end{figure}
+
+\section{Adjusting the Slice and Viewing the Data and the Calculator}
+
+After selecting the \textbf{Slice} tool, ParaView allows us to choose how the
+data should be sliced. Often, we want to create \(z\)-slices, since this is the
+default orientation used by Dendro output. To do this, set the slice normal to
+\((0,0,1)\). We also set the origin to \((0,0,10^{-5})\). The small nonzero
+\(z\)-value is used because setting \(z=0\) can sometimes cause ParaView to miss
+the slice.
+
+The \textbf{Show Plane} option should be turned off so that only the data slice
+is displayed. After changing these settings, click \textbf{Apply} again.
+
+Once the slice is displayed, we can change which field is visualized using the
+field-selection menu. We can also move forward and backward through the
+available time steps using the time controls. Finally, the representation menu
+allows us to switch between different viewing modes, such as \textbf{Surface}
+and \textbf{Wireframe}. These controls are highlighted in
+Figure~\ref{fig:paraview-view-controls}.
+
+\begin{figure}[h!]
+\centering
+
+\begin{tikzpicture}
+    % Main screenshot
+    \node[anchor=south west, inner sep=0] (img) at (0,0)
+        {\includegraphics[width=\textwidth]{Paraview/Paraview_5.png}};
+
+    % Normalized image coordinates:
+    % (0,0) = bottom-left, (1,1) = top-right.
+    \begin{scope}[
+        x={(img.south east)},
+        y={(img.north west)}
+    ]
+
+        % Time controls: play/pause and step forward/backward buttons
+        \draw[red, very thick]
+            (0.18,0.921) rectangle (0.26,0.955);
+
+        \draw[red, very thick, ->]
+            (0.330,0.975) -- (0.262,0.93);
+
+        \node[
+            red,
+            fill=white,
+            draw=red,
+            thick,
+            rounded corners,
+            font=\small
+        ] at (0.385,0.975)
+            {Time controls};
+
+        % Solid Color dropdown
+        \draw[blue, very thick]
+            (0.087,0.885) rectangle (0.150,0.916);
+
+        \draw[blue, very thick, ->]
+            (0.055,0.845) -- (0.118,0.883);
+
+        \node[
+            blue,
+            fill=white,
+            draw=blue,
+            thick,
+            rounded corners,
+            font=\small
+        ] at (0.030,0.840)
+            {Fields};
+
+        % Surface/Wireframe dropdown
+        \draw[green, very thick]
+            (0.187,0.880) rectangle (0.245,0.916);
+
+        \draw[green, very thick, ->]
+            (0.315,0.83) -- (0.246,0.890);
+
+        \node[
+            green,
+            fill=white,
+            draw=green,
+            thick,
+            rounded corners,
+            font=\small
+        ] at (0.375,0.840)
+            {Surface / Wireframe};
+
+    \end{scope}
+\end{tikzpicture}
+
+\caption{ParaView controls for stepping through time, selecting the displayed
+field or color option, and switching between representations such as
+\textbf{Surface} and \textbf{Wireframe}.}
+\label{fig:paraview-view-controls}
+
+\end{figure}
+The Calculator tool is opened by clicking the Calculator button. In the Calculator window, the available fields can be loaded by selecting Scalars. Mathematical operations may then be applied to these fields to construct derived quantities.
+
+\section{Warp by Scalar}
+
+To use the \textbf{Warp By Scalar} filter, click \textbf{Filters} and search
+for \textbf{Warp By Scalar}. After selecting the filter, its settings will
+appear in the Properties panel, in the same general location as the slice
+settings.
+
+\begin{figure}[h!]
+\centering
+
+\begin{tikzpicture}
+    \node[anchor=south west, inner sep=0] (img) at (0,0)
+        {\includegraphics[width=\textwidth]{Paraview/Paraview_6.png}};
+
+    \begin{scope}[
+        x={(img.south east)},
+        y={(img.north west)}
+    ]
+
+        % Scalars dropdown
+        \draw[red, very thick]
+            (0.031,0.380) rectangle (0.084,0.410);
+        \draw[red, very thick, ->]
+            (0.200,0.440) -- (0.085,0.410);
+        \node[
+            red,
+            fill=white,
+            draw=red,
+            thick,
+            rounded corners,
+            font=\small
+        ] at (0.205,0.450)
+            {Scalars};
+
+        % Scale Factor control
+        \draw[blue, very thick]
+            (0.000,0.350) rectangle (0.100,0.381);
+        \draw[blue, very thick, ->]
+            (0.165,0.360) -- (0.100,0.350);
+        \node[
+            blue,
+            fill=white,
+            draw=blue,
+            thick,
+            rounded corners,
+            font=\small
+        ] at (0.235,0.360)
+            {Scale Factor};
+
+    \end{scope}
+\end{tikzpicture}
+
+\caption{The \textbf{Warp By Scalar} settings in the Properties panel. The
+\textbf{Scalars} menu selects the field used for the warping, and the
+\textbf{Scale Factor} controls the strength of the warp.}
+\label{fig:paraview-warp-by-scalar}
+
+\end{figure}
+
+\section{Color Map Editor}
+
+The \textbf{Color Map Editor} controls how ParaView maps data values to colors.
+It can be used to change the color scale, adjust the visible data range, and
+choose a different color preset.
+
+\begin{figure}[p]
+\centering
+
+\includegraphics[
+    width=\textwidth,
+    height=0.75\textheight,
+    keepaspectratio
+]{Paraview/Paraview_7.png}
+
+\caption{The \textbf{Color Map Editor} panel in ParaView. This panel controls
+the color scale, opacity, and transfer function used to visualize the selected
+field.}
+\label{fig:paraview-color-map-editor}
+
+\end{figure}
+
+By default, the color mapping may not automatically update when stepping
+through time. The easiest way to ensure that the colors match the data range at
+each time step is to enable \textbf{Clamp} and update the color range at every
+time step. Otherwise, the coloring may not match the current range of the data
+unless it is updated manually.
+
+
+\section{Macros, making Animations Saving CSV Files, and Finding Data}
+
+Often, we want to perform repetitive tasks in ParaView. These tasks can be
+automated by creating a macro. To create a macro, click \textbf{Tools}, then
+select \textbf{Start Trace}. Perform the task you want to automate, and when
+you are finished, click \textbf{Stop Trace}. ParaView will then allow you to
+save the recorded trace as a macro. The macro can later be used to repeat the
+same sequence of actions automatically.
+
+We can also save the data currently loaded in ParaView as a CSV file. To do
+this, click \textbf{File}, then select \textbf{Save Data}. This will save the
+data from the currently active object, such as the current slice. The resulting
+CSV file can then be loaded into Python, MATLAB, Mathematica, or another tool
+for later analysis.
+
+Animations can also be saved from ParaView by clicking \textbf{File} and then
+selecting \textbf{Save Animation}.
+
+Finally, ParaView can be used to find data that satisfies certain conditions.
+To do this, click \textbf{View} and then select \textbf{Find Data}. In the
+\textbf{Find Data} panel, choose the dataset you want to search. You can usually
+leave the element type set to \textbf{Point}. Then choose the field you want to
+search, set the desired condition and value, and click \textbf{Find Data}. The
+matching region will be highlighted in the render view.

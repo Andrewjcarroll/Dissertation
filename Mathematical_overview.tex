@@ -478,4 +478,715 @@ these equations form the ADM system. The variables $\gamma_{ij}$ and $K_{ij}$ ar
 }
 \end{equation}
 \subsection{Reformulating the Einstein Equations}
-THE ADM equations are actually only weakly hyperbolic, unfortunately they in general have been shown to be numerically unstable. We therefore need to Reformulate them. It has been shown how to reformaulte them into a strongly hyperbolic system of equations. 
+The ADM equations are actually only weakly hyperbolic, unfortunately they in general have been shown to be numerically unstable. We therefore need to Reformulate them. It has been shown how to reformaulte them into a strongly hyperbolic system of equations. 
+\subsubsection{Reformulating Maxwell's equations}
+We begin by using the electromagnetism analogy. In a \(3+1\) decomposition,
+Maxwell's equations can be written as
+\begin{equation}
+    \partial_t E_i
+    =
+    -D_jD^j A_i
+    +D_iD^jA_j
+    -4\pi j_i ,
+\end{equation}
+together with
+\begin{equation}
+    \partial_t A_i
+    =
+    -E_i-D_i\phi .
+\end{equation}
+These evolution equations are supplemented by the constraint equation
+\begin{equation}
+    D_iE^i=4\pi\rho .
+\end{equation}
+We define the constraint violation \(\mathcal{C}\) by
+\begin{equation}
+    \mathcal{C}
+    \equiv
+    D_iE^i-4\pi\rho .
+\end{equation}
+Ideally, the constraint is satisfied exactly, so that
+\begin{equation}
+    \mathcal{C}=0 .
+\end{equation}
+Furthermore, if the constraint is satisfied initially, we would like it to remain
+satisfied during the evolution. In exact arithmetic this would imply
+\begin{equation}
+    \partial_t \mathcal{C}=0 .
+\end{equation}
+In a numerical evolution, however, truncation error and roundoff error generally
+produce small but nonzero values of \(\mathcal{C}\). It is therefore useful to
+reformulate the evolution system so that constraint violations propagate in a
+controlled way.
+
+We now introduce the auxiliary variable
+\begin{equation}
+    \Gamma
+    \equiv
+    D_iA^i .
+\end{equation}
+Taking a time derivative gives
+\begin{equation}
+    \partial_t\Gamma
+    =
+    D_i\partial_t A^i .
+\end{equation}
+Using the evolution equation for \(A_i\), we find
+\begin{equation}
+    \partial_t\Gamma
+    =
+    -D_iE^i-D_iD^i\phi .
+\end{equation}
+Since \(\mathcal{C}=0\) for constraint-satisfying data, we are free to add an
+arbitrary multiple of \(\mathcal{C}\) to the right-hand side. Thus we write
+\begin{equation}
+    \partial_t\Gamma
+    =
+    -D_iE^i-D_iD^i\phi+\eta\mathcal{C},
+\end{equation}
+where \(\eta\) is a constant. Using
+\begin{equation}
+    \mathcal{C}=D_iE^i-4\pi\rho ,
+\end{equation}
+this may also be written as
+\begin{equation}
+    \partial_t\Gamma
+    =
+    (\eta-1)D_iE^i
+    -D_iD^i\phi
+    -4\pi\eta\rho .
+\end{equation}
+
+With this new variable, the Maxwell evolution system becomes
+\begin{align}
+    \partial_t A_i
+    &=
+    -E_i-D_i\phi ,
+    \\
+    \partial_t E_i
+    &=
+    -D^2A_i+D_i\Gamma-4\pi j_i ,
+    \\
+    \partial_t\Gamma
+    &=
+    -D_iE^i-D_iD^i\phi+\eta\mathcal{C}.
+\end{align}
+Here \(D^2\equiv D_iD^i\). The advantage of this form is that the constraint
+violation no longer simply satisfies \(\partial_t\mathcal{C}=0\). Instead, as we
+now show, it satisfies a wave equation.
+
+Starting from
+\begin{equation}
+    \mathcal{C}
+    =
+    D_iE^i-4\pi\rho ,
+\end{equation}
+we take a time derivative:
+\begin{equation}
+    \partial_t\mathcal{C}
+    =
+    D_i\partial_t E^i
+    -4\pi\partial_t\rho .
+\end{equation}
+Using charge conservation,
+\begin{equation}
+    \partial_t\rho
+    =
+    -D_i j^i ,
+\end{equation}
+we obtain
+\begin{equation}
+    \partial_t\mathcal{C}
+    =
+    D_i\partial_t E^i
+    +4\pi D_i j^i .
+\end{equation}
+Substituting the evolution equation for \(E_i\),
+\begin{equation}
+    \partial_t E_i
+    =
+    -D^2A_i+D_i\Gamma-4\pi j_i ,
+\end{equation}
+gives
+\begin{align}
+    \partial_t\mathcal{C}
+    &=
+    D^i\left(-D^2A_i+D_i\Gamma-4\pi j_i\right)
+    +4\pi D_i j^i
+    \\
+    &=
+    -D^iD^2A_i+D^iD_i\Gamma .
+\end{align}
+Assuming that the spatial derivatives commute, this becomes
+\begin{equation}
+    \partial_t\mathcal{C}
+    =
+    -D^2D^iA_i+D^2\Gamma .
+\end{equation}
+Therefore,
+\begin{equation}
+    \partial_t\mathcal{C}
+    =
+    D^2\left(\Gamma-D^iA_i\right).
+\end{equation}
+
+Taking another time derivative, we find
+\begin{equation}
+    \partial_t^2\mathcal{C}
+    =
+    D^2\left(\partial_t\Gamma-D^i\partial_t A_i\right).
+\end{equation}
+Using
+\begin{equation}
+    \partial_t A_i
+    =
+    -E_i-D_i\phi ,
+\end{equation}
+we have
+\begin{equation}
+    -D^i\partial_t A_i
+    =
+    D^iE_i+D^iD_i\phi .
+\end{equation}
+Hence,
+\begin{align}
+    \partial_t\Gamma-D^i\partial_t A_i
+    &=
+    \left(-D^iE_i-D^iD_i\phi+\eta\mathcal{C}\right)
+    +
+    \left(D^iE_i+D^iD_i\phi\right)
+    \\
+    &=
+    \eta\mathcal{C}.
+\end{align}
+It follows that
+\begin{equation}
+    \partial_t^2\mathcal{C}
+    =
+    D^2\left(\eta\mathcal{C}\right).
+\end{equation}
+Since \(\eta\) is constant, this reduces to
+\begin{equation}
+    \partial_t^2\mathcal{C}
+    =
+    \eta D^2\mathcal{C}.
+\end{equation}
+Equivalently,
+\begin{equation}
+    \boxed{
+    \left(-\partial_t^2+\eta D_iD^i\right)\mathcal{C}=0
+    } .
+\end{equation}
+Thus the constraint violation \(\mathcal{C}\) satisfies a wave equation. For
+\(\eta>0\), constraint violations propagate with speed \(\sqrt{\eta}\). Anayltically we haven't changes the nature of the equations but we have changed the numeric behavior as now the error will propagate a way as it turns out we will need to do something similar for the bssn equations. 
+
+\subsubsection{BSSN Equations}
+
+We begin with the ADM equations:
+\begin{align}
+    R + K^2 - K_{ij}K^{ij}
+    &=
+    16\pi \rho,
+    &&\text{Hamiltonian constraint},
+    \\[0.5em]
+    D_j \left( K^{ij} - \gamma^{ij}K \right)
+    &=
+    8\pi j^i,
+    &&\text{Momentum constraint},
+    \\[0.5em]
+    \partial_t \gamma_{ij}
+    &=
+    -2\alpha K_{ij}
+    +
+    \mathcal{L}_{\beta}\gamma_{ij},
+    &&\text{Metric evolution},
+    \\[0.5em]
+    \partial_t K_{ij}
+    &=
+    \alpha
+    \left(
+        R_{ij}
+        - 2K_{ik}K^k{}_{j}
+        + K K_{ij}
+    \right)
+    - D_i D_j \alpha
+    \notag \\
+    &\quad
+    - 4\pi \alpha
+    \left[
+        2S_{ij}
+        -
+        \gamma_{ij}(S-\rho)
+    \right]
+    +
+    \mathcal{L}_{\beta}K_{ij},
+    &&\text{Extrinsic-curvature evolution}.
+\end{align}
+
+The Ricci tensor can be written in several different forms. In particular,
+\(R_{ij}\) contains second derivatives of the metric:
+\begin{equation}
+    R_{ij}
+    =
+    -\frac{1}{2}\gamma^{kl}
+    \left(
+        \partial_k\partial_l\gamma_{ij}
+        +
+        \partial_i\partial_j\gamma_{kl}
+        -
+        \partial_i\partial_l\gamma_{kj}
+        -
+        \partial_k\partial_j\gamma_{il}
+    \right)
+    +
+    \gamma^{kl}
+    \left(
+        \Gamma^{m}{}_{il}\Gamma_{mkj}
+        -
+        \Gamma^{m}{}_{ij}\Gamma_{mkl}
+    \right).
+\end{equation}
+
+The most important terms for rewriting the equations are the four terms involving
+second derivatives of the metric. The first term,
+\(\gamma^{kl}\partial_k\partial_l\gamma_{ij}\), acts like a Laplace operator
+on the metric. However, because of the remaining second-derivative terms, we
+cannot immediately write the system in wave-equation form. In analogy with the
+introduction of an auxiliary variable in Maxwell's equations, we introduce a
+new variable here as well. This allows us to rewrite the Ricci tensor in terms
+of the trace of the Christoffel symbols. In particular, we define
+\begin{equation}
+    \Gamma^i \equiv \gamma^{jk}\Gamma^i{}_{jk}.
+\end{equation}
+In terms of this contracted Christoffel symbol, the Ricci tensor can be written
+as
+\begin{equation}
+\begin{aligned}
+    R_{ij}
+    &=
+    -\frac{1}{2}\gamma^{kl}\partial_k\partial_l\gamma_{ij}
+    +
+    \gamma_{k(i}\partial_{j)}\Gamma^k
+    +
+    \Gamma^k\Gamma_{(ij)k}
+    \\
+    &\quad
+    +
+    2\gamma^{lm}\Gamma^k{}_{m(i}\Gamma_{j)kl}
+    +
+    \gamma^{kl}\Gamma^m{}_{il}\Gamma_{mkj}.
+\end{aligned}
+\end{equation}
+
+We can also use the identity relating the contracted Christoffel symbols to the
+divergence of the inverse metric:
+\begin{equation}
+    g^{bc}\Gamma^a{}_{bc}
+    =
+    -\frac{1}{\sqrt{|g|}}
+    \partial_b
+    \left(
+        \sqrt{|g|}g^{ab}
+    \right).
+\end{equation}
+Applying this identity to the spatial metric gives
+\begin{equation}
+    \label{eq:Gamma_eq}
+    \Gamma^i
+    =
+    -\frac{1}{\sqrt{\gamma}}
+    \partial_j
+    \left(
+        \sqrt{\gamma}\gamma^{ij}
+    \right).
+\end{equation}
+
+We can now regard \(\Gamma^i\) as an independent variable. It is related to the
+divergence of the metric in much the same way as the auxiliary variable in the
+Maxwell example above. To complete the system, we must derive an evolution
+equation for \(\Gamma^i\). This is done by taking a time derivative of
+Eq.~\eqref{eq:Gamma_eq}. Doing so introduces divergences of the extrinsic
+curvature. These terms can then be simplified using the momentum constraint.
+
+To avoid some of the difficulties associated with the determinant of the metric,
+we also introduce a conformal transformation. In particular, we write
+\begin{equation}
+    \gamma_{ij}
+    =
+    e^{4\phi}\tilde{\gamma}_{ij}.
+\end{equation}
+There is some freedom in the choice of conformal factor. We can then rewrite
+quantities such as the Christoffel symbols and the Ricci tensor in terms of the
+conformal metric plus correction terms involving the conformal factor. The
+physical Ricci tensor can be split into two pieces,
+\begin{equation}
+    R_{ij}
+    =
+    \bar{R}_{ij}
+    +
+    R^{\phi}_{ij},
+\end{equation}
+where \(\bar{R}_{ij}\) is computed from the conformally related metric
+\(\bar{\gamma}_{ij}\), and \(R^{\phi}_{ij}\) contains the terms involving the
+conformal factor \(\phi\).
+
+The conformal Ricci tensor is
+\begin{equation}
+\begin{aligned}
+    \bar{R}_{ij}
+    &=
+    -\frac{1}{2}\bar{\gamma}^{kl}
+    \partial_k\partial_l \bar{\gamma}_{ij}
+    +
+    \bar{\gamma}_{k(i}\partial_{j)}\bar{\Gamma}^{k}
+    +
+    \bar{\Gamma}^{k}\bar{\Gamma}_{(ij)k}
+    \\
+    &\quad
+    +
+    2\bar{\gamma}^{lm}
+    \bar{\Gamma}^{k}{}_{m(i}\bar{\Gamma}_{j)kl}
+    +
+    \bar{\gamma}^{kl}
+    \bar{\Gamma}^{m}{}_{il}\bar{\Gamma}_{mkj}.
+\end{aligned}
+\end{equation}
+
+The conformal-factor contribution is
+\begin{equation}
+\begin{aligned}
+    R^{\phi}_{ij}
+    &=
+    -2
+    \left(
+        \bar{D}_i\bar{D}_j\phi
+        +
+        \bar{\gamma}_{ij}\bar{\gamma}^{lm}
+        \bar{D}_l\bar{D}_m\phi
+    \right)
+    \\
+    &\quad
+    +
+    4
+    \left(
+        \left(\bar{D}_i\phi\right)
+        \left(\bar{D}_j\phi\right)
+        -
+        \bar{\gamma}_{ij}\bar{\gamma}^{lm}
+        \left(\bar{D}_l\phi\right)
+        \left(\bar{D}_m\phi\right)
+    \right).
+\end{aligned}
+\end{equation}
+
+The contracted conformal Christoffel symbols are defined by
+\begin{equation}
+    \bar{\Gamma}^{i}
+    \equiv
+    \bar{\gamma}^{jk}\bar{\Gamma}^{i}{}_{jk}
+    =
+    -\frac{1}{\bar{\gamma}^{1/2}}
+    \partial_j
+    \left(
+        \bar{\gamma}^{1/2}
+        \bar{\gamma}^{ij}
+    \right),
+\end{equation}
+where \(\bar{\gamma}\) denotes the determinant of the conformal metric
+\(\bar{\gamma}_{ij}\).
+
+Using the freedom in the choice of conformal factor, we may impose
+\begin{equation}
+    \bar{\gamma}=1,
+\end{equation}
+which reduces the conformal connection functions to
+\begin{equation}
+    \bar{\Gamma}^{i}
+    =
+    -\partial_j\bar{\gamma}^{ij}.
+\end{equation}
+
+Taking the determinant of
+\begin{equation}
+    \gamma_{ij}
+    =
+    e^{4\phi}\bar{\gamma}_{ij},
+\end{equation}
+and using \(\bar{\gamma}=1\), we obtain
+\begin{equation}
+    \phi
+    =
+    \frac{1}{12}\ln\gamma,
+\end{equation}
+where \(\gamma\) is the determinant of the physical metric \(\gamma_{ij}\).
+
+The extrinsic curvature is decomposed into its trace and trace-free parts:
+\begin{equation}
+    K_{ij}
+    =
+    A_{ij}
+    +
+    \frac{1}{3}\gamma_{ij}K,
+\end{equation}
+where
+\begin{equation}
+    K
+    =
+    \gamma^{ij}K_{ij}.
+\end{equation}
+Finally, the trace-free part is conformally rescaled according to
+\begin{equation}
+    A_{ij}
+    =
+    e^{4\phi}\tilde{A}_{ij}.
+\end{equation}
+
+The variables we evolve are therefore
+\[
+    \phi,\qquad
+    \tilde{\gamma}_{ij},\qquad
+    \tilde{A}_{ij},\qquad
+    K,\qquad
+    \tilde{\Gamma}^i.
+\]
+These are the standard BSSN variables.
+
+\noindent\textbf{The BSSN equations are}
+\begin{equation}
+\boxed{
+\begin{aligned}
+    \partial_t \phi
+    &=
+    -\frac{1}{6}\alpha K
+    +
+    \beta^i \partial_i \phi
+    +
+    \frac{1}{6}\partial_i \beta^i ,
+    &&\text{Conformal exponent evolution},
+    \\[0.75em]
+    \partial_t K
+    &=
+    -\gamma^{ij}D_iD_j\alpha
+    +
+    \alpha
+    \left(
+        \tilde{A}_{ij}\tilde{A}^{ij}
+        +
+        \frac{1}{3}K^2
+    \right)
+    +
+    4\pi\alpha(\rho+S)
+    +
+    \beta^i\partial_i K ,
+    &&\text{Mean-curvature evolution},
+    \\[0.75em]
+    \partial_t \tilde{\gamma}_{ij}
+    &=
+    -2\alpha\tilde{A}_{ij}
+    +
+    \beta^k\partial_k\tilde{\gamma}_{ij}
+    +
+    \tilde{\gamma}_{ik}\partial_j\beta^k
+    +
+    \tilde{\gamma}_{kj}\partial_i\beta^k
+    -
+    \frac{2}{3}\tilde{\gamma}_{ij}\partial_k\beta^k ,
+    &&\text{Conformal-metric evolution},
+    \\[0.75em]
+    \partial_t \tilde{A}_{ij}
+    &=
+    e^{-4\phi}
+    \left[
+        -\left(D_iD_j\alpha\right)^{\mathrm{TF}}
+        +
+        \alpha
+        \left(
+            R_{ij}^{\mathrm{TF}}
+            -
+            8\pi S_{ij}^{\mathrm{TF}}
+        \right)
+    \right]
+    +
+    \alpha
+    \left(
+        K\tilde{A}_{ij}
+        -
+        2\tilde{A}_{il}\tilde{A}^{l}{}_{j}
+    \right)
+    \\
+    &\quad
+    +
+    \beta^k\partial_k\tilde{A}_{ij}
+    +
+    \tilde{A}_{ik}\partial_j\beta^k
+    +
+    \tilde{A}_{kj}\partial_i\beta^k
+    -
+    \frac{2}{3}\tilde{A}_{ij}\partial_k\beta^k ,
+    &&\text{Trace-free curvature evolution},
+    \\[0.75em]
+    \partial_t \tilde{\Gamma}^{i}
+    &=
+    -2\tilde{A}^{ij}\partial_j\alpha
+    +
+    2\alpha
+    \left(
+        \tilde{\Gamma}^{i}{}_{jk}\tilde{A}^{kj}
+        -
+        \frac{2}{3}\tilde{\gamma}^{ij}\partial_j K
+        -
+        8\pi\tilde{\gamma}^{ij}j_j
+        +
+        6\tilde{A}^{ij}\partial_j\phi
+    \right)
+    \\
+    &\quad
+    +
+    \beta^j\partial_j\tilde{\Gamma}^{i}
+    -
+    \tilde{\Gamma}^{j}\partial_j\beta^i
+    +
+    \frac{2}{3}\tilde{\Gamma}^{i}\partial_j\beta^j
+    +
+    \frac{1}{3}\tilde{\gamma}^{li}\partial_l\partial_j\beta^j
+    +
+    \tilde{\gamma}^{lj}\partial_j\partial_l\beta^i ,
+    &&\text{Conformal-connection evolution}.
+\end{aligned}
+}
+\end{equation}
+
+\subsubsection{Gauge and Slicing Conditions}
+
+We are not quite done, because we still have freedom to choose our coordinate
+system. In particular, we must choose conditions for the lapse \(\alpha\) and
+the shift \(\beta^i\). We summarize several common choices below.
+
+\paragraph{Geodesic slicing.}
+A simple choice is to set
+\begin{equation}
+    \alpha=1,
+    \qquad
+    \beta^i=0.
+\end{equation}
+This is called geodesic slicing. Although this is an easy choice, it is usually
+a poor one for numerical relativity simulations. The acceleration of the normal
+observers is
+\begin{equation}
+    a_a
+    =
+    D_a\ln\alpha .
+\end{equation}
+For geodesic slicing, \(\alpha=1\), so \(a_a=0\). Thus the normal observers are
+in free fall. This is also true for the coordinate points. In a strong
+gravitational field, this can lead to coordinate singularities, making geodesic
+slicing unsuitable for most numerical simulations of black holes.
+
+\paragraph{Maximal slicing.}
+We can control the convergence of coordinate observers by controlling the mean
+curvature. In maximal slicing, we impose
+\begin{equation}
+    K=0.
+\end{equation}
+We have imposed this condition on initial data in the past, but here we impose
+it at all times. Therefore,
+\begin{equation}
+    \partial_t K=0.
+\end{equation}
+This condition has several desirable properties, including singularity avoidance.
+In particular, the lapse tends to collapse toward zero near strong-field
+regions. This causes those slices to be held back in the evolution, a phenomenon
+known as the collapse of the lapse. However, maximal slicing also has
+disadvantages, such as grid stretching, which can lead to sharp features that
+are difficult to resolve numerically.
+
+\paragraph{Harmonic coordinates.}
+Harmonic coordinates are defined by the condition
+\begin{equation}
+    \Gamma^a=0.
+\end{equation}
+A related condition is harmonic slicing, in which we require only the time
+component of \(\Gamma^a\) to vanish and set \(\beta^i=0\). To obtain a lapse
+condition, we compute
+\begin{equation}
+    \Gamma^0
+    =
+    -\frac{1}{\alpha\gamma^{1/2}}
+    \partial_t
+    \left(
+        \gamma^{1/2}\alpha^{-1}
+    \right)
+    =
+    0.
+\end{equation}
+This gives the lapse evolution equation
+\begin{equation}
+    \partial_t \alpha
+    =
+    -\alpha^2 K.
+\end{equation}
+Solutions to the resulting wave equation are generally well behaved. However,
+with a few modifications to harmonic slicing, we can obtain an even better gauge
+choice for black-hole evolutions.
+
+\paragraph{\(1+\log\) slicing and the Gamma-driver condition.}
+We generalize the lapse evolution equation to
+\begin{equation}
+    \partial_t \alpha
+    =
+    -\alpha^2 f(\alpha)K.
+\end{equation}
+For \(f(\alpha)=1\), this reduces to harmonic slicing. For
+\(f(\alpha)=0\), the lapse is constant in time, which gives geodesic slicing
+when \(\alpha=1\). In the limit \(f(\alpha)\rightarrow\infty\), this condition
+approaches maximal slicing.
+
+A particularly useful choice is
+\begin{equation}
+    f(\alpha)
+    =
+    \frac{2}{\alpha}.
+\end{equation}
+This gives
+\begin{equation}
+    \partial_t\alpha
+    =
+    -2\alpha K,
+\end{equation}
+which is the standard \(1+\log\) slicing condition. This choice has the
+singularity-avoidance properties of maximal slicing while retaining good
+behavior in nearly flat regions.
+
+As a further generalization, we do not assume that \(\beta^i\) is close to zero.
+We include the advective term and write
+\begin{equation}
+    \left(\partial_t-\beta^i\partial_i\right)\alpha
+    =
+    -\alpha^2 f(\alpha)K.
+\end{equation}
+For \(f(\alpha)=2/\alpha\), this becomes
+\begin{equation}
+    \left(\partial_t-\beta^i\partial_i\right)\alpha
+    =
+    -2\alpha K.
+\end{equation}
+
+We also need an evolution condition for the shift. A common choice is the
+Gamma-driver condition,
+\begin{equation}
+    \left(\partial_t+\beta^j\partial_j\right)\beta^i
+    =
+    \mu B^i,
+\end{equation}
+together with
+\begin{equation}
+    \left(\partial_t+\beta^j\partial_j\right)B^i
+    =
+    \left(\partial_t+\beta^j\partial_j\right)\tilde{\Gamma}^i
+    -
+    \eta B^i.
+\end{equation}
+Here \(\mu\) and \(\eta\) are constants. The combination of \(1+\log\) slicing
+and the Gamma-driver shift condition is called the moving-puncture gauge. A
+major advantage of this gauge is that it removes the need for excision: the
+singularities are effectively handled by the gauge itself.
