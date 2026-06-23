@@ -1,14 +1,6 @@
-% Rewritten to match the reference paper style:
-% - arXiv rendered as: eprint = {arXiv:XXXX.XXXXX [class]} (or legacy arXiv:gr-qc/....)
-% - APS-style journal abbreviations
-% - No archivePrefix/primaryClass fields
-% - Kept keys; did not invent missing bibliographic data
+% Cleaned bibliography: duplicate keys removed by keeping the last occurrence.
+% Original backed up as references.bib.bak.
 
-% Rewritten to match the reference paper style:
-% - arXiv rendered as: eprint = {arXiv:XXXX.XXXXX [class]} (or legacy arXiv:gr-qc/....)
-% - APS-style journal abbreviations
-% - No archivePrefix/primaryClass fields
-% - Kept keys; did not invent missing bibliographic data
 @article{GWTC1,
   author = {B. P. Abbott et al. (LIGO Scientific Collaboration and Virgo Collaboration)},
   title = {GWTC-1: A Gravitational-Wave Transient Catalog of Compact Binary Mergers Observed by LIGO and Virgo during the First and Second Observing Runs},
@@ -19,37 +11,55 @@
 }
 
 @article{GWTC2,
-  author = {R. Abbott et al. (LIGO Scientific Collaboration and Virgo Collaboration)},
-  title = {GWTC-2: Compact Binary Coalescences Observed by LIGO and Virgo during the First Half of the Third Observing Run},
-  journal = {Phys. Rev. X},
-  volume = {11},
-  pages = {021053},
-  year = {2021}
+  author        = {Abbott, R. and others},
+  title         = {GWTC-2: Compact Binary Coalescences Observed by LIGO and Virgo during the First Half of the Third Observing Run},
+  journal       = {Phys. Rev. X},
+  volume        = {11},
+  pages         = {021053},
+  year          = {2021},
+  doi           = {10.1103/PhysRevX.11.021053},
+  eprint        = {2010.14527},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc},
+  collaboration = {LIGO Scientific Collaboration and Virgo Collaboration}
 }
 
 @article{GWTC3,
-  author = {R. Abbott et al. (LIGO Scientific Collaboration and Virgo Collaboration)},
-  title = {GWTC-3: Compact Binary Coalescences Observed by LIGO and Virgo during the Second Part of the Third Observing Run},
-  journal = {Phys. Rev. X},
-  volume = {13},
-  pages = {041039},
-  year = {2023}
+  author        = {Abbott, R. and others},
+  title         = {GWTC-3: Compact Binary Coalescences Observed by LIGO and Virgo during the Second Part of the Third Observing Run},
+  journal       = {Phys. Rev. X},
+  volume        = {13},
+  pages         = {041039},
+  year          = {2023},
+  doi           = {10.1103/PhysRevX.13.041039},
+  eprint        = {2111.03606},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc},
+  collaboration = {LIGO Scientific Collaboration, Virgo Collaboration, and KAGRA Collaboration}
 }
 
-@misc{Abbott2016,
-  title  = {Tests of General Relativity with GW150914},
-  author = {LIGO Scientific Collaboration and Virgo Collaboration and Abbott, B. P. and Abbott, R. and Abbott, T. D. and Abernathy, M. R. and Acernese, F. and Ackley, K. and Adams, C. and Adams, T. and others},
-  year   = {2016},
-  eprint = {arXiv:1602.03841 [gr-qc]},
-  note   = {Submitted 11 Feb 2016 (v1); last revised 23 Oct 2018 (v3)}
+@article{Abbott2016,
+  title   = {Tests of General Relativity with GW150914},
+  author  = {Abbott, B. P. and others (LIGO Scientific Collaboration and Virgo Collaboration)},
+  journal = {Phys. Rev. Lett.},
+  volume  = {116},
+  number  = {22},
+  pages   = {221101},
+  year    = {2016},
+  doi     = {10.1103/PhysRevLett.116.221101},
+  eprint  = {arXiv:1602.03841 [gr-qc]}
 }
 
-@misc{Elley2022,
-  title  = {Spin-induced dynamical scalarization, de-scalarization and stealthness in scalar-Gauss-Bonnet gravity during black hole coalescence},
-  author = {Elley, Matthew and Silva, Hector O. and Witek, Helvi and Yunes, Nicol{\'a}s},
-  year   = {2022},
-  eprint = {arXiv:2205.06240 [gr-qc]},
-  note   = {Submitted to a journal}
+@article{Elley2022,
+  title   = {Spin-induced dynamical scalarization, descalarization, and stealthness in scalar-Gauss-Bonnet gravity during a black hole coalescence},
+  author  = {Elley, Matthew and Silva, Hector O. and Witek, Helvi and Yunes, Nicol{\'a}s},
+  journal = {Phys. Rev. D},
+  volume  = {106},
+  number  = {4},
+  pages   = {044018},
+  year    = {2022},
+  doi     = {10.1103/PhysRevD.106.044018},
+  eprint  = {arXiv:2205.06240 [gr-qc]}
 }
 
 @article{Hirschmann2018,
@@ -62,36 +72,52 @@
   doi     = {10.1103/PhysRevD.97.064032}
 }
 
-@misc{Julie2017,
-  title  = {On the motion of hairy black holes in Einstein-Maxwell-dilaton theories},
-  author = {Juli{\'e}, F{\'e}lix-Louis},
-  year   = {2017},
-  eprint = {arXiv:1711.10769 [gr-qc]},
-  note   = {Dated: 29 Nov 2017}
+@article{Julie2017,
+  title   = {On the motion of hairy black holes in Einstein-Maxwell-dilaton theories},
+  author  = {Juli{\'e}, F{\'e}lix-Louis},
+  journal = {JCAP},
+  year    = {2018},
+  volume  = {01},
+  pages   = {026},
+  doi     = {10.1088/1475-7516/2018/01/026},
+  eprint  = {arXiv:1711.10769 [gr-qc]}
 }
 
-@misc{Bozzola2019,
-  title  = {Initial data for general relativistic simulations of multiple electrically charged black holes with linear and angular momenta},
-  author = {Bozzola, Gabriele and Paschalidis, Vasileios},
-  year   = {2019},
-  eprint = {arXiv:1903.01036 [gr-qc]},
-  note   = {Version 2; dated 19 Jun 2019}
+@article{Bozzola2019,
+  title   = {Initial data for general relativistic simulations of multiple electrically charged black holes with linear and angular momenta},
+  author  = {Bozzola, Gabriele and Paschalidis, Vasileios},
+  journal = {Phys. Rev. D},
+  volume  = {99},
+  number  = {10},
+  pages   = {104044},
+  year    = {2019},
+  doi     = {10.1103/PhysRevD.99.104044},
+  eprint  = {arXiv:1903.01036 [gr-qc]}
 }
 
 @inproceedings{Fernando2019,
-  title     = {A scalable framework for Adaptive Computational General Relativity on Heterogeneous Clusters},
   author    = {Fernando, Milinda and Neilsen, David and Hirschmann, Eric and Sundar, Hari},
-  booktitle = {Proceedings of the ACM International Conference on Supercomputing (ICS '19)},
-  year      = {2019}
+  title     = {A Scalable Framework for Adaptive Computational General Relativity on Heterogeneous Clusters},
+  booktitle = {Proceedings of the ACM International Conference on Supercomputing},
+  series    = {ICS '19},
+  year      = {2019},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  doi       = {10.1145/3330345.3330346}
 }
 
 @article{Fernando2019b,
-  title   = {Massively Parallel Simulations of Binary Black Hole Intermediate-Mass-Ratio Inspirals},
-  author  = {Fernando, M. and Neilsen, D. and Lim, H. and Hirschmann, E. and Sundar, H.},
-  journal = {SIAM J. Sci. Comput.},
-  year    = {2019},
-  volume  = {41},
-  pages   = {C97--C138}
+  author        = {Fernando, Milinda and Neilsen, David and Lim, Hyun and Hirschmann, Eric and Sundar, Hari},
+  title         = {Massively Parallel Simulations of Binary Black Hole Intermediate-Mass-Ratio Inspirals},
+  journal       = {SIAM Journal on Scientific Computing},
+  volume        = {41},
+  number        = {2},
+  pages         = {C97--C138},
+  year          = {2019},
+  doi           = {10.1137/18M1196972},
+  eprint        = {1807.06128},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.DC}
 }
 
 @article{Fernando2023,
@@ -377,32 +403,37 @@
   url     = {https://link.aps.org/doi/10.1103/PhysRevD.109.044008}
 }
 
-@misc{Sahoo2025,
-  title  = {Deciphering signatures of Kerr--Sen black holes in presence of plasma from the Event Horizon Telescope data},
-  author = {Sahoo, Siddharth Kumar and Banerjee, Indrani},
-  year   = {2025},
-  doi    = {10.48550/arXiv.2504.09443},
-  eprint = {arXiv:2504.09443 [gr-qc]},
-  note   = {Submitted 13 Apr 2025}
+@article{Sahoo2025,
+  title   = {Deciphering signatures of Kerr--Sen black holes in presence of plasma from the Event Horizon Telescope data},
+  author  = {Sahoo, Siddharth Kumar and Banerjee, Indrani},
+  journal = {JCAP},
+  year    = {2025},
+  volume  = {10},
+  pages   = {100},
+  doi     = {10.1088/1475-7516/2025/10/100},
+  eprint  = {arXiv:2504.09443 [gr-qc]}
 }
 
-@misc{Black2025_ORBIT,
-  title  = {Nyquist-resolving gravitational waves via orbital frequency-based refinement},
-  author = {Black, William K. and Neilsen, David and Hirschmann, Eric W. and Van Komen, David F. and Fernando, Milinda},
-  year   = {2025},
-  doi    = {10.48550/arXiv.2502.20282},
-  eprint = {arXiv:2502.20282 [gr-qc]},
-  note   = {Submitted 27 Feb 2025; revised 22 Apr 2025}
+@article{Black2025_ORBIT,
+  title   = {Nyquist-resolving gravitational waves via orbital frequency-based refinement},
+  author  = {Black, William K. and Neilsen, David and Hirschmann, Eric W. and Van Komen, David F. and Fernando, Milinda},
+  journal = {Phys. Rev. D},
+  volume  = {111},
+  number  = {12},
+  pages   = {124001},
+  year    = {2025},
+  doi     = {10.1103/PhysRevD.111.124001},
+  eprint  = {arXiv:2502.20282 [gr-qc]}
 }
 
 @article{Assumpcao2022_HyperbolicRelaxation,
   title   = {Fast hyperbolic relaxation elliptic solver for numerical relativity: Conformally flat, binary puncture initial data},
   author  = {Assump{\c{c}}{\~a}o, Thiago and Werneck, Leonardo R. and Jacques, Terrence Pierre and Etienne, Zachariah B.},
   journal = {Phys. Rev. D},
-  year    = {2022},
   volume  = {105},
   number  = {10},
   pages   = {104037},
+  year    = {2022},
   doi     = {10.1103/PhysRevD.105.104037},
   eprint  = {arXiv:2111.02424 [gr-qc]}
 }
@@ -483,14 +514,16 @@
 }
 
 @article{Baumgarte1999_BSSN,
-  title   = {On the numerical integration of Einstein's field equations},
-  author  = {Baumgarte, Thomas W. and Shapiro, Stuart L.},
-  journal = {Phys. Rev. D},
-  year    = {1999},
-  volume  = {59},
-  pages   = {024007},
-  doi     = {10.1103/PhysRevD.59.024007},
-  eprint  = {arXiv:gr-qc/9810065}
+  author        = {Baumgarte, Thomas W. and Shapiro, Stuart L.},
+  title         = {Numerical integration of Einstein's field equations},
+  journal       = {Phys. Rev. D},
+  volume        = {59},
+  pages         = {024007},
+  year          = {1998},
+  doi           = {10.1103/PhysRevD.59.024007},
+  eprint        = {gr-qc/9810065},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc}
 }
 
 @article{Bowen1985_ChargedInitialData,
@@ -504,11 +537,12 @@
 }
 
 @misc{Mukherjee2022_ConformallyCurvedChargedSpinning,
-  title  = {Conformally curved initial data for charged, spinning black hole binaries on arbitrary orbits},
-  author = {Mukherjee, Soham and Johnson-McDaniel, Nathan K. and Tichy, Wolfgang and Liebling, Steven L.},
-  year   = {2022},
-  doi    = {10.48550/arXiv.2202.12133},
-  eprint = {arXiv:2202.12133 [gr-qc]}
+  author        = {Mukherjee, Soham and Johnson-McDaniel, Nathan K. and Tichy, Wolfgang and Liebling, Steven L.},
+  title         = {Conformally curved initial data for charged, spinning black hole binaries on arbitrary orbits},
+  year          = {2022},
+  eprint        = {2202.12133},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc}
 }
 
 @article{Yunes2013_LRR_GRTests,
@@ -612,12 +646,16 @@
   eprint  = {arXiv:gr-qc/0511103}
 }
 
-@misc{Etienne2024,
-  title  = {Improved Moving-Puncture Techniques for Compact Binary Simulations},
-  author = {Etienne, Zachariah B.},
-  year   = {2024},
-  eprint = {arXiv:2404.01137 [gr-qc]},
-  note   = {v2}
+@article{Etienne2024,
+  title   = {Improved moving-puncture techniques for compact binary simulations},
+  author  = {Etienne, Zachariah B.},
+  journal = {Phys. Rev. D},
+  volume  = {110},
+  number  = {6},
+  pages   = {064045},
+  year    = {2024},
+  doi     = {10.1103/PhysRevD.110.064045},
+  eprint  = {arXiv:2404.01137 [gr-qc]}
 }
 
 @article{Barausse2013,
@@ -718,32 +756,33 @@
   eprint  = {arXiv:1408.1698 [gr-qc]},
   url     = {https://arxiv.org/abs/1408.1698}
 }
+
 @article{PapalloReall2017,
-  author    = {Giuseppe Papallo and Harvey S. Reall},
-  title     = {On the local well-posedness of Lovelock and Horndeski theories},
-  journal   = {JHEP},
-  volume    = {2017},
-  number    = {11},
-  pages     = {109},
-  year      = {2017},
-  doi       = {10.1007/JHEP11(2017)109},
-  eprint    = {1705.04370},
+  author        = {Papallo, Giuseppe and Reall, Harvey S.},
+  title         = {On the local well-posedness of Lovelock and Horndeski theories},
+  journal       = {Phys. Rev. D},
+  volume        = {96},
+  pages         = {044019},
+  year          = {2017},
+  doi           = {10.1103/PhysRevD.96.044019},
+  eprint        = {1705.04370},
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{KovacsReall2020,
-  author    = {Aron D. Kovacs and Harvey S. Reall},
-  title     = {Well-posed formulation of scalar-tensor effective field theory},
-  journal   = {Phys. Rev. D},
-  volume    = {101},
-  number    = {12},
-  pages     = {124003},
-  year      = {2020},
-  doi       = {10.1103/PhysRevD.101.124003},
-  eprint    = {2003.04327},
+  author        = {Kovacs, Aron D. and Reall, Harvey S.},
+  title         = {Well-posed formulation of scalar-tensor effective field theory},
+  journal       = {Phys. Rev. Lett.},
+  volume        = {124},
+  pages         = {221101},
+  year          = {2020},
+  doi           = {10.1103/PhysRevLett.124.221101},
+  eprint        = {2003.04327},
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @misc{PopeRohrerWhiting2025,
   author    = {C. N. Pope and D. O. Rohrer and B. F. Whiting},
   title     = {Perturbations of Black Holes in Einstein-Maxwell-Dilaton-Axion (EMDA) Theories},
@@ -752,16 +791,19 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Clough2024,
-  title   = {What no one has seen before: gravitational waveforms from warp drive collapse},
-  author  = {Clough, Katy and Dietrich, Tim and Khan, Sebastian},
-  year    = {2024},
-  journal = {arXiv preprint arXiv:2406.02466},
-  doi     = {10.48550/arXiv.2406.02466},
-  eprint  = {2406.02466},
+  author        = {Clough, Katy and Dietrich, Tim and Khan, Sebastian},
+  title         = {What no one has seen before: gravitational waveforms from warp drive collapse},
+  journal       = {The Open Journal of Astrophysics},
+  volume        = {7},
+  year          = {2024},
+  doi           = {10.33232/001c.121868},
+  eprint        = {2406.02466},
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Abbott2025GWTC3GR,
   title   = {Tests of General Relativity with GWTC-3},
   author  = {Abbott, R. and others (LIGO Scientific Collaboration and Virgo Collaboration and KAGRA Collaboration)},
@@ -775,6 +817,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Yunes2025GWTests,
   title   = {Gravitational-wave tests of general relativity with ground-based detectors and pulsar-timing arrays},
   author  = {Yunes, Nicol{\'a}s and Siemens, Xavier and Yagi, Kent},
@@ -788,15 +831,21 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Abac2025GW250114,
-  title   = {Black hole spectroscopy and tests of general relativity with GW250114},
-  author  = {Abac, A. G. and others (LIGO Scientific Collaboration and Virgo Collaboration and KAGRA Collaboration)},
-  journal = {Physical Review Letters},
-  year    = {2025},
-  eprint  = {arXiv:2509.xxxxx},
+  author        = {Abac, A. G. and others},
+  title         = {Black Hole Spectroscopy and Tests of General Relativity with GW250114},
+  journal       = {Phys. Rev. Lett.},
+  volume        = {136},
+  pages         = {041403},
+  year          = {2026},
+  doi           = {10.1103/6c61-fm1n},
+  eprint        = {2509.08099},
   archivePrefix = {arXiv},
-  primaryClass  = {gr-qc}
+  primaryClass  = {gr-qc},
+  collaboration = {LIGO Scientific Collaboration, Virgo Collaboration, and KAGRA Collaboration}
 }
+
 @article{Doneva2023sGB,
   title   = {Testing the limits of scalar-Gauss-Bonnet gravity through nonlinear evolutions of spin-induced scalarization},
   author  = {Doneva, Daniela D. and Arest{\'e} Sal{\'o}, Llibert and Clough, Katy and Figueras, Pau and Yazadjiev, Stoytcho S.},
@@ -810,6 +859,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Giri2025AdSBlackShells,
   title   = {Exploring Black Hole Mimickers: Electromagnetic and Gravitational Signatures of AdS Black Shells},
   author  = {Giri, Suvendu and Danielsson, Ulf and Lehner, Luis and Pretorius, Frans},
@@ -823,6 +873,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @article{Bambi2025Mimickers,
   title   = {Black hole mimickers: from theory to observation},
   author  = {Bambi, Cosimo and Brustein, Ramy and Cardoso, Vitor and Chael, Andrew and Danielsson, Ulf and Giri, Suvendu and Gupta, Anuradha and Heidmann, Pierre and Lehner, Luis and Liebling, Steven and Maselli, Andrea and Maggio, Elisa and Mathur, Samir and Medeiros, Lia and Nielsen, Alex B. and Olivares-S{\'a}nchez, H{\'e}ctor R. and Pani, Paolo and Siemonsen, Nils and Wong, George N.},
@@ -832,6 +883,7 @@
   archivePrefix = {arXiv},
   primaryClass  = {gr-qc}
 }
+
 @book{Carroll2004,
   title     = {Spacetime and Geometry: An Introduction to General Relativity},
   author    = {Carroll, Sean M.},
@@ -879,6 +931,7 @@
   publisher = {Cambridge University Press},
   isbn      = {9781108933445}
 }
+
 @article{Einstein1915,
   title   = {Die Feldgleichungen der Gravitation},
   author  = {Einstein, Albert},
@@ -886,6 +939,7 @@
   year    = {1915},
   pages   = {844--847}
 }
+
 @article{Daszuta2023,
   title   = {Spectrally-tuned compact finite-difference schemes with domain decomposition and applications to numerical relativity},
   author  = {Daszuta, Boris},
@@ -897,6 +951,7 @@
   doi     = {10.1103/PhysRevD.107.104036},
   eprint  = {arXiv:2303.00088 [gr-qc]}
 }
+
 @article{Kim2013,
   title   = {Quasi-disjoint pentadiagonal matrix systems for the parallelization of compact finite-difference schemes and filters},
   author  = {Kim, Jae Wook},
@@ -906,6 +961,7 @@
   pages   = {168--194},
   doi     = {10.1016/j.jcp.2013.01.039}
 }
+
 @article{Kim2010,
   title   = {High-order compact filters with variable cut-off wavenumber and stable boundary treatment},
   author  = {Kim, Jae Wook},
@@ -916,6 +972,7 @@
   pages   = {1168--1182},
   doi     = {10.1016/j.compfluid.2010.02.004}
 }
+
 @article{KimSandberg2012,
   title   = {Efficient parallel computing with a compact finite difference scheme},
   author  = {Kim, Jae Wook and Sandberg, Richard D.},
@@ -925,6 +982,7 @@
   pages   = {70--87},
   doi     = {10.1016/j.compfluid.2012.01.008}
 }
+
 @article{Kim2024,
   title   = {Towards a genuinely stable boundary closure for pentadiagonal compact finite difference schemes},
   author  = {Kim, Jae Wook},
@@ -934,6 +992,7 @@
   pages   = {112802},
   doi     = {10.1016/j.jcp.2024.112802}
 }
+
 @article{Wang2018,
   title   = {A new central compact finite difference scheme with high spectral resolution for acoustic wave equation},
   author  = {Wang, Zhikai and Li, Jingye and Wang, Benfeng and Xu, Yiran and Chen, Xiaohong},
@@ -943,6 +1002,7 @@
   pages   = {191--206},
   doi     = {10.1016/j.jcp.2018.03.030}
 }
+
 @article{Kim2007,
   title   = {Optimised boundary compact finite difference schemes for computational aeroacoustics},
   author  = {Kim, Jae Wook},
@@ -953,6 +1013,7 @@
   pages   = {995--1019},
   doi     = {10.1016/j.jcp.2007.01.008}
 }
+
 @mastersthesis{Tyler2007,
   title  = {Analysis and Implementation of High-Order Compact Finite Difference Schemes},
   author = {Tyler, Jonathan G.},
@@ -961,6 +1022,7 @@
   year   = {2007},
   type   = {Master's thesis}
 }
+
 @article{Abac2025,
   author  = {Abac, A. G. and et al. (LIGO Scientific Collaboration, Virgo Collaboration, and KAGRA Collaboration)},
   title   = {Supplemental Material for ``GW250114: Testing Hawking's Area Law and the Kerr Nature of Black Holes''},
@@ -971,6 +1033,7 @@
   doi     = {10.1103/kw5g-d732},
   url     = {https://journals.aps.org/prl/supplemental/10.1103/kw5g-d732/GW250114_supplement.pdf}
 }
+
 @misc{LIGO_Facts,
   author       = {{LIGO Laboratory}},
   title        = {LIGO Facts},
@@ -979,6 +1042,7 @@
   year         = {n.d.},
   note         = {Accessed: 2026-04-27}
 }
+
 @article{Lele1992,
   author  = {Lele, Sanjiva K.},
   title   = {Compact Finite Difference Schemes with Spectral-like Resolution},
@@ -989,6 +1053,7 @@
   pages   = {16--42},
   doi     = {10.1016/0021-9991(92)90324-R}
 }
+
 @article{Loffler2012,
   author  = {L{\"o}ffler, Frank and Faber, Joshua and Bentivegna, Eloisa and Bode, Tanja and Diener, Peter and Haas, Roland and Hinder, Ian and Mundim, Bruno C. and Ott, Christian D. and Schnetter, Erik and Allen, Gabrielle and Campanelli, Manuela and Laguna, Pablo},
   title   = {The Einstein Toolkit: A Community Computational Infrastructure for Relativistic Astrophysics},
@@ -999,7 +1064,9 @@
   pages   = {115001},
   doi     = {10.1088/0264-9381/29/11/115001},
   eprint  = {arXiv:1111.3344 [gr-qc]}
-}@article{Boyle2019,
+}
+
+@article{Boyle2019,
   author  = {Boyle, Michael and others},
   title   = {The SXS Collaboration catalog of binary black hole simulations},
   journal = {Classical and Quantum Gravity},
@@ -1010,6 +1077,7 @@
   doi     = {10.1088/1361-6382/ab34e2},
   eprint  = {arXiv:1904.04831 [gr-qc]}
 }
+
 @article{Brugmann2008,
   author  = {Br{\"u}gmann, Bernd and Gonz{\'a}lez, Jos{\'e} A. and Hannam, Mark and Husa, Sascha and Sperhake, Ulrich and Tichy, Wolfgang},
   title   = {Calibration of Moving Puncture Simulations},
@@ -1021,6 +1089,7 @@
   doi     = {10.1103/PhysRevD.77.024027},
   eprint  = {arXiv:gr-qc/0610128}
 }
+
 @article{Clough2015,
   author  = {Clough, Katy and Lim, Eugene A. and Figueroa, Daniel G. and Ferreira, Pedro G.},
   title   = {GRChombo: Numerical Relativity with Adaptive Mesh Refinement},
@@ -1032,6 +1101,7 @@
   doi     = {10.1088/0264-9381/32/24/245011},
   eprint  = {arXiv:1503.03436 [gr-qc]}
 }
+
 @article{White2016,
   author  = {White, Christopher J. and Stone, James M. and Gammie, Charles F.},
   title   = {An Extension of Athena++ to Curvilinear Coordinates and Dynamical Spacetimes},
@@ -1067,3 +1137,421 @@
   doi     = {10.1088/0264-9381/28/19/195015},
   eprint  = {arXiv:1006.1632 [gr-qc]}
 }
+
+@misc{ferreira2026electromagneticdualitydegeneracydynamical,
+      title={Electromagnetic duality degeneracy in dynamical black hole mergers}, 
+      author={José Ferreira and Gabriele Bozzola and Carlos A. R. Herdeiro and Vasileios Paschalidis and Miguel Zilhão},
+      year={2026},
+      eprint={2605.20493},
+      archivePrefix={arXiv},
+      primaryClass={gr-qc},
+      url={https://arxiv.org/abs/2605.20493}, 
+}
+
+@article{Sen1995,
+  title   = {Black hole solutions in heterotic string theory on a torus},
+  author  = {Sen, Ashoke},
+  journal = {Nucl. Phys. B},
+  volume  = {440},
+  pages   = {421--440},
+  year    = {1995},
+  doi     = {10.1016/0550-3213(95)00063-x},
+  eprint  = {arXiv:hep-th/9411187}
+}
+
+@article{Zhang2024,
+  title   = {Thermodynamic topology of Kerr-Sen black holes via R{\'e}nyi statistics},
+  author  = {Zhang, Meng-Yao and Chen, Hao and Hassanabadi, Hassan and Long, Zheng-Wen and Yang, Hui},
+  journal = {Phys. Lett. B},
+  volume  = {856},
+  pages   = {138885},
+  year    = {2024},
+  doi     = {10.1016/j.physletb.2024.138885},
+  eprint  = {arXiv:2312.12814 [gr-qc]}
+}
+
+@article{Etienne2026BHaHAHA,
+  author        = {Etienne, Zachariah B. and Assump{\c{c}}{\~a}o, Thiago and Werneck, Leonardo Rosa and Tootle, Samuel D.},
+  title         = {{BHaHAHA}: A Fast, Robust Apparent Horizon Finder Library for Numerical Relativity},
+  journal       = {Classical and Quantum Gravity},
+  volume        = {43},
+  pages         = {075007},
+  year          = {2026},
+  doi           = {10.1088/1361-6382/ae09e9},
+  eprint        = {2505.15912},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc}
+}
+
+@misc{Gasparotto2026MemoryHairyBBH,
+  title  = {Gravitational Memory from Hairy Binary Black Hole Mergers},
+  author = {Gasparotto, Silvia and Zosso, Jann and Arest{\'e} Sal{\'o}, Llibert and Doneva, Daniela D. and Yazadjiev, Stoytcho S.},
+  year   = {2026},
+  eprint = {arXiv:2604.09350 [gr-qc]}
+}
+
+@article{Corman2024,
+  title = {Nonlinear studies of modifications to general relativity: Comparing different approaches},
+  author = {Corman, Maxence and Lehner, Luis and East, William E. and Dideron, Guillaume},
+  journal = {Phys. Rev. D},
+  volume = {110},
+  issue = {8},
+  pages = {084048},
+  numpages = {29},
+  year = {2024},
+  month = {Oct},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.110.084048},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.110.084048}
+}
+
+@misc{Held2025,
+      title={Black-hole binaries and waveforms in Quadratic Gravity}, 
+      author={Aaron Held and Hyun Lim},
+      year={2025},
+      eprint={2503.13428},
+      archivePrefix={arXiv},
+      primaryClass={gr-qc},
+      url={https://arxiv.org/abs/2503.13428}, 
+}
+
+@article{Held2021,
+  title = {Nonlinear dynamics of quadratic gravity in spherical symmetry},
+  author = {Held, Aaron and Lim, Hyun},
+  journal = {Phys. Rev. D},
+  volume = {104},
+  issue = {8},
+  pages = {084075},
+  numpages = {11},
+  year = {2021},
+  month = {Oct},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.104.084075},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.104.084075}
+}
+
+@article{Held2023,
+  title = {Nonlinear evolution of quadratic gravity in $3+1$ dimensions},
+  author = {Held, Aaron and Lim, Hyun},
+  journal = {Phys. Rev. D},
+  volume = {108},
+  issue = {10},
+  pages = {104025},
+  numpages = {18},
+  year = {2023},
+  month = {Nov},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.108.104025},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.108.104025}
+}
+
+@article{Okounkova:2020rqw,
+    author = "Okounkova, Maria",
+    title = "{Numerical relativity simulation of GW150914 in Einstein dilaton Gauss-Bonnet gravity}",
+    eprint = "2001.03571",
+    archivePrefix = "arXiv",
+    primaryClass = "gr-qc",
+    doi = "10.1103/PhysRevD.102.084046",
+    journal = "Phys. Rev. D",
+    volume = "102",
+    number = "8",
+    pages = "084046",
+    year = "2020"
+}
+
+@article{Okounkova2020,
+  title = {Numerical relativity simulation of GW150914 beyond general relativity},
+  author = {Okounkova, Maria and Stein, Leo C. and Moxon, Jordan and Scheel, Mark A. and Teukolsky, Saul A.},
+  journal = {Phys. Rev. D},
+  volume = {101},
+  issue = {10},
+  pages = {104016},
+  numpages = {10},
+  year = {2020},
+  month = {May},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.101.104016},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.101.104016}
+}
+
+@article{Okounkova2019,
+  title = {Numerical binary black hole collisions in dynamical Chern-Simons gravity},
+  author = {Okounkova, Maria and Stein, Leo C. and Scheel, Mark A. and Teukolsky, Saul A.},
+  journal = {Phys. Rev. D},
+  volume = {100},
+  issue = {10},
+  pages = {104026},
+  numpages = {20},
+  year = {2019},
+  month = {Nov},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.100.104026},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.100.104026}
+}
+
+@article{Ripley2020a,
+	doi = {10.1088/1361-6382/ab9bbb},
+	url = {https://doi.org/10.1088/1361-6382/ab9bbb},
+	year = 2020,
+	month = {jul},
+	publisher = {{IOP} Publishing},
+	volume = {37},
+	number = {15},
+	pages = {155003},
+	author = {Justin L Ripley and Frans Pretorius},
+	title = {Dynamics of a {\textdollar}$\lbrace${\textbackslash}mathbb$\lbrace$Z$\rbrace$$\rbrace${\_}$\lbrace$2$\rbrace${\textdollar} symmetric {EdGB} gravity in spherical symmetry},
+	journal = {Classical and Quantum Gravity},
+}
+
+@article{East2021,
+  title = {Evolution of Einstein-scalar-Gauss-Bonnet gravity using a modified harmonic formulation},
+  author = {East, William E. and Ripley, Justin L.},
+  journal = {Phys. Rev. D},
+  volume = {103},
+  issue = {4},
+  pages = {044040},
+  numpages = {20},
+  year = {2021},
+  month = {Feb},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.103.044040},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.103.044040}
+}
+
+@article{Ripley2020b,
+  title = {Scalarized black hole dynamics in Einstein-dilaton-Gauss-Bonnet gravity},
+  author = {Ripley, Justin L. and Pretorius, Frans},
+  journal = {Phys. Rev. D},
+  volume = {101},
+  issue = {4},
+  pages = {044015},
+  numpages = {15},
+  year = {2020},
+  month = {Feb},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.101.044015},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.101.044015}
+}
+
+@article{Cayuso2020,
+  title = {Nonlinear, noniterative treatment of EFT-motivated gravity},
+  author = {Cayuso, Ramiro and Lehner, Luis},
+  journal = {Phys. Rev. D},
+  volume = {102},
+  issue = {8},
+  pages = {084008},
+  numpages = {18},
+  year = {2020},
+  month = {Oct},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.102.084008},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.102.084008}
+}
+
+@article{Witek2019,
+  title = {Black holes and binary mergers in scalar Gauss-Bonnet gravity: Scalar field dynamics},
+  author = {Witek, Helvi and Gualtieri, Leonardo and Pani, Paolo and Sotiriou, Thomas P.},
+  journal = {Phys. Rev. D},
+  volume = {99},
+  issue = {6},
+  pages = {064035},
+  numpages = {24},
+  year = {2019},
+  month = {Mar},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.99.064035},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.99.064035}
+}
+
+@article{Witek2020,
+  title = {Towards numerical relativity in scalar Gauss-Bonnet gravity: $3+1$ decomposition beyond the small-coupling limit},
+  author = {Witek, Helvi and Gualtieri, Leonardo and Pani, Paolo},
+  journal = {Phys. Rev. D},
+  volume = {101},
+  issue = {12},
+  pages = {124055},
+  numpages = {9},
+  year = {2020},
+  month = {Jun},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.101.124055},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.101.124055}
+}
+
+@article{East2023,
+  title = {Instability and backreaction of massive spin-2 fields around black holes},
+  author = {East, William E. and Siemonsen, Nils},
+  journal = {Phys. Rev. D},
+  volume = {108},
+  issue = {12},
+  pages = {124048},
+  numpages = {10},
+  year = {2023},
+  month = {Dec},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.108.124048},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.108.124048}
+}
+
+@misc{Taillte2025,
+      title={Nonlinear evolution of the spin-2 black hole superradiant instability}, 
+      author={Taillte May and William E. East},
+      year={2025},
+      eprint={2509.13488},
+      archivePrefix={arXiv},
+      primaryClass={gr-qc},
+      url={https://arxiv.org/abs/2509.13488}, 
+}
+
+@article{Alexander2009,
+title = {Chern–Simons modified general relativity},
+journal = {Physics Reports},
+volume = {480},
+number = {1},
+pages = {1-55},
+year = {2009},
+issn = {0370-1573},
+doi = {https://doi.org/10.1016/j.physrep.2009.07.002},
+url = {https://www.sciencedirect.com/science/article/pii/S037015730900177X},
+author = {Stephon Alexander and Nicolás Yunes},
+keywords = {Chern, Simons, String theory, Loop Quantum Gravity, Parity violation},
+}
+
+@misc{GWTC4,
+  title = {{GWTC-4.0}: Updating the Gravitational-Wave Transient Catalog with Observations from the First Part of the Fourth LIGO-Virgo-KAGRA Observing Run},
+  author = {Abac, A. G. and others},
+  year = {2025},
+  eprint = {2508.18082},
+  archivePrefix = {arXiv},
+  primaryClass = {gr-qc},
+  url = {https://arxiv.org/abs/2508.18082}
+}
+
+@article{Cardoso2012NRHEP,
+  title = {{NR/HEP}: roadmap for the future},
+  author = {Cardoso, Vitor and Gualtieri, Leonardo and Herdeiro, Carlos
+            and Sperhake, Ulrich and Chesler, Paul M. and Lehner, Luis
+            and Park, Seong Chan and Reall, Harvey S. and Sopuerta, Carlos F.
+            and others},
+  journal = {Classical and Quantum Gravity},
+  volume = {29},
+  number = {24},
+  pages = {244001},
+  year = {2012},
+  doi = {10.1088/0264-9381/29/24/244001},
+  eprint = {1201.5118},
+  archivePrefix = {arXiv}
+}
+
+@article{Corman2024NonlinearModificationsGR,
+  title = {Nonlinear studies of modifications to general relativity: Comparing different approaches},
+  author = {Corman, Maxence and Lehner, Luis and East, William E. and Dideron, Guillaume},
+  journal = {Physical Review D},
+  volume = {110},
+  number = {8},
+  pages = {084048},
+  year = {2024},
+  doi = {10.1103/PhysRevD.110.084048},
+  eprint = {2405.15581},
+  archivePrefix = {arXiv},
+  primaryClass = {gr-qc}
+}
+
+@misc{Afshordi2024BlackHolesInsideOut,
+  title = {Black Holes Inside and Out 2024: visions for the future of black hole physics},
+  author = {Afshordi, Niayesh and Ashtekar, Abhay and Barausse, Enrico
+            and Berti, Emanuele and Brito, Richard and Buoninfante, Luca
+            and Carballo-Rubio, Ra{\'u}l and Cardoso, Vitor and Carullo, Gregorio
+            and Dafermos, Mihalis and De Laurentis, Mariafelicia and del Rio, Adrian
+            and Di Filippo, Francesco and Eichhorn, Astrid and Emparan, Roberto
+            and Gregory, Ruth and Herdeiro, Carlos A. R. and Kunz, Jutta
+            and Lehner, Luis and Liberati, Stefano and Mathur, Samir D.
+            and Nissanke, Samaya and Pani, Paolo and Platania, Alessia
+            and Pretorius, Frans and Sasaki, Misao and Tiede, Paul
+            and Unruh, William and Visser, Matt and Wald, Robert M.},
+  year = {2024},
+  eprint = {2410.14414},
+  archivePrefix = {arXiv},
+  primaryClass = {gr-qc},
+  url = {https://arxiv.org/abs/2410.14414}
+}
+
+@article{Buoninfante2025TopicalCollectionBHIO,
+  title = {Topical Collection -- Black Holes Inside and Out 2024: Visions for the future of black hole physics},
+  author = {Buoninfante, Luca and Carballo-Rubio, Ra{\'u}l and Cardoso, Vitor
+            and Di Filippo, Francesco and Eichhorn, Astrid},
+  journal = {General Relativity and Gravitation},
+  volume = {57},
+  pages = {109},
+  year = {2025},
+  doi = {10.1007/s10714-025-03444-8}
+}
+
+@misc{Bambi2025BlackHoleMimickers,
+  title = {Black hole mimickers: from theory to observation},
+  author = {Bambi, Cosimo and Brustein, Ramy and Cardoso, Vitor and Chael, Andrew
+            and Danielsson, Ulf and Giri, Suvendu and Gupta, Anuradha
+            and Heidmann, Pierre and Lehner, Luis and Liebling, Steven
+            and Maselli, Andrea and Maggio, Elisa and Mathur, Samir
+            and Medeiros, Lia and Nielsen, Alex B.
+            and Olivares-S{\'a}nchez, H{\'e}ctor R. and Pani, Paolo
+            and Siemonsen, Nils and Wong, George N.},
+  year = {2025},
+  eprint = {2505.09014},
+  archivePrefix = {arXiv},
+  primaryClass = {gr-qc},
+  url = {https://arxiv.org/abs/2505.09014}
+}
+
+@article{Bernard2025GenericEFTGWTests,
+  title = {Generic EFT-motivated beyond General Relativity gravitational wave tests and their curvature dependence: from observation to interpretation},
+  author = {Bernard, Laura and Giri, Suvendu and Lehner, Luis and Sturani, Riccardo},
+  journal = {Physical Review D},
+  volume = {112},
+  number = {12},
+  pages = {124013},
+  year = {2025},
+  doi = {10.1103/bl9q-1q3r},
+  eprint = {2507.17143},
+  archivePrefix = {arXiv},
+  primaryClass = {gr-qc}
+}
+
+@book{KreissOliger1973,
+  author    = {Kreiss, Heinz-Otto and Oliger, Joseph},
+  title     = {Methods for the Approximate Solution of Time Dependent Problems},
+  volume    = {10},
+  series    = {Global Atmospheric Research Programme (GARP): GARP Publication Series},
+  publisher = {GARP Publication},
+  year      = {1973}
+}
+
+@article{DeBuhr2018RelativisticHydroWavelets,
+  author        = {DeBuhr, Jackson and Zhang, Bo and Anderson, Matthew and Neilsen, David
+                   and Hirschmann, Eric W. and Grenga, Temistocle and Paolucci, Samuel},
+  title         = {Relativistic Hydrodynamics with Wavelets},
+  journal       = {The Astrophysical Journal},
+  volume        = {867},
+  number        = {2},
+  pages         = {112},
+  year          = {2018},
+  doi           = {10.3847/1538-4357/aae3e3},
+  eprint        = {1512.00386},
+  archivePrefix = {arXiv},
+  primaryClass  = {astro-ph.IM}
+}
+
+@article{Anderson2006RelativisticMHDAMR,
+  author        = {Anderson, Matthew and Hirschmann, Eric W. and Liebling, Steven L. and Neilsen, David},
+  title         = {Relativistic MHD with adaptive mesh refinement},
+  journal       = {Classical and Quantum Gravity},
+  volume        = {23},
+  number        = {22},
+  pages         = {6503--6524},
+  year          = {2006},
+  doi           = {10.1088/0264-9381/23/22/025},
+  eprint        = {gr-qc/0605102},
+  archivePrefix = {arXiv},
+  primaryClass  = {gr-qc}
+}
+

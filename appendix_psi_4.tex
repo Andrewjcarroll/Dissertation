@@ -1,3 +1,62 @@
+\section{Wave Extraction}  
+\label{sec:appx:wave_extraction}
+
+The GW signals are given by the Newman--Penrose scalar derived from the Weyl tensor as:
+\begin{equation}
+    \Psi_4 = C_{abcd} k^{a} \bar{m}^{b} k^{c} \bar{m}^{d}.
+\end{equation}
+where $k^a$ and $\bar{m}^b$ are members of a null tetrad defined as 
+\begin{equation}
+\begin{gathered}
+l^{a} = \frac{1}{\sqrt{2}}\left(n^{a} + u^{a}\right),\quad
+k^{a} = \frac{1}{\sqrt{2}}\left(n^{a} - u^{a}\right),\\
+m^{a} = \frac{1}{\sqrt{2}}\left(v^{a} + i w^{a}\right).
+\end{gathered}
+\end{equation}
+This null tetrad is constructed in terms of orthonormal spatial vectors $u^a, v^b, w^c$ which asymptotically behave like the standard radial, polar and azimuthal unit vectors, respectively, and which are normal to the timelike unit vector $n^{a}$.  
+ 
+The extraction of the outgoing electromagnetic radiation is given by two scalar quantities calculated in the Newman--Penrose formalism \cite{Newman1962,Zilhao2014}.  
+These two radiative quantities are defined as:
+\begin{align}
+\Phi_1 &= \frac{1}{2} F_{a b}
+\left(l^{a} k^{b} + \bar{m}^{a} m^{b}\right),\\
+\Phi_2 &= F_{ab} \bar{m}^{a} k^{b}.
+\end{align}
+The outgoing radiative quantities for the dilaton and axion are defined in a similar way, namely 
+\begin{equation}
+    \bm{\varphi} = l^a \nabla_a \phi, \quad
+    \bm{\vartheta} = l^a \nabla_a \kappa.
+\end{equation}
+
+At a given extraction radius $R_{\mathrm{ex}}$, we perform a multipolar decomposition by projecting each field onto spin-weighted spherical harmonics with the appropriate spin weight (taking values $s=-2,-1$ or $0$ depending on the field):
+\begin{align}
+\Psi_4(t,\theta,\phi) &= \sum_{l,m} \psi^{lm}(t)\, Y^{-2}_{lm}(\theta,\phi), \label{eq:psi4_decomp} \\
+\Phi_1(t,\theta,\phi) &= \sum_{l,m} \Phi^{lm}_{1}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:xi1_decomp} \\
+\Phi_2(t,\theta,\phi) &= \sum_{l,m} \Phi^{lm}_{2}(t)\, Y^{-1}_{lm}(\theta,\phi), \label{eq:xi2_decomp} \\
+{\bm{\varphi}}(t,\theta,\phi) &= \sum_{l,m} {\bm{\varphi}}^{lm}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:phi_decomp} \\
+\bm{\vartheta}(t,\theta,\phi) &= \sum_{l,m} \bm{\vartheta}^{lm}(t)\, Y^{0}_{lm}(\theta,\phi). \label{eq:kappa_decomp}
+\end{align}
+
+We can calculate the radiated energy from the gravitational, electromagnetic, axion, and dilaton fields as follows \cite{Zilhao2012}:
+\begin{align}
+F_{\mathrm{GW}}
+&= \frac{dE_{\mathrm{GW}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{16\pi}
+\sum_{l,m} \left| \int_{-\infty}^{t} dt'\, \psi^{lm}(t') \right|^2, \\
+F_{\mathrm{EM}}
+&= \frac{dE_{\mathrm{EM}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{4\pi}
+\sum_{l,m} \left| \Phi^{lm}_2(t) \right|^2 , \\ 
+F_{\mathrm{D}}
+&= \frac{dE_{\mathrm{D}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{4\pi}
+\sum_{l,m} \left| \bm{\varphi}^{lm}(t) \right|^2 , \\
+F_{\mathrm{A}}
+&= \frac{dE_{\mathrm{A}}}{dt}
+= \lim_{r \to \infty} \frac{r^2}{4\pi}
+\sum_{l,m} \left| \bm{\vartheta}^{lm}(t) \right|^2 . 
+\end{align}
+
 \section{Computation of \texorpdfstring{$\Psi_4$}{Psi4}}
 
 The gravitational waveforms extracted from numerical relativity simulations are often expressed in terms of the Newman--Penrose scalar $\Psi_4$. This scalar provides a convenient way to isolate the outgoing gravitational radiation from the curvature of spacetime. In this appendix, we describe the construction of $\Psi_4$, its relation to the Weyl tensor, and its connection to the gravitational-wave strain measured by detectors.
@@ -343,7 +402,7 @@ The mismatch is then
     =
     1 - \mathcal{O}.
 \end{equation}
-In practice, the overlap is usually maximized over arbitrary time and phase shifts:
+In practice, the overlap is usually maximized over time and phase shifts:
 \begin{equation}
     \mathcal{M}
     =

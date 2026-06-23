@@ -1190,3 +1190,263 @@ Here \(\mu\) and \(\eta\) are constants. The combination of \(1+\log\) slicing
 and the Gamma-driver shift condition is called the moving-puncture gauge. A
 major advantage of this gauge is that it removes the need for excision: the
 singularities are effectively handled by the gauge itself.
+
+
+\section{Equations of Motion}
+\label{sec:appx:eom}
+
+The action for EMDA in the Einstein frame is given as:
+\begin{equation}
+\begin{aligned}
+S=\int \mathrm{d}^4 x\,\sqrt{-g}\Big[
+&{R\over8\pi}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2\\
+&-\tfrac12 e^{4\alpha_1\phi}(\nabla\kappa)^2
+-\kappa\,F_{ab}(*F)^{ab}
+\Big]
+\end{aligned}
+\end{equation}
+where $\phi$ and $\kappa$ are the dilaton and axion, respectively.
+The tensor $F_{ab}$ is the U(1) field strength, and $(*F)_{ab}$ is its
+dual. In this work we set the coupling constants to
+$\alpha_0=\alpha_1=1$, corresponding to a low-energy limit of heterotic
+string theory.
+
+The Einstein equations are:
+\begin{equation}
+\begin{split}
+%R_{ab} - \tfrac{1}{2} g_{ab} R
+G_{ab} = 8\pi G\bigg[&
+ \, 2\left(
+    \nabla_a \phi \nabla_b \phi
+    - \tfrac{1}{2} g_{ab}(\nabla \phi)^2
+\right) \\
+&+ 2 e^{-2\alpha_0\phi}
+\left(
+    F_{ac}F_b{}^c
+    - \tfrac{1}{4} g_{ab}F^2
+\right) \\
+&+ \tfrac{1}{2} e^{4\alpha_1\phi}
+\left(
+    \nabla_a\kappa \nabla_b\kappa
+    - \tfrac{1}{2} g_{ab}(\nabla \kappa)^2
+\right)
+\bigg] 
+\end{split}
+\label{eq:Einstein}
+\end{equation}
+while the matter equations can be written 
+\begin{align}
+0 &= \nabla^a \nabla_a \phi
+   + \tfrac{1}{2}\alpha_0 e^{-2\alpha_0 \phi} F^2
+   - \tfrac{1}{2}\alpha_1 e^{4\alpha_1 \phi} (\nabla \kappa)^2, \label{eq:phi} \\[1ex]
+0 &= \nabla^a \!\left( e^{4\alpha_1 \phi} \nabla_a \kappa \right)
+   - F_{ab} (\ast F)^{ab}, \label{eq:kappa} \\[1ex]
+0 &= \nabla_a \!\left( e^{-2\alpha_0 \phi} F^{ab} \right)
+   + (\ast F)^{ab} \nabla_a \kappa. \label{eq:Maxwell}
+\end{align}
+
+We include a form of hyperbolic constraint damping into the Maxwell equations so that violations propagate away at the speed of light. In particular, we introduce two scalar fields $\Phi$ and $\Psi$ into \ref{eq:Maxwell} and the identity $\nabla_a(*F)^{ab}=0$ as follows:
+\begin{align}
+\nabla_{a}\left(F^{ab} + g^{ab}\Psi \right) 
+  &= \eta_{1} n^{a} \Psi 
+     + 2 \alpha_{0} \nabla_{a}\phi\, F^{ab} \nonumber \\
+  &\quad - e^{2\alpha_0 \phi} (*F)^{ab}\nabla_a \kappa, \\[6pt]
+\nabla_{a}\!\left( (\ast F)^{ab} + g^{ab}\Phi \right) 
+  &= \eta_{2} n^{a} \Phi .
+\end{align}
+where $\eta_1$ and $\eta_2$ are taken as positive constants and serve as tunable parameters to effect the damping of the elctromagnetic constraints.  Note that on the right hand sides, we have also included $n^a$, the usual unit timelike normal to the spatial hypersurfaces in anticipation of performing the usual $3+1$ split of spacetime.  It is worth noting that these damped versions of Maxwell are now no longer strictly 4-covariant.  
+
+We introduce the usual $3+1$ decomposition of spacetime by defining the line element as 
+\begin{align}
+{\rm d}s^2 = -\alpha^2 {\rm d} t^2 + \gamma_{ij} ({\rm d}x^i + \beta^i {\rm d}t) ({\rm d}x^j + \beta^j {\rm d}t) 
+\end{align}
+with lapse, $\alpha$, shift, $\beta^i$, 3-metric, $\gamma_{ij}$, unit timelike normal $n_a = (-\alpha,0,0,0)$ and extrinsic curvature $K_{ab} = - \gamma_a{}^c \gamma_b{}^d\nabla_c n_d$.  
+
+Using the BSSN formulation, we solve the standard 
+BSSN evolution equations for the usual $\chi, {\tilde \gamma}_{ij}, K, {\tilde A}_{ij}$ and ${\tilde \Gamma}^i$ variables with EMDA matter terms.\footnote{Note that in this Appendix only, $\chi$ represents the conformal factor and not the dimensionless spin parameter.}  These equations take the form 
+
+\begin{align}
+\partial_0\tilde{\gamma}_{ij} &= -2\alpha\,\tilde{A}_{ij},\\[4pt]
+\partial_0 \chi &= \tfrac{2}{3}\alpha\,\chi\,K,\\[4pt]
+\partial_0 K &= [\ldots] + 4\pi\alpha\,(\rho + T),\\[4pt]
+\partial_0\tilde{A}_{ij} &= [\ldots] - 8\pi\chi\alpha\left( T_{ij} - \tfrac{1}{3}\,\gamma_{ij} T_k{}^k\right),\\[4pt]
+\partial_0 \tilde{\Gamma}^i &= [\ldots] - 16\pi\alpha\,\chi^{-1} S^{\,i},
+%\tilde{\Gamma}^i &= \tilde{\gamma}^{jk}\tilde{\Gamma}^{\,i}{}_{jk}
+\end{align}
+where $\partial_0 \equiv \partial_t - {\cal L}_{\beta}$ with ${\cal L}_{\beta}$ the Lie derivative along the shift and the $[\ldots]$ are a stand-in for the relevant right hand sides which can be found in standard references, e.g.~\cite{Baumgarte2010} 
+
+The quantities $S^i$, $T_{ij}$, and $\rho$ are defined as
+\begin{equation}
+\begin{aligned}
+S^i
+&\equiv -\gamma^{ia} T_{ab} n^b  \\
+&=   2\Pi D^i\phi
+   + 2e^{-2\alpha_0\phi}\epsilon^{ijk}E_jB_k  %\\
+%&\qquad\qquad
+   + \tfrac{1}{2}e^{4\alpha_1\phi}\Xi D^i\kappa ,
+\label{eq:Si}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+T_{ij}
+&\equiv T_{ab} \gamma^a{}_i \gamma^b{}_j  \\
+&= 2\Bigl[
+      D_i\phi D_j\phi
+      - \tfrac{1}{2}\tilde{\gamma}_{ij}\bigl((D\phi)^2-\Pi^2\bigr)
+   \Bigr]  \\
+&\quad\quad
+- 2e^{-2\alpha_0\phi}\Bigl( 
+       E_iE_j + B_iB_j  \\
+&\qquad\qquad\qquad\quad
+      - \tfrac{1}{2}\tilde{\gamma}_{ij}
+        \bigl(E_kE^k + B_kB^k\bigr)
+   \Bigr)  \\
+&\quad\,
++ \tfrac{1}{2}e^{4\alpha_1\phi}\Bigl[
+      D_i\kappa D_j\kappa
+      - \tfrac{1}{2}\tilde{\gamma}_{ij}\bigl((D\kappa)^2-\Xi^2\bigr)
+   \Bigr] .
+\label{eq:Tij}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    \rho \equiv\;& \Pi^2 + (D\phi)^2 
+    + e^{-2 \alpha_0 \phi}\big( E_a  E^a +  B_a  B^a\big) \\
+    &+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big(\Xi^2 + (D\kappa)^2\big).
+\end{split}
+\end{equation}
+
+We use standard puncture gauge conditions for the lapse and the shift:
+\begin{align}
+\partial_t\alpha &=\beta^i \partial_i - 2\alpha K , \\[4pt]
+\partial_t \beta^i &= \beta^j \partial_j \beta^i + \tfrac{3}{4} B^i , \\[4pt] 
+\partial_t B^i &= \beta^j \partial_j B^i + \partial_t {\tilde\Gamma}^i - \beta^j \partial_j {\tilde \Gamma}^i - \eta B^i .
+\end{align}
+We also employ a slow-start lapse condition~\cite{Etienne2024} to reduce transients at early times.  This amounts to adding the term 
+\begin{equation}
+- \chi^{1/2} \bigl(\varpi \, e^{-t^2/2\sigma^2}\bigr)\,(\alpha - \chi^{1/2}) \\[4pt]
+\end{equation}
+to the equation for the lapse.  Following~\cite{Etienne2024}, we take the constants $\varpi=3/5$ and $\sigma=20$.
+
+For the matter equations we start with the dilaton and axion:
+\begin{align}
+    \partial_0 \phi &= - \alpha \Pi , \\
+    \partial_0 \kappa &= - \Xi 
+\end{align}
+\begin{equation}
+\begin{aligned}
+\partial_0 \Pi
+=& \, \alpha K \Pi
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \phi
+- \chi\, \tilde{\gamma}^{ij} \partial_i \alpha\, \partial_j \phi  \\
+&+ \alpha \chi\, \tilde{\Gamma}^i \partial_i \phi
++ \frac{\alpha}{2}\tilde{\gamma}^{ij}
+  \partial_i \chi\, \partial_j \phi \\
+&+ \frac{\alpha\alpha_0}{\chi}
+  e^{-2\alpha_0\phi}
+  \tilde{\gamma}_{ij}
+  \left(E^iE^j - B^iB^j\right)  \\
+&+ \frac{\alpha\alpha_1}{2}
+  e^{4\alpha_1\phi}
+  \left(
+    \chi\,\tilde{\gamma}^{ij}
+    \partial_i\kappa\,\partial_j\kappa
+    - \Xi^2
+  \right).
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+\partial_0 \Xi
+&= \alpha K \Xi
+\\[3pt]
+&\quad
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \kappa
+- \chi\, \tilde{\gamma}^{ij}\, \partial_i \alpha\, \partial_j \kappa
+\\[3pt]
+&\quad
++ \alpha \chi\, \tilde{\Gamma}^i \partial_i \kappa
++ \frac{\alpha}{2}\, \tilde{\gamma}^{ij}\, \partial_i \kappa\, \partial_j \chi
+\\[6pt]
+&\quad
+- 4 \alpha \alpha_1 \chi\, \tilde{\gamma}^{ij}\,
+  \partial_i \kappa\, \partial_j \phi
++ 4 \alpha \alpha_1 \Pi \Xi
+\\[6pt]
+&\quad
++ \frac{4\alpha}{\chi}\,
+  e^{-4\alpha_1 \phi}\,
+  \tilde{\gamma}_{ij} B^i E^j .
+\end{aligned}
+\end{equation}
+The equations for the electromgnetic fields, including hyperbolic divergence cleaning become
+\begin{equation}
+\begin{aligned}
+\partial_0 \Psi
+&= - \alpha\, \partial_i E^i
+\\[3pt]
+&\quad
++ \frac{3\alpha}{2\chi}\, E^i \partial_i \chi
++ 2 \alpha_0 \alpha\, E^i \partial_i \phi
+\\[3pt]
+&\quad
++ \alpha e^{2\alpha_0 \phi}\, B^i \partial_i \kappa
+- \alpha \eta_1 \Psi .
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\partial_0 \Phi
+&= \alpha\, \partial_i B^i
+- \frac{3\alpha}{2\chi}\, B^i \partial_i \chi
+- \alpha \eta_2 \Phi .
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\partial_0 E^i
+&= \alpha K E^i
+\\[4pt]
+&\quad
++ 2 \alpha \alpha_0 \chi^{1/2}\,
+  \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \phi
+- 2 \alpha \alpha_0 E^i \Pi
+\\[6pt]
+&\quad
++ \alpha e^{2\alpha_0 \phi} \chi^{1/2}\,
+  \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \kappa
+- \alpha e^{2\alpha_0 \phi} \Xi B^i
+\\[6pt]
+&\quad
+- \alpha \chi\, \tilde{\gamma}^{ij} \partial_j \Psi
+- \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \alpha
+\\[4pt]
+&\quad
+- \alpha \chi^{1/2}\, \epsilon^{jik} B^l \partial_j \tilde{\gamma}_{kl}
+- \alpha \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} \partial_j B^l
+\\[4pt]
+&\quad
++ \alpha \chi^{-1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \chi .
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\partial_0 B^i
+&= \alpha K B^i
++ \alpha \chi\, \tilde{\gamma}^{ij} \partial_j \Phi
+\\[6pt]
+&\quad
+- \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \alpha
++ \alpha \chi^{-1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \chi
+\\[4pt]
+&\quad
+- \alpha \chi^{1/2}\, \epsilon^{ijk} E^l \partial_j \tilde{\gamma}_{kl}
+- \alpha \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} \partial_j E^l .
+\end{aligned}
+\end{equation}
