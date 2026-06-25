@@ -17,3 +17,6 @@
 
 # Misc
 *.zip
+
+# Syncthing temp files
+.syncthing.*.tmp

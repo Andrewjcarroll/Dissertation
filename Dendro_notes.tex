@@ -5,7 +5,7 @@ We can construct a sparse representation of the fields using a set of nested dya
 \end{equation}
 where \(V_j\) denotes the grid level, and \(x^{j,k}\) denotes the points on the grids.  
 
-I show an example below: the red dots indicate the points included only in the alternative grids \(W_j\). Notice that all points in a given \(V_j\) will also appear in all subsequent refinement levels. The grids do not need to separately save the points already included at coarser levels; the points unique to finer grids are highlighted in red.  
+I show an example below: the red dots indicate the points included only in the alternative grids \(W_j\). Notice that all points in a given \(V_j\) will also appear in all subsequent refinement levels.  
 
 \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -73,10 +73,10 @@ The wavelet coefficient measures how well the interpolation captures the field a
 \[
 |d^{j,k}| > \epsilon.
 \]
-\section{Spacefilling curves and the octree}
 
+\section{Sobolev informed refinement}
 
-
+TBD
 
 \section{Performance of the Code}
 \label{sec:code_performance}
@@ -98,9 +98,10 @@ Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
   \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and summed momentum constraint
-  violation measured over the full simulation. The $L_2$ norm is taken with respect to the number of points  The constraints remain
-  controlled throughout the evolution, including the merger phase.
+  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint
+  violation measured over the full simulation. The $L_2$ norm is normalized
+  by the number of grid points. The constraints remain controlled throughout
+  the evolution, including the merger phase.
   }
   \label{fig:constraint_ham_mom}
 \end{figure}
@@ -109,38 +110,84 @@ Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
   \caption{
-  The volume weighted $L_2$ norms of the electromagnetic constraints, namely the no-monopole constraint that involves the divergence of the magnetic field, $\nabla\cdot B$, and the Gauss constraint that invokes the divergence of the electric field.  Both are measured over the full simulation. 
+  The volume-weighted $L_2$ norms of the electromagnetic constraints measured
+  over the full simulation. These include the magnetic no-monopole constraint,
+  $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$.
   }
-  \label{fig:constraint_divb}
+  \label{fig:constraint_div_constraints}
 \end{figure}
-A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our WAMR scheme on the  coefficients of the wavelet expansion that determines whether refinement or coarsening occurs.  The maximum refinement level sets the largest number of refinement levels that can be obtained in a simulation.  We confirm that for both, making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
 
-The tests done here use the first \(20M\) of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses of \(m_1=m_2=0.50\), and charge-to-mass ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin \(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics, we again exclude a small neighborhood of each puncture from calculation of the norms.
-Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single diagnostic for the overall constraint violation during the evolution.
+A full convergence study for binary black hole evolutions is computationally
+expensive and is therefore not attempted here. Instead, we assess the behavior
+of the code by varying two parameters that directly affect the adaptive mesh
+refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement
+level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our
+WAMR scheme applied to the coefficients of the wavelet expansion; it determines
+whether refinement or coarsening occurs. The maximum refinement level sets the
+finest grid spacing that can be reached in a simulation. We confirm that making
+these refinement criteria more stringent leads to a corresponding reduction in
+the constraint violations.
 
-Comparisons of simulations with respect to different wavelet tolerances are shown in Figure~\ref{fig:constraint_wavelet_tolerance}.  Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error.  For the three different wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ we can see that the constraints are indeed reduced as $\varepsilon$ decreases.  
+The tests performed here use the first \(20M\) of a head-on evolution of two
+equal-mass, charged black holes. The black holes have an initial coordinate
+separation of \(16M\), individual masses \(m_1=m_2=0.50\), and charge-to-mass
+ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin
+\(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics,
+we again exclude a small neighborhood of each puncture from the calculation of
+the norms. Throughout this section, the constraint measure shown is the sum of
+the volume-weighted Hamiltonian constraint and the three volume-weighted
+momentum constraints. This provides a single diagnostic for the overall
+constraint violation during the evolution.
+
+Comparisons of simulations with different wavelet tolerances are shown in
+Figure~\ref{fig:constraint_wavelet_tolerance}. Decreasing $\varepsilon$ allows
+the grid to refine more aggressively in regions with larger truncation error.
+For the three wavelet tolerances
+\(\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}\),
+the constraints decrease as $\varepsilon$ is lowered.
 
 \begin{figure}[tbp]
   \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet tolerance.pdf}
+  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
   \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations
-  over the first \(20M\) of a head-on evolution of two equal-mass charged
-  black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
-  \(\chi=0.4\). The simulations use wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6} \}$. These simulations were done with a maximum refinement level of $\ell_{\rm max} = 15$.
-  Lowering the wavelet tolerance improves the resolution of dynamically
-  important regions and reduces the overall constraint violation.
+  The sum of the volume-weighted Hamiltonian and momentum constraint violations
+  over the first \(20M\) of a head-on evolution of two equal-mass charged black
+  holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
+  \(\chi=0.4\). The simulations use wavelet tolerances
+  \(\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}\)
+  and a maximum refinement level of \(\ell_{\rm max}=15\). Lowering the wavelet
+  tolerance improves the resolution of dynamically important regions and
+  reduces the overall constraint violation.
   }
   \label{fig:constraint_wavelet_tolerance}
 \end{figure}
 
-Comparing simulations according to different maximum refinement levels is another means of changing the resolution in an AMR setting.  Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum refinement levels of $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325, 0.0162, 0.00813, 0.00407 \}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
+Comparing simulations with different maximum refinement levels provides another
+way to test resolution dependence in an AMR setting.
+Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum
+refinement levels \(\ell_{\rm max} \in \{14,15,16,17\}\), corresponding to
+finest grid spacings
+\(h \in \{0.0325,0.0162,0.00813,0.00407\}\), respectively. Increasing the
+allowed maximum depth provides additional resolution near the black holes and
+in regions where the fields develop sharp spatial structures. The resulting
+decrease in the constraints provides further evidence that the simulations
+improve with increased resolution.
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
   \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first \(20M\) of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin  \(\chi=0.4\) each. The simulations compare maximum refinement levels $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325,0.0162,0.00813,0.00407 \}$, respectively. The wavelet tolerance is set here to $\varepsilon = 1\times 10^{-5}$.  Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under-resolved regions.
+  The sum of the volume-weighted Hamiltonian and momentum constraint violations
+  over the first \(20M\) of a head-on evolution of two equal-mass charged black
+  holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
+  \(\chi=0.4\). The simulations compare maximum refinement levels
+  \(\ell_{\rm max} \in \{14,15,16,17\}\), corresponding to finest grid spacings
+  \(h \in \{0.0325,0.0162,0.00813,0.00407\}\), respectively. The wavelet
+  tolerance is fixed at \(\varepsilon=1\times10^{-5}\). Increasing the maximum
+  refinement level reduces the overall constraint violation by allowing
+  additional grid refinement in under-resolved regions.
   }
   \label{fig:constraint_maxdepth}
 \end{figure}
+
+
