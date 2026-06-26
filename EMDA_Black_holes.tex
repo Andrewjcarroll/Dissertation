@@ -1,3 +1,453 @@
+%TO DO CHECK ALL OF THESE THEY SHOULD NOT BE TRUSTED UNTIL YOU DO
+
+\section{Schwarzschild Metric}
+
+
+\label{sec:appx:SchwarzschildBH}
+
+We present the Schwarzschild solution in standard Schwarzschild coordinates. This solution describes a static, spherically symmetric, uncharged black hole in general relativity. The metric takes the form
+\begin{equation}
+ds^2 =
+-\left(1-\frac{2M}{r}\right)dt^2
++\left(1-\frac{2M}{r}\right)^{-1}dr^2
++r^2 d\theta^2
++r^2\sin^2\theta\, d\varphi^2 .
+\end{equation}
+Equivalently, this can be written as
+\begin{equation}
+ds^2 =
+-f(r)dt^2
++f(r)^{-1}dr^2
++r^2 d\Omega^2 ,
+\end{equation}
+where
+\begin{align}
+f(r) &= 1-\frac{2M}{r}, \\
+d\Omega^2 &= d\theta^2+\sin^2\theta\,d\varphi^2 .
+\end{align}
+
+The Schwarzschild solution is characterized by a single physical parameter, the ADM mass \(M\). Since the spacetime is nonrotating and uncharged, the electric charge, angular momentum, and magnetic dipole moment vanish:
+\begin{align}
+Q &= 0, \\
+J &= 0, \\
+\mu &= 0 .
+\end{align}
+In the absence of additional matter fields, the associated gauge, dilaton, and axion fields are trivial:
+\begin{align}
+A_a dx^a &= 0, \\
+\phi &= 0, \\
+\kappa &= 0 .
+\end{align}
+
+With respect to the Schwarzschild radial coordinate \(r\), the event horizon is located at
+\begin{equation}
+r_H = 2M .
+\end{equation}
+The curvature singularity occurs at
+\begin{equation}
+r=0,
+\end{equation}
+while the apparent coordinate singularity at \(r=2M\) corresponds to the event horizon rather than a physical singularity.
+
+The Schwarzschild solution may be obtained as the nonrotating, uncharged limit of the Kerr--Sen solution by taking
+\begin{equation}
+a \to 0,
+\qquad
+\alpha \to 0,
+\qquad
+m \to M .
+\end{equation}
+In this limit, the Kerr--Sen metric functions reduce to
+\begin{align}
+\Delta &= r^2 - 2Mr, \\
+\rho^2 &= r^2, \\
+\Sigma &= r^4,
+\end{align}
+and the Kerr--Sen line element becomes the Schwarzschild line element.
+
+\section{Reissner--Nordstr\"om Metric}
+\label{sec:appx:ReissnerNordstromBH}
+
+We present the Reissner--Nordstr\"om solution in standard Schwarzschild-like coordinates. This solution describes a static, spherically symmetric, electrically charged black hole in general relativity coupled to electromagnetism. The metric takes the form
+\begin{equation}
+ds^2 =
+-\left(1-\frac{2M}{r}+\frac{Q^2}{r^2}\right)dt^2
++\left(1-\frac{2M}{r}+\frac{Q^2}{r^2}\right)^{-1}dr^2
++r^2 d\theta^2
++r^2\sin^2\theta\, d\varphi^2 .
+\end{equation}
+Equivalently, this can be written as
+\begin{equation}
+ds^2 =
+-f(r)dt^2
++f(r)^{-1}dr^2
++r^2 d\Omega^2 ,
+\end{equation}
+where
+\begin{align}
+f(r) &= 1-\frac{2M}{r}+\frac{Q^2}{r^2}, \\
+d\Omega^2 &= d\theta^2+\sin^2\theta\,d\varphi^2 .
+\end{align}
+
+The associated electromagnetic potential may be written as
+\begin{equation}
+A_a dx^a = -\frac{Q}{r}\,dt ,
+\end{equation}
+up to a gauge transformation. Equivalently, one may choose the opposite sign convention,
+\begin{equation}
+A_a dx^a = \frac{Q}{r}\,dt ,
+\end{equation}
+depending on the convention used for the Maxwell tensor. In either case, the corresponding electric field has magnitude proportional to \(Q/r^2\).
+
+The Reissner--Nordstr\"om solution is characterized by two physical parameters: the ADM mass \(M\) and the electric charge \(Q\). Since the spacetime is nonrotating, the angular momentum and magnetic dipole moment vanish:
+\begin{align}
+J &= 0, \\
+\mu &= 0 .
+\end{align}
+In the absence of additional scalar fields, the dilaton and axion are trivial:
+\begin{align}
+\phi &= 0, \\
+\kappa &= 0 .
+\end{align}
+
+With respect to the Schwarzschild-like radial coordinate \(r\), the horizons are located at the roots of \(f(r)=0\):
+\begin{equation}
+r_{\pm} = M \pm \sqrt{M^2-Q^2}.
+\end{equation}
+The outer event horizon is therefore
+\begin{equation}
+r_H = r_+ = M+\sqrt{M^2-Q^2}.
+\end{equation}
+The condition for the existence of a nonextremal Reissner--Nordstr\"om black hole is
+\begin{equation}
+M^2 > Q^2 .
+\end{equation}
+Equivalently, in terms of the dimensionless charge-to-mass ratio,
+\begin{equation}
+\lambda = \frac{Q}{M},
+\end{equation}
+the nonextremality condition is
+\begin{equation}
+|\lambda| < 1 .
+\end{equation}
+
+The curvature singularity occurs at
+\begin{equation}
+r=0.
+\end{equation}
+The apparent coordinate singularities at \(r=r_{\pm}\) correspond to the inner and outer horizons.
+
+The Reissner--Nordstr\"om solution reduces to the Schwarzschild solution in the uncharged limit,
+\begin{equation}
+Q \to 0 .
+\end{equation}
+In this limit,
+\begin{align}
+f(r) &\to 1-\frac{2M}{r}, \\
+r_+ &\to 2M, \\
+r_- &\to 0,
+\end{align}
+and the line element becomes the Schwarzschild line element.
+
+\section{Kerr Metric}
+\label{sec:appx:KerrBH}
+
+We present the Kerr solution in Boyer--Lindquist coordinates. This solution describes a stationary, axisymmetric, uncharged rotating black hole in general relativity. The metric takes the form
+\begin{align}
+ds^2 &=
+-\left(1-\frac{2Mr}{\rho^2}\right)dt^2
++\rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right)
++\frac{\Sigma}{\rho^2}\sin^2\theta\,d\varphi^2
+\notag \\
+&\quad
+-\frac{4Mar}{\rho^2}\sin^2\theta\,dt\,d\varphi ,
+\end{align}
+where the metric functions are defined by
+\begin{align}
+\Delta &= r^2 - 2Mr + a^2, \\
+\rho^2 &= r^2 + a^2\cos^2\theta, \\
+\Sigma &= \left(r^2+a^2\right)^2-\Delta a^2\sin^2\theta .
+\end{align}
+
+The Kerr solution is characterized by two physical parameters: the ADM mass \(M\) and the angular momentum \(J\). The spin parameter \(a\) is related to these quantities by
+\begin{equation}
+a = \frac{J}{M}.
+\end{equation}
+Since the Kerr black hole is uncharged, the electric charge and magnetic dipole moment vanish:
+\begin{align}
+Q &= 0, \\
+\mu &= 0 .
+\end{align}
+In the absence of additional matter fields, the associated gauge, dilaton, and axion fields are trivial:
+\begin{align}
+A_a dx^a &= 0, \\
+\phi &= 0, \\
+\kappa &= 0 .
+\end{align}
+
+With respect to the Boyer--Lindquist radial coordinate \(r\), the event horizons are located at the roots of \(\Delta=0\):
+\begin{equation}
+r_{\pm} = M \pm \sqrt{M^2-a^2}.
+\end{equation}
+The outer event horizon is therefore
+\begin{equation}
+r_H = r_+ = M+\sqrt{M^2-a^2}.
+\end{equation}
+The condition for the existence of a nonextremal Kerr black hole is
+\begin{equation}
+M^2 > a^2
+\quad \Leftrightarrow \quad
+M^4 > J^2 .
+\end{equation}
+Equivalently, in terms of the dimensionless spin parameter
+\begin{equation}
+\chi = \frac{J}{M^2} = \frac{a}{M},
+\end{equation}
+the nonextremality condition is
+\begin{equation}
+|\chi| < 1 .
+\end{equation}
+
+The curvature singularity occurs where
+\begin{equation}
+\rho^2 = r^2+a^2\cos^2\theta = 0,
+\end{equation}
+which corresponds to the Kerr ring singularity at
+\begin{equation}
+r=0,
+\qquad
+\theta=\frac{\pi}{2}.
+\end{equation}
+
+The Kerr solution may be obtained as the uncharged limit of the Kerr--Sen solution by taking
+\begin{equation}
+\alpha \to 0,
+\qquad
+m \to M .
+\end{equation}
+In this limit, the Kerr--Sen fields become trivial,
+\begin{align}
+A_a dx^a &= 0, \\
+\phi &= 0, \\
+\kappa &= 0,
+\end{align}
+and the Kerr--Sen metric functions reduce to the Kerr metric functions
+\begin{align}
+\Delta &= r^2 - 2Mr + a^2, \\
+\rho^2 &= r^2+a^2\cos^2\theta, \\
+\Sigma &= \left(r^2+a^2\right)^2-\Delta a^2\sin^2\theta .
+\end{align}
+
+\section{Kerr--Newman Metric}
+\label{sec:appx:KerrNewmanBH}
+
+We present the Kerr--Newman solution in Boyer--Lindquist coordinates. This solution describes a stationary, axisymmetric, electrically charged rotating black hole in Einstein--Maxwell theory. The metric takes the form
+\begin{align}
+ds^2 &=
+-\left(1-\frac{2Mr-Q^2}{\rho^2}\right)dt^2
++\rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right)
++\frac{\Sigma}{\rho^2}\sin^2\theta\,d\varphi^2
+\notag \\
+&\quad
+-\frac{2a(2Mr-Q^2)}{\rho^2}\sin^2\theta\,dt\,d\varphi ,
+\end{align}
+where the metric functions are defined by
+\begin{align}
+\Delta &= r^2 - 2Mr + a^2 + Q^2, \\
+\rho^2 &= r^2 + a^2\cos^2\theta, \\
+\Sigma &= \left(r^2+a^2\right)^2-\Delta a^2\sin^2\theta .
+\end{align}
+
+The associated electromagnetic potential may be written as
+\begin{equation}
+A_a dx^a =
+-\frac{Qr}{\rho^2}
+\left(dt-a\sin^2\theta\,d\varphi\right),
+\end{equation}
+up to a gauge transformation and sign convention.
+
+The Kerr--Newman solution is characterized by three physical parameters: the ADM mass \(M\), electric charge \(Q\), and angular momentum \(J\). The spin parameter \(a\) is related to the angular momentum by
+\begin{equation}
+a = \frac{J}{M}.
+\end{equation}
+The magnetic dipole moment is
+\begin{equation}
+\mu = aQ.
+\end{equation}
+In the absence of additional scalar fields, the dilaton and axion are trivial:
+\begin{align}
+\phi &= 0, \\
+\kappa &= 0 .
+\end{align}
+
+With respect to the Boyer--Lindquist radial coordinate \(r\), the horizons are located at the roots of \(\Delta=0\):
+\begin{equation}
+r_{\pm}
+=
+M \pm \sqrt{M^2-a^2-Q^2}.
+\end{equation}
+The outer event horizon is therefore
+\begin{equation}
+r_H = r_+ = M+\sqrt{M^2-a^2-Q^2}.
+\end{equation}
+The condition for the existence of a nonextremal Kerr--Newman black hole is
+\begin{equation}
+M^2 > a^2 + Q^2 .
+\end{equation}
+Equivalently, using \(a=J/M\), this condition may be written as
+\begin{equation}
+M^4 > J^2 + M^2 Q^2 .
+\end{equation}
+In terms of the dimensionless spin and charge parameters
+\begin{align}
+\chi &= \frac{J}{M^2} = \frac{a}{M}, \\
+\lambda &= \frac{Q}{M},
+\end{align}
+the nonextremality condition becomes
+\begin{equation}
+\chi^2+\lambda^2 < 1 .
+\end{equation}
+
+The curvature singularity occurs where
+\begin{equation}
+\rho^2 = r^2+a^2\cos^2\theta = 0,
+\end{equation}
+which corresponds to the ring singularity
+\begin{equation}
+r=0,
+\qquad
+\theta=\frac{\pi}{2}.
+\end{equation}
+
+The Kerr--Newman solution reduces to the Kerr solution in the uncharged limit,
+\begin{equation}
+Q \to 0,
+\end{equation}
+for which
+\begin{align}
+\Delta &\to r^2-2Mr+a^2, \\
+r_+ &\to M+\sqrt{M^2-a^2}.
+\end{align}
+It reduces to the Reissner--Nordstr\"om solution in the nonrotating limit,
+\begin{equation}
+a \to 0,
+\end{equation}
+for which
+\begin{align}
+\Delta &\to r^2-2Mr+Q^2, \\
+r_+ &\to M+\sqrt{M^2-Q^2}.
+\end{align}
+Finally, in the uncharged and nonrotating limit,
+\begin{equation}
+Q \to 0,
+\qquad
+a \to 0,
+\end{equation}
+the Kerr--Newman solution reduces to the Schwarzschild solution.
+
+```latex
+
+\section{Einstein--Maxwell--Dilaton Black Holes}
+\label{sec:appx:EMDBH}
+
+We present a static, spherically symmetric black-hole solution in Einstein--Maxwell--Dilaton theory. In Schwarzschild-like coordinates, the magnetically charged solution takes the form
+\begin{align}
+ds^2 &=
+-\left(1-\frac{r_+}{r}\right)
+ \left(1-\frac{r_-}{r}\right)^{1-\alpha_1}
+dt^2
++
+\left(1-\frac{r_+}{r}\right)^{-1}
+ \left(1-\frac{r_-}{r}\right)^{\alpha_1-1}
+dr^2
+\notag \\
+&\quad
++
+r^2
+\left(1-\frac{r_-}{r}\right)^{\alpha_1}
+d\Omega^2 ,
+\end{align}
+where
+\begin{equation}
+d\Omega^2 = d\theta^2+\sin^2\theta\,d\varphi^2 .
+\end{equation}
+The coupling-dependent parameter \(\alpha_1\) is defined by
+\begin{equation}
+\alpha_1 = \frac{2\alpha_0^2}{1+\alpha_0^2},
+\end{equation}
+where \(\alpha_0\) is the dilaton coupling constant.
+
+For the magnetic solution, the Maxwell field and dilaton are
+\begin{align}
+F_{\theta\varphi} &= Q_m \sin\theta , \\
+e^{-2\alpha_0\phi}
+&=
+e^{-2\alpha_0\phi_0}
+\left(1-\frac{r_-}{r}\right)^{\alpha_1},
+\end{align}
+where \(Q_m\) is the magnetic charge and \(\phi_0\) is the asymptotic value of the dilaton at spatial infinity.
+
+The constants \(r_+\) and \(r_-\) are related to the ADM mass \(M\), magnetic charge \(Q_m\), and asymptotic dilaton value \(\phi_0\) by
+\begin{align}
+2M &= r_+ + \left(1-\alpha_1\right)r_- , \\
+2Q_m^2
+&=
+e^{2\alpha_0\phi_0}
+r_+ r_-
+\left(2-\alpha_1\right).
+\end{align}
+The surface \(r=r_+\) corresponds to the event horizon, while \(r=r_-\) corresponds to a curvature singularity. For \(r>r_-\), the dilaton is larger than its asymptotic value and monotonically decreases toward \(\phi_0\) at spatial infinity.
+
+The theory also admits an electrically charged solution related to the magnetic solution by a discrete electromagnetic duality. Under this duality, the metric is unchanged, while the Maxwell field and dilaton transform according to
+\begin{equation}
+F_{ab} \to e^{-2\alpha_0\phi}({}^*F)_{ab},
+\qquad
+\phi \to -\phi .
+\end{equation}
+For the electric solution, the Maxwell field and dilaton are
+\begin{align}
+F_{tr} &= \frac{Q_e}{r^2}, \\
+e^{2\alpha_0\phi}
+&=
+e^{2\alpha_0\phi_0}
+\left(1-\frac{r_-}{r}\right)^{\alpha_1},
+\end{align}
+where \(Q_e\) is the electric charge. The constants \(r_+\) and \(r_-\) then satisfy
+\begin{align}
+2M &= r_+ + \left(1-\alpha_1\right)r_- , \\
+2Q_e^2
+&=
+e^{-2\alpha_0\phi_0}
+r_+ r_-
+\left(2-\alpha_1\right).
+\end{align}
+In this case, the solution has ADM mass \(M\), electric charge \(Q_e\), and asymptotic dilaton value \(\phi_0\). The event horizon is located at \(r=r_+\), and the curvature singularity is located at \(r=r_-\). For \(r>r_-\), the dilaton monotonically increases toward \(\phi_0\) at spatial infinity.
+
+Since this solution is static and spherically symmetric, the angular momentum and magnetic dipole moment vanish:
+\begin{align}
+J &= 0, \\
+\mu &= 0 .
+\end{align}
+
+Several familiar black-hole solutions are recovered as special limits. In the limit of vanishing dilaton coupling,
+\begin{equation}
+\alpha_0 \to 0,
+\qquad
+\alpha_1 \to 0,
+\end{equation}
+the solution reduces to the Reissner--Nordstr\"om black hole. In the uncharged limit,
+\begin{equation}
+Q_m \to 0
+\qquad
+\text{or}
+\qquad
+Q_e \to 0,
+\end{equation}
+one has \(r_- \to 0\), and the solution reduces to the Schwarzschild black hole with
+\begin{equation}
+r_+ = 2M .
+\end{equation}
+
 \section{Kerr--Sen Metric}
 \label{sec:appx:KerrSenBH}
 We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindquist type coordinates. The metric takes the form

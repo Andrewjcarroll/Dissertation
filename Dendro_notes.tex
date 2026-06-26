@@ -1,18 +1,22 @@
 \section{Wavelet adaptive mesh refinement}
-We can construct a sparse representation of the fields using a set of nested dyadic grids:  
+\label{sec:wavelet_amr}
+
+Dendro employs wavelet adaptive mesh refinement (WAMR) to construct a sparse representation of the evolved fields while maintaining resolution in regions where the solution contains significant spatial structure. The basic idea is to represent the computational domain using a hierarchy of nested dyadic grids. In one spatial dimension, these grids may be written as
 \begin{equation}
-    V_j = \left\{ x^{j,k} = 2^{-j}k\,\Delta x \right\},
+    V_j = \left\{ x^{j,k} = 2^{-j} k\,\Delta x \right\},
 \end{equation}
-where \(V_j\) denotes the grid level, and \(x^{j,k}\) denotes the points on the grids.  
+where \(j\) denotes the refinement level, \(k\) indexes the points on that level, and \(\Delta x\) is the spacing on the coarsest grid. The grids are nested, so that points present on a coarse level also appear on all finer levels.
 
-I show an example below: the red dots indicate the points included only in the alternative grids \(W_j\). Notice that all points in a given \(V_j\) will also appear in all subsequent refinement levels.  
+Figure~\ref{fig:wavelet_grid_hierarchy} illustrates this nested structure. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail spaces \(W_j\), which contain the information added when passing from level \(j-1\) to level \(j\).
 
-\begin{center}
+\begin{figure}[t]
+\centering
 \begin{tikzpicture}[scale=1]
     % V0 line
     \draw[thick] (0,0) -- (4,0);
     \node[left] at (0,0) {$V_0$};
     \node[above] at (2,0) {$\Delta x$};
+
     % Endpoints for V0
     \filldraw (0,0) circle (1.2pt);
     \filldraw (4,0) circle (1.2pt);
@@ -21,62 +25,214 @@ I show an example below: the red dots indicate the points included only in the a
     \draw[thick] (0,-0.8) -- (4,-0.8);
     \node[left] at (0,-0.8) {$V_1$};
     \node[right, red] at (4,-0.8) {$W_1$};
-    \filldraw[red] (2,-0.8) circle (2pt); % midpoint red dot
-    % Endpoints for V1
     \filldraw (0,-0.8) circle (1.2pt);
+    \filldraw[red] (2,-0.8) circle (2pt);
     \filldraw (4,-0.8) circle (1.2pt);
 
     % V2 line
     \draw[thick] (0,-1.6) -- (4,-1.6);
     \node[left] at (0,-1.6) {$V_2$};
     \node[right, red] at (4,-1.6) {$W_2$};
-    % Red dots
-    \filldraw[red] (1,-1.6) circle (2pt);
-    \filldraw[red] (3,-1.6) circle (2pt);
-    \node[below] at (2,-1.6) {$x^{2,2}$};
-    % Endpoints for V2
     \filldraw (0,-1.6) circle (1.2pt);
+    \filldraw[red] (1,-1.6) circle (2pt);
+    \filldraw (2,-1.6) circle (1.2pt);
+    \filldraw[red] (3,-1.6) circle (2pt);
     \filldraw (4,-1.6) circle (1.2pt);
+    \node[below] at (2,-1.6) {$x^{2,2}$};
 
     % Ticks
     \foreach \x in {1,2,3} {
         \draw (\x,-1.5) -- (\x,-1.7);
     }
 \end{tikzpicture}
-\end{center}
+\caption{
+Schematic illustration of nested dyadic grids used in wavelet adaptive mesh refinement. Points present on coarser grids are retained on finer grids, while the red points indicate the additional degrees of freedom introduced at each refinement level. These additional points correspond to the detail spaces \(W_j\).
+}
+\label{fig:wavelet_grid_hierarchy}
+\end{figure}
 
-We start with a field defined on the points of the grid. The field is represented by \(u^{j,k}\). We can extend the values to higher levels by interpolation. For points already included at coarser resolutions, we have \(u^{j+1, 2k} = u^{j,k}\). For new points, interpolation gives
+Let \(u^{j,k}\) denote the value of a field \(u\) at the grid point \(x^{j,k}\). Since the grids are nested, values at points inherited from the previous level satisfy
 \begin{equation}
-    u^{j+1,\,2k+1} = \sum_m h^{j+1,\,2k+1}_{j,m}\, u^{j,m}.
+    u^{j+1,2k} = u^{j,k}.
 \end{equation}
-
-We can represent this interpolation with a series of basis functions:
+The values at newly introduced points may be estimated by interpolation from the previous level,
 \begin{equation}
-    \phi_{j,k}(x) = \sum_l c^l\, \phi_{j+1,\,l}(x),
+    u^{j+1,2k+1}
+    =
+    \sum_m h^{j+1,2k+1}_{j,m}\,u^{j,m},
 \end{equation}
-where \(c^l\) are the interpolation weights.  
+where \(h^{j+1,2k+1}_{j,m}\) are the interpolation weights.
 
-To represent the full grid, including the alternative grids \(W_j\) (the red dots above), we can write:
+Equivalently, this interpolation can be described in terms of scaling functions. A basis function on level \(j\) may be represented using basis functions on the finer level \(j+1\) as
 \begin{equation}
-    u(x) = \sum_{k \in S_0} u^{0,k}\, \phi_{0,k}(x)
-         + \sum_{j=1} \sum_{k \in S_j} d^{j,k}\, \phi_{j,k}(x),
+    \phi_{j,k}(x)
+    =
+    \sum_l c^l\,\phi_{j+1,l}(x),
 \end{equation}
-where \(d^{j,k}\) are the wavelet coefficients. The \(u^{0,k}\) values are the field values at base level points, \(u^{0,k} = u(x^{0,k})\), and \(u^{j,k} = u(x^{j,k})\).  
-
-The wavelet coefficients are computed by comparing the interpolation from the previous level to the actual field value:
+where the coefficients \(c^l\) encode the interpolation stencil. This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A sparse representation of the field can therefore be written schematically as
 \begin{equation}
-    d^{j,k} = u^{j,k} - P(x^{j,k}, j-1),
+    u(x)
+    =
+    \sum_{k \in S_0} u^{0,k}\,\phi_{0,k}(x)
+    +
+    \sum_{j=1}^{J}
+    \sum_{k \in S_j}
+    d^{j,k}\,\phi_{j,k}(x),
 \end{equation}
-where \(P(x^{j,k}, j-1)\) is the interpolated value from level \(j-1\).  
+where \(S_0\) denotes the set of retained points on the coarsest level, \(S_j\) denotes the set of retained detail points on level \(j\), and \(d^{j,k}\) are the wavelet coefficients.
 
-The wavelet coefficient measures how well the interpolation captures the field at that point. We can set a threshold \(\epsilon\) such that refinement occurs only where
-\[
-|d^{j,k}| > \epsilon.
-\]
+The wavelet coefficient at a detail point is computed by comparing the actual field value to the value predicted by interpolation from the previous refinement level,
+\begin{equation}
+    d^{j,k}
+    =
+    u^{j,k}
+    -
+    P\!\left(x^{j,k},j-1\right),
+\end{equation}
+where \(P(x^{j,k},j-1)\) denotes the interpolated value obtained from level \(j-1\). Thus, the coefficient \(d^{j,k}\) measures the local interpolation error associated with omitting the point \(x^{j,k}\). Points for which the interpolation error is small can be discarded without significantly changing the represented field, while points with large wavelet coefficients are retained. In practice, refinement is controlled by a tolerance \(\epsilon\), and points are retained when
+\begin{equation}
+    |d^{j,k}| > \epsilon.
+\end{equation}
+This criterion provides an efficient adaptive representation: smooth regions of the solution are represented using relatively few points, while regions containing sharp gradients, wave propagation, or strong-field structure are refined automatically.
 
-\section{Sobolev informed refinement}
+\section{Sobolev-informed refinement}
+\label{sec:sobolev_refinement}
 
-TBD
+In addition to the standard wavelet criterion, we also consider a Sobolev-inspired modification of the refinement indicator. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
+
+For a given evolved variable \(u\), the standard wavelet refinement indicator may be denoted by
+\begin{equation}
+    I_{\mathrm{W}}(u).
+\end{equation}
+This quantity represents the usual WAMR estimate based on the magnitude of the local wavelet coefficient. The Sobolev-informed indicator augments this quantity by including contributions from first and second spatial derivatives. We use an indicator of the form
+\begin{equation}
+    I_{\mathrm{Sob}}(u)
+    =
+    \sqrt{
+        I_{\mathrm{W}}(u)^2
+        +
+        w_1 I_{\nabla u}^2
+        +
+        w_2 I_{\nabla^2 u}^2
+    },
+    \label{eq:sobolev_indicator}
+\end{equation}
+where \(I_{\nabla u}\) is a local first-derivative indicator, \(I_{\nabla^2 u}\) is a local second-derivative indicator, and \(w_1\) and \(w_2\) are user-controlled weights. The first-derivative term increases refinement in regions with large gradients, while the second-derivative term increases refinement in regions with large curvature or rapidly changing gradients.
+
+This refinement measure should be interpreted as a \emph{Sobolev-inspired} or \emph{Sobolev-weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. By contrast, Eq.~\eqref{eq:sobolev_indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet-based refinement algorithm.
+
+for the comparison between the baseline wavelet adaptive mesh refinement criterion and the Sobolev-informed refinement criterion described in Sec.~\ref{sec:sobolev_refinement}. The purpose is to compare not only the constraint behavior of the two refinement strategies, but also the computational cost associated with the resulting adaptive meshes.
+
+The following figures show additional comparisons between the
+baseline wavelet adaptive mesh refinement criterion and the Sobolev-informed
+refinement criterion described in Sec.~\ref{sec:sobolev_refinement}. These
+diagnostics compare both the constraint behavior of the two refinement strategies
+and the computational cost associated with the resulting adaptive meshes.
+
+Figure~\ref{fig:appendix_sobolev_mesh_comparison} shows a representative
+side-by-side comparison of the adaptive mesh structure produced by the two
+refinement criteria. The Sobolev-informed criterion modifies the local refinement
+indicator by including derivative information, which changes the distribution of
+refined regions relative to the baseline wavelet criterion.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{Figures/Appendix/sobolev_wamr_labeled_side_by_side.pdf}
+\caption{
+Representative comparison of the adaptive mesh generated by the baseline wavelet
+AMR criterion and the Sobolev-informed AMR criterion. The Sobolev-informed
+criterion includes derivative information in the refinement indicator, which
+changes where grid points are allocated. The ripling ring is the location of the diploe pulse proagating outward. 
+}
+\label{fig:appendix_sobolev_mesh_comparison}
+\end{figure}
+
+Figure~\ref{fig:appendix_sobolev_constraints} shows the divergence constraints
+for the electric and vector-potential fields. These quantities provide a direct
+measure of the constraint violation during the evolution. The comparison shows
+how the Sobolev-informed refinement criterion affects the constraint-preserving
+behavior of the evolution relative to the baseline wavelet criterion.
+
+\begin{figure}[t]
+\centering
+
+\subfloat[\(L_2\) norm of \(\nabla_i E^i\).]{%
+    \includegraphics[width=0.48\textwidth]{Figures/Appendix/DivE_wavelet_tolerance_comparison.pdf}%
+    \label{fig:appendix_sobolev_dive}%
+}
+\hfill
+\subfloat[\(L_2\) norm of \(\nabla_i A^i\).]{%
+    \includegraphics[width=0.48\textwidth]{Figures/Appendix/DivA_wavelet_tolerance_comparison.pdf}%
+    \label{fig:appendix_sobolev_diva}%
+}
+
+\caption{
+Constraints for the baseline wavelet AMR and Sobolev-informed AMR
+refinement criteria. The left panel shows the \(L_2\) norm of the electric-field
+divergence constraint, while the right panel shows the corresponding divergence
+for the vector potential. These quantities are used to assess whether
+the modified refinement indicator improves or degrades the constraint behavior of
+the evolution.
+}
+\label{fig:appendix_sobolev_constraints}
+\end{figure}
+
+Figure~\ref{fig:appendix_sobolev_efficiency} compares the number of active mesh
+points and the grid-efficiency. The number of active mesh points,
+\(N_{\mathrm{mesh}}\), measures the size of the adaptive grid and is therefore a
+proxy for the computational cost of the evolution. A refinement strategy that
+achieves comparable or smaller constraint violations using fewer mesh points is
+more efficient.
+
+To quantify this tradeoff, we define a grid-efficiency
+\begin{equation}
+    \eta
+    =
+    \frac{1}{C_{\mathrm{tot}} N_{\mathrm{mesh}}^2},
+    \label{eq:grid_efficiency}
+\end{equation}
+where \(C_{\mathrm{tot}}\) is the total constraint measure and
+\(N_{\mathrm{mesh}}\) is the number of active mesh points. In this work, the
+total constraint measure is constructed from the divergence constraints as
+\begin{equation}
+    C_{\mathrm{tot}}
+    =
+    C_{\nabla E} + C_{\nabla A},
+    \label{eq:total_constraint_sum}
+\end{equation}
+where \(C_{\nabla E}\) and \(C_{\nabla A}\) denote the \(L_2\) norms of the
+corresponding divergences. With this definition, larger values of
+\(\eta\) indicate that a simulation achieves smaller constraint violation for a
+given mesh size. The factor of \(N_{\mathrm{mesh}}^2\) penalizes simulations
+that reduce the constraint violation only by using substantially more grid
+points.
+
+\begin{figure}[t]
+\centering
+
+\subfloat[Number of active meshes.]{%
+    \includegraphics[width=0.48\textwidth]{Figures/Appendix/mesh_size_wavelet_tolerance_comparison.pdf}%
+    \label{fig:appendix_sobolev_mesh_size}%
+}
+\hfill
+\subfloat[Grid-efficiency.]{%
+    \includegraphics[width=0.48\textwidth]{Figures/Appendix/grid_efficiency_wavelet_tolerance_comparison.pdf}%
+    \label{fig:appendix_sobolev_grid_efficiency}%
+}
+
+\caption{
+Mesh-size and grid-efficiency for the baseline wavelet AMR and
+Sobolev-informed AMR refinement criteria. The left panel shows the number of
+active mesh points \(N_{\mathrm{mesh}}\), which serves as a proxy for
+computational cost. The right panel shows the grid-efficiency 
+\(\eta = 1/(C_{\mathrm{tot}}N_{\mathrm{mesh}}^2)\). Larger values of \(\eta\)
+indicate smaller constraint violation for a given mesh size, and therefore a
+more efficient use of grid points.
+}
+\label{fig:appendix_sobolev_efficiency}
+\end{figure}
+
+
 
 \section{Performance of the Code}
 \label{sec:code_performance}
@@ -132,11 +288,11 @@ The tests performed here use the first \(20M\) of a head-on evolution of two
 equal-mass, charged black holes. The black holes have an initial coordinate
 separation of \(16M\), individual masses \(m_1=m_2=0.50\), and charge-to-mass
 ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin
-\(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics,
+\(\chi=0.4\) and are initially at rest. In computing the constraints,
 we again exclude a small neighborhood of each puncture from the calculation of
 the norms. Throughout this section, the constraint measure shown is the sum of
 the volume-weighted Hamiltonian constraint and the three volume-weighted
-momentum constraints. This provides a single diagnostic for the overall
+momentum constraints. This provides a single for the overall
 constraint violation during the evolution.
 
 Comparisons of simulations with different wavelet tolerances are shown in

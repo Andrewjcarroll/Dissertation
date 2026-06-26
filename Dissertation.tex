@@ -15,6 +15,14 @@
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{booktabs}
+% Better page breaking / avoid widows and orphans
+\usepackage[all]{nowidow}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Control figure placement
+\usepackage{placeins}
 \everymath{\displaystyle}
 
 \newcommand{\cmark}{{\color{green!60!black}\ding{51}}}
@@ -37,8 +45,7 @@
   \Year{[2026]}
 
 % If you have a long title, split it between multiple lines using the \\ command
-  \Title{EMDA and CFD in Numerical Relativity
-  }
+  \Title{Numerical Relativity Beyond General Relativity: Charged Black Holes and Compact Finite Differences}
 
 % Your research advisor
 \AdvisorTitle{Advisors}
