@@ -1,71 +1,54 @@
 \section{Introduction}
-Gravitational-wave detectors have opened a new regime for precision tests of general relativity (GR)~\cite{Abbott2025GWTC3GR,Yunes2025GWTests,Abac2025GW250114,
+
+Gravitational-wave observations now provide direct access to the strong-field, dynamical regime of compact-binary coalescence. As detector sensitivity improves and high signal-to-noise-ratio events become more common, the late inspiral, merger, and ringdown will offer increasingly stringent tests of the general-relativistic description of black holes~\cite{Abbott2025GWTC3GR,Yunes2025GWTests,Abac2025GW250114,
 Giri2025AdSBlackShells,Clough2024,Bambi2025Mimickers,
-Yunes2013_LRR_GRTests,Yagi2016_BHTestsGR,Meidam2014,Berti2015,Yang2017}. Recent detections have reached signal-to-noise ratios as high as 80, enabling tests of Hawking's area law and placing constraints on the remnant spin at the 90 percent confidence level~\cite{LVK2025GW250114}. As detector sensitivity continues to improve, gravitational waves will provide increasingly precise probes of the strong-field, dynamical regime of gravity.
+Yunes2013_LRR_GRTests,Yagi2016_BHTestsGR,Meidam2014,Berti2015,Yang2017}. Recent detections have reached signal-to-noise ratios as high as 80, enabling tests of Hawking's area law and placing constraints on the remnant spin at the 90 percent confidence level~\cite{LVK2025GW250114}. These developments make it increasingly important to understand not only whether observed signals are consistent with general relativity, but also how specific beyond-GR effects would appear in the waveform.
 
-Although GR has passed all observational tests to date, it is not the only theoretically viable description of gravity. This motivates the study of well-posed alternative theories and their predictions for compact-binary dynamics. A broad range of approaches to strong-field gravity beyond GR has been explored in recent years~\cite{Cardoso2012NRHEP,Corman2024NonlinearModificationsGR,Afshordi2024BlackHolesInsideOut,Bambi2025BlackHoleMimickers,Bernard2025GenericEFTGWTests}. These include studies of dynamical Chern--Simons gravity~\cite{Alexander2009,Okounkova2019}, Einstein-dilaton-Gauss-Bonnet theory~\cite{Okounkova:2020rqw,Okounkova2020}, modified gauge choices in Einstein-scalar-Gauss-Bonnet theory~\cite{Ripley2020a,Ripley2020b}, the so-called ``fixing the equations'' approach~\cite{Cayuso2020}, and auxiliary-field formulations for higher-curvature systems, including quadratic gravity~\cite{Held2021,Held2023,Held2025,East2023,Taillte2025}. See also Ref.~\cite{Corman2024} for a more detailed discussion and comparison of these and related approaches.
+A central difficulty in such tests is that the merger regime is both highly nonlinear and theory dependent. For many alternative theories of gravity, analytic approximations are insufficient near merger, while numerical simulations require a well-posed initial-value formulation, stable gauge choices, and controlled constraint behavior. Considerable effort has therefore been devoted to developing formulations and approximation schemes that permit nonlinear simulations beyond GR~\cite{Cardoso2012NRHEP,Corman2024NonlinearModificationsGR,Afshordi2024BlackHolesInsideOut,Bambi2025BlackHoleMimickers,Bernard2025GenericEFTGWTests}. Examples include studies of dynamical Chern--Simons gravity~\cite{Alexander2009,Okounkova2019}, Einstein-dilaton-Gauss-Bonnet theory~\cite{Okounkova:2020rqw,Okounkova2020}, modified gauge choices in Einstein-scalar-Gauss-Bonnet theory~\cite{Ripley2020a,Ripley2020b}, the ``fixing the equations'' approach~\cite{Cayuso2020}, and auxiliary-field formulations for higher-curvature systems, including quadratic gravity~\cite{Held2021,Held2023,Held2025,East2023,Taillte2025}. See also Ref.~\cite{Corman2024} for a more detailed discussion and comparison of these approaches.
 
-There are, however, significant challenges associated with making concrete predictions in alternative theories of gravity, especially in the strong-field and highly dynamical regime relevant for compact-binary mergers. One particularly useful strategy is to construct waveform models in these theories and determine where, and to what extent, they depart from their GR counterparts. Such comparisons are essential for assessing whether beyond-GR effects could be observable with current or future gravitational-wave detectors.
+In this work, we focus on the waveform-level consequences of Einstein--Maxwell--dilaton--axion theory. EMDA extends Einstein--Maxwell theory by coupling the electromagnetic field to a dilaton and an axion, and it arises as a low-energy limit of heterotic string theory. The theory admits rotating charged black-hole solutions, such as the Kerr--Sen spacetime, whose exterior fields differ from those of Kerr--Newman black holes. Previous work has investigated the stability of black holes and black-hole hair in EMDA theory~\cite{PopeRohrerWhiting2025,Carroll2026KerrSenStability}, and black-hole shadow studies using Event Horizon Telescope observations have not ruled out Kerr--Sen black holes~\cite{Sahoo2024PRD,Sahoo2025}. These features make EMDA a useful setting in which to study how additional matter fields can influence compact-binary dynamics and gravitational radiation.
 
-Numerical relativity, and the waveform models derived from it, are essential for this effort because compact-binary mergers are highly nonlinear and analytic approximations are not accurate across large portions of the parameter space. Numerical studies of alternative theories require well-posed initial data, robust evolution equations, controlled constraint propagation, and stable gauge dynamics. These ingredients are prerequisites for extracting physically meaningful information from simulations and for constructing reliable waveform catalogs.
+Charged binary black holes have also been studied extensively in Einstein--Maxwell gravity~\cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021GW150914ChargedBH,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These simulations show that electromagnetic charge can modify the orbital dynamics, emitted radiation, and recoil of the remnant. In one analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $(Q/M\sim0.3)$ in the binary components~\cite{Bozzola2021GW150914ChargedBH}. Comparatively little work, however, has examined charged inspiraling binary black holes in beyond-GR theories with additional scalar or pseudoscalar degrees of freedom.
 
-There has been significant work investigating binary black-hole waveforms in Einstein--Maxwell gravity~\cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021GW150914ChargedBH,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These studies have explored how electromagnetic charge modifies the merger dynamics, radiation, and recoil of binary black holes. In one such analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $(Q/M \sim 0.3)$ in the binary components~\cite{Bozzola2021GW150914ChargedBH}. However, comparatively less work has extended these studies to charged binary black holes in beyond-GR theories of gravity.
+The goal of this paper is to take a step toward such a waveform catalog in EMDA. We simulate inspiraling charged binary black holes and compare the resulting gravitational waveforms with neutral general-relativistic reference waveforms. The cases considered here include charge-to-mass ratios larger than those expected for astrophysical black holes~\cite{Gibbons1975VacuumPolarization,Pan2019BlackHoleDischarge}. Our aim is therefore not to construct immediately realistic astrophysical templates, but to identify regimes in which the additional EMDA fields produce measurable changes in the binary dynamics and gravitational-wave signal. In this sense, the simulations provide a controlled probe of how charge, dilaton, and axion effects can enter gravitational waveforms in the nonlinear merger regime.
 
-In this work, we use Einstein--Maxwell--dilaton--axion (EMDA) theory as a testing ground for possible departures from GR. EMDA is a good candidate because the theory allows for a well posed initial data problem. EMDA extends Einstein--Maxwell theory by coupling the electromagnetic field to additional scalar and pseudoscalar degrees of freedom. It also arises as a low-energy limit of heterotic string theory and admits rotating charged black-hole solutions, such as the Kerr--Sen spacetime. These black holes differ from Kerr black holes while remaining observationally viable in some regimes. Recent work has investigated the stability of black holes and black-hole hair in EMDA theory~\cite{PopeRohrerWhiting2025,Carroll2026KerrSenStability}, and black-hole shadow studies using Event Horizon Telescope observations have not ruled out Kerr--Sen black holes~\cite{Sahoo2024PRD,Sahoo2025}.
+\subsection{Scope of this work}
 
-These considerations motivate a systematic study of binary black-hole dynamics in EMDA theory. In particular, waveform catalogs for alternative theories of gravity remain limited, and comparatively little work has been done on inspiraling binary black-hole evolutions in EMDA theory. To our knowledge, the present work is among the first studies of inspiraling binary black-hole waveforms in this theory.
+In this work, we present a modest catalog of binary black-hole waveforms in EMDA theory, considering several choices of mass ratio, spin, and charge configuration. Our primary goal is to determine when EMDA waveforms begin to differ appreciably from their neutral GR counterparts and to identify how these differences depend on the charge configuration and binary parameters.
 
-The cases considered here include charge-to-mass ratios larger than those expected for astrophysical black holes~\cite{Gibbons1975VacuumPolarization,Pan2019BlackHoleDischarge}. Our goal is therefore not to construct immediately realistic astrophysical waveform templates, but rather to probe where departures from GR become significant. This allows us to identify regimes in which the additional EMDA fields produce measurable changes in the binary dynamics and gravitational-wave signal.
+An important complication is that compact-binary waveforms are highly degenerate. Differences between an EMDA waveform and a GR waveform need not imply an unambiguous beyond-GR signature, since similar changes could potentially be mimicked by varying intrinsic binary parameters such as the mass ratio, spins, total mass scale, or, in charged systems, the charge distribution. A complete assessment of these degeneracies would require parameter estimation over both the EMDA and GR parameter spaces, which is beyond the scope of this study.
 
-\subsection{Motivation}
+Instead, we address a more restricted question: how do waveform differences emerge as one moves through the EMDA parameter space, and under what conditions do these differences become large enough to warrant more detailed follow-up studies? The catalog presented here is intended as an initial step toward a more complete study of EMDA binary black-hole phenomenology and toward assessing whether high-precision gravitational-wave observations could constrain or detect signatures of EMDA theory.
 
-In this work, we present a modest catalog of binary black-hole waveforms in EMDA theory, considering several choices of mass ratio, spin, and charge configuration. The parameter space of compact-binary waveforms is highly degenerate. Consequently, it is not always clear whether deviations from a GR waveform arise from genuinely new physics or whether they could instead be mimicked by changes in intrinsic binary parameters, such as the mass ratio, spins, charges, or total mass scale.
+\subsection{Structure of the paper and conventions}
 
-A complete study of these degeneracies would require a full parameter-estimation analysis over both the EMDA and GR parameter spaces, which is beyond the scope of this work. Instead, we address a more restricted question: how do waveform differences emerge as one moves through the EMDA theory space, and under what conditions do these differences become appreciable?
-
-\subsection{Goal of the Work}
-
-The primary goal of this work is to determine if and under what circumstances  EMDA waveforms differ noticeably from their GR counterparts. We focus on how the additional EMDA fields and charges modify the inspiral dynamics and gravitational-wave signal. 
-
-The waveform catalog presented here is intended as an initial step toward a more complete study of EMDA binary black-hole phenomenology. While we do not attempt to cover the full parameter space or perform a complete parameter-estimation analysis, these results provide useful guidance for future studies aimed at determining whether high-precision gravitational-wave observations can constrain or detect signatures of EMDA theory.
-
-
-\subsection{Structure of the Paper and Conventions}
-
-The remainder of this paper is organized as follows. In Sec.~\ref{sec:methods}, we review the EMDA equations, describe the numerical methods used in the evolutions, and discuss the construction of initial data. We also describe the procedure used to reduce orbital eccentricity and the waveform-extraction methods used in the analysis. In Sec.~\ref{sec:results}, we compare EMDA and GR waveforms and identify the circumstances under which differences between the two become noticeable. We summarize our conclusions and discuss future directions in Sec.~\ref{sec:conclusion}.
+The remainder of this paper is organized as follows. In Sec.~\ref{sec:methods}, we review the EMDA equations, describe the numerical methods used in the evolutions, and discuss the construction of initial data. We also describe the procedure used to reduce orbital eccentricity and the waveform-extraction methods used in the analysis. In Sec.~\ref{sec:results}, we compare EMDA and GR waveforms and identify the circumstances under which the differences between them become noticeable. We summarize our conclusions and discuss future directions in Sec.~\ref{sec:conclusion}.
 
 Unless otherwise stated, we use geometrized units with (G=c=1). Greek indices denote spacetime components, while Latin indices denote spatial components.
 
-\section{Einstein--Maxwell--Dilaton--Axion}
+
+\section{Einstein--Maxwell--Dilaton--Axion Theory}
 \label{sec:emda}
-The general theory we consider in this work is an extension of Einstein-Maxwell on inclusion of two coupled scalar fields, the dilaton and the axion.  The action for the EMDA system is
+
+We consider Einstein--Maxwell--dilaton--axion theory, in which the Einstein--Maxwell system is supplemented by a scalar dilaton field $\phi$ and a pseudoscalar axion field $\kappa$. The action is
 \begin{equation}
 \begin{aligned}
-S=\int \mathrm{d}^4 x\,\sqrt{-g}\Big[
-&{R\over8\pi}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2\\
+S=\int \mathrm{d}^4 x,\sqrt{-g}\Big[
+&{R\over8\pi}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2\
 &-\tfrac12 e^{4\alpha_1\phi}(\nabla\kappa)^2
--\kappa\,F_{ab}(*F)^{ab}
+-\kappa,F_{ab}(*F)^{ab}
 \Big],
 \end{aligned}
 \end{equation}
-where the first term is the standard Hilbert action and \(\phi\) and \(\kappa\) are the dilaton and axion, respectively.
-\(F_{ab}\) is the U(1) field strength, and \((*F)_{ab}\) is
-its dual. The parameters $\alpha_0$ and $\alpha_1$ are real, positive constants
-that set the coupling strengths and allow us to consider a family of EMDA
-theories. Particular choices correspond to particular theories. For
-instance, $\alpha_0=\alpha_1=0$ gives Einstein--Maxwell theory minimally
-coupled to scalar and axion fields, while
-$(\alpha_0,\alpha_1)=(\sqrt{3},0)$ corresponds to Kaluza--Klein.
-In this work we take $(\alpha_0,\alpha_1)=(1,1)$, corresponding to a
-low-energy limit of heterotic string theory. For these coupling values, the
-theory admits the Kerr--Sen family of rotating, charged black hole
-solutions. These solutions reduce to Kerr when the electromagnetic charge
-vanishes. In contrast to the Kerr--Newman solution of Einstein--Maxwell
-theory, the Kerr--Sen geometry is accompanied by nontrivial dilaton and
-axion fields whose structure is determined by the black hole charge and
-spin. The explicit Kerr--Sen metric and associated fields are summarized in
-Appendix~\ref{sec:appx:KerrSenBH}.
+where $R$ is the Ricci scalar, $F_{ab}$ is the $U(1)$ field strength, and $(*F)_{ab}$ is its dual. The constants $\alpha_0$ and $\alpha_1$ determine the coupling strengths between the electromagnetic field and the dilaton and axion sectors.
 
+Different choices of $\alpha_0$ and $\alpha_1$ correspond to different members of this class of theories. For example, $\alpha_0=\alpha_1=0$ gives Einstein--Maxwell theory with minimally coupled scalar and pseudoscalar fields, while $(\alpha_0,\alpha_1)=(\sqrt{3},0)$ gives the Kaluza--Klein value of the dilaton coupling. In the simulations presented here, we fix
+$(\alpha_0,\alpha_1)=(1,1)$
+which corresponds to the coupling values associated with the low-energy limit of heterotic string theory.
+
+For this choice of couplings, the theory admits rotating charged black-hole solutions of the Kerr--Sen type. These solutions reduce to Kerr in the limit of vanishing electromagnetic charge, but for nonzero charge the black hole is accompanied by nontrivial dilaton and axion fields. This makes EMDA a useful extension of Einstein--Maxwell theory for studying how charge can affect binary black-hole dynamics when additional matter fields are present.
+
+The inspiraling binaries studied in this work are not exact binary Kerr--Sen solutions. Instead, we construct approximate charged binary black-hole initial data and evolve the full EMDA system numerically. This allows us to compare the resulting gravitational waveforms against neutral general-relativistic reference waveforms and to identify how the electromagnetic, dilaton, and axion fields influence the inspiral and merger. The isolated Kerr--Sen solution and associated fields are summarized in Appendix~\ref{sec:appx:KerrSenBH}.
 
 
 \section{Numerical methods}
@@ -78,27 +61,13 @@ We use the same code developed in earlier work~\cite{Carroll2026KerrSenStability
 \subsection{Code Description}
 \label{sec:code_description}
 
-We perform our black hole merger simulations using \texttt{Dendro-GR}, a well developed numerical relativity framework. \texttt{Dendro-GR} combines an octree-based adaptive
-mesh infrastructure with automatic code generation for the evolution
-equations~\cite{Fernando2019,Fernando2019b,Fernando2023}. The computational domain is refined dynamically using wavelet adaptive multiresolution (WAMR) in which the evolved fields are represented on an adaptive hierarchy of octree blocks. Wavelet coefficients computed from the evolved variables provide a local estimate of the truncation error 
-or unresolved field content~\cite{DeBuhr2018RelativisticHydroWavelets,Anderson2006RelativisticMHDAMR, Fernando2023}.
-Regions where these wavelet coefficients exceed a prescribed tolerance are refined, while regions in which wavelet coefficients remain below a coarsening threshold are de-refined. This tends to concentrate resolution near the black holes, in the wave extraction region, and in regions where the electromagnetic, dilaton, or axion fields develop large spatial gradients, while smoother regions are evolved on coarser grids.
+For the simulations presented here, we evolve the EMDA system using \texttt{Dendro-GR}, the numerical relativity code also used in Ref.~\cite{Carroll2026KerrSenStability}. \texttt{Dendro-GR} is an adaptive mesh-refinement code based on an octree representation of the computational domain. The mesh hierarchy is adjusted dynamically using wavelet adaptive multiresolution, in which wavelet coefficients provide a local measure of unresolved field content and are used to determine where refinement or coarsening is required~\cite{DeBuhr2018RelativisticHydroWavelets,Anderson2006RelativisticMHDAMR,Fernando2023}. This allows resolution to be placed preferentially in regions where the evolved fields contain sharp gradients or otherwise require finer spatial resolution. In the simulations considered here, this concentrates resolution near the black holes, in the wave-extraction region, and in regions with nontrivial electromagnetic, dilaton, or axion structure, while avoiding uniform refinement of the full domain.
 
-Spatial derivatives are computed using sixth-order finite-difference
-stencils, and time integration is performed using a fourth-order
-Runge--Kutta scheme. We include Kreiss--Oliger dissipation to damp
-poorly resolved high-frequency modes and improve numerical stability
-\cite{KreissOliger1973}. Additional details of the \texttt{Dendro-GR}
-infrastructure, including its WAMR implementation, scalability, and previous applications to binary black hole evolutions, can be 
-found in~\cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}.
+Spatial derivatives are evaluated with sixth-order finite-difference operators, and the evolution is advanced in time using a fourth-order Runge--Kutta method. We also add Kreiss--Oliger dissipation of the corresponding order to suppress poorly resolved high-frequency numerical modes. Further details on the \texttt{Dendro-GR} infrastructure, including its adaptive wavelet refinement strategy, code-generation framework, scalability, and previous applications to binary black-hole simulations, can be found in Refs.~\cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}. In particular, \texttt{Dendro-GR} has been shown to perform well for intermediate-mass-ratio inspiral simulations, where adaptive refinement is especially useful for resolving disparate length scales~\cite{Black2025_ORBIT}.
 
-During the evolutions, we monitor the Hamiltonian and momentum constraints together with the electromagnetic divergence constraints throughout the computational domain. These quantities provide a global check on the consistency of the evolution and are used to assess the efficacy of the WAMR refinement parameters. Representative plots of the constraints and their violation are shown in Appendix~\ref{sec:code_performance}.
+Throughout each evolution, we monitor the Hamiltonian and momentum constraints, as well as the electromagnetic divergence constraints. These quantities are used to track the consistency of the numerical solution and to assess whether the chosen refinement parameters adequately resolve the relevant dynamics. Representative constraint behavior is shown in Appendix~\ref{sec:code_performance}.
 
-We also compute quasilocal quantities on apparent horizons using the
-\texttt{BHaHAHA} apparent horizon finder~\cite{Etienne2026BHaHAHA}, which
-we have extended to evaluate the horizon mass, spin, and electric charge.
- Appendix~\ref{sec:code_performance}
-
+We also extract quasilocal horizon quantities using a modified version of the \texttt{BHaHAHA} apparent-horizon finder~\cite{Etienne2026BHaHAHA}. In addition to locating the apparent horizons, this modified version is used to compute the horizon mass, spin, and electric charge during the evolution.
 
 \subsection{Controlling the Eccentricity}
 
