@@ -1,156 +1,201 @@
-\section{Wave Extraction}  
+\section{Wave Extraction}
 \label{sec:appx:wave_extraction}
 
-The GW signals are given by the Newman--Penrose scalar derived from the Weyl tensor as:
+Gravitational radiation is extracted from the Newman--Penrose scalar $\Psi_4$, which is constructed from the Weyl tensor:
 \begin{equation}
-    \Psi_4 = C_{abcd} k^{a} \bar{m}^{b} k^{c} \bar{m}^{d}.
+\Psi_4
+=
+C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
 \end{equation}
-where $k^a$ and $\bar{m}^b$ are members of a null tetrad defined as 
+Here $k^a$ and $\bar{m}^a$ are members of a null tetrad. The tetrad is constructed from the future-directed unit normal $n^a$ to the spatial hypersurface and an orthonormal spatial triad $r^a$, $\theta^a$, and $\varphi^a$, which asymptotically approach the usual radial, polar, and azimuthal unit vectors. We define
 \begin{equation}
-\begin{gathered}
-l^{a} = \frac{1}{\sqrt{2}}\left(n^{a} + u^{a}\right),\quad
-k^{a} = \frac{1}{\sqrt{2}}\left(n^{a} - u^{a}\right),\\
-m^{a} = \frac{1}{\sqrt{2}}\left(v^{a} + i w^{a}\right).
-\end{gathered}
+\begin{aligned}
+\ell^a &= \frac{1}{\sqrt{2}}\left(n^a+r^a\right),\
+k^a &= \frac{1}{\sqrt{2}}\left(n^a-r^a\right),\
+m^a &= \frac{1}{\sqrt{2}}\left(\theta^a+i\varphi^a\right),\
+\bar{m}^a &= \frac{1}{\sqrt{2}}\left(\theta^a-i\varphi^a\right).
+\end{aligned}
 \end{equation}
-This null tetrad is constructed in terms of orthonormal spatial vectors $u^a, v^b, w^c$ which asymptotically behave like the standard radial, polar and azimuthal unit vectors, respectively, and which are normal to the timelike unit vector $n^{a}$.  
- 
-The extraction of the outgoing electromagnetic radiation is given by two scalar quantities calculated in the Newman--Penrose formalism \cite{Newman1962,Zilhao2014}.  
-These two radiative quantities are defined as:
-\begin{align}
-\Phi_1 &= \frac{1}{2} F_{a b}
-\left(l^{a} k^{b} + \bar{m}^{a} m^{b}\right),\\
-\Phi_2 &= F_{ab} \bar{m}^{a} k^{b}.
-\end{align}
-The outgoing radiative quantities for the dilaton and axion are defined in a similar way, namely 
+With metric signature $(-,+,+,+)$, these vectors satisfy
 \begin{equation}
-    \bm{\varphi} = l^a \nabla_a \phi, \quad
-    \bm{\vartheta} = l^a \nabla_a \kappa.
+\ell^a k_a = -1,
+\qquad
+m^a\bar{m}_a = 1,
+\end{equation}
+with all other tetrad inner products vanishing.
+
+In practice, the spatial triad is constructed from coordinate vectors that approach the spherical-coordinate directions in the wave zone. We begin with
+\begin{equation}
+\begin{aligned}
+u^a &= (0,x,y,z),\
+v^a &= (0,xz,yz,-x^2-y^2),\
+w^a &= (0,-y,x,0).
+\end{aligned}
+\end{equation}
+Using the spatial metric $\gamma_{ij}$, we define the spatial inner product
+\begin{equation}
+\langle u,v\rangle = \gamma_{ij}u^i v^j
+\end{equation}
+and the associated norm
+\begin{equation}
+|u| = \sqrt{\langle u,u\rangle}.
+\end{equation}
+The Gram--Schmidt procedure gives the orthonormal spatial vectors
+\begin{equation}
+\begin{aligned}
+r^a
+&=
+\frac{u^a}{|u|},
+[0.5em]
+\theta^a
+&=
+\frac{
+v^a-\langle r,v\rangle r^a
+}{
+\left|v-\langle r,v\rangle r\right|
+},
+[0.5em]
+\varphi^a
+&=
+\frac{
+w^a
+-\langle r,w\rangle r^a
+-\langle \theta,w\rangle \theta^a
+}{
+\left|
+w
+-\langle r,w\rangle r
+-\langle \theta,w\rangle \theta
+\right|
+}.
+\end{aligned}
 \end{equation}
 
-At a given extraction radius $R_{\mathrm{ex}}$, we perform a multipolar decomposition by projecting each field onto spin-weighted spherical harmonics with the appropriate spin weight (taking values $s=-2,-1$ or $0$ depending on the field):
-\begin{align}
-\Psi_4(t,\theta,\phi) &= \sum_{l,m} \psi^{lm}(t)\, Y^{-2}_{lm}(\theta,\phi), \label{eq:psi4_decomp} \\
-\Phi_1(t,\theta,\phi) &= \sum_{l,m} \Phi^{lm}_{1}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:xi1_decomp} \\
-\Phi_2(t,\theta,\phi) &= \sum_{l,m} \Phi^{lm}_{2}(t)\, Y^{-1}_{lm}(\theta,\phi), \label{eq:xi2_decomp} \\
-{\bm{\varphi}}(t,\theta,\phi) &= \sum_{l,m} {\bm{\varphi}}^{lm}(t)\, Y^{0}_{lm}(\theta,\phi), \label{eq:phi_decomp} \\
-\bm{\vartheta}(t,\theta,\phi) &= \sum_{l,m} \bm{\vartheta}^{lm}(t)\, Y^{0}_{lm}(\theta,\phi). \label{eq:kappa_decomp}
-\end{align}
+The Newman--Penrose scalar $\Psi_4$ is related to the gravitational-wave strain by
+\begin{equation}
+\Psi_4
+=
+\ddot{h}*+ - i\ddot{h}*\times ,
+\end{equation}
+up to the overall sign convention used for the null tetrad. Thus, the strain can be obtained by integrating $\Psi_4$ twice in time.
 
-We can calculate the radiated energy from the gravitational, electromagnetic, axion, and dilaton fields as follows \cite{Zilhao2012}:
+The outgoing electromagnetic radiation is extracted using Newman--Penrose scalars associated with the Maxwell tensor \cite{Newman1962,Zilhao2014}. We define
+\begin{align}
+\Phi_1
+&=
+\frac{1}{2}F_{ab}
+\left(\ell^a k^b+\bar{m}^a m^b\right),
+\
+\Phi_2
+&=
+F_{ab}\bar{m}^a k^b .
+\end{align}
+Here $\Phi_2$ represents the outgoing radiative electromagnetic degree of freedom at large radius.
+
+We define analogous outgoing scalar quantities for the dilaton and axion fields by projecting their gradients along the outgoing null direction:
+\begin{equation}
+\bm{\varphi}
+=
+\ell^a\nabla_a\phi,
+\qquad
+\bm{\vartheta}
+=
+\ell^a\nabla_a\kappa .
+\end{equation}
+
+% At an extraction radius $R_{\mathrm{ex}}$, each radiative quantity is decomposed into spin-weighted spherical harmonics with the appropriate spin weight:
+% \begin{align}
+% \Psi_4(t,\theta,\varphi)
+% &=
+% \sum_{\ell,m}
+% \psi^{\ell m}(t),
+% {}*{-2}Y*{\ell m}(\theta,\varphi),
+% \label{eq:psi4_decomp_2}
+% \
+% \Phi_1(t,\theta,\varphi)
+% &=
+% \sum_{\ell,m}
+% \Phi^{\ell m}*{1}(t),
+% {}*{0}Y_{\ell m}(\theta,\varphi),
+% \label{eq:xi1_decomp}
+% \
+% \Phi_2(t,\theta,\varphi)
+% &=
+% \sum_{\ell,m}
+% \Phi^{\ell m}*{2}(t),
+% {}*{-1}Y_{\ell m}(\theta,\varphi),
+% \label{eq:xi2_decomp}
+% \
+% \bm{\varphi}(t,\theta,\varphi)
+% &=
+% \sum_{\ell,m}
+% \bm{\varphi}^{\ell m}(t),
+% {}*{0}Y*{\ell m}(\theta,\varphi),
+% \label{eq:phi_decomp}
+% \
+% \bm{\vartheta}(t,\theta,\varphi)
+% &=
+% \sum_{\ell,m}
+% \bm{\vartheta}^{\ell m}(t),
+% {}*{0}Y*{\ell m}(\theta,\varphi).
+% \label{eq:kappa_decomp}
+% \end{align}
+Here we use $\ell$ for the spherical-harmonic index to avoid confusion with the null vector $\ell^a$.
+
+The radiated energy fluxes in the gravitational, electromagnetic, dilaton, and axion channels are then computed from the multipolar amplitudes. Following Ref.~\cite{Zilhao2012}, we use
 \begin{align}
 F_{\mathrm{GW}}
-&= \frac{dE_{\mathrm{GW}}}{dt}
-= \lim_{r \to \infty} \frac{r^2}{16\pi}
-\sum_{l,m} \left| \int_{-\infty}^{t} dt'\, \psi^{lm}(t') \right|^2, \\
+&=
+\frac{dE_{\mathrm{GW}}}{dt}
+=
+\lim_{r\to\infty}
+\frac{r^2}{16\pi}
+\sum_{\ell,m}
+\left|
+\int_{-\infty}^{t}
+\psi^{\ell m}(t'),dt'
+\right|^2,
+\
 F_{\mathrm{EM}}
-&= \frac{dE_{\mathrm{EM}}}{dt}
-= \lim_{r \to \infty} \frac{r^2}{4\pi}
-\sum_{l,m} \left| \Phi^{lm}_2(t) \right|^2 , \\ 
-F_{\mathrm{D}}
-&= \frac{dE_{\mathrm{D}}}{dt}
-= \lim_{r \to \infty} \frac{r^2}{4\pi}
-\sum_{l,m} \left| \bm{\varphi}^{lm}(t) \right|^2 , \\
+&=
+\frac{dE_{\mathrm{EM}}}{dt}
+=
+\lim_{r\to\infty}
+\frac{r^2}{4\pi}
+\sum_{\ell,m}
+\left|
+\Phi^{\ell m}*2(t)
+\right|^2,
+\
+F*{\mathrm{D}}
+&=
+\frac{dE_{\mathrm{D}}}{dt}
+=
+\lim_{r\to\infty}
+\frac{r^2}{4\pi}
+\sum_{\ell,m}
+\left|
+\bm{\varphi}^{\ell m}(t)
+\right|^2,
+\
 F_{\mathrm{A}}
-&= \frac{dE_{\mathrm{A}}}{dt}
-= \lim_{r \to \infty} \frac{r^2}{4\pi}
-\sum_{l,m} \left| \bm{\vartheta}^{lm}(t) \right|^2 . 
+&=
+\frac{dE_{\mathrm{A}}}{dt}
+=
+\lim_{r\to\infty}
+\frac{r^2}{4\pi}
+\sum_{\ell,m}
+\left|
+\bm{\vartheta}^{\ell m}(t)
+\right|^2.
 \end{align}
-
-\section{Computation of \texorpdfstring{$\Psi_4$}{Psi4}}
-
-The gravitational waveforms extracted from numerical relativity simulations are often expressed in terms of the Newman--Penrose scalar $\Psi_4$. This scalar provides a convenient way to isolate the outgoing gravitational radiation from the curvature of spacetime. In this appendix, we describe the construction of $\Psi_4$, its relation to the Weyl tensor, and its connection to the gravitational-wave strain measured by detectors.
-
-\subsection{Tetrad Construction}
-
-We begin by constructing an orthonormal tetrad adapted to the spatial hypersurfaces. We take the timelike vector to be the future-directed unit normal $n^a$ to the spacelike hypersurface. In the asymptotic region, we construct a set of spatial vectors resembling the spherical-coordinate directions and then orthonormalize them using the Gram--Schmidt procedure.
-
-We start with the spatial vectors
-\begin{equation}
-\begin{aligned}
-    u^a &= (0, x, y, z),\\
-    v^a &= (0, xz, yz, -x^2 - y^2),\\
-    w^a &= (0, -y, x, 0).
-\end{aligned}
-\end{equation}
-Using the spatial metric $\gamma_{ij}$, we define the spatial inner product and norm by
-\begin{equation}
-    \langle u, v \rangle \equiv \gamma_{ij} u^i v^j,
-\end{equation}
-and
-\begin{equation}
-    \|u\| \equiv \sqrt{\langle u, u \rangle}.
-\end{equation}
-The Gram--Schmidt procedure then gives the orthonormal spatial vectors
-\begin{equation}
-\begin{aligned}
-    e_{(1)}^a
-    &=
-    \frac{u^a}{\|u\|},
-    \\[0.5em]
-    e_{(2)}^a
-    &=
-    \frac{
-        v^a - \langle e_{(1)}, v \rangle e_{(1)}^a
-    }{
-        \left\|v - \langle e_{(1)}, v \rangle e_{(1)}\right\|
-    },
-    \\[0.5em]
-    e_{(3)}^a
-    &=
-    \frac{
-        w^a
-        - \langle e_{(1)}, w \rangle e_{(1)}^a
-        - \langle e_{(2)}, w \rangle e_{(2)}^a
-    }{
-        \left\|
-        w
-        - \langle e_{(1)}, w \rangle e_{(1)}
-        - \langle e_{(2)}, w \rangle e_{(2)}
-        \right\|
-    }.
-\end{aligned}
-\end{equation}
-We identify these vectors with the radial, polar, and azimuthal directions,
-\begin{equation}
-    e_{(1)}^a = r^a,
-    \qquad
-    e_{(2)}^a = \theta^a,
-    \qquad
-    e_{(3)}^a = \phi^a.
-\end{equation}
-Using these orthonormal vectors, we construct the null tetrad
-\begin{equation}
-\begin{aligned}
-    \ell^a &= \frac{1}{\sqrt{2}}\left(n^a + r^a\right),\\
-    k^a &= \frac{1}{\sqrt{2}}\left(n^a - r^a\right),\\
-    m^a &= \frac{1}{\sqrt{2}}\left(\theta^a + i \phi^a\right),\\
-    \bar{m}^a &= \frac{1}{\sqrt{2}}\left(\theta^a - i \phi^a\right).
-\end{aligned}
-\end{equation}
-Here $\ell^a$ and $k^a$ are real null vectors, while $m^a$ is a complex null vector and $\bar{m}^a$ is its complex conjugate. With the metric signature $(-,+,+,+)$, the tetrad satisfies
-\begin{equation}
-    \ell^a \ell_a = 0,
-    \qquad
-    k^a k_a = 0,
-    \qquad
-    m^a m_a = 0,
-    \qquad
-    \bar{m}^a \bar{m}_a = 0,
-\end{equation}
-and the only non-vanishing inner products are
-\begin{equation}
-    \ell^a k_a = -1,
-    \qquad
-    m^a \bar{m}_a = 1.
-\end{equation}
-This null tetrad forms the basis used in the Newman--Penrose formalism.
+In numerical simulations these quantities are evaluated at finite extraction radii, so the expressions above should be interpreted as their asymptotic large-radius limits.
 
 \subsection{The Weyl Tensor and \texorpdfstring{$\Psi_4$}{Psi4}}
 
 The Weyl tensor is the trace-free part of the spacetime curvature. In four dimensions, the Riemann tensor has twenty independent components. Ten of these are determined by the Ricci tensor, while the remaining ten are contained in the Weyl tensor. The Weyl tensor therefore captures the part of the curvature associated with tidal and radiative degrees of freedom.
 
-In $n$ dimensions, with $n \geq 4$, the Weyl tensor is defined by
+In $n$ dimensions, with $n\geq 4$, the Weyl tensor is defined by
 \begin{equation}
 \begin{aligned}
 C_{abcd}
@@ -159,22 +204,22 @@ R_{abcd}
 +
 \frac{1}{n-2}
 \left(
-    g_{ad} R_{cb}
-    +
-    g_{bc} R_{da}
-    -
-    g_{ac} R_{db}
-    -
-    g_{bd} R_{ca}
+g_{ad} R_{cb}
++
+g_{bc} R_{da}
+-
+g_{ac} R_{db}
+-
+g_{bd} R_{ca}
 \right)
-\\
+\
 &\quad
 +
 \frac{1}{(n-1)(n-2)}
 \left(
-    g_{ac}g_{db}
-    -
-    g_{ad}g_{cb}
+g_{ac}g_{db}
+-
+g_{ad}g_{cb}
 \right)R .
 \end{aligned}
 \end{equation}
@@ -187,240 +232,288 @@ R_{abcd}
 +
 \frac{1}{2}
 \left(
-    g_{ad} R_{cb}
-    +
-    g_{bc} R_{da}
-    -
-    g_{ac} R_{db}
-    -
-    g_{bd} R_{ca}
+g_{ad} R_{cb}
++
+g_{bc} R_{da}
+-
+g_{ac} R_{db}
+-
+g_{bd} R_{ca}
 \right)
-\\
+\
 &\quad
 +
 \frac{1}{6}
 \left(
-    g_{ac}g_{db}
-    -
-    g_{ad}g_{cb}
+g_{ac}g_{db}
+-
+g_{ad}g_{cb}
 \right)R .
 \end{aligned}
 \end{equation}
 The Weyl tensor has the same index symmetries as the Riemann tensor:
 \begin{equation}
-    C_{abcd}
-    =
-    -C_{abdc}
-    =
-    -C_{bacd}
-    =
-    C_{cdab},
+C_{abcd}
+=
+-C_{abdc}
+=
+-C_{bacd}
+=
+C_{cdab},
 \end{equation}
 together with the cyclic identity
 \begin{equation}
-    C_{abcd} + C_{adbc} + C_{acdb} = 0.
+C_{abcd}+C_{adbc}+C_{acdb}=0.
 \end{equation}
 
 The Newman--Penrose scalar $\Psi_4$ is defined as a projection of the Weyl tensor onto the null tetrad:
 \begin{equation}
-    \Psi_4
-    =
-    - C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
-    \label{eq:psi4-definition}
+\Psi_4
+=
+C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
+\label{eq:psi4-definition}
 \end{equation}
-The overall sign convention may vary between authors and numerical relativity codes. In an asymptotically flat spacetime, with an appropriate outgoing tetrad, $\Psi_4$ encodes the outgoing gravitational radiation.
-
+The overall sign convention may vary between authors and numerical relativity codes. In an asymptotically flat spacetime, with an appropriate outgoing tetrad, $\Psi_4$ encodes the outgoing gravitational radiation. With the convention used here, it is related to the gravitational-wave strain by
+\begin{equation}
+\Psi_4
+=
+\ddot{h}*+ - i\ddot{h}*\times ,
+\end{equation}
+up to the sign convention chosen for the null tetrad. Thus, the complex strain
+\begin{equation}
+h = h_+ - i h_\times
+\end{equation}
+satisfies
+\begin{equation}
+\Psi_4 = \ddot{h}.
+\end{equation}
+In practice, the strain is obtained by integrating $\Psi_4$ twice in time, with appropriate treatment of integration constants and low-frequency numerical noise.
 \subsection{Relation to the \texorpdfstring{$3+1$}{3+1} Variables}
 
-In numerical relativity, $\Psi_4$ is computed from quantities defined on spatial hypersurfaces. The curvature terms are therefore rewritten using the Gauss--Codazzi relations. Schematically, the relevant projections are
+In numerical relativity, $\Psi_4$ is computed from quantities defined on spatial hypersurfaces. The spacetime curvature entering the Weyl tensor is therefore rewritten using the Gauss--Codazzi relations. Schematically, the relevant projections are
 \begin{equation}
-    \perp R_{abcd}
-    =
-    {}^{(3)}R_{abcd}
-    +
-    K_{ac}K_{bd}
-    -
-    K_{ad}K_{bc},
+\gamma^a{}*i\gamma^b{}*j\gamma^c{}*k\gamma^d{}*l
+{}^{(4)}R*{abcd}
+=
+{}^{(3)}R*{ijkl}
++
+K*{ik}K*{jl}
+-
+K_{il}K_{jk},
 \end{equation}
 \begin{equation}
-    \perp\left(R_{abcd} n^a\right)
-    =
-    D_c K_{bd}
-    -
-    D_d K_{bc},
+\gamma^a{}*i\gamma^b{}*j\gamma^c{}*k n^d
+{}^{(4)}R*{abcd}
+=
+D_jK*{ik}
+-
+D_iK*{jk},
 \end{equation}
 and
 \begin{equation}
-    \perp\left(R_{abcd} n^a n^c\right)
-    =
-    \mathcal{L}_n K_{bd}
-    +
-    K_{bc}K^c{}_d
-    +
-    \frac{1}{\alpha}D_bD_d\alpha .
+\gamma^a{}*i\gamma^b{}*j n^c n^d
+{}^{(4)}R*{acbd}
+=
+\mathcal{L}*n K*{ij}
++
+K*{ik}K^k{}*j
++
+\frac{1}{\alpha}D_iD_j\alpha .
 \end{equation}
-These identities allow the spacetime curvature entering Eq.~\eqref{eq:psi4-definition} to be expressed in terms of the spatial metric $\gamma_{ij}$, the extrinsic curvature $K_{ij}$, and their spatial derivatives.
+These identities allow the spacetime curvature appearing in Eq.~\eqref{eq:psi4-definition} to be expressed in terms of the spatial metric $\gamma*{ij}$, the extrinsic curvature $K_{ij}$, and their spatial derivatives.
 
-After substituting the Gauss--Codazzi relations, the Weyl scalar can be written in terms of spatial curvature and extrinsic-curvature quantities. A common form is
+After substituting the Gauss--Codazzi relations, the Weyl scalar can be written in terms of spatial curvature and extrinsic-curvature quantities. A common schematic form is
 \begin{equation}
 \begin{aligned}
-    \Psi_4
-    &=
-    \left(
-        {}^{(3)}R_{bd}
-        +
-        K K_{bd}
-        -
-        K_{bc}K^c{}_d
-    \right)
-    \bar{m}^b \bar{m}^d
-    \\
-    &\quad
-    +
-    \left(
-        D_c K_{bd}
-        -
-        D_d K_{bc}
-    \right)
-    r^c \bar{m}^b \bar{m}^d .
+\Psi_4
+&=
+\left(
+{}^{(3)}R_{bd}
++
+K K_{bd}
+-
+K_{bc}K^c{}*d
+\right)
+\bar{m}^b \bar{m}^d
+\
+&\quad
++
+\left(
+D_c K*{bd}
+-
+D_d K_{bc}
+\right)
+r^c \bar{m}^b \bar{m}^d .
 \end{aligned}
 \end{equation}
-This expression shows explicitly that $\Psi_4$ can be computed from the spatial geometry and extrinsic curvature of each slice.
+The precise sign of this expression depends on the conventions used for the Riemann tensor, the extrinsic curvature, and the null tetrad. The important point is that $\Psi_4$ can be computed from the spatial geometry and extrinsic curvature of each slice.
 
 For BSSN-type formulations, the extrinsic curvature is decomposed as
 \begin{equation}
-    K_{ij}
-    =
-    \chi^{-1}
-    \left(
-        \tilde{A}_{ij}
-        +
-        \frac{1}{3}\tilde{\gamma}_{ij}K
-    \right),
+K_{ij}
+=
+\chi^{-1}
+\left(
+\tilde{A}*{ij}
++
+\frac{1}{3}\tilde{\gamma}*{ij}K
+\right),
 \end{equation}
-where $\tilde{\gamma}_{ij}$ is the conformal spatial metric, $\tilde{A}_{ij}$ is the trace-free conformal extrinsic curvature, $K$ is the trace of the extrinsic curvature, and $\chi$ is the conformal factor used in the evolution system.
+where $\tilde{\gamma}*{ij}$ is the conformal spatial metric, $\tilde{A}*{ij}$ is the trace-free conformal extrinsic curvature, $K$ is the trace of the extrinsic curvature, and $\chi$ is the conformal factor used in the evolution system. Equivalently, if $\gamma_{ij}=e^{4\phi}\tilde{\gamma}_{ij}$, then $\chi=e^{-4\phi}$.
 
 The resulting expressions for the real and imaginary parts of $\Psi_4$ in terms of BSSN variables are lengthy. They are typically evaluated directly in the code using the evolved variables and their derivatives. Symbolically, one may write
 \begin{equation}
-    \Psi_4
-    =
-    \mathcal{R}(\Psi_4)
-    +
-    i\,\mathcal{I}(\Psi_4),
+\Psi_4
+=
+\mathrm{Re}(\Psi_4)
++
+i,\mathrm{Im}(\Psi_4),
 \end{equation}
 where the real and imaginary parts are obtained by projecting the spatial curvature and extrinsic-curvature terms onto the complex dyad formed from $m^a$ and $\bar{m}^a$.
 
 \subsection{Relation Between \texorpdfstring{$\Psi_4$}{Psi4} and Strain}
 
-The quantity directly measured by gravitational-wave detectors such as LIGO is not $\Psi_4$, but the gravitational-wave strain. The strain is commonly written as the complex quantity
+The quantity directly measured by gravitational-wave detectors is not $\Psi_4$, but the gravitational-wave strain. The strain is commonly written as the complex quantity
 \begin{equation}
-    h
-    =
-    h_+
-    -
-    i h_\times ,
+h
+=
+h_+
+-
+i h_\times ,
 \end{equation}
 where $h_+$ and $h_\times$ are the two gravitational-wave polarizations.
 
 At future null infinity, $\Psi_4$ is related to the second time derivative of the strain by
 \begin{equation}
-    \Psi_4
-    =
-    \ddot{h}_+
-    -
-    i\ddot{h}_\times
-    =
-    \ddot{h}.
+\Psi_4
+=
+\ddot{h}*+
+-
+i\ddot{h}*\times
+=
+\ddot{h},
 \end{equation}
-Therefore, the strain can be obtained by integrating $\Psi_4$ twice in time:
+up to the overall sign convention used for the null tetrad. Therefore, the strain can be obtained by integrating $\Psi_4$ twice in time:
 \begin{equation}
-    h(t)
-    =
-    \int^t dt'
-    \int^{t'} dt''\,
-    \Psi_4(t'') .
+h(t)
+=
+\int^t dt'
+\int^{t'} dt'',
+\Psi_4(t'') .
 \end{equation}
-In practice, this integration must be performed carefully, since direct time-domain integration can introduce secular drifts. Frequency-domain methods or fixed-frequency integration are often used to control these low-frequency artifacts.
+In practice, this integration must be performed carefully, since direct time-domain integration can introduce secular drifts. Frequency-domain methods, including fixed-frequency integration, are often used to control low-frequency numerical artifacts.
 
 The strain and Weyl scalar may also be decomposed into spin-weighted spherical harmonics:
 \begin{align}
-    h(t,\theta,\phi)
-    &=
-    \sum_{\ell,m}
-    h_{\ell m}(t)\,
-    {}_{-2}Y_{\ell m}(\theta,\phi),
-    \\
-    \Psi_4(t,\theta,\phi)
-    &=
-    \sum_{\ell,m}
-    \Psi_4^{\ell m}(t)\,
-    {}_{-2}Y_{\ell m}(\theta,\phi).
+h(t,\theta,\varphi)
+&=
+\sum_{\ell,m}
+h_{\ell m}(t),
+{}*{-2}Y*{\ell m}(\theta,\varphi),
+\
+\Psi_4(t,\theta,\varphi)
+&=
+\sum_{\ell,m}
+\Psi_4^{\ell m}(t),
+{}*{-2}Y*{\ell m}(\theta,\varphi).
 \end{align}
 For each multipolar mode, the relation between $\Psi_4$ and the strain becomes
 \begin{equation}
-    \Psi_4^{\ell m}(t)
-    =
-    \ddot{h}_{\ell m}(t),
+\Psi_4^{\ell m}(t)
+=
+\ddot{h}*{\ell m}(t),
 \end{equation}
 or equivalently,
 \begin{equation}
-    h_{\ell m}(t)
-    =
-    \int^t dt'
-    \int^{t'} dt''\,
-    \Psi_4^{\ell m}(t'') .
+h*{\ell m}(t)
+=
+\int^t dt'
+\int^{t'} dt'',
+\Psi_4^{\ell m}(t'') .
 \end{equation}
-Often, waveform comparisons focus on the dominant $(\ell,m)=(2,\pm2)$ modes.
-
+Waveform comparisons often focus on the dominant $(\ell,m)=(2,\pm2)$ modes.
 \subsection{Waveform Mismatch}
 
-To quantify how similar two gravitational waveforms are, we compute a mismatch. This can be done in two related ways. A purely numerical comparison measures the difference between two waveforms directly, while a detector-based comparison weights the difference by the noise curve of a gravitational-wave detector.
+To quantify the similarity between two gravitational waveforms, we compute a mismatch. This can be done in two related ways. A purely numerical comparison measures the difference between two waveforms directly, while a detector-based comparison weights the difference by the noise curve of a gravitational-wave detector.
 
 For two complex waveforms $h_1(t)$ and $h_2(t)$, a simple normalized overlap may be written as
 \begin{equation}
-    \mathcal{O}
-    =
-    \frac{
-        \left| \langle h_1, h_2 \rangle \right|
-    }{
-        \sqrt{
-            \langle h_1, h_1 \rangle
-            \langle h_2, h_2 \rangle
-        }
-    },
+\mathcal{O}
+=
+\frac{
+\left| \langle h_1, h_2 \rangle \right|
+}{
+\sqrt{
+\langle h_1, h_1 \rangle
+\langle h_2, h_2 \rangle
+}
+},
 \end{equation}
-where the time-domain inner product may be taken as
+where a simple time-domain inner product is
 \begin{equation}
-    \langle h_1, h_2 \rangle
-    =
-    \int_{t_1}^{t_2}
-    h_1(t) h_2^*(t)\,dt .
+\langle h_1, h_2 \rangle
+=
+\int_{t_1}^{t_2}
+h_1(t) h_2^*(t),dt .
 \end{equation}
 The mismatch is then
 \begin{equation}
-    \mathcal{M}
-    =
-    1 - \mathcal{O}.
+\mathcal{M}
+=
+1-\mathcal{O}.
 \end{equation}
-In practice, the overlap is usually maximized over time and phase shifts:
+In practice, the overlap is usually maximized over relative time and phase shifts:
 \begin{equation}
-    \mathcal{M}
-    =
-    1
-    -
-    \max_{\Delta t,\,\Delta \phi}
-    \frac{
-        \left|
-        \left\langle
-            h_1,
-            h_2^{\Delta t,\Delta \phi}
-        \right\rangle
-        \right|
-    }{
-        \sqrt{
-            \langle h_1,h_1\rangle
-            \langle h_2,h_2\rangle
-        }
-    }.
+\mathcal{M}
+=
+1
+-
+\max_{\Delta t,,\Delta \phi}
+\frac{
+\left|
+\left\langle
+h_1,
+h_2^{\Delta t,\Delta \phi}
+\right\rangle
+\right|
+}{
+\sqrt{
+\langle h_1,h_1\rangle
+\langle h_2,h_2\rangle
+}
+}.
 \end{equation}
-This provides a single number measuring the disagreement between two waveforms after removing trivial offsets in arrival time and phase. A smaller mismatch indicates better agreement.
+Here $h_2^{\Delta t,\Delta \phi}$ denotes the waveform $h_2$ shifted in time by $\Delta t$ and rotated by an overall phase $\Delta\phi$. This maximization removes trivial offsets in arrival time and phase, leaving a measure of the physical disagreement between the waveform shapes. A smaller mismatch indicates better agreement.
+
+For comparisons that account for detector sensitivity, one instead uses a noise-weighted inner product in the frequency domain,
+\begin{equation}
+\left(h_1,h_2\right)
+=
+4,\mathrm{Re}
+\int_{f_{\min}}^{f_{\max}}
+\frac{
+\tilde{h}_1(f)\tilde{h}*2^*(f)
+}{
+S_n(f)
+},df ,
+\end{equation}
+where $\tilde{h}(f)$ is the Fourier transform of $h(t)$ and $S_n(f)$ is the one-sided detector noise power spectral density. The detector-weighted overlap is then
+\begin{equation}
+\mathcal{O}
+=
+\frac{
+\left(h_1,h_2\right)
+}{
+\sqrt{
+\left(h_1,h_1\right)
+\left(h_2,h_2\right)
+}
+},
+\end{equation}
+again maximized over relative time and phase shifts. The corresponding mismatch is
+\begin{equation}
+\mathcal{M}
+=
+1-\max*{\Delta t,,\Delta\phi}\mathcal{O}.
+\end{equation}
+This detector-weighted mismatch is the more relevant quantity when assessing whether two waveforms could be distinguished by a particular gravitational-wave detector.

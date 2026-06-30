@@ -1,45 +1,51 @@
 \section{Introduction}
 Since Einstein introduced the theory of general relativity in 1915 \cite{Einstein1915}, 
-it has remained consistent with all experimental tests to date. 
+it has remained consistent with all experimental tests to date\cite{Will2014,Yunes2025GWTests}. 
 General relativity has fundamentally transformed our understanding of space and time, 
 explaining phenomena ranging from the anomalous precession of Mercury to the operation 
-of atomic clocks in GPS satellites, and predicting the existence of compact objects 
-such as neutron stars and black holes, as well as gravitational waves \cite{Carroll2004, MisnerThorneWheeler1973}.
+of atomic clocks in GPS satellites\cite{Ashby2003}, and predicting the existence of compact objects 
+such as neutron stars and black holes, as well as gravitational waves \cite{Carroll2004,MisnerThorneWheeler1973,Einstein1916GW}.
 
 Gravitational waves were first directly detected by LIGO in 2015 \cite{Abbott2016b}. 
 These signals originate from some of the most energetic events in the universe, such as mergers of neutron stars and black holes. 
 However, the signals detected by LIGO are extremely weak; the detectors are sensitive enough to measure relative length changes 
 on the order of $10^{-21}$, corresponding to displacements smaller than a proton diameter \cite{LIGO_Facts}. 
 Despite this extraordinary sensitivity, gravitational wave signals remain weak relative to background noise. 
-The highest signal-to-noise ratio (SNR) observed to date is on the order of $\sim 80$ \cite{Abac2025GW250114}.
+The highest signal-to-noise ratio (SNR) gravitational-wave event reported to date is GW250114,
+with a network matched-filter SNR of approximately $80$ \cite{Abac2025GW250114}.
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/LIGO_measurement_of_gravitational_waves.svg.png}
     \caption{Schematic illustration of the LIGO interferometer used to detect gravitational waves through differential arm length changes.}
     \label{fig:ligo_detector}
 \end{figure}
+ 
+Interpreting gravitational-wave detections requires accurate theoretical models of the expected signals. In practice, this is achieved by comparing observational data against waveform templates constructed from analytical approximations, phenomenological models, and numerical simulations. This template-based comparison allows the physical properties of the source, including the component masses and spins, to be inferred statistically \cite{Veitch2015,Khan2016_IMRPhenomD}.
 
-Interpreting gravitational wave detections requires accurate theoretical models of the expected signals. 
-In practice, this is achieved by comparing observational data to waveform templates generated through numerical simulations. 
-This comparison allows us to statstically determine key physical properties of the source, such as masses and spins.
+Constructing theoretical models of binary black-hole mergers is challenging because the relevant dynamics are strongly nonlinear and only partially accessible through analytic methods. In general relativity, exact analytic solutions are typically restricted to highly symmetric systems and cannot describe the full inspiral, merger, and ringdown of a generic binary black-hole system. Numerical relativity therefore plays an essential role in modeling the late inspiral, merger, and ringdown, where fully nonlinear effects are important. A number of numerical relativity codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR-Athena++, and Dendro-GR \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,Daszuta2021_GRAthena,Fernando2023}.
 
-Making theoretical models of binary black hole mergers is not trivial. In GR, analytic solutions in general relativity are typically restricted to highly symmetric systems and cannot describe the full dynamics of binary black hole mergers. 
-As a result, numerical relativity simulations are essential. 
-A number of codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR-Athena++, and Dendro-GR. \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,White2016, Fernando2023}
+Simulating binary black-hole mergers remains computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{BaumgarteShapiro2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black-hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
 
-Simulating binary black hole mergers is computationally demanding. 
-It requires solving a coupled system of nonlinear partial differential equations across multiple length scales, including the scale of the black holes, 
-the binary orbital scale, and the radiation zone \cite{BaumgarteShapiro2010, BaumgarteShapiro2021}. 
-In this work, we make use of the Dendro numerical relativity framework \cite{Fernando2023}.
+For standard general relativity (GR), substantial progress has been made, and extensive
+waveform catalogs now cover much of the binary-black-hole parameter space, particularly
+for near-equal-mass systems. Here we define the mass ratio as
+$q=M_{\mathrm{larger}}/M_{\mathrm{smaller}}\ge 1$. The LIGO--Virgo--KAGRA
+(LVK) collaboration has reported hundreds of compact-binary candidates using waveform
+models informed by analytical approximations and numerical relativity
+\cite{Abbott2019,GWTC3,GWTC4,Boyle2019}. However, two key challenges remain:
+improving the fidelity of GR simulations and developing waveform catalogs for alternative
+theories of gravity.
 
-For standard general relativity (GR), substantial progress has been made, and extensive waveform catalogs now cover much of the parameter space, 
-particularly for near-equal-mass systems (We here define  the mass ratio q as $q = \frac{M_{\text{larger}}}{M_{\text{smaller}}} \ge 1$). 
-The LIGO--Virgo--KAGRA (LVK) collaboration has reported hundreds of detected events using these models \cite{Abbott2019}. 
-However, two key challenges remain: improving the fidelity of GR simulations and developing waveform catalogs for alternative theories of gravity .
+The next generation of gravitational-wave detectors is expected to significantly increase
+the signal-to-noise ratios of observed compact-binary signals. Meeting this challenge will
+require higher-fidelity numerical simulations and more accurate waveform models
+\cite{Purrer2020_AccuracyRequirements,Black2025_ORBIT}.
 
-The next generation of gravitational wave detectors is expected to significantly improve the signal-to-noise ratio of observed signals. Meeting this challenge will require higher-fidelity numerical simulations and more accurate waveform models.
-
-In general, higher-fidelity simulations—particularly those with larger mass ratios—require finer grid resolution, leading to a substantial increase in computational cost. This trend is illustrated in Fig.~\ref{fig:Walltime}. Current simulations with mass ratios $q < 8$ can require weeks of runtime on modern supercomputers, and further increases in resolution would significantly amplify this cost.
+In general, higher-fidelity simulations, particularly those with larger mass ratios, require
+finer grid resolution and therefore substantially greater computational cost. This trend is
+illustrated in Fig.~\ref{fig:Walltime}. Current simulations with mass ratios $q<8$ can
+require weeks of runtime on modern supercomputers, and further increases in resolution
+would significantly amplify this cost \cite{Boyle2019,Black2025_ORBIT}.
 
 \begin{figure}[t]
     \centering
@@ -151,7 +157,7 @@ This equation is written in fully covariant form. Expanding it in flat spacetime
 \end{equation}
 where $D$ denotes purely spatial derivatives.
 
-This provides a simple example of a $3+1$ decomposition. The scalar wave equation is a second-order hyperbolic equation with well-posed initial value properties: solutions exist and are unique. Importantly, there are no constraint equations in this system, meaning we are free to choose $\psi$ and $\rho$ arbitrarily as initial data. As we will see, this is not the case for Maxwell's equations or general relativity, where constraint equations must be satisfied.
+This provides a simple example of a $3+1$ decomposition. The scalar wave equation is a second-order hyperbolic equation with well-posed initial value properties: solutions exist and are unique. Importantly, there are no constraint equations in this system, we are free to choose initial data for \(\psi\) and \(\partial_t\psi\). As we will see, this is not the case for Maxwell's equations or general relativity, where constraint equations must be satisfied.
 
 We now turn to the more complex case of Maxwell's equations:
 \begin{align}
@@ -180,96 +186,91 @@ Solving the Cauchy problem for Einstein's equations is nontrivial, as we must sa
 
 In EMDA, solving the Cauchy problem is further complicated by the presence of additional source terms. The stress-energy tensor $T_{ab}$ encodes all contributions from matter and energy apart from gravity.In standard GR this is 0, in EMDA, this includes electromagnetic fields as well as scalar fields. The solution for single black holes is known analytically for the certain coupling strengths ($\alpha_0=\alpha_1 =1$) but numerically one could also imagine varying the coupling strength to see how the evolutions change.  This dissertation will address the challenges associated with constructing consistent initial data and evolving these systems.
 
-Once we have constructed suitable initial data and evolved the system, we obtain a gravitational waveform. We compute this waveform using the Newman--Penrose formalism, in which it is represented by the scalar $\Psi_4$. Details of how $\Psi_4$ is calculated are provided in the appendix.
+Once suitable initial data have been constructed and the system has been evolved, we extract the gravitational waveform. In this work, we compute the waveform using the Newman--Penrose formalism, in which outgoing gravitational radiation is represented by the Weyl scalar $\Psi_4$ \cite{Newman1962}. Details of how $\Psi_4$ is calculated are provided in Appendix~\ref{sec:appx:wave_extraction}.
 
-From $\Psi_4$, we can reconstruct the gravitational-wave strain measured by LIGO. This allows us to compare our simulated waveforms with observed signals. To quantify the difference between two waveforms, we compute the mismatch, defined as
+The scalar $\Psi_4$ is related to the gravitational-wave strain $h=h_+-i h_\times$ by
 \begin{equation}
-    \mathrm{mismatch}(h_1, h_2) = 1 - \max \mathcal{O}(h_1, h_2),
+\Psi_4 = \frac{d^2 h}{dt^2},
 \end{equation}
-where the maximum is taken over time shifts and polarization angles.
-
-From the mismatch, we can estimate the minimum signal-to-noise ratio (SNR) required to distinguish between the two waveforms. This is given by
+up to the sign conventions used for the null tetrad. From $\Psi_4$, we reconstruct the strain and compare simulated waveforms with one another and, in principle, with observed gravitational-wave signals. To quantify the difference between two waveforms, we compute the mismatch,
 \begin{equation}
-    \mathrm{SNR}(h_1, h_2) = \frac{1}{\sqrt{2\,\mathrm{mismatch}(h_1, h_2)}}.
+\mathrm{mismatch}(h_1,h_2) = 1 - \max \mathcal{O}(h_1,h_2),
 \end{equation}
+where $\mathcal{O}$ is the normalized waveform overlap and the maximum is taken over time shifts and polarization angles.
 
-Despite this framework, interpreting differences between waveforms remains challenging. The parameter space is often degenerate; for example, it may not be immediately clear whether observed differences arise from spin, charge, or other physical effects.
-
-We additionally present the work we have done incorporating compact finite differences into our numerical relativity code. To begin, we first discuss the methods currently used in the code.
-
-On a discrete grid, we can approximate derivatives using finite differences. For example, a second-order accurate centered approximation to the first derivative is given by
+The mismatch can be used to estimate the signal-to-noise ratio required to distinguish two waveforms. In the small-mismatch limit, this distinguishability threshold is approximately
 \begin{equation}
-\left.\frac{df}{dx}\right|_{i}
-= \frac{f_{i+1} - f_{i-1}}{2\,\Delta x}
-+ \mathcal{O}(\Delta x^2).
+\rho \sim \frac{1}{\sqrt{2,\mathrm{mismatch}(h_1,h_2)}}.
 \end{equation}
-For higher-order accuracy, we can use a Taylor series expansion to construct more accurate approximations. For instance, a fourth-order accurate stencil is
+This estimate provides a useful way to interpret waveform differences, although it should not be regarded as an absolute detection criterion. In practice, interpreting differences between waveforms remains challenging because the parameter space is often degenerate. For example, it may not be immediately clear whether observed differences arise from spin, charge, or other physical effects.
+
+Improving the accuracy of these waveform comparisons requires improving the numerical simulations that produce them. We therefore also present our work incorporating compact finite differences into our numerical relativity code. To begin, we first review the finite-difference methods currently used in the code.
+
+On a discrete grid, derivatives can be approximated using finite differences. 
+For example, a second-order accurate centered approximation to the first derivative is
 \begin{equation}
-\left.\frac{df}{dx}\right|_{i}
-= \frac{-f_{i+2} + 8 f_{i+1} - 8 f_{i-1} + f_{i-2}}{12\,\Delta x}
-+ \mathcal{O}(\Delta x^4).
+    \left.\frac{df}{dx}\right|_{i}
+    = \frac{f_{i+1} - f_{i-1}}{2\,\Delta x}
+    + \mathcal{O}(\Delta x^2).
 \end{equation}
 
-These are examples of explicit finite difference schemes. Alternatively, we can seek an approximation to the first derivative using a compact (implicit) scheme of the form
+Higher-order accurate formulas can be constructed by matching Taylor series expansions. 
+For instance, a fourth-order accurate centered stencil is
 \begin{equation}
-\beta f'_{i-2} + \alpha f'_{i-1} + f'_i + \alpha f'_{i+1} + \beta f'_{i+2}
-=
-c\,\frac{f_{i+3} - f_{i-3}}{6 \Delta x}
-+ b\,\frac{f_{i+2} - f_{i-2}}{4 \Delta x}
-+ a\,\frac{f_{i+1} - f_{i-1}}{2 \Delta x}.
+    \left.\frac{df}{dx}\right|_{i}
+    = \frac{-f_{i+2} + 8 f_{i+1} - 8 f_{i-1} + f_{i-2}}{12\,\Delta x}
+    + \mathcal{O}(\Delta x^4).
 \end{equation}
+These finite-difference approximations are standard tools in numerical solutions of partial differential equations \cite{BaumgarteShapiro2010}.
 
-The coefficients can be determined by matching Taylor series expansions to the desired order of accuracy (a more detailed derivation is provided in the appendix):
+These are examples of explicit finite-difference schemes. Alternatively, one can approximate the first derivative using a compact, or implicit, finite-difference scheme of the form
+\begin{equation}
+    \beta f'_{i-2} + \alpha f'_{i-1} + f'_i
+    + \alpha f'_{i+1} + \beta f'_{i+2}
+    =
+    c\,\frac{f_{i+3} - f_{i-3}}{6\,\Delta x}
+    + b\,\frac{f_{i+2} - f_{i-2}}{4\,\Delta x}
+    + a\,\frac{f_{i+1} - f_{i-1}}{2\,\Delta x}.
+\end{equation}
+Here $f'_i$ denotes the numerical approximation to $df/dx$ at grid point $i$. Compact finite-difference schemes of this type were developed to obtain higher spectral resolution than comparable explicit schemes \cite{Lele1992}.
+
+The coefficients are determined by matching Taylor series expansions to the desired order of accuracy. For the above stencil, the consistency conditions include
 \begin{align}
-a + b + c &= 1 + 2\alpha + 2\beta 
-&& \text{(2nd order)}, \\
-a + 2^2 b + 3^2 c &= 2 \frac{3!}{2!}\left(\alpha + 2^2 \beta \right) 
-&& \text{(4th order)}, \\
-a + 2^4 b + 3^4 c &= 2 \frac{5!}{4!}\left(\alpha + 2^4 \beta \right) 
-&& \text{(6th order)}.
+    a + b + c &= 1 + 2\alpha + 2\beta
+    && \text{(2nd order)}, \\
+    a + 2^2 b + 3^2 c &= 2 \frac{3!}{2!}\left(\alpha + 2^2 \beta \right)
+    && \text{(4th order)}, \\
+    a + 2^4 b + 3^4 c &= 2 \frac{5!}{4!}\left(\alpha + 2^4 \beta \right)
+    && \text{(6th order)}.
 \end{align}
-
-This approach is more complex and leads to an implicit scheme. However, the trade-off is improved accuracy and enhanced spectral resolution compared to explicit methods. This improvement in spectral resolution is illustrated in Fig.~\ref{fig:spectral_resolution}. 
-
-There are many possible compact finite difference operators that can be constructed. In this work, we describe our methodology for identifying accurate and stable compact derivative operators and evaluate their performance relative to their explicit counterparts.
+This approach is more complex than an explicit finite-difference stencil because the derivatives are obtained by solving an implicit system. The trade-off is that compact schemes can provide improved accuracy and enhanced spectral resolution compared to explicit methods \cite{Lele1992}. This improvement in spectral resolution is illustrated in Fig.~\ref{fig:spectral_resolution}. There are many possible compact finite-difference operators that can be constructed. In this work, we describe our methodology for identifying accurate and stable compact derivative operators and evaluate their performance relative to their explicit counterparts.
 
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Figures/1stDerivativeSpectralIntTest.png}
-    \caption{Comparison of spectral resolution for explicit and compact fourth-order first-derivative operators.}
-    \label{fig:spectral_resolution}
+\centering
+\includegraphics[width=0.8\textwidth]{Figures/1stDerivativeSpectralIntTest.png}
+\caption{Comparison of the spectral resolution of explicit and compact fourth-order first-derivative operators.}
+\label{fig:spectral_resolution}
 \end{figure}
+
 \section{Summary of Dissertation}
-In this dissertation, we primarily present results from binary black hole simulations in EMDA theory. The dissertation is organized as follows. Chapter 2 discusses the formulation of the initial data and presents results from head-on collision simulations. Chapter 3 presents inspiral and merger results in EMDA theory. Chapter 4 explores interpolated EMDA models in which the coupling strengths are varied. Chapter 5 investigates the implementation of compact finite difference operators in numerical relativity codes.
 
-The results presented in this dissertation are currently in preparation for publication.
+This dissertation primarily presents results from binary black-hole simulations in Einstein--Maxwell--dilaton--axion (EMDA) theory, along with a study of compact finite-difference methods for numerical relativity. The dissertation is organized as follows. Chapter~2 discusses the formulation of the initial data and presents results from head-on collision simulations. Chapter~3 presents inspiral and merger results in EMDA theory. Chapter~4 explores interpolated EMDA models in which the coupling strengths are varied. Chapter~5 investigates the implementation of compact finite-difference operators in numerical relativity codes.
 
-Each of these projects involved multiple collaborators. The EMDA work builds on earlier contributions by Hyun Lim (LANL) and was carried out collaboratively with Eric Hirschmann (BYU), David van Komen (University of Utah), Sebastian Vander Ploeg Fallon (Cornell), and David Neilsen (BYU). The compact finite difference (CFD) project was conducted in collaboration with Eric Hirschmann (BYU), David van Komen (University of Utah), David Neilsen (BYU), as well as Nathaneil Garey and Luke Papenfuss (BYU).
+Several of the results presented in this dissertation are currently in preparation for publication.
+
+Each of these projects involved multiple collaborators. The EMDA work builds on earlier contributions by Hyun Lim at Los Alamos National Laboratory and was carried out collaboratively with Eric Hirschmann at Brigham Young University, David Van Komen at the University of Utah, Sebastian Vander Ploeg Fallon at Cornell University, and David Neilsen at Brigham Young University. The compact finite-difference (CFD) project was conducted in collaboration with Eric Hirschmann, David Van Komen, David Neilsen, Nathaniel Garey, and Luke Papenfuss.
 
 \section{Conventions}
 
-In this work, we adopt geometrized units such that
-\begin{itemize}
-    \item $c = G = 1$.
-    \item Lengths and masses are expressed in units of a characteristic mass scale $M$.
-    \item Distance: $d = M \;\Rightarrow\; d = GM/c^2$.
-    \item Time: $t = M \;\Rightarrow\; t = GM/c^3$.
-    \item We use the metric signature $(-,+,+,+)$.
-    \item Einstein summation convention is assumed unless otherwise stated.
-    \item Spacetime indices $a,b,c,\dots$ run over $0,1,2,3$, while spatial indices $i,j,k,\dots$ run over $1,2,3$.
-    \item The symmetric and antisymmetric parts of a tensor are defined as
-    \[
-    T_{(ab)} \equiv \frac{1}{2}\left(T_{ab} + T_{ba}\right), 
-    \qquad
-    T_{[ab]} \equiv \frac{1}{2}\left(T_{ab} - T_{ba}\right).
-    \]
-    \item Partial derivatives are denoted by $\partial_i g$ or equivalently $g_{,i}$.
-    \item Covariant derivatives are written as $\nabla_a f_b$ or equivalently $f_{b;a}$.
-    \item The Lie derivative of a tensor $X^a$ along a vector field $\beta^a$ is denoted by $\mathcal{L}_{\beta} X^a$.
-  \item In general, we refer to objects associated with
-    \begin{itemize}
-        \item the spacetime manifold $\mathcal{M}$ as $g_{ab}$, ${}^{(4)}\Gamma^{a}{}_{bc}$, $\nabla_a$, ${}^{(4)}R_{ab}$, etc.,
-        \item a spatial slice $\Sigma$ as $\gamma_{ij}$, $\Gamma^{i}{}_{jk}$, $D_i$, $R_{ij}$, etc.,
-        \item a conformally related space as $\bar{\gamma}_{ij}$, $\bar{\Gamma}^{i}{}_{jk}$, $\bar{D}_i$, $\bar{R}_{ij}$, etc.
-    \end{itemize}
-\end{itemize}
+In this work, we use geometrized units with $c=G=1$. Unless otherwise stated, lengths and masses are expressed in units of a characteristic mass scale $M$. In physical units, a length scale $d=M$ corresponds to $d=GM/c^2$, while a time scale $t=M$ corresponds to $t=GM/c^3$.
+
+We use the metric signature $(-,+,+,+)$ and assume the Einstein summation convention unless otherwise stated. Spacetime indices $a,b,c,\ldots$ run over $0,1,2,3$, while spatial indices $i,j,k,\ldots$ run over $1,2,3$. The symmetric and antisymmetric parts of a tensor are defined as
+\begin{equation}
+T_{(ab)} \equiv \frac{1}{2}\left(T_{ab}+T_{ba}\right),
+\qquad
+T_{[ab]} \equiv \frac{1}{2}\left(T_{ab}-T_{ba}\right).
+\end{equation}
+
+Partial derivatives are denoted by $\partial_i g$ or equivalently $g_{,i}$. Covariant derivatives are written as $\nabla_a f_b$ or equivalently $f_{b;a}$. The Lie derivative of a tensor $X^a$ along a vector field $\beta^a$ is denoted by $\mathcal{L}_{\beta}X^a$.
+
+In general, we use the following notation for geometric quantities. Objects associated with the spacetime manifold $\mathcal{M}$ are denoted by $g_{ab}$, ${}^{(4)}\Gamma^{a}{}*{bc}$, $\nabla_a$, ${}^{(4)}R*{ab}$, and related quantities. Objects associated with a spatial slice $\Sigma$ are denoted by $\gamma_{ij}$, $\Gamma^{i}{}*{jk}$, $D_i$, $R*{ij}$, and related quantities. Objects associated with a conformally related space are denoted by $\tilde{\gamma}*{ij}$, $\tilde{\Gamma}^{i}{}*{jk}$, $\tilde{D}*i$, $\tilde{R}*{ij}$, and related quantities.

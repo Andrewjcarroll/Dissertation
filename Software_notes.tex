@@ -1,83 +1,96 @@
 \chapter{EMDA Code Setup on MaryLou}
 
-
 \section{Building \texttt{emda-gr}}
-
 To build \texttt{emda-gr}, the following external packages are required:
 \begin{itemize}
-    \item \textbf{C/C++11 or higher} (tested with GNU and Intel compilers)
-    \item \textbf{MPI implementation} (tested with \texttt{MVAPICH2}, \texttt{OpenMPI}, and Intel MPI)
-    \item \textbf{BLAS/LAPACK} (tested with \texttt{OpenBLAS} and Intel MKL)
-    \item \textbf{GSL} (GNU Scientific Library); set \texttt{GSL\_ROOT\_DIR} in \texttt{CMake} to enable automatic detection
+\item \textbf{C/C++11 or higher} (tested with GNU and Intel compilers)
+\item \textbf{MPI implementation} (tested with \texttt{MVAPICH2}, \texttt{OpenMPI}, and Intel MPI)
+\item \textbf{BLAS/LAPACK} (tested with \texttt{OpenBLAS} and Intel MKL)
+\item \textbf{GSL} (GNU Scientific Library); set \texttt{GSL\_ROOT\_DIR} in \texttt{CMake} to enable automatic detection
 \end{itemize}
 
-The modules currently loaded on MaryLou are:
+On MaryLou, the recommended module environment is:
 
 \begin{verbatim}
 andrewc0@login03:$ ml
 Currently Loaded Modules:
-  1) gcc/14.1   
-  2) python/3.12   
-  3) cmake/3.28   
-  4) gcc-runtime/13.2.0-g4hc7ev   
-  5) eigen/3.4.0-6kqviac   
-  6) openmpi5-GR   
-  7) gsl-GR   
-  8) mkl-GR   
-  9) rclone/1.65.2-tyg4lvy
-\end{verbatim}
 
-To ensure these dependencies are always available, it is convenient to load them automatically in your shell configuration. Open your \texttt{\textasciitilde/.bash\_profile}:
+1. gcc/14.1
+2. python/3.12
+3. cmake/3.28
+4. gcc-runtime/13.2.0-g4hc7ev
+5. eigen/3.4.0-6kqviac
+6. openmpi5-GR
+7. gsl-GR
+8. mkl-GR
+9. rclone/1.65.2-tyg4lvy
+   \end{verbatim}
+
+To ensure that these dependencies are always available, it is convenient to load
+them automatically in your shell configuration. Open your
+\texttt{\textasciitilde/.bash\_profile}:
 
 \begin{verbatim}
 vim ~/.bash_profile
 \end{verbatim}
 
-An example \texttt{.bash\_profile} is shown below. Additional customizations may be added as needed.
+An example \texttt{.bash\_profile} is shown below. Additional customizations may
+be added as needed.
 
 \begin{verbatim}
+
 # --- Modules ---
+
 module purge
 module use /grphome/grp_GR/.modulefiles
 module load gcc/14.1 python/3.12 cmake/3.28 eigen/3.4.0-6kqviac
 module load openmpi5-GR gsl-GR mkl-GR rclone
 
+export HCOLL_DIR=/vapps/rhel9/x86_64/HPC-X/hpcx-v2.19-gcc-inbox-redhat9-cuda12-x86_64/hcoll/lib
+export LD_LIBRARY_PATH="${HCOLL_DIR}:${LD_LIBRARY_PATH:-}"
+
 # --- GSL ---
+
 export GSL_DIR=/grphome/grp_GR/apps/gsl-2.8
 export GSL_ROOT_DIR=/grphome/grp_GR/apps/gsl-2.8
 export LD_LIBRARY_PATH="${GSL_DIR}/lib:${LD_LIBRARY_PATH:-}"
 
 # --- MKL ---
+
 if [ -n "${MKLROOT:-}" ] && [ -d "${MKLROOT}/lib/intel64" ]; then
-  export LD_LIBRARY_PATH="${MKLROOT}/lib/intel64:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${MKLROOT}/lib/intel64:${LD_LIBRARY_PATH:-}"
 fi
 
-# --- GCC 14 runtime (libstdc++, libgcc_s) ---
-# Required to avoid GLIBCXX / CXXABI runtime errors
-if command -v g++ >/dev/null 2>&1; then
-  GCC_LIBDIR="$(dirname "$(g++ -print-file-name=libstdc++.so.6)")"
-  GCC_GCCLIBDIR="$(dirname "$(g++ -print-file-name=libgcc_s.so.1)")"
+# --- GCC 14 runtime: libstdc++ and libgcc_s ---
 
-  if [ -d "$GCC_LIBDIR" ]; then
-    export LD_LIBRARY_PATH="$GCC_LIBDIR:${LD_LIBRARY_PATH:-}"
-  fi
-  if [ -d "$GCC_GCCLIBDIR" ]; then
-    export LD_LIBRARY_PATH="$GCC_GCCLIBDIR:${LD_LIBRARY_PATH:-}"
-  fi
+# Required to avoid GLIBCXX and CXXABI runtime errors.
+
+if command -v g++ >/dev/null 2>&1; then
+GCC_LIBDIR="$(dirname "$(g++ -print-file-name=libstdc++.so.6)")"
+GCC_GCCLIBDIR="$(dirname "$(g++ -print-file-name=libgcc_s.so.1)")"
+
+if [ -d "$GCC_LIBDIR" ]; then
+export LD_LIBRARY_PATH="$GCC_LIBDIR:${LD_LIBRARY_PATH:-}"
+fi
+if [ -d "$GCC_GCCLIBDIR" ]; then
+export LD_LIBRARY_PATH="$GCC_GCCLIBDIR:${LD_LIBRARY_PATH:-}"
+fi
 fi
 
 # --- History settings ---
+
 HISTSIZE=1000000
 HISTFILESIZE=2000000
 HISTCONTROL=ignoredups:erasedups
 HISTIGNORE="ls:bg:fg:history"
 shopt -s histappend
 
-# Save history after every command
+# Save history after every command.
+
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 \end{verbatim}
 
-After reloading your shell, verify that the modules have been loaded correctly:
+After reloading the shell, verify that the modules have been loaded correctly:
 
 \begin{verbatim}
 ml
@@ -88,57 +101,65 @@ The output should match the module list shown above.
 \section{Building the Solver}
 
 First, clone the EMDA repository. Create a project directory if desired, then run:
+
 \begin{verbatim}
-git clone git@github.com:dfvankomen/emda-gr.git
+git clone [git@github.com](mailto:git@github.com):dfvankomen/emda-gr.git
 cd emda-gr
 \end{verbatim}
 
-CMake will now automatically fetch \texttt{dendrolib}.  
+CMake will automatically fetch \texttt{dendrolib} during configuration.
 
+Create and enter a build directory:
 
-Create a build directory:
 \begin{verbatim}
 mkdir build
 cd build
 \end{verbatim}
 
-You may then configure the project using:
+Configure the project using:
+
 \begin{verbatim}
 ccmake ..
 \end{verbatim}
 
-CMake will locate the required libraries and present a configuration interface.
-After configuration, generate the build files. At present, the only settings you
-may wish to toggle is the choice between the EMDA--EMD--EMGR systems of
-equations.The second is the CPU architecturewe will be running on. For the purposes of the first run, let us use EMDA.
+CMake will locate the required libraries and open an interactive configuration
+interface. The main settings that may need to be adjusted are the system of
+equations and the target CPU architecture.
 
-We will also need to specify the CPU architecture for the target system. For example on
-MaryLou, we normally use the \texttt{physics2} or \texttt{m12} partitions, both of
-which consist of 64-core AMD EPYC 7763 (2.45~GHz) CPUs. Therefore, we should
-build for the Zen~3 architecture by setting
-\texttt{CPU\_ARCH} to \texttt{znver3}.
+The available equation systems include EMDA, EMD, and EMGR. For a first test
+run, choose the EMDA system.
 
-Once the build files are generated, compile the code using:
+The CPU architecture should match the compute nodes on which the job will run.
+On MaryLou, the \texttt{physics2} and \texttt{m12} partitions use 64-core AMD
+EPYC 7763 processors. These are Zen~3 CPUs, so set
+
+\begin{verbatim}
+CPU_ARCH = znver3
+\end{verbatim}
+
+After configuration is complete, generate the build files from within
+\texttt{ccmake}. Then compile the code using:
+
 \begin{verbatim}
 make -j
 \end{verbatim}
 
-
 \subsection{Build Outputs}
 
-Once the build completes, you should have both \texttt{tpid} and
-\texttt{emdaSolver} binaries located in one of the following directories:
+Once the build completes, the \texttt{emdaSolver} and \texttt{tpid} binaries
+should be located in the solver build directory, for example:
 
 \begin{verbatim}
 emda-gr/build/emdaSolver/
 \end{verbatim}
 
-At this point, the solver is ready, and we can proceed to running simulations.
+At this point, the solver is ready to be used for simulations.
 
 \section{Runs and Job Scripts}
 
-With the solver built, we now need to move from your home directory into the
-scratch directory. The scratch directory varies by supercomputer. Consult the Supercomputer documentation I will show how this is done on Marylou. 
+After building the solver, move from the home directory to the scratch directory.
+The location of the scratch directory depends on the supercomputer. On MaryLou,
+the scratch area is located under \texttt{/nobackup/autodelete/usr/}.
 
 First, change into your scratch area:
 
@@ -146,26 +167,27 @@ First, change into your scratch area:
 cd /nobackup/autodelete/usr/YOURUSERNAME/
 \end{verbatim}
 
-Create a directory for your runs (name it however you like), then enter it:
+Create a directory for the EMDA runs and enter it:
 
 \begin{verbatim}
 mkdir EMDA_runs
 cd EMDA_runs
 \end{verbatim}
 
-Next, copy over the binaries we just built, along with a parameter (TOML) file.
-(The \texttt{\textasciitilde} in these commands refers to your home directory.)
+Next, copy the solver binaries and a parameter file into the run directory. In
+the commands below, replace \texttt{\textasciitilde/path/to/} with the location
+of your local \texttt{emda-gr} checkout.
 
 Copy \texttt{emdaSolver}:
 
 \begin{verbatim}
-cp ~/path/to/emda-gr/build/build_noavx/emdaSolver/emdaSolver ./
+cp ~/path/to/emda-gr/build/emdaSolver/emdaSolver ./
 \end{verbatim}
 
 Copy \texttt{tpid}:
 
 \begin{verbatim}
-cp ~/path/to/emda-gr/build/build_noavx/emdaSolver/tpid ./
+cp ~/path/to/emda-gr/build/emdaSolver/tpid ./
 \end{verbatim}
 
 Copy the parameter file:
@@ -186,295 +208,414 @@ You should see:
 emda_simplified.param.toml  emdaSolver  tpid
 \end{verbatim}
 
-Now create output directories for the run:
+Now create the standard output directories for the run:
 
 \begin{verbatim}
 mkdir cp prof vtu bah
 \end{verbatim}
-The vtu is where visual data that we can see in paraview is saved, cp is where checkpoints are saved prof is where the gravitational and other waves are saved as well as the ADM Mass charge and the constraint solutions are saved. 
-(We will add another section later describing the relevant parameter-file
-settings.)
+
+These directories store the main simulation outputs:
+\begin{itemize}
+\item \texttt{cp}: checkpoint files, which allow the run to be restarted
+\item \texttt{prof}: waveform extraction, ADM quantities, charges, and constraint outputs
+\item \texttt{vtu}: visualization files that can be opened in ParaView
+\item \texttt{bah}: apparent-horizon data
+\end{itemize}
+
+A later section will describe the most important parameter-file settings needed
+to control these outputs.
+
 
 \subsection{Submitting a Run with Slurm}
 
-To run on the cluster, create a job script. Use \texttt{vim}:
+To run the simulation on the cluster, create a Slurm job script. For example:
 
 \begin{verbatim}
 vim Job.sb
 \end{verbatim}
 
-Paste the following:
+Paste the following into the file:
 
 \begin{verbatim}
-#!/bin/zsh
+#!/bin/bash
 #SBATCH --time=72:00:00
 #SBATCH --ntasks=256
 #SBATCH --nodes=2
 #SBATCH --mem-per-cpu=4096M
 #SBATCH -J EMDA_RUN
-#SBATCH --mail-user=youremail@email.com
+#SBATCH --mail-user=[youremail@email.com](mailto:youremail@email.com)
 #SBATCH --mail-type=END,FAIL
 #SBATCH --partition=m12
 
 echo "Starting run"
 
-source ~/.bash_profile 
+source ~/.bash_profile
+
 ./tpid emda_simplified.param.toml 256 &> TPID.txt
 mpirun -np 256 ./emdaSolver emda_simplified.param.toml &>> Inspiral.txt
 
 echo "Run completed"
 \end{verbatim}
-Note that the semicolon means “do this before moving on.” We need this behavior
-so that the TPID solver finishes generating the initial data before proceeding.
-TPID will produce a binary file called \texttt{rit\_q2\_tpid\_sol.bin}, which
-\texttt{emdaSolver} will then read and evolve.
 
-On the \texttt{m12} nodes, each node has 128 CPU cores, so you should scale the
-number of nodes accordingly (e.g., 256 tasks typically corresponds to 2 nodes).
+The \texttt{tpid} command generates the initial data, while
+\texttt{emdaSolver} evolves that data forward in time. Since these commands are
+written on separate lines and the \texttt{tpid} command is not placed in the
+background, the script waits for \texttt{tpid} to finish before starting
+\texttt{emdaSolver}. This ordering is necessary because \texttt{tpid} produces
+the binary initial-data file, \texttt{rit\_q2\_tpid\_sol.bin}, which is then
+read by \texttt{emdaSolver}.
 
-You can submit the job using:
+On the \texttt{m12} partition, each node has 128 CPU cores. Therefore, a run
+using 256 MPI tasks typically uses 2 nodes. If the number of MPI tasks is
+changed, the number of requested nodes should be adjusted accordingly.
+
+Submit the job with:
+
 \begin{verbatim}
 sbatch Job.sb
 \end{verbatim}
 
-Once submitted, the job will enter the queue and will begin running when
-resources become available. You can check the status of your jobs with:
+Once submitted, the job will enter the queue and begin running when resources
+become available. You can check the status of your jobs with:
 
 \begin{verbatim}
 squeue | grep yourusername
 \end{verbatim}
 
-After the job starts running, you can monitor the output by inspecting the text
-files generated during execution, for example:
+After the job starts, you can monitor the output by inspecting the text files
+generated during execution. For example:
 
 \begin{verbatim}
 cat TPID.txt
 \end{verbatim}
 
-And that’s it—the simulation is running.
-
-The only remaining step is to explain the parameter file:
-
-\section{Par-file Explanation}
-The parameter file is read by both the \texttt{tpid} solver and
-\texttt{emdaSolver}. It allows us to change solver settings without having to
-rebuild the code each time, which is extremely useful.
-
-Below is an overview of the most important settings. If a parameter is not
-mentioned here, it is probably safe to leave it at its default value.
+or
 
 \begin{verbatim}
+tail -f Inspiral.txt
+\end{verbatim}
+
+At this point, the simulation is running.
+
+\section{Parameter-File Explanation}
+
+The parameter file is read by both \texttt{tpid} and \texttt{emdaSolver}. It
+allows many run settings to be changed without rebuilding the code, which makes
+it easy to adjust output frequencies, grid settings, checkpointing behavior,
+and initial-data parameters.
+
+This section summarizes some of the most important parameters. Parameters not
+discussed here can usually be left at their default values.
+
+\begin{verbatim}
+
 # Whether or not the solver should attempt to restore from a checkpoint
+
 EMDA_RESTORE_SOLVER = false
 \end{verbatim}
 
-This determines whether the solver will attempt to pick up where it left off by
-restoring from a checkpoint.
+This option determines whether \texttt{emdaSolver} should attempt to restart
+from an existing checkpoint. For a fresh run, this should be set to
+\texttt{false}. To continue a previous run from checkpoint data, set this to
+\texttt{true}.
 
 \begin{verbatim}
 EMDA_IO_OUTPUT_FREQ = 400
 \end{verbatim}
 
 This controls how often VTU output is written. Smaller values produce output
-more frequently but increase storage usage. Adjust this setting to suit your needs.
+more frequently, but they also increase storage usage. This parameter should be
+chosen based on how much visualization data is needed.
 
 \begin{verbatim}
 EMDA_REMESH_TEST_FREQ = 200
 \end{verbatim}
 
-This sets how often the solver invokes the AMR algorithm to determine whether
-the grid resolution needs to change. Setting this too often can add noise on the grid. updating too infrequently can mean the dynamics are not well captured by the grid. Around 200 seem sto work well. 
+This sets how often the solver invokes the adaptive mesh refinement algorithm
+to determine whether the grid should be refined or coarsened. If this value is
+too small, remeshing can occur too frequently and may introduce unnecessary grid
+noise. If it is too large, the grid may not adapt quickly enough to resolve the
+dynamics. A value around \texttt{200} has worked well in typical EMDA runs.
 
 \begin{verbatim}
 EMDA_GW_EXTRACT_FREQ = 25
 \end{verbatim}
 
-This controls how often gravitational waves are extracted, along with black
-hole positions and masses. This step is not particularly expensive, either
-computationally or in terms of storage, so values in the range 50--100 are
-typically reasonable.
+This controls how often gravitational-wave quantities are extracted. The same
+output step also includes other useful quantities, such as black-hole positions
+and masses. This output is not especially expensive compared with VTU output,
+so values in the range \texttt{25}--\texttt{100} are usually reasonable.
 
 \begin{verbatim}
 EMDA_CHECKPT_FREQ = 100
 \end{verbatim}
 
-This specifies the number of time steps between checkpoints. This is pretty cheap computationally so this can be small.
+This specifies the number of time steps between checkpoints. Checkpointing is
+relatively inexpensive compared with full visualization output, so this value
+can be kept fairly small. More frequent checkpoints make it easier to restart a
+run after a crash or wall-time limit.
 
 \begin{verbatim}
+
 # VTU file prefix
+
 EMDA_VTU_FILE_PREFIX = "vtu/emda_gr"
+
 # Checkpoint file prefix
+
 EMDA_CHKPT_FILE_PREFIX = "cp/emda_cp"
+
 # Profiling file prefix
+
 EMDA_PROFILE_FILE_PREFIX = "prof/emda_prof"
 \end{verbatim}
 
-These options control where different types of output data are stored.
+These options control where different types of output data are written. The
+\texttt{vtu} directory stores visualization output, the \texttt{cp} directory
+stores checkpoint files, and the \texttt{prof} directory stores extracted
+waveforms and other reduced data products.
 
 \begin{verbatim}
+
 # Which evolution variables to output
-EMDA_VTU_OUTPUT_EVOL_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-35]
+
+EMDA_VTU_OUTPUT_EVOL_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
 
 # Number of evolution variables to output
+
 EMDA_NUM_EVOL_VARS_VTU_OUTPUT = 36
 \end{verbatim}
 
-These settings determine which evolution variables (e.g., metric components,
-extrinsic curvature, etc.) are written to the VTU files. If you need to reduce
-storage usage, you may omit some of these variables.
+These settings determine which evolution variables are written to the VTU
+files. These variables include quantities such as the metric components,
+extrinsic-curvature components, gauge variables, and matter fields. If storage
+usage becomes a concern, some variables may be omitted from the VTU output.
 
 \begin{verbatim}
+
 # Which constraint variables to output
-EMDA_VTU_OUTPUT_CONST_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+EMDA_VTU_OUTPUT_CONST_INDICES = [0, 1, 2, 3, 4, 5, 6, 7,
+8, 9, 10, 11, 12, 13]
 
 # Number of constraint variables to output
+
 EMDA_NUM_CONST_VARS_VTU_OUTPUT = 14
 \end{verbatim}
 
-These are similar to the evolution-variable settings, but apply to constraint
-quantities such as the Hamiltonian and momentum constraints.
+These options are analogous to the evolution-variable output settings, but they
+apply to constraint quantities. These include quantities such as the Hamiltonian
+constraint, the momentum constraints, and additional constraints associated
+with the electromagnetic sector.
 
 \begin{verbatim}
+
 # Whether to isolate an X slice
+
 EMDA_VTU_X_SLICE = false
+
 # Whether to isolate a Y slice
+
 EMDA_VTU_Y_SLICE = false
+
 # Whether to isolate a Z slice
+
 EMDA_VTU_Z_SLICE = true
+
 # Any combination may be set to true
+
 \end{verbatim}
 
-In general, writing VTU output for the entire 3-D grid is expensive, so we
-typically output a 2-D slice instead. You should enable only one of these slice
-options at a time; enabling multiple slices will produce unintuitive cuts
-through the grid. For most purposes, leaving the Z slice enabled is a good
+Writing VTU output for the full 3-D grid can be expensive, so it is often
+preferable to output a 2-D slice instead. For most visualization purposes, a
+single slice is sufficient. In typical runs, the Z slice is a good default
 choice.
+
+Although multiple slice options can be enabled at the same time, doing so may
+produce output that is less straightforward to interpret. For simple
+visualization, enable only one slice direction at a time.
 
 \begin{verbatim}
 EMDA_DENDRO_GRAIN_SZ = 50
 \end{verbatim}
 
-This controls how many grid blocks are assigned to each processor. Some analysis
-has been done to estimate optimal values, but in practice this parameter should
-generally be kept between 25 and 200.
+This controls the approximate number of grid blocks assigned to each processor.
+In practice, this parameter should usually be kept between \texttt{25} and
+\texttt{200}. Very small or very large values may reduce parallel efficiency.
 
 \begin{verbatim}
 EMDA_DENDRO_AMR_FAC = 0.2
 \end{verbatim}
 
-This controls how sensitive the AMR algorithm is to refining or coarsening the
-grid.
+This controls the sensitivity of the adaptive mesh refinement algorithm. Smaller
+values generally make the grid more sensitive to refinement, while larger
+values make refinement less aggressive. This parameter should be adjusted with
+care, since it affects both accuracy and computational cost.
 
 \begin{verbatim}
 EMDA_ELE_ORDER = 6
 \end{verbatim}
 
-Loosely speaking, this determines how much information each block shares with
-its neighbors. Higher values increase communication and can slow the code down.
-For EMDA, this should currently be left at 6.
+This sets the finite-element order used by the Dendro infrastructure. Loosely
+speaking, it controls how much information each block must exchange with its
+neighbors. Higher values increase communication costs and may slow the code. For
+the current EMDA implementation, this should generally be left at
+\texttt{6}.
 
 \begin{verbatim}
+
 # Minimum depth of the mesh/octree
+
 EMDA_MINDEPTH = 4
+
 # Maximum depth of the mesh/octree
+
 EMDA_MAXDEPTH = 15
 \end{verbatim}
 
-These are very important parameters. They determine how coarse
-(\texttt{EMDA\_MINDEPTH}) and how fine (\texttt{EMDA\_MAXDEPTH}) the grid is
-allowed to become. Note that the CFL factor is set by the finest level of the
-grid, so increasing \texttt{EMDA\_MAXDEPTH} significantly increases the runtime.
-Each increase in \texttt{EMDA\_MAXDEPTH} halves the grid spacing at the finest
-level.Each black hole needs a minimum of 50 or more points accross the horizon to be adequately resolved. Maxdepth 15 for a spaceteim with a total mass of 1, with an equal mass ratio merger on a $\pm400$ grid is adequately resolved. as q goes up this increases for a q=2 you need a maxdepth of 16. 
+These parameters control the minimum and maximum refinement levels of the
+octree mesh. The minimum depth sets the coarsest allowed grid resolution, while
+the maximum depth sets the finest allowed grid resolution. Increasing
+\texttt{EMDA\_MAXDEPTH} improves the maximum available resolution, but it also
+increases memory usage and computational cost.
+
+The CFL condition is set by the finest level of the grid, so increasing
+\texttt{EMDA\_MAXDEPTH} can significantly increase the runtime. Each increase
+in \texttt{EMDA\_MAXDEPTH} halves the grid spacing on the finest level. As a
+rule of thumb, each black hole should be resolved by at least roughly 50 points
+across the horizon. For an equal-mass binary with total mass $M=1$ on a
+$\pm 400$ grid, \texttt{EMDA\_MAXDEPTH = 15} is usually adequate. For larger
+mass ratios, the smaller black hole requires additional refinement. For example,
+a $q=2$ binary typically requires \texttt{EMDA\_MAXDEPTH = 16}.
 
 \begin{verbatim}
 ########################################################################
+
 # REFINEMENT STRATEGY
 
 # Which refinement mode to use
+
 # 0 - WAMR
+
 # 1 - EH
+
 # 2 - EH_WAMR
+
 # 3 - BH_LOC
+
 # 4 - BH_WAMR
+
 EMDA_REFINEMENT_MODE = 4
 \end{verbatim}
 
-This parameter controls how the grid is refined. it is recommended to leave this set to 4 for now.
-
+This parameter controls the refinement strategy used by the code. The
+recommended choice is currently \texttt{EMDA\_REFINEMENT\_MODE = 4}, which uses
+black-hole-centered refinement together with wavelet adaptive mesh refinement.
 \begin{verbatim}
 EMDA_AMR_R_RATIO = 1.618033988749895
 \end{verbatim}
 
-This determines how quickly refinement around a black hole falls off with
-radius. The default value is reasonable and should be left unchanged initially.
+This parameter determines how quickly the forced refinement around each black
+hole falls off with radius. The default value is reasonable and should usually
+be left unchanged for initial runs.
 
 \begin{verbatim}
+
 # Wavelet Tolerance Function to use (see grUtils.cpp for adding more)
+
 # 1,2 - deprecated
+
 # 3 - center highly refined; low refinement elsewhere eases over time
+
 # 4 - start with refinement centered at BHs, then widen to r=0 focused
+
 # 5 - focus refinement in self-similar ways about each BH
+
 # 6 - refine well in r <= t and coarsely in r > t
+
 EMDA_USE_WAVELET_TOL_FUNCTION = 6
 \end{verbatim}
 
-This controls how the refinement tolerance varies across the grid. Function~6,
-which was developed by William, works well in practice and is recommended. More details on this can be found\cite{Black2025_ORBIT}
+This parameter controls how the wavelet refinement tolerance varies across the
+computational domain. Function~6, developed by William, has worked well in
+practice and is the recommended choice for current EMDA runs. More details can
+be found in Ref.~\cite{Black2025_ORBIT}.
 
 \begin{verbatim}
+
 # Minimum wavelet tolerance
+
 EMDA_WAVELET_TOL = 0.00001
 
 # Gravitational wave refinement tolerance
+
 EMDA_GW_REFINE_WTOL = 0.0001
 
 # Maximum wavelet tolerance
+
 EMDA_WAVELET_TOL_MAX = 0.001
 
 # Wavelet tolerance radii (for shell-based tolerance)
+
 EMDA_WAVELET_TOL_FUNCTION_R0 = 3.0
 EMDA_WAVELET_TOL_FUNCTION_R1 = 12.0
 \end{verbatim}
 
-The minimum wavelet tolerance is the most important of these parameters, as it
-sets the strictest refinement criterion over the entire grid. The remaining
-parameters depend on the chosen tolerance function; the defaults are reasonable,
-but may be adjusted if needed.
+The minimum wavelet tolerance, \texttt{EMDA\_WAVELET\_TOL}, is the most important
+of these parameters because it sets the strictest refinement criterion used by
+the grid. Smaller values force more refinement and generally improve accuracy,
+but they also increase memory usage and runtime. The remaining parameters
+depend on the chosen wavelet tolerance function. The default values are
+reasonable starting points, but they may be adjusted for higher-resolution runs
+or for runs in which the wave-extraction region requires additional refinement.
 
 \begin{verbatim}
+
 # Indices of variables used for refinement (see grDef.h for definitions)
-EMDA_REFINE_VARIABLE_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-35]
+
+EMDA_REFINE_VARIABLE_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
 
 # Number of variables used for refinement
+
 EMDA_NUM_REFINE_VARS = 36
 \end{verbatim}
 
-we can choose not to test every evolution variable when deciding whether to
-refine the grid. These parameters control which variables are used to trigger
-refinement.
+These parameters specify which evolution variables are used when deciding
+whether the grid should be refined. It is not always necessary to use every
+evolution variable as a refinement variable, but the full list is a safe default
+for general-purpose EMDA runs.
 
 \begin{verbatim}
+
 # CFL (Courant--Friedrichs--Lewy) factor
+
 EMDA_CFL_FACTOR = 0.25
 
 # Simulation start time
+
 EMDA_RK_TIME_BEGIN = 0
+
 # Simulation end time
+
 EMDA_RK_TIME_END = 1000
 \end{verbatim}
 
-These parameters control the CFL factor and the total coordinate time for which
-the simulation is run. The remaining Runge--Kutta settings are typically fine at
-their default values.
+These parameters control the CFL factor and the total coordinate time of the
+simulation. The CFL factor sets the time step relative to the grid spacing on
+the finest refinement level. The parameters \texttt{EMDA\_RK\_TIME\_BEGIN} and
+\texttt{EMDA\_RK\_TIME\_END} determine the start and end times of the
+evolution. The remaining Runge--Kutta settings can usually be left at their
+default values.
 
 \begin{verbatim}
 ###########################################
+
 # EMDA THEORY PARAMETERS
+
 ###########################################
 EMDA_LAMBDA = [1, 1, 1, 1]
 EMDA_ALPHA_THEORY = [1.0, 1.0]
@@ -495,36 +636,58 @@ ETA_DAMPING = 1.0
 ETA_DAMPING_EXP = 1.0
 \end{verbatim}
 
-These parameters define the physics of the system, many of which control the
-gauge choice. The two parameters that we modifiy are
-$\alpha_0$ and $\alpha_1$, which select the theory being evolved:
-$\alpha_0 = \alpha_1 = 1$ corresponds to EMDA,
-$\alpha_0 = 1$, $\alpha_1 = 0$ corresponds to EMD, and
-$\alpha_0 = \alpha_1 = 0$ corresponds to Einstein--Maxwell.
-The remaining gauge parameters are generally fine at their default values.
+These parameters define the theory and gauge choices used in the evolution. The
+main parameters that are typically changed are the two theory couplings
+$\alpha_0$ and $\alpha_1$, stored in \texttt{EMDA\_ALPHA\_THEORY}. The choices
 
+\[
+(\alpha_0,\alpha_1) = (1,1)
+\]
+
+correspond to EMDA,
+
+\[
+(\alpha_0,\alpha_1) = (1,0)
+\]
+
+correspond to EMD, and
+
+\[
+(\alpha_0,\alpha_1) = (0,0)
+\]
+
+correspond to Einstein--Maxwell. The remaining gauge parameters are generally
+safe to leave at their default values.
 
 \begin{verbatim}
+
 # Kreiss--Oliger dissipation parameter
+
 KO_DISS_SIGMA = 0.4
 \end{verbatim}
 
-This parameter controls the strength of numerical dissipation. Some dissipation
-is required for stability, and a value of 0.4 is a reasonable starting point.
+This parameter controls the strength of Kreiss--Oliger numerical dissipation.
+Some dissipation is needed for stability, and \texttt{KO\_DISS\_SIGMA = 0.4} is
+a reasonable starting value.
 
 \begin{verbatim}
 ########################################################################
+
 # Select initial data type
+
 # See the bottom of the file for reference
 
 EMDA_ID_TYPE = 0
 \end{verbatim}
 
-This selects the type of initial data used. A value of 0 uses the TPID solver,
-though other black hole initial-data options are available.
+This parameter selects the type of initial data used by the evolution. The
+choice \texttt{EMDA\_ID\_TYPE = 0} uses the TPID solver. Other black-hole
+initial-data options are available, but TPID is the standard choice for the
+binary black-hole simulations described here.
 
 \begin{verbatim}
 ########################################################################
+
 # Set up EMDA grid extents
 
 EMDA_GRID_MIN_X = -400.0
@@ -535,53 +698,67 @@ EMDA_GRID_MIN_Z = -400.0
 EMDA_GRID_MAX_Z = 400.0
 \end{verbatim}
 
-These parameters define the physical size of the computational grid. The values
-shown here are reasonable defaults. We do not want the boundaries to close to where we extract the waves as reflections from the boundaries can contaminate our waveforms.
+These parameters define the physical extent of the computational domain. The
+values shown here are reasonable defaults for many binary simulations. The outer
+boundary should be placed far enough from the wave-extraction region that
+boundary reflections do not contaminate the extracted waveforms during the time
+interval of interest.
 
 \begin{verbatim}
 ########################################################################
+
 # Black hole parameters
 
 EMDA_BH1_AMR_R = 1.0
 EMDA_BH1_CONSTRAINT_R = 2.0
 EMDA_BH1_MAX_LEV = 15
 EMDA_BH1 = {MASS = 0.5, X = 5.0, Y = 0.0, Z = 0.0,
-            V_X = -0.00100282, V_Y = 0.095775311, V_Z = 0.0,
-            SPIN = 0.0, SPIN_THETA = 0.0, SPIN_PHI = 0.0,
-            ELECTRIC_CHARGE = 0.05, MAGNETIC_CHARGE = 0.0}
+V_X = -0.00100282, V_Y = 0.095775311, V_Z = 0.0,
+SPIN = 0.0, SPIN_THETA = 0.0, SPIN_PHI = 0.0,
+ELECTRIC_CHARGE = 0.05, MAGNETIC_CHARGE = 0.0}
 
 EMDA_BH2_AMR_R = 1.0
 EMDA_BH2_CONSTRAINT_R = 2.0
 EMDA_BH2_MAX_LEV = 15
 EMDA_BH2 = {MASS = 0.5, X = -5.0, Y = 0.0, Z = 0.0,
-            V_X = 0.00100282, V_Y = -0.095775311, V_Z = 0.0,
-            SPIN = 0.0, SPIN_THETA = 0.0, SPIN_PHI = 0.0,
-            ELECTRIC_CHARGE = 0.05, MAGNETIC_CHARGE = 0.0}
+V_X = 0.00100282, V_Y = -0.095775311, V_Z = 0.0,
+SPIN = 0.0, SPIN_THETA = 0.0, SPIN_PHI = 0.0,
+ELECTRIC_CHARGE = 0.05, MAGNETIC_CHARGE = 0.0}
 \end{verbatim}
 
-Here we set the parameters for each black hole.
-\texttt{EMDA\_BH1\_AMR\_R} defines the radius within which refinement is forced
-around each black hole, while \texttt{EMDA\_BH1\_CONSTRAINT\_R} specifies the
-radius excluded when computing Hamiltonian  and momentum constraints.
-\texttt{EMDA\_BH2\_MAX\_LEV} sets the maximum refinement level near the black
-hole.
+These parameters define the black-hole properties used by the evolution and by
+the refinement infrastructure. The parameter \texttt{EMDA\_BH1\_AMR\_R} sets
+the radius within which refinement is forced around the first black hole, while
+\texttt{EMDA\_BH1\_CONSTRAINT\_R} sets the radius excluded when computing
+constraint norms. The corresponding \texttt{BH2} parameters play the same role
+for the second black hole. The parameters \texttt{EMDA\_BH1\_MAX\_LEV} and
+\texttt{EMDA\_BH2\_MAX\_LEV} set the maximum refinement level allowed near each
+black hole.
 
-Note that the \texttt{X}, \texttt{Y}, and \texttt{Z} values do not determine the
-initial placement of the black holes on the grid. Instead, they specify where
-the code begins searching for the black hole location and define the excision
-region. For equal-mass binaries ($q = 1$), these should match $\pm b$ in the
-TPID parameters.
+The \texttt{X}, \texttt{Y}, and \texttt{Z} entries do not directly determine the
+black holes' initial positions in the TPID solve. Instead, they specify where
+the evolution code begins searching for the black-hole locations and where it
+centers the black-hole refinement regions. For equal-mass binaries, these
+values should match the corresponding $\pm b$ positions used in the TPID
+parameters.
 
- The electric charge must remain smaller than the mass to avoid exceeding the
-extremal limit. Magnetic charge should not be used yet, as it is still under
-development. The spin parameter corresponds to $S = \chi m^2$.
-TPID reads the charge and spin from this line, but not the mass or position.
+The electric charge should remain below the black-hole mass in order to avoid
+exceeding the extremal limit. Magnetic charge is still under development and
+should not be used for standard production runs. The spin parameter corresponds
+to the dimensionless spin $\chi$, with angular momentum $S=\chi m^2$.
 
-Note that \texttt{V\_X}, \texttt{V\_Y}, and \texttt{V\_Z} represent the
-\emph{momenta}, not the velocities. This is an important distinction.
+TPID reads the charge and spin from these black-hole parameter blocks, but it
+does not use the listed mass or position values in the same way as the
+evolution code. The TPID mass and separation are set separately by the TPID
+parameters described below.
+
+Finally, note that \texttt{V\_X}, \texttt{V\_Y}, and \texttt{V\_Z} represent
+the black-hole momenta, not their coordinate velocities. This distinction is
+important when setting up binary initial data.
 
 \begin{verbatim}
 ########################################################################
+
 # GRAVITATIONAL WAVE EXTRACTION PARAMETERS
 
 EMDA_GW_NUM_RADAII = 6
@@ -591,32 +768,36 @@ EMDA_GW_NUM_LMODES = 7
 EMDA_GW_L_MODES = [2, 3, 4, 5, 6, 7, 8]
 
 # Radius at which conserved quantities are extracted
+
 EMDA_GW_EXTRACTION_RADIUS = 300.0
 
 # Modes for EM, dilaton, and axion radiation
+
 EMDA_RAD_NUM_LMODES = 6
 EMDA_RAD_L_MODES = [1, 2, 3, 4, 5, 6]
 ########################################################################
 \end{verbatim}
 
 These parameters control the extraction of gravitational, electromagnetic,
-dilaton, and axion radiation. We can chosse which spherical harmonics we want to extract. \texttt{EMDA\_GW\_NUM\_LMODES} applies to
-gravitational waves, while \texttt{EMDA\_RAD\_NUM\_LMODES} applies to all other
-radiative fields. The mode numbers correspond to the multipole moments being
-extracted. Although modes can be defined up to $l \approx 10$, in practice the
-dominant contributions are usually from modes with $l \leq 4$.
+dilaton, and axion radiation. Radiation is extracted on spherical surfaces at
+the radii listed in \texttt{EMDA\_GW\_RADAII}. The gravitational-wave modes are
+set by \texttt{EMDA\_GW\_L\_MODES}, while the modes for the electromagnetic,
+dilaton, and axion fields are set by \texttt{EMDA\_RAD\_L\_MODES}.
 
-Radiation is extracted on spherical surfaces at several radii, which are
-specified above.
+The mode numbers correspond to the spherical-harmonic multipoles being
+extracted. Although modes can be extracted up to roughly $\ell \approx 10$, the
+dominant contributions are usually contained in the lower modes, especially
+$\ell \leq 4$.
 
 \begin{verbatim}
 # Time steps between apparent-horizon (AEH) solves
 AEH_SOLVER_FREQ = 50
 \end{verbatim}
 
-This parameter controls how often the apparent-horizon solver is invoked. The
-remaining AEH-related settings should generally be left at their default
-values.
+This parameter controls how often the apparent-horizon solver is called. The
+remaining AEH-related settings should generally be left at their default values
+unless the apparent-horizon finder fails or additional horizon information is
+needed.
 
 \begin{verbatim}
 TPID_PAR_B = 5.0
@@ -624,15 +805,18 @@ TPID_TARGET_M_PLUS  = 0.48594
 TPID_TARGET_M_MINUS = 0.48594
 \end{verbatim}
 
-\texttt{TPID\_PAR\_B} sets the coordinate separation between the black holes.
-The target masses are the values used internally by the TPID solver.
+The parameter \texttt{TPID\_PAR\_B} sets the coordinate half-separation used by
+TPID. For example, \texttt{TPID\_PAR\_B = 5.0} corresponds to punctures located
+near $x=\pm 5$. The target masses are the values used internally by TPID when
+constructing the initial data.
 
 \begin{verbatim}
 TPID_CENTER_OFFSET = {X = 0.0, Y = 0.0, Z = 0.0}
 \end{verbatim}
 
-For equal-mass binaries ($q = 1$), this should be left unchanged. For unequal
-mass ratios, the system should be recentered on the center of mass.
+For equal-mass binaries, this should usually be left at zero. For unequal-mass
+binaries, the system may need to be recentered so that the center of mass is
+located near the origin.
 
 \begin{verbatim}
 TPID_NPOINTS_A   = 40
@@ -641,26 +825,26 @@ TPID_NPOINTS_PHI = 20
 \end{verbatim}
 
 These parameters control the resolution of the TPID grid. The values shown here
-are reasonable defaults.
+are reasonable defaults for initial testing, but higher values may be needed for
+more accurate initial data.
 
 \begin{verbatim}
 TPID_GIVE_BARE_MASS = 1
 \end{verbatim}
 
-This determines whether the puncture masses are fixed or solved for. Setting
-this to 0 instructs TPID to solve for the masses. When set to 1, TPID attempts
-to match the puncture masses to the specified target values.
+This parameter determines whether the puncture masses are fixed or solved for.
+When \texttt{TPID\_GIVE\_BARE\_MASS = 0}, TPID solves for the bare masses. When
+\texttt{TPID\_GIVE\_BARE\_MASS = 1}, TPID uses the specified target masses.
 
-A recommended procedure is to first estimate the expected masses (e.g.,
-$m = 0.5$ for $q = 1$), run TPID with mass solving enabled, then update the
-target masses and rerun with \texttt{TPID\_GIVE\_BARE\_MASS = 1} to finalize the
-initial data.
+A useful procedure is to first estimate the desired masses, run TPID with mass
+solving enabled, then update the target masses and rerun with
+\texttt{TPID\_GIVE\_BARE\_MASS = 1} to finalize the initial data.
 
 \begin{verbatim}
 TPID_REPLACE_LAPSE_WITH_SQRT_CHI = true
 \end{verbatim}
 
-This option should always be enabled when using SSL.
+This option should be enabled when using the slow-start lapse.
 
 \begin{verbatim}
 # Include dilatonic contributions in rho during TPID solve
@@ -671,13 +855,13 @@ TPID_USE_DILATON = true
 TPID_USE_INTERPOLATED_SOLUTION = false
 \end{verbatim}
 
-If both options are set to \texttt{false}, TPID will generate pure
+These parameters control how scalar-field contributions are included in the
+initial-data solve. If both options are set to \texttt{false}, TPID generates
 Einstein--Maxwell initial data. Setting
-\texttt{TPID\_USE\_INTERPOLATED\_SOLUTION = true} produces EMD initial data,
-while \texttt{TPID\_USE\_DILATON = true} produces EMDA initial data.
+\texttt{TPID\_USE\_INTERPOLATED\_SOLUTION = true} produces EMD-type initial
+data. Setting \texttt{TPID\_USE\_DILATON = true} includes dilatonic
+contributions directly in the TPID solve.
 
-You should ensure that the $\alpha$ parameters are consistent with the type of
-initial data being generated, and that CMake is configured to build the
-corresponding system of equations.
-
-
+The initial-data choice should be consistent with both the theory parameters in
+\texttt{EMDA\_ALPHA\_THEORY} and the system of equations selected when the code
+was configured with CMake.
