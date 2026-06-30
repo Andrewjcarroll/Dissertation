@@ -1100,7 +1100,7 @@ together with
 \end{equation}
 Here $B^i$ is an auxiliary variable, while $\mu$ and $\eta$ are constants that control the characteristic speed and damping of the shift condition. The combination of $1+\log$ slicing and the Gamma-driver shift condition is called the moving-puncture gauge. A major advantage of this gauge is that it allows black-hole spacetimes to be evolved without excising the singularity from the computational domain.
 
-\section{Equations of Motion}
+\section{EMDA Equations of Motion}
 \label{sec:appx:eom}
 
 The action for EMDA in the Einstein frame is given as:
@@ -1215,11 +1215,9 @@ T_{ij}
 &= 2\Bigl[
       D_i\phi D_j\phi
       - \tfrac{1}{2}\tilde{\gamma}_{ij}\bigl((D\phi)^2-\Pi^2\bigr)
-   \Bigr]  \\
-&\quad\quad
+   \Bigr] 
 - 2e^{-2\alpha_0\phi}\Bigl( 
-       E_iE_j + B_iB_j  \\
-&\qquad\qquad\qquad\quad
+       E_iE_j + B_iB_j 
       - \tfrac{1}{2}\tilde{\gamma}_{ij}
         \bigl(E_kE^k + B_kB^k\bigr)
    \Bigr)  \\
@@ -1259,15 +1257,14 @@ For the matter equations we start with the dilaton and axion:
 \partial_0 \Pi
 =& \, \alpha K \Pi
 - \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \phi
-- \chi\, \tilde{\gamma}^{ij} \partial_i \alpha\, \partial_j \phi  \\
-&+ \alpha \chi\, \tilde{\Gamma}^i \partial_i \phi
+- \chi\, \tilde{\gamma}^{ij} \partial_i \alpha\, \partial_j \phi 
++ \alpha \chi\, \tilde{\Gamma}^i \partial_i \phi
 + \frac{\alpha}{2}\tilde{\gamma}^{ij}
   \partial_i \chi\, \partial_j \phi \\
 &+ \frac{\alpha\alpha_0}{\chi}
   e^{-2\alpha_0\phi}
   \tilde{\gamma}_{ij}
-  \left(E^iE^j - B^iB^j\right)  \\
-&+ \frac{\alpha\alpha_1}{2}
+  \left(E^iE^j - B^iB^j\right) + \frac{\alpha\alpha_1}{2}
   e^{4\alpha_1\phi}
   \left(
     \chi\,\tilde{\gamma}^{ij}
@@ -1282,12 +1279,8 @@ For the matter equations we start with the dilaton and axion:
 \begin{aligned}
 \partial_0 \Xi
 &= \alpha K \Xi
-\\[3pt]
-&\quad
 - \alpha \chi\, \tilde{\gamma}^{ij} \partial_i \partial_j \kappa
 - \chi\, \tilde{\gamma}^{ij}\, \partial_i \alpha\, \partial_j \kappa
-\\[3pt]
-&\quad
 + \alpha \chi\, \tilde{\Gamma}^i \partial_i \kappa
 + \frac{\alpha}{2}\, \tilde{\gamma}^{ij}\, \partial_i \kappa\, \partial_j \chi
 \\[6pt]
@@ -1295,24 +1288,18 @@ For the matter equations we start with the dilaton and axion:
 - 4 \alpha \alpha_1 \chi\, \tilde{\gamma}^{ij}\,
   \partial_i \kappa\, \partial_j \phi
 + 4 \alpha \alpha_1 \Pi \Xi
-\\[6pt]
-&\quad
 + \frac{4\alpha}{\chi}\,
   e^{-4\alpha_1 \phi}\,
   \tilde{\gamma}_{ij} B^i E^j .
 \end{aligned}
 \end{equation}
-The equations for the electromgnetic fields, including hyperbolic divergence cleaning become
+The equations for the electromagnetic fields, including hyperbolic divergence cleaning become
 \begin{equation}
 \begin{aligned}
 \partial_0 \Psi
 &= - \alpha\, \partial_i E^i
-\\[3pt]
-&\quad
 + \frac{3\alpha}{2\chi}\, E^i \partial_i \chi
 + 2 \alpha_0 \alpha\, E^i \partial_i \phi
-\\[3pt]
-&\quad
 + \alpha e^{2\alpha_0 \phi}\, B^i \partial_i \kappa
 - \alpha \eta_1 \Psi .
 \end{aligned}
@@ -1329,8 +1316,6 @@ The equations for the electromgnetic fields, including hyperbolic divergence cle
 \begin{aligned}
 \partial_0 E^i
 &= \alpha K E^i
-\\[4pt]
-&\quad
 + 2 \alpha \alpha_0 \chi^{1/2}\,
   \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \phi
 - 2 \alpha \alpha_0 E^i \Pi
@@ -1339,16 +1324,12 @@ The equations for the electromgnetic fields, including hyperbolic divergence cle
 + \alpha e^{2\alpha_0 \phi} \chi^{1/2}\,
   \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \kappa
 - \alpha e^{2\alpha_0 \phi} \Xi B^i
-\\[6pt]
-&\quad
 - \alpha \chi\, \tilde{\gamma}^{ij} \partial_j \Psi
 - \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \alpha
 \\[4pt]
 &\quad
 - \alpha \chi^{1/2}\, \epsilon^{jik} B^l \partial_j \tilde{\gamma}_{kl}
 - \alpha \chi^{1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} \partial_j B^l
-\\[4pt]
-&\quad
 + \alpha \chi^{-1/2}\, \epsilon^{jik}\tilde{\gamma}_{kl} B^l \partial_j \chi .
 \end{aligned}
 \end{equation}
@@ -1362,8 +1343,6 @@ The equations for the electromgnetic fields, including hyperbolic divergence cle
 &\quad
 - \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \alpha
 + \alpha \chi^{-1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \chi
-\\[4pt]
-&\quad
 - \alpha \chi^{1/2}\, \epsilon^{ijk} E^l \partial_j \tilde{\gamma}_{kl}
 - \alpha \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} \partial_j E^l .
 \end{aligned}

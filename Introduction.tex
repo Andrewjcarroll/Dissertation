@@ -24,7 +24,7 @@ Interpreting gravitational-wave detections requires accurate theoretical models 
 
 Constructing theoretical models of binary black-hole mergers is challenging because the relevant dynamics are strongly nonlinear and only partially accessible through analytic methods. In general relativity, exact analytic solutions are typically restricted to highly symmetric systems and cannot describe the full inspiral, merger, and ringdown of a generic binary black-hole system. Numerical relativity therefore plays an essential role in modeling the late inspiral, merger, and ringdown, where fully nonlinear effects are important. A number of numerical relativity codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR-Athena++, and Dendro-GR \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,Daszuta2021_GRAthena,Fernando2023}.
 
-Simulating binary black-hole mergers remains computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{BaumgarteShapiro2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black-hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
+Simulating binary black-hole mergers is computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{BaumgarteShapiro2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black-hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
 
 For standard general relativity (GR), substantial progress has been made, and extensive
 waveform catalogs now cover much of the binary-black-hole parameter space, particularly
@@ -56,9 +56,20 @@ would significantly amplify this cost \cite{Boyle2019,Black2025_ORBIT}.
 
 To obtain more accurate waveforms, there are two main approaches: running existing codes at higher resolution or improving the underlying numerical methods. A drawback of the brute-force approach—simply increasing resolution—is that the timescale of the problem is constrained by the CFL factor. This, in turn, requires more timesteps, significantly increasing the total runtime of the simulation.
 
-One potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods—although highly accurate—are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. In tests within our Maxwell solver, CFDs often perform comparably to explicit methods at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains limited \cite{Daszuta2023}.
+One potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods—although highly accurate—are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. In tests performed with our Maxwell solver, the compact finite-difference schemes generally perform better than the corresponding explicit methods. In some cases, the compact schemes achieve comparable accuracy to explicit schemes at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains limited \cite{Daszuta2023}.
 
-Gravitational wave observations provide a powerful probe of gravity in the strongly nonlinear, dynamical regime, where deviations from general relativity (GR) may become apparent. To search for such deviations, waveform templates from alternative theories of gravity are required. While some work has been carried out in theories such as Chern--Simons gravity, scalar--tensor theories, Einstein--Gauss--Bonnet gravity, and Einstein--Maxwell--dilaton theory, waveform catalogs in these frameworks remain incomplete.
+Gravitational wave observations provide a powerful probe of gravity in the
+strongly nonlinear, dynamical regime, where deviations from general relativity
+(GR) may become apparent~\cite{Abbott2016,Abbott2025GWTC3GR,Yunes2025GWTests}.
+To search for such deviations, waveform templates from alternative theories of
+gravity are required~\cite{Yunes2009,Nair2019,Berti2015}. While some work has
+been carried out in theories such as Chern--Simons gravity~\cite{Alexander2009,
+Okounkova2019}, scalar--tensor theories~\cite{Barausse2013,Shibata2013,
+Berti2013,Palenzuela2014}, Einstein--Gauss--Bonnet gravity~\cite{Witek2019,
+Ripley2020b,East2021,Okounkova:2020rqw,Elley2022,Doneva2023sGB}, and
+Einstein--Maxwell--dilaton theory~\cite{Hirschmann2018,Julie2017}, waveform
+catalogs in these frameworks remain limited~\cite{Cardoso2012NRHEP,
+Corman2024NonlinearModificationsGR,Held2025}.
 
 In this dissertation, we focus on Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA is of particular interest because it admits a well-posed initial value formulation and arises as the low-energy limit of string theory. In contrast to the no-hair theorem in standard GR, which states the black holes can be completely defined by their mass spin and charge,  EMDA black holes possess additional degrees of freedom associated with the dilaton and axion fields.
 
@@ -184,7 +195,7 @@ Specifically, Gauss's law and the absence of magnetic monopoles must be satisfie
 
 Solving the Cauchy problem for Einstein's equations is nontrivial, as we must satisfy both the Hamiltonian and momentum constraints. There are established techniques for solving these constraints. In particular, the momentum constraints are often addressed using the Bowen--York formalism. The Hamiltonian constraint reduces to an elliptic equation that must be solved numerically.
 
-In EMDA, solving the Cauchy problem is further complicated by the presence of additional source terms. The stress-energy tensor $T_{ab}$ encodes all contributions from matter and energy apart from gravity.In standard GR this is 0, in EMDA, this includes electromagnetic fields as well as scalar fields. The solution for single black holes is known analytically for the certain coupling strengths ($\alpha_0=\alpha_1 =1$) but numerically one could also imagine varying the coupling strength to see how the evolutions change.  This dissertation will address the challenges associated with constructing consistent initial data and evolving these systems.
+In EMDA, solving the Cauchy problem is further complicated by the presence of additional source terms. The stress-energy tensor $T_{ab}$ encodes all contributions from matter and energy apart from gravity. In standard GR this is 0, in EMDA, this includes electromagnetic fields as well as scalar fields. The solution for single black holes is known analytically for the certain coupling strengths ($\alpha_0=\alpha_1 =1$) but numerically one could also imagine varying the coupling strength to see how the evolutions change.  This dissertation will address the challenges associated with constructing consistent initial data and evolving these systems.
 
 Once suitable initial data have been constructed and the system has been evolved, we extract the gravitational waveform. In this work, we compute the waveform using the Newman--Penrose formalism, in which outgoing gravitational radiation is represented by the Weyl scalar $\Psi_4$ \cite{Newman1962}. Details of how $\Psi_4$ is calculated are provided in Appendix~\ref{sec:appx:wave_extraction}.
 
@@ -248,7 +259,7 @@ This approach is more complex than an explicit finite-difference stencil because
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{Figures/1stDerivativeSpectralIntTest.png}
-\caption{Comparison of the spectral resolution of explicit and compact fourth-order first-derivative operators.}
+\caption{Spectral resolution of explicit and compact fourth-order first-derivative operators. The blue line represents perfect resolution, and the dashed line marks the cutoff frequency used in the optimization. The compact finite-difference operator maintains better agreement with the ideal resolution curve over a wider range of wavenumbers.}
 \label{fig:spectral_resolution}
 \end{figure}
 
@@ -273,4 +284,4 @@ T_{[ab]} \equiv \frac{1}{2}\left(T_{ab}-T_{ba}\right).
 
 Partial derivatives are denoted by $\partial_i g$ or equivalently $g_{,i}$. Covariant derivatives are written as $\nabla_a f_b$ or equivalently $f_{b;a}$. The Lie derivative of a tensor $X^a$ along a vector field $\beta^a$ is denoted by $\mathcal{L}_{\beta}X^a$.
 
-In general, we use the following notation for geometric quantities. Objects associated with the spacetime manifold $\mathcal{M}$ are denoted by $g_{ab}$, ${}^{(4)}\Gamma^{a}{}*{bc}$, $\nabla_a$, ${}^{(4)}R*{ab}$, and related quantities. Objects associated with a spatial slice $\Sigma$ are denoted by $\gamma_{ij}$, $\Gamma^{i}{}*{jk}$, $D_i$, $R*{ij}$, and related quantities. Objects associated with a conformally related space are denoted by $\tilde{\gamma}*{ij}$, $\tilde{\Gamma}^{i}{}*{jk}$, $\tilde{D}*i$, $\tilde{R}*{ij}$, and related quantities.
+%In general, we use the following notation for geometric quantities. Objects associated with the spacetime manifold $\mathcal{M}$ are denoted by $g_{ab}$, ${}^{(4)}\Gamma^{a}{}*{bc}$, $\nabla_a$, ${}^{(4)}R*{ab}$, and related quantities. Objects associated with a spatial slice $\Sigma$ are denoted by $\gamma_{ij}$, $\Gamma^{i}{}*{jk}$, $D_i$, $R*{ij}$, and related quantities. Objects associated with a conformally related space are denoted by $\tilde{\gamma}*{ij}$, $\tilde{\Gamma}^{i}{}*{jk}$, $\tilde{D}*i$, $\tilde{R}*{ij}$, and related quantities.
