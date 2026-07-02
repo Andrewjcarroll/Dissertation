@@ -6,15 +6,15 @@ A central difficulty in such tests is that the merger regime is both highly nonl
 
 In this work, we focus on the waveform-level consequences of Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA extends Einstein--Maxwell theory by coupling the electromagnetic field to a dilaton and an axion, and it arises as a low-energy limit of heterotic string theory \cite{Sen1992,Sen1995}. The theory admits rotating charged black-hole solutions, such as the Kerr--Sen spacetime, whose exterior fields differ from those of Kerr--Newman black holes. Previous work has investigated the stability of black holes and black-hole hair in EMDA theory \cite{PopeRohrerWhiting2025,Carroll2026KerrSenStability}, and black-hole shadow studies using Event Horizon Telescope observations have not ruled out Kerr--Sen black holes \cite{Sahoo2024PRD,Sahoo2025}. These features make EMDA a useful setting in which to study how additional matter fields can influence compact-binary dynamics and gravitational radiation.
 
-Charged binary black holes have also been studied extensively in Einstein--Maxwell gravity \cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021GW150914ChargedBH,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These simulations show that electromagnetic charge can modify the orbital dynamics, emitted radiation, and recoil of the remnant. In one analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $Q/M\sim0.3$ in the binary components \cite{Bozzola2021GW150914ChargedBH}. Comparatively little work, however, has examined charged inspiraling binary black holes in beyond-GR theories with additional scalar or pseudoscalar degrees of freedom.
+Charged binary black holes have also been studied extensively in Einstein--Maxwell gravity \cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021GW150914ChargedBH,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These simulations show that electromagnetic charge can modify the orbital dynamics, emitted radiation, and recoil of the remnant. In one analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $Q/M\sim0.3$ \cite{Bozzola2021GW150914ChargedBH}. Comparatively little work, however, has examined charged inspiraling binary black holes in beyond-GR theories with additional scalar or pseudoscalar degrees of freedom.
 
 The goal of this paper is to take a step toward such a waveform catalog in EMDA theory. We simulate inspiraling charged binary black holes and compare the resulting gravitational waveforms with neutral general-relativistic reference waveforms. The cases considered here include charge-to-mass ratios larger than those expected for astrophysical black holes \cite{Gibbons1975VacuumPolarization,Pan2019BlackHoleDischarge}. Our aim is therefore not to construct immediately realistic astrophysical templates, but to identify regimes in which the additional EMDA fields produce measurable changes in the binary dynamics and gravitational-wave signal. In this sense, the simulations provide a controlled probe of how charge, dilaton, and axion effects can enter gravitational waveforms in the nonlinear merger regime.
 
 We present a modest catalog of binary black-hole waveforms in EMDA theory, considering several choices of mass ratio, spin, and charge configuration. Our primary goal is to determine when EMDA waveforms begin to differ appreciably from their neutral GR counterparts and to identify how these differences depend on the charge configuration and binary parameters.
 
-An important complication is that compact-binary waveforms are highly degenerate. Differences between an EMDA waveform and a GR waveform need not imply an unambiguous beyond-GR signature, since similar changes could potentially be mimicked by varying intrinsic binary parameters such as the mass ratio, spins, total mass scale, or, in charged systems, the charge distribution. A complete assessment of these degeneracies would require parameter estimation over both the EMDA and GR parameter spaces, which is beyond the scope of this study.
+An important complication is that compact-binary waveforms are highly degenerate. Differences between an EMDA waveform and a GR waveform need not imply an unambiguous beyond-GR signature, since similar changes could potentially be mimicked by varying intrinsic binary parameters such as the mass ratio, spins, total mass scale, or, in charged systems, the charge. A complete assessment of these degeneracies would require parameter estimation over both the EMDA and GR parameter spaces, which is beyond the scope of this study.
 
-Instead, we address a more restricted question: how do waveform differences emerge as one moves through the EMDA parameter space, and under what conditions do these differences become large enough to warrant more detailed follow-up studies? The catalog presented here is intended as an initial step toward a more complete study of EMDA binary black-hole phenomenology and toward assessing whether high-precision gravitational-wave observations could constrain or detect signatures of EMDA theory.
+Instead, we address a more restricted question: how do waveform differences emerge as one moves through the EMDA parameter space, and under what conditions do these differences become large enough to detect? The catalog presented here is intended as an initial step toward a more complete study of EMDA binary black-hole phenomenology and toward assessing whether high-precision gravitational-wave observations could constrain or detect signatures of EMDA theory.
 
 \subsection{Structure of the paper and conventions}
 
@@ -85,9 +85,9 @@ In units where \(G=1\), this becomes
 \]
 Thus, like-signed charges reduce the effective attraction, while oppositely signed charges increase it. We therefore first compute the momenta required for an uncharged binary to be approximately quasicircular and then rescale the orbital momenta according to the effective gravitational coupling implied by the charge-to-mass ratios of the two black holes.
 
-The initial momenta for the corresponding uncharged binaries are computed using the \texttt{NRPyPN} package~\cite{Etienne2023_NRPyPN}. This package provides post-Newtonian estimates for low-eccentricity binary black-hole initial data compatible with Bowen--York/TwoPunctures data~\cite{Healy2017_PNQuasicircular,RamosBuades2019_EccentricityReduction}. We then apply the charge-dependent rescaling described above to obtain the momenta used in the charged evolutions. This procedure assumes that the leading correction to the orbital parameters comes from the electromagnetic interaction, while the direct effects of the dilaton and axion fields are negligible.
+The initial momenta for the corresponding uncharged binaries are computed using the \texttt{NRPyPN} package~\cite{Etienne2023_NRPyPN}. This package provides post-Newtonian estimates for low-eccentricity binary black-hole initial data compatible with Bowen--York/TwoPunctures data~\cite{Healy2017_PNQuasicircular,RamosBuades2019_EccRed}. We then apply the charge-dependent rescaling described above to obtain the momenta used in the charged evolutions. This procedure assumes that the leading correction to the orbital parameters comes from the electromagnetic interaction, while the direct effects of the dilaton and axion fields are negligible.
 
-Although approximate, this prescription yields sufficiently low eccentricities for the configurations considered here, as illustrated in Figs.~\ref{fig:orbital_dynamics_q1_q2} and~\ref{fig:orbital_dynamics_q4_q8}.
+Although approximate, this prescription yields sufficiently low eccentricities for the configurations considered here, as illustrated in Figs.~\ref{fig:orbital_dynamics_q1_q2} and~\ref{fig:orbital_dynamics_q4_q8}.We also note that the charge has a signifiicant effect on the amount of time it takes to inspirial in. 
 
 
 \begin{figure}[p]
@@ -119,11 +119,11 @@ Although approximate, this prescription yields sufficiently low eccentricities f
     \centering
 
     \subfloat[$q=4$: black-hole separation.\label{fig:bh_separation_q4}]{%
-        \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_SPIN_04_high_charge_separation_comparison.pdf}%
+        \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_separation_comparison.pdf}%
     }
     \hfill
     \subfloat[$q=4$: orbital trajectories.\label{fig:bh_xy_q4}]{%
-        \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_SPIN_04_high_charge_Q0p05_pp_xy_trajectory.pdf}%
+        \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_Q0p1_pp_xy_trajectory.png}%
     }
 
     \vspace{1.0em}
@@ -209,7 +209,8 @@ We compare EMDA and GR waveforms for a representative set of binary black-hole c
 
 The simulation catalog considered in this work is summarized in Table~\ref{tab:simulation_catalog}. For each mass ratio \(q=m_1/m_2\), spin \(\chi\), and charge magnitude \(\lambda\), we consider the neutral case, \(Q_1=Q_2=0\), together with several charged configurations. The charged cases are denoted by \(++\), \(+-\), and \(+0\), corresponding respectively to like-signed charges, oppositely signed charges, and configurations in which only one black hole is charged.
 
-We find that the waveform differences generally increase with both charge magnitude and spin. In each case, the charged waveform is compared against a neutral reference waveform with the same mass ratio and spin. For example, for the \(q=1\), \(\chi=0.4\) cases, the mismatch increases from \(2.5959\times 10^{-4}\) for \(\lambda=0.1\) to \(5.2775\times 10^{-3}\) for \(\lambda=0.3\). Similar trends are observed across the spinning cases. The full set of waveform mismatches is given in Table~\ref{tab:waveform_mismatches_combined}.
+We find that the waveform differences generally increase with charge. In each case, the charged waveform is compared against a neutral reference waveform with the same mass ratio and spin. For example, for the $(q=1)$, $(\chi=0.4)$ cases, the mismatch increases from $(2.5959\times 10^{-4})$ for $(\lambda=0.1)$ to $(5.2775\times 10^{-3})$ for $(\lambda=0.3)$. The full set of waveform mismatches is analyzed using the numerical-relativity analysis toolkit kuibit~\cite{kuibit}, and the results are given in Table~\ref{tab:waveform_mismatches_combined}. The critical signal-to-noise ratio required to distinguish the charged and neutral waveforms ranges from approximately $(2.3)$ to $(537)$.
+
 
 
 \begin{figure*}[t]
@@ -226,7 +227,7 @@ We find that the waveform differences generally increase with both charge magnit
     \vspace{0.5em}
 
     \subfloat[$q=4$.\label{fig:q4_peak_aligned_hplus}]{%
-        \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q4_Q0_vs_Q0p05_pp_peak_aligned_hplus_notitle.pdf}%
+        \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/Q0_vs_Q0p1_pp_peak_aligned_hplus_notitle.png}%
     }
     \hfill
     \subfloat[$q=8$.\label{fig:q8_peak_aligned_hplus}]{%
@@ -240,11 +241,11 @@ We find that the waveform differences generally increase with both charge magnit
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this work, we presented a small waveform catalog for binary black-hole simulations in Einstein--Maxwell--dilaton--axion (EMDA) theory. Our results show that, as the charge parameter is increased, the differences between the neutral general-relativistic reference waveforms and the charged EMDA waveforms become increasingly pronounced. This indicates that charge and the additional EMDA fields can leave measurable imprints on the gravitational waveform.
+In this work, we presented a small waveform catalog for binary black-hole simulations in Einstein--Maxwell--dilaton--axion (EMDA) theory. Our results show that, as the charge parameter is increased, the differences between the neutral general-relativistic reference waveforms and the charged EMDA waveforms become increasingly pronounced. This indicates that electric charge and the additional EMDA fields can leave observable imprints on the gravitational waveform. Using the mismatch as a rough distinguishability estimate, the largest deviations in our catalog correspond to critical signal-to-noise ratios of order a few, with the smallest value approximately $(\rho_{\rm crit}\simeq 2.15)$. These values suggest that the largest waveform differences found here could be distinguishable in sufficiently loud events, although a full parameter-estimation study would be required to make this statement quantitative.
 
 These differences should be interpreted with care. Some of the observed deviations may be partially degenerate with changes in the binary mass ratio, spins, eccentricity, or other intrinsic parameters. In addition, not all differences between the charged and neutral cases can be attributed uniquely to the dilaton and axion fields, since part of the effect may arise from the electromagnetic charge itself. A more complete comparison would therefore include corresponding Einstein--Maxwell simulations, allowing the purely electromagnetic contribution to be separated from the additional EMDA-field effects. Such a study is computationally expensive and is left for future work.
 
-These results demonstrate that EMDA theory provides a useful numerical relativity testbed for studying beyond-GR effects in binary black-hole mergers. Even within this limited catalog, the simulations show that charged extensions of general relativity can produce waveform differences that grow systematically with charge. This motivates further studies with larger parameter surveys, improved initial data, longer inspirals, and detailed comparisons among neutral GR, Einstein--Maxwell, and EMDA binaries.
+These results demonstrate that EMDA theory provides a useful numerical-relativity testbed for studying beyond-GR effects in binary black-hole mergers. Even within this limited catalog, the simulations show that charged extensions of general relativity can produce waveform differences that grow systematically with charge. This motivates further studies with larger parameter surveys, improved initial data, longer inspirals, and detailed comparisons among neutral GR, Einstein--Maxwell, and EMDA binaries.
 
 \section{Runs done and mismatch}
 \begin{table*}[htbp]
@@ -270,44 +271,52 @@ Mass Ratio \(q\) & Spin \(\chi\) & Charge Magnitude \(\lambda\) & Neutral & \(++
 2 & 0.4 & 0.05 & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) \\
 2 & 0.4 & 0.15 & -- & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) \\
 \midrule
-4 & 0.4 & 0.5 & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) \\
+4 & 0.4 & 0.05 & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) \\
+4 & 0.4 & 0.1 &  -- & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) \\
 \midrule
 8 & -0.2 & 0.1 & \(\checkmark\) & \(\checkmark\) & -- & -- \\
 \bottomrule
 \end{tabular}
 \end{table*}
+
 \begin{table*}[t]
 \centering
-\caption{Mismatch of charged EMDA binary black-hole waveforms relative to the neutral reference waveform \(Q0\). Here \(q=m_1/m_2\), \(\chi\) is the dimensionless spin parameter, and \(\lambda_i=Q_i/M_i\). The column \(|\lambda_i|\) gives the nonzero charge magnitude used in each charged configuration. The columns \(++\), \(+-\), and \(+0\) denote the charge configurations of the two black holes. The mismatch is computed from the \((\ell,m)=(2,2)\) gravitational waveform using kuibit, after optimizing over time and polarization shifts. Entries marked by \(\text{--}\) were excluded because the mismatch calculation gave a clearly anomalous result.} 
+\caption{Mismatch of charged EMDA binary black-hole waveforms relative to the neutral reference waveform \(Q0\). Here \(q=m_1/m_2\), \(\chi\) is the dimensionless spin parameter, and \(\lambda_i=Q_i/M_i\). The column \(|\lambda_i|\) gives the nonzero charge magnitude used in each charged configuration. The columns \(++\), \(+-\), and \(+0\) denote the charge configurations of the two black holes. The mismatch is computed from the \((\ell,m)=(2,2)\) gravitational waveform using the numerical-relativity analysis package kuibit~\cite{kuibit}, after optimizing over time and polarization shifts. The values in parentheses give the approximate critical signal-to-noise ratio, \(\rho_{\rm crit}\simeq 1/\sqrt{2\mathcal{M}}\), required to distinguish the charged waveform from GR.}
 \label{tab:waveform_mismatches_combined}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{cccccc}
 \toprule
 Mass Ratio \(q\) & Spin \(\chi\) & Charge Magnitude \(|\lambda_i|\)
 & \(++\) & \(+-\) & \(+0\) \\
 \midrule
-1 & 0   & 0.10 & \(3.5330\times 10^{-4}\) & \(2.7358\times 10^{-4}\) & \(1.5472\times 10^{-4}\) \\
-1 & 0   & 0.20 & \(6.7055\times 10^{-4}\) & \(1.4541\times 10^{-3}\) & \(6.9051\times 10^{-4}\) \\
-1 & 0   & 0.30 & \(1.9433\times 10^{-3}\) & \(5.3202\times 10^{-3}\) & \(7.5398\times 10^{-4}\) \\
+1 & 0   & 0.10 & \(3.53\times 10^{-4}\;(37.6)\) & \(2.74\times 10^{-4}\;(42.8)\) & \(1.55\times 10^{-4}\;(56.8)\) \\
+1 & 0   & 0.20 & \(6.71\times 10^{-4}\;(27.3)\) & \(1.45\times 10^{-3}\;(18.5)\) & \(6.91\times 10^{-4}\;(26.9)\) \\
+1 & 0   & 0.30 & \(1.94\times 10^{-3}\;(16.0)\) & \(5.32\times 10^{-3}\;(9.7)\) & \(7.54\times 10^{-4}\;(25.8)\) \\
 \midrule
-1 & 0.4 & 0.10 & \(2.5959\times 10^{-4}\) & \(2.8683\times 10^{-4}\) & \(4.0834\times 10^{-4}\) \\
-1 & 0.4 & 0.20 & \(7.1013\times 10^{-4}\) & \(7.4023\times 10^{-3}\) & \(7.4207\times 10^{-4}\) \\
-1 & 0.4 & 0.30 & \(5.2775\times 10^{-3}\) & \(2.9045\times 10^{-2}\) & \(1.0418\times 10^{-3}\) \\
+1 & 0.4 & 0.10 & \(2.60\times 10^{-4}\;(43.9)\) & \(2.87\times 10^{-4}\;(41.8)\) & \(4.08\times 10^{-4}\;(35.0)\) \\
+1 & 0.4 & 0.20 & \(7.10\times 10^{-4}\;(26.5)\) & \(7.40\times 10^{-3}\;(8.2)\) & \(7.42\times 10^{-4}\;(26.0)\) \\
+1 & 0.4 & 0.30 & \(5.28\times 10^{-3}\;(9.7)\) & \(2.90\times 10^{-2}\;(4.1)\) & \(1.04\times 10^{-3}\;(21.9)\) \\
 \midrule
-1 & 0.8 & 0.10 & \(2.7743\times 10^{-4}\) & \(9.4404\times 10^{-4}\) & \(1.0310\times 10^{-3}\) \\
-1 & 0.8 & 0.20 & \(4.6629\times 10^{-2}\) & \(9.3019\times 10^{-2}\) & \(1.6697\times 10^{-2}\) \\
-1 & 0.8 & 0.30 & \(6.1881\times 10^{-2}\) & \(2.5258\times 10^{-2}\) & \(7.9910\times 10^{-3}\) \\
+1 & 0.8 & 0.10 & \(2.77\times 10^{-4}\;(42.5)\) & \(9.44\times 10^{-4}\;(23.0)\) & \(1.03\times 10^{-3}\;(22.0)\) \\
+1 & 0.8 & 0.20 & \(4.66\times 10^{-2}\;(3.3)\) & \(9.30\times 10^{-2}\;(2.3)\) & \(1.67\times 10^{-2}\;(5.5)\) \\
+1 & 0.8 & 0.30 & \(6.19\times 10^{-2}\;(2.8)\) & \(2.53\times 10^{-2}\;(4.4)\) & \(7.99\times 10^{-3}\;(7.9)\) \\
 \midrule
-2 & 0   & 0.05 & \(6.0296\times 10^{-5}\) & \(1.1086\times 10^{-3}\) & \(4.5466\times 10^{-5}\) \\
-2 & 0   & 0.15 & \(2.9322\times 10^{-4}\) & \(4.9762\times 10^{-4}\) & \(1.5623\times 10^{-4}\) \\
+2 & 0   & 0.05 & \(1.58\times 10^{-3}\;(17.8)\) & \(1.34\times 10^{-3}\;(19.3)\) & \(2.56\times 10^{-5}\;(139.7)\) \\
+2 & 0   & 0.15 & \(1.83\times 10^{-3}\;(16.5)\) & \(3.21\times 10^{-3}\;(12.5)\) & \(7.47\times 10^{-4}\;(25.9)\) \\
 \midrule
-2 & 0.4 & 0.05 & \(7.2699\times 10^{-5}\) & \(1.3302\times 10^{-4}\) & \(1.7314\times 10^{-6}\) \\
-2 & 0.4 & 0.15 & \(6.1688\times 10^{-4}\) & \(2.3388\times 10^{-4}\) & \(7.5752\times 10^{-5}\) \\
+2 & 0.4 & 0.05 & \(7.27\times 10^{-5}\;(82.9)\) & \(1.33\times 10^{-4}\;(61.3)\) & \(1.73\times 10^{-6}\;(537.4)\) \\
+2 & 0.4 & 0.15 & \(6.17\times 10^{-4}\;(28.5)\) & \(2.34\times 10^{-4}\;(46.2)\) & \(7.58\times 10^{-5}\;(81.2)\) \\
 \midrule
-4 & 0.4 & 0.05 & \(4.9880\times 10^{-4}\) & \(2.5781\times 10^{-4}\) & \(3.4390\times 10^{-4}\) \\
+4 & 0.4 & 0.05 & \(5.10\times 10^{-5}\;(99.0)\) & \(7.34\times 10^{-5}\;(82.5)\) & \(7.17\times 10^{-5}\;(83.5)\) \\
+4 & 0.4 & 0.10 & \(3.17\times 10^{-4}\;(39.7)\) & \(1.82\times 10^{-4}\;(52.5)\) & \(8.80\times 10^{-5}\;(75.4)\) \\
 \midrule
-8 & 0.2 & 0.10 & \(1.1383\times 10^{-3}\) & \(\text{--}\) & \(\text{--}\) \\
+8 & 0.2 & 0.10 & \(1.14\times 10^{-3}\;(21.0)\) & \(\text{--}\) & \(\text{--}\) \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table*}
 
 

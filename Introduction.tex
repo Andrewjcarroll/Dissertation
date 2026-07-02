@@ -58,18 +58,8 @@ To obtain more accurate waveforms, there are two main approaches: running existi
 
 One potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods—although highly accurate—are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. In tests performed with our Maxwell solver, the compact finite-difference schemes generally perform better than the corresponding explicit methods. In some cases, the compact schemes achieve comparable accuracy to explicit schemes at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains limited \cite{Daszuta2023}.
 
-Gravitational wave observations provide a powerful probe of gravity in the
-strongly nonlinear, dynamical regime, where deviations from general relativity
-(GR) may become apparent~\cite{Abbott2016,Abbott2025GWTC3GR,Yunes2025GWTests}.
-To search for such deviations, waveform templates from alternative theories of
-gravity are required~\cite{Yunes2009,Nair2019,Berti2015}. While some work has
-been carried out in theories such as Chern--Simons gravity~\cite{Alexander2009,
-Okounkova2019}, scalar--tensor theories~\cite{Barausse2013,Shibata2013,
-Berti2013,Palenzuela2014}, Einstein--Gauss--Bonnet gravity~\cite{Witek2019,
-Ripley2020b,East2021,Okounkova:2020rqw,Elley2022,Doneva2023sGB}, and
-Einstein--Maxwell--dilaton theory~\cite{Hirschmann2018,Julie2017}, waveform
-catalogs in these frameworks remain limited~\cite{Cardoso2012NRHEP,
-Corman2024NonlinearModificationsGR,Held2025}.
+In addition to the need for improved waveform modeling in GR, there is also a need for waveform models in alternative theories of gravity. Gravitational-wave observations provide a powerful probe of gravity in the strongly nonlinear, dynamical regime, where deviations from general relativity (GR) may become apparent~\cite{Abbott2016,Abbott2025GWTC3GR,Yunes2025GWTests}. To search for such deviations, waveform templates from alternative theories of gravity are required~\cite{Yunes2009,Nair2019,Berti2015}. While studies have been carried out in theories such as Chern--Simons gravity~\cite{Alexander2009,Okounkova2019}, scalar--tensor theories~\cite{Barausse2013,Shibata2013,Berti2013,Palenzuela2014}, Einstein--Gauss--Bonnet gravity~\cite{Witek2019,Ripley2020b,East2021,Okounkova:2020rqw,Elley2022,Doneva2023sGB}, and Einstein--Maxwell--dilaton theory~\cite{Hirschmann2018,Julie2017}, waveform catalogs in these frameworks remain limited~\cite{Cardoso2012NRHEP,Corman2024NonlinearModificationsGR,Held2025}.
+
 
 In this dissertation, we focus on Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA is of particular interest because it admits a well-posed initial value formulation and arises as the low-energy limit of string theory. In contrast to the no-hair theorem in standard GR, which states the black holes can be completely defined by their mass spin and charge,  EMDA black holes possess additional degrees of freedom associated with the dilaton and axion fields.
 

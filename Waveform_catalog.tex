@@ -8,14 +8,14 @@ magnitude and charge configuration.
 
 % Compact waveform panel macro.
 % This version is compatible with \usepackage[caption=false]{subfig}.
-\newcommand{\gwpanel}[1]{%
-    \subfloat[]{%
-        \includegraphics[width=0.315\textwidth]{#1}%
+\newcommand{\gwpanel}[2]{%
+    \subfloat[#1]{%
+        \includegraphics[width=0.315\textwidth]{#2}%
     }%
 }
 
 \newcommand{\gwneutralpanel}[1]{%
-    \subfloat[]{%
+    \subfloat[Neutral]{%
         \includegraphics[width=0.315\textwidth]{#1}%
     }%
 }
@@ -30,27 +30,36 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.10\)}
+{Waveform/GW/Q1_SPIN_0_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.10\)}
+{Waveform/GW/Q1_SPIN_0_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.10\)}
+{Waveform/GW/Q1_SPIN_0_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.20\)}
+{Waveform/GW/Q1_SPIN_0_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.20\)}
+{Waveform/GW/Q1_SPIN_0_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.20\)}
+{Waveform/GW/Q1_SPIN_0_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.30\)}
+{Waveform/GW/Q1_SPIN_0_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.30\)}
+{Waveform/GW/Q1_SPIN_0_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_0_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.30\)}
+{Waveform/GW/Q1_SPIN_0_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=1\) and \(\chi=0\). The neutral case is shown at the top, followed by charged configurations ordered by increasing charge magnitude and charge configuration.}
 \label{fig:gw_catalog_q1_chi0}
@@ -66,27 +75,36 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.10\)}
+{Waveform/GW/Q1_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.10\)}
+{Waveform/GW/Q1_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.10\)}
+{Waveform/GW/Q1_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.20\)}
+{Waveform/GW/Q1_SPIN_04_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.20\)}
+{Waveform/GW/Q1_SPIN_04_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.20\)}
+{Waveform/GW/Q1_SPIN_04_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.30\)}
+{Waveform/GW/Q1_SPIN_04_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.30\)}
+{Waveform/GW/Q1_SPIN_04_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_04_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.30\)}
+{Waveform/GW/Q1_SPIN_04_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=1\) and \(\chi=0.4\). The neutral case is shown at the top, followed by charged configurations ordered by increasing charge magnitude and charge configuration.}
 \label{fig:gw_catalog_q1_chi04}
@@ -102,27 +120,36 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.10\)}
+{Waveform/GW/Q1_SPIN_08_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.10\)}
+{Waveform/GW/Q1_SPIN_08_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.10\)}
+{Waveform/GW/Q1_SPIN_08_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.20\)}
+{Waveform/GW/Q1_SPIN_08_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.20\)}
+{Waveform/GW/Q1_SPIN_08_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.20\)}
+{Waveform/GW/Q1_SPIN_08_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.30\)}
+{Waveform/GW/Q1_SPIN_08_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.30\)}
+{Waveform/GW/Q1_SPIN_08_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q1_SPIN_08_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.30\)}
+{Waveform/GW/Q1_SPIN_08_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=1\) and \(\chi=0.8\). The neutral case is shown at the top, followed by charged configurations ordered by increasing charge magnitude and charge configuration.}
 \label{fig:gw_catalog_q1_chi08}
@@ -138,19 +165,25 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.05\)}
+{Waveform/GW/Q2_SPIN_0_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.05\)}
+{Waveform/GW/Q2_SPIN_0_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.05\)}
+{Waveform/GW/Q2_SPIN_0_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.15\)}
+{Waveform/GW/Q2_SPIN_0_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.15\)}
+{Waveform/GW/Q2_SPIN_0_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_0_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.15\)}
+{Waveform/GW/Q2_SPIN_0_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=2\) and \(\chi=0\). The neutral case is shown at the top, followed by charged configurations ordered by increasing charge magnitude and charge configuration.}
 \label{fig:gw_catalog_q2_chi0}
@@ -166,19 +199,25 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.05\)}
+{Waveform/GW/Q2_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.05\)}
+{Waveform/GW/Q2_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.05\)}
+{Waveform/GW/Q2_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.15\)}
+{Waveform/GW/Q2_SPIN_04_Q0p15_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.15\)}
+{Waveform/GW/Q2_SPIN_04_Q0p15_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q2_SPIN_04_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.15\)}
+{Waveform/GW/Q2_SPIN_04_Q0p15_pp_emda_prof_GW_l2_m2_r5.pdf}
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=2\) and \(\chi=0.4\). The neutral case is shown at the top, followed by charged configurations ordered by increasing charge magnitude and charge configuration.}
 \label{fig:gw_catalog_q2_chi04}
@@ -194,13 +233,27 @@ magnitude and charge configuration.
 
 \vspace{0.6em}
 
-\gwpanel{Waveform/GW/Q4_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_0=0.05\)}
+{Waveform/GW/Q4_SPIN_04_Q0p05_p0_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q4_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_-=0.05\)}
+{Waveform/GW/Q4_SPIN_04_Q0p05_pn_emda_prof_GW_l2_m2_r5.pdf}
 \hfill
-\gwpanel{Waveform/GW/Q4_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
+\gwpanel{\(\lambda^+_+=0.05\)}
+{Waveform/GW/Q4_SPIN_04_Q0p05_pp_emda_prof_GW_l2_m2_r5.pdf}
 
-\caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=4\) and \(\chi=0.4\). The neutral case is shown at the top, followed by the charged configurations.}
+\vspace{0.6em}
+
+\gwpanel{\(\lambda^+_0=0.10\)}
+{Waveform/GW/Q4_SPIN_04_Q0p1_p0_emda_prof_GW_l2_m2_r5.pdf}
+\hfill
+\gwpanel{\(\lambda^+_-=0.10\)}
+{Waveform/GW/Q4_SPIN_04_Q0p1_pn_emda_prof_GW_l2_m2_r5.pdf}
+\hfill
+\gwpanel{\(\lambda^+_+=0.10\)}
+{Waveform/GW/Q4_SPIN_04_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}
+
+\caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=4\) and \(\chi=0.4\). The neutral case is shown at the top, followed by charged configurations with \(|\lambda_i|=0.05\) and \(|\lambda_i|=0.10\).}
 \label{fig:gw_catalog_q4_chi04}
 \end{figure}
 
@@ -210,17 +263,18 @@ magnitude and charge configuration.
 \begin{figure}[p]
 \centering
 
-\subfloat[Neutral configuration.]{%
+\subfloat[Neutral]{%
     \includegraphics[width=0.47\textwidth]{Waveform/GW/Q8_SPIN_02_Q0_emda_prof_GW_l2_m2_r5.pdf}%
 }
 \hfill
-\subfloat[Charged \(++\) configuration.]{%
+\subfloat[\(\lambda^+_+=0.10\)]{%
     \includegraphics[width=0.47\textwidth]{Waveform/GW/Q8_SPIN_02_Q0p1_pp_emda_prof_GW_l2_m2_r5.pdf}%
 }
 
 \caption{Extracted \(r\Psi_4^{(2,2)}\) waveforms for \(q=8\) and \(\chi=0.2\).}
 \label{fig:gw_catalog_q8_chi02}
 \end{figure}
+
 
 % ============================================================
 % Scalar waveform catalog macros
@@ -252,35 +306,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p1_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p1_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p1_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p15_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p15_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI1/Q1_SPIN_0_Q0p15_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=1\) and \(\chi=0\).}
@@ -293,35 +347,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p1_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p1_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p1_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p15_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p15_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI1/Q1_SPIN_04_Q0p15_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=1\) and \(\chi=0.4\).}
@@ -334,35 +388,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p1_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p1_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p1_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p15_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p15_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI1/Q1_SPIN_08_Q0p15_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=1\) and \(\chi=0.8\).}
@@ -375,24 +429,24 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.15\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p15_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.15\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p15_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.15\)}
 {Waveform/PHI1/Q2_SPIN_0_Q0p15_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=2\) and \(\chi=0\).}
@@ -405,24 +459,24 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.15\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p15_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.15\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p15_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.15\)}
 {Waveform/PHI1/Q2_SPIN_04_Q0p15_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=2\) and \(\chi=0.4\).}
@@ -435,14 +489,25 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI1/Q4_SPIN_04_Q0p05_p0_emda_prof_PHI1_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI1/Q4_SPIN_04_Q0p05_pn_emda_prof_PHI1_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI1/Q4_SPIN_04_Q0p05_pp_emda_prof_PHI1_l2_m2_r5.pdf}
+
+\vspace{0.6em}
+
+\fieldpanel{\(\lambda^+_0=0.10\)}
+{Waveform/PHI1/Q4_SPIN_04_Q0p1_p0_emda_prof_PHI1_l2_m2_r5.pdf}
+\hfill
+\fieldpanel{\(\lambda^+_-=0.10\)}
+{Waveform/PHI1/Q4_SPIN_04_Q0p1_pn_emda_prof_PHI1_l1_m1_r5.pdf}
+\hfill
+\fieldpanel{\(\lambda^+_+=0.10\)}
+{Waveform/PHI1/Q4_SPIN_04_Q0p1_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=4\) and \(\chi=0.4\).}
 \label{fig:phi1_catalog_q4_chi04}
@@ -454,7 +519,7 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI1/Q8_SPIN_02_Q0p1_pp_emda_prof_PHI1_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_1\) waveforms for \(q=8\) and \(\chi=0.2\).}
@@ -481,35 +546,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p1_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p1_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p1_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p15_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p15_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI2/Q1_SPIN_0_Q0p15_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=1\) and \(\chi=0\).}
@@ -522,35 +587,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p1_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p1_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p1_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p15_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p15_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI2/Q1_SPIN_04_Q0p15_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=1\) and \(\chi=0.4\).}
@@ -563,35 +628,35 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.10\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.10\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p1,+0\)}
+\fieldpanel{\(\lambda^+_0=0.20\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p1_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,+-\)}
+\fieldpanel{\(\lambda^+_-=0.20\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p1_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.20\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p1_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.30\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p15_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.30\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p15_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.30\)}
 {Waveform/PHI2/Q1_SPIN_08_Q0p15_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=1\) and \(\chi=0.8\).}
@@ -604,24 +669,24 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.15\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p15_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.15\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p15_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.15\)}
 {Waveform/PHI2/Q2_SPIN_0_Q0p15_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=2\) and \(\chi=0\).}
@@ -634,24 +699,24 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \vspace{0.6em}
 
-\fieldpanel{\(Q0p15,+0\)}
+\fieldpanel{\(\lambda^+_0=0.15\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p15_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,+-\)}
+\fieldpanel{\(\lambda^+_-=0.15\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p15_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p15,++\)}
+\fieldpanel{\(\lambda^+_+=0.15\)}
 {Waveform/PHI2/Q2_SPIN_04_Q0p15_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=2\) and \(\chi=0.4\).}
@@ -664,14 +729,25 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p05,+0\)}
+\fieldpanel{\(\lambda^+_0=0.05\)}
 {Waveform/PHI2/Q4_SPIN_04_Q0p05_p0_emda_prof_PHI2_l2_m2_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,+-\)}
+\fieldpanel{\(\lambda^+_-=0.05\)}
 {Waveform/PHI2/Q4_SPIN_04_Q0p05_pn_emda_prof_PHI2_l1_m1_r5.pdf}
 \hfill
-\fieldpanel{\(Q0p05,++\)}
+\fieldpanel{\(\lambda^+_+=0.05\)}
 {Waveform/PHI2/Q4_SPIN_04_Q0p05_pp_emda_prof_PHI2_l2_m2_r5.pdf}
+
+\vspace{0.6em}
+
+\fieldpanel{\(\lambda^+_0=0.10\)}
+{Waveform/PHI2/Q4_SPIN_04_Q0p1_p0_emda_prof_PHI2_l2_m2_r5.pdf}
+\hfill
+\fieldpanel{\(\lambda^+_-=0.10\)}
+{Waveform/PHI2/Q4_SPIN_04_Q0p1_pn_emda_prof_PHI2_l1_m1_r5.pdf}
+\hfill
+\fieldpanel{\(\lambda^+_+=0.10\)}
+{Waveform/PHI2/Q4_SPIN_04_Q0p1_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=4\) and \(\chi=0.4\).}
 \label{fig:phi2_catalog_q4_chi04}
@@ -683,9 +759,11 @@ cases we show the \((\ell,m)=(2,2)\) mode.
 \begin{figure}[p]
 \centering
 
-\fieldpanel{\(Q0p1,++\)}
+\fieldpanel{\(\lambda^+_+=0.10\)}
 {Waveform/PHI2/Q8_SPIN_02_Q0p1_pp_emda_prof_PHI2_l2_m2_r5.pdf}
 
 \caption{Extracted \(\Phi_2\) waveforms for \(q=8\) and \(\chi=0.2\).}
 \label{fig:phi2_catalog_q8_chi02}
 \end{figure}
+
+
