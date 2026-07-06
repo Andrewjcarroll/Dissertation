@@ -1,13 +1,19 @@
-\section{Wavelet adaptive mesh refinement}
-\label{sec:wavelet_amr}
+\section{Wavelet Adaptive Mesh Refinement}
+\label{sec:wamr}
 
 Dendro employs wavelet adaptive mesh refinement (WAMR) to construct a sparse representation of the evolved fields while maintaining resolution in regions where the solution contains significant spatial structure. The basic idea is to represent the computational domain using a hierarchy of nested dyadic grids. In one spatial dimension, these grids may be written as
 \begin{equation}
-    V_j = \left\{ x^{j,k} = 2^{-j} k\,\Delta x \right\},
+    V_j
+    =
+    \left\{
+        x^{j,k}
+        =
+        2^{-j} k\,\Delta x
+    \right\},
 \end{equation}
-where \(j\) denotes the refinement level, \(k\) indexes the points on that level, and \(\Delta x\) is the spacing on the coarsest grid. The grids are nested, so that points present on a coarse level also appear on all finer levels.
+where $j$ denotes the refinement level, $k$ indexes the points on that level, and $\Delta x$ is the spacing on the coarsest grid. The grids are nested, so points present on a coarse level also appear on all finer levels. The multidimensional AMR hierarchy used in the simulations is built from the same dyadic refinement idea.
 
-Figure~\ref{fig:wavelet_grid_hierarchy} illustrates this nested structure. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail spaces \(W_j\), which contain the information added when passing from level \(j-1\) to level \(j\).
+Figure~\ref{fig:wamr-grid-hierarchy} illustrates this nested structure in one dimension. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail spaces $W_j$, which contain the information added when passing from level $j-1$ to level $j$.
 
 \begin{figure}[t]
 \centering
@@ -46,14 +52,16 @@ Figure~\ref{fig:wavelet_grid_hierarchy} illustrates this nested structure. The b
     }
 \end{tikzpicture}
 \caption{
-Schematic illustration of nested dyadic grids used in wavelet adaptive mesh refinement. Points present on coarser grids are retained on finer grids, while the red points indicate the additional degrees of freedom introduced at each refinement level. These additional points correspond to the detail spaces \(W_j\).
+Schematic illustration of the nested dyadic grids used in wavelet adaptive mesh refinement. Points present on coarser grids are retained on finer grids, while the red points indicate the additional degrees of freedom introduced at each refinement level. These additional points correspond to the detail spaces $W_j$.
 }
-\label{fig:wavelet_grid_hierarchy}
+\label{fig:wamr-grid-hierarchy}
 \end{figure}
 
-Let \(u^{j,k}\) denote the value of a field \(u\) at the grid point \(x^{j,k}\). Since the grids are nested, values at points inherited from the previous level satisfy
+Let $u^{j,k}$ denote the value of a field $u$ at the grid point $x^{j,k}$. Since the grids are nested, values at points inherited from the previous level satisfy
 \begin{equation}
-    u^{j+1,2k} = u^{j,k}.
+    u^{j+1,2k}
+    =
+    u^{j,k}.
 \end{equation}
 The values at newly introduced points may be estimated by interpolation from the previous level,
 \begin{equation}
@@ -61,25 +69,26 @@ The values at newly introduced points may be estimated by interpolation from the
     =
     \sum_m h^{j+1,2k+1}_{j,m}\,u^{j,m},
 \end{equation}
-where \(h^{j+1,2k+1}_{j,m}\) are the interpolation weights.
+where $h^{j+1,2k+1}_{j,m}$ are the interpolation weights.
 
-Equivalently, this interpolation can be described in terms of scaling functions. A basis function on level \(j\) may be represented using basis functions on the finer level \(j+1\) as
+Equivalently, this interpolation can be described in terms of scaling functions. A basis function on level $j$ may be represented using basis functions on the finer level $j+1$ as
 \begin{equation}
     \phi_{j,k}(x)
     =
     \sum_l c^l\,\phi_{j+1,l}(x),
 \end{equation}
-where the coefficients \(c^l\) encode the interpolation stencil. This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A sparse representation of the field can therefore be written schematically as
+where the coefficients $c^l$ encode the interpolation stencil. This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A sparse representation of the field can therefore be written schematically as
 \begin{equation}
     u(x)
     =
-    \sum_{k \in S_0} u^{0,k}\,\phi_{0,k}(x)
+    \sum_{k \in S_0}
+    u^{0,k}\,\phi_{0,k}(x)
     +
     \sum_{j=1}^{J}
     \sum_{k \in S_j}
-    d^{j,k}\,\phi_{j,k}(x),
+    d^{j,k}\,\psi_{j,k}(x),
 \end{equation}
-where \(S_0\) denotes the set of retained points on the coarsest level, \(S_j\) denotes the set of retained detail points on level \(j\), and \(d^{j,k}\) are the wavelet coefficients.
+where $S_0$ denotes the set of retained points on the coarsest level, $S_j$ denotes the set of retained detail points on level $j$, $d^{j,k}$ are the wavelet coefficients, and $\psi_{j,k}$ denotes the corresponding detail basis function.
 
 The wavelet coefficient at a detail point is computed by comparing the actual field value to the value predicted by interpolation from the previous refinement level,
 \begin{equation}
@@ -89,18 +98,18 @@ The wavelet coefficient at a detail point is computed by comparing the actual fi
     -
     P\!\left(x^{j,k},j-1\right),
 \end{equation}
-where \(P(x^{j,k},j-1)\) denotes the interpolated value obtained from level \(j-1\). Thus, the coefficient \(d^{j,k}\) measures the local interpolation error associated with omitting the point \(x^{j,k}\). Points for which the interpolation error is small can be discarded without significantly changing the represented field, while points with large wavelet coefficients are retained. In practice, refinement is controlled by a tolerance \(\epsilon\), and points are retained when
+where $P(x^{j,k},j-1)$ denotes the interpolated value obtained from level $j-1$. Thus, the coefficient $d^{j,k}$ measures the local interpolation error associated with omitting the point $x^{j,k}$. Points for which the interpolation error is small can be discarded without significantly changing the represented field, while points with large wavelet coefficients are retained. In practice, refinement is controlled by a tolerance $\varepsilon$, and points are retained when, schematically,
 \begin{equation}
-    |d^{j,k}| > \epsilon.
+    |d^{j,k}| > \varepsilon .
 \end{equation}
 This criterion provides an efficient adaptive representation: smooth regions of the solution are represented using relatively few points, while regions containing sharp gradients, wave propagation, or strong-field structure are refined automatically.
 
-\section{Sobolev-informed refinement}
-\label{sec:sobolev_refinement}
+\section{Sobolev-Informed Refinement}
+\label{sec:sobolev-amr}
 
 In addition to the standard wavelet criterion, we also consider a Sobolev-inspired modification of the refinement indicator. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
 
-For a given evolved variable \(u\), the standard wavelet refinement indicator may be denoted by
+For a given evolved variable $u$, the standard wavelet refinement indicator may be denoted by
 \begin{equation}
     I_{\mathrm{W}}(u).
 \end{equation}
@@ -115,235 +124,156 @@ This quantity represents the usual WAMR estimate based on the magnitude of the l
         +
         w_2 I_{\nabla^2 u}^2
     },
-    \label{eq:sobolev_indicator}
+    \label{eq:sobolev-amr-indicator}
 \end{equation}
-where \(I_{\nabla u}\) is a local first-derivative indicator, \(I_{\nabla^2 u}\) is a local second-derivative indicator, and \(w_1\) and \(w_2\) are user-controlled weights. The first-derivative term increases refinement in regions with large gradients, while the second-derivative term increases refinement in regions with large curvature or rapidly changing gradients.
+where $I_{\nabla u}$ is a local first-derivative indicator, $I_{\nabla^2 u}$ is a local second-derivative indicator, and $w_1$ and $w_2$ are user-controlled weights. Any required normalization of the derivative indicators is absorbed into these weights. The first-derivative term increases refinement in regions with large gradients, while the second-derivative term increases refinement in regions with large curvature or rapidly changing gradients.
 
-This refinement measure should be interpreted as a \emph{Sobolev-inspired} or \emph{Sobolev-weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. By contrast, Eq.~\eqref{eq:sobolev_indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet-based refinement algorithm.
+This refinement measure should be interpreted as a \emph{Sobolev-inspired} or \emph{Sobolev-weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. By contrast, Eq.~\eqref{eq:sobolev-amr-indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet-based refinement algorithm.
 
-for the comparison between the baseline wavelet adaptive mesh refinement criterion and the Sobolev-informed refinement criterion described in Sec.~\ref{sec:sobolev_refinement}. The purpose is to compare not only the constraint behavior of the two refinement strategies, but also the computational cost associated with the resulting adaptive meshes.
+The following figures compare the baseline wavelet adaptive mesh refinement criterion with the Sobolev-informed refinement criterion. These diagnostics compare both the constraint behavior of the two refinement strategies and the computational cost associated with the resulting adaptive meshes.
 
-The following figures show additional comparisons between the
-baseline wavelet adaptive mesh refinement criterion and the Sobolev-informed
-refinement criterion described in Sec.~\ref{sec:sobolev_refinement}. These
-diagnostics compare both the constraint behavior of the two refinement strategies
-and the computational cost associated with the resulting adaptive meshes.
-
-Figure~\ref{fig:appendix_sobolev_mesh_comparison} shows a representative
-side-by-side comparison of the adaptive mesh structure produced by the two
-refinement criteria. The Sobolev-informed criterion modifies the local refinement
-indicator by including derivative information, which changes the distribution of
-refined regions relative to the baseline wavelet criterion.
+Figure~\ref{fig:sobolev-amr-mesh-comparison} shows a representative side-by-side comparison of the adaptive mesh structure produced by the two refinement criteria. The Sobolev-informed criterion modifies the local refinement indicator by including derivative information, which changes the distribution of refined regions relative to the baseline wavelet criterion.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Appendix/sobolev_wamr_labeled_side_by_side.pdf}
 \caption{
-Representative comparison of the adaptive mesh generated by the baseline wavelet
-AMR criterion and the Sobolev-informed AMR criterion. The Sobolev-informed
-criterion includes derivative information in the refinement indicator, which
-changes where grid points are allocated. The ripling ring is the location of the diploe pulse proagating outward. 
+Representative comparison of the adaptive mesh generated by the baseline wavelet AMR criterion and the Sobolev-informed AMR criterion. The Sobolev-informed criterion includes derivative information in the refinement indicator, which changes where grid points are allocated. The oscillatory ring corresponds to the outward-propagating dipole pulse.
 }
-\label{fig:appendix_sobolev_mesh_comparison}
+\label{fig:sobolev-amr-mesh-comparison}
 \end{figure}
 
-Figure~\ref{fig:appendix_sobolev_constraints} shows the divergence constraints
-for the electric and vector-potential fields. These quantities provide a direct
-measure of the constraint violation during the evolution. The comparison shows
-how the Sobolev-informed refinement criterion affects the constraint-preserving
-behavior of the evolution relative to the baseline wavelet criterion.
+Figure~\ref{fig:sobolev-amr-constraints} shows the divergence constraints for the electric and vector-potential fields. These quantities provide a direct measure of the constraint violation during the evolution. The comparison shows how the Sobolev-informed refinement criterion affects the constraint-preserving behavior of the evolution relative to the baseline wavelet criterion.
 
 \begin{figure}[t]
 \centering
 
-\subfloat[\(L_2\) norm of \(\nabla_i E^i\).]{%
+\subfloat[$L_2$ norm of $\nabla_i E^i$.]{%
     \includegraphics[width=0.48\textwidth]{Figures/Appendix/DivE_wavelet_tolerance_comparison.pdf}%
-    \label{fig:appendix_sobolev_dive}%
+    \label{fig:sobolev-amr-dive}%
 }
 \hfill
-\subfloat[\(L_2\) norm of \(\nabla_i A^i\).]{%
+\subfloat[$L_2$ norm of $\nabla_i A^i$.]{%
     \includegraphics[width=0.48\textwidth]{Figures/Appendix/DivA_wavelet_tolerance_comparison.pdf}%
-    \label{fig:appendix_sobolev_diva}%
+    \label{fig:sobolev-amr-diva}%
 }
 
 \caption{
-Constraints for the baseline wavelet AMR and Sobolev-informed AMR
-refinement criteria. The left panel shows the \(L_2\) norm of the electric-field
-divergence constraint, while the right panel shows the corresponding divergence
-for the vector potential. These quantities are used to assess whether
-the modified refinement indicator improves or degrades the constraint behavior of
-the evolution.
+Constraints for the baseline wavelet AMR and Sobolev-informed AMR refinement criteria. The left panel shows the $L_2$ norm of the electric-field divergence constraint, while the right panel shows the corresponding divergence for the vector potential. These quantities are used to assess whether the modified refinement indicator improves or degrades the constraint behavior of the evolution.
 }
-\label{fig:appendix_sobolev_constraints}
+\label{fig:sobolev-amr-constraints}
 \end{figure}
 
-Figure~\ref{fig:appendix_sobolev_efficiency} compares the number of active mesh
-points and the grid-efficiency. The number of active mesh points,
-\(N_{\mathrm{mesh}}\), measures the size of the adaptive grid and is therefore a
-proxy for the computational cost of the evolution. A refinement strategy that
-achieves comparable or smaller constraint violations using fewer mesh points is
-more efficient.
+Figure~\ref{fig:sobolev-amr-efficiency} compares the number of active mesh points and a measure of the grid-efficiency. The number of active mesh points, $N_{\mathrm{mesh}}$, measures the size of the adaptive grid and is therefore a proxy for the computational cost of the evolution. A refinement strategy that achieves comparable or smaller constraint violations using fewer mesh points is more efficient.
 
-To quantify this tradeoff, we define a grid-efficiency
+To quantify this tradeoff, we define the grid efficency as:
 \begin{equation}
     \eta
     =
     \frac{1}{C_{\mathrm{tot}} N_{\mathrm{mesh}}^2},
-    \label{eq:grid_efficiency}
+    \label{eq:sobolev-amr-grid-efficiency}
 \end{equation}
-where \(C_{\mathrm{tot}}\) is the total constraint measure and
-\(N_{\mathrm{mesh}}\) is the number of active mesh points. In this work, the
-total constraint measure is constructed from the divergence constraints as
+where $C_{\mathrm{tot}}$ is the total constraint measure and $N_{\mathrm{mesh}}$ is the number of active mesh points. In this work, the total constraint measure is constructed from the divergence constraints as
 \begin{equation}
     C_{\mathrm{tot}}
     =
-    C_{\nabla E} + C_{\nabla A},
-    \label{eq:total_constraint_sum}
+    C_{\nabla E}
+    +
+    C_{\nabla A},
+    \label{eq:sobolev-amr-total-constraint}
 \end{equation}
-where \(C_{\nabla E}\) and \(C_{\nabla A}\) denote the \(L_2\) norms of the
-corresponding divergences. With this definition, larger values of
-\(\eta\) indicate that a simulation achieves smaller constraint violation for a
-given mesh size. The factor of \(N_{\mathrm{mesh}}^2\) penalizes simulations
-that reduce the constraint violation only by using substantially more grid
-points.
+where $C_{\nabla E}$ and $C_{\nabla A}$ denote the $L_2$ norms of the corresponding divergences. With this definition, larger values of $\eta$ indicate that a simulation achieves smaller constraint violation for a given mesh size. The factor of $N_{\mathrm{mesh}}^2$ penalizes simulations that reduce the constraint violation only by using substantially more grid points.
 
 \begin{figure}[t]
 \centering
 
-\subfloat[Number of active meshes.]{%
+\subfloat[Number of active mesh points.]{%
     \includegraphics[width=0.48\textwidth]{Figures/Appendix/mesh_size_wavelet_tolerance_comparison.pdf}%
-    \label{fig:appendix_sobolev_mesh_size}%
+    \label{fig:sobolev-amr-mesh-size}%
 }
 \hfill
 \subfloat[Grid-efficiency.]{%
     \includegraphics[width=0.48\textwidth]{Figures/Appendix/grid_efficiency_wavelet_tolerance_comparison.pdf}%
-    \label{fig:appendix_sobolev_grid_efficiency}%
+    \label{fig:sobolev-amr-grid-efficiency}%
 }
 
 \caption{
-Mesh-size and grid-efficiency for the baseline wavelet AMR and
-Sobolev-informed AMR refinement criteria. The left panel shows the number of
-active mesh points \(N_{\mathrm{mesh}}\), which serves as a proxy for
-computational cost. The right panel shows the grid-efficiency 
-\(\eta = 1/(C_{\mathrm{tot}}N_{\mathrm{mesh}}^2)\). Larger values of \(\eta\)
-indicate smaller constraint violation for a given mesh size, and therefore a
-more efficient use of grid points.
+Mesh size and grid-efficiency for the baseline wavelet AMR and Sobolev-informed AMR refinement criteria. The left panel shows the number of active mesh points $N_{\mathrm{mesh}}$, which serves as a proxy for computational cost. The right panel shows $\eta = 1/(C_{\mathrm{tot}}N_{\mathrm{mesh}}^2)$. Larger values of $\eta$ indicate smaller constraint violation for a given mesh size, and therefore a more efficient use of grid points.
 }
-\label{fig:appendix_sobolev_efficiency}
+\label{fig:sobolev-amr-efficiency}
 \end{figure}
 
-
-
 \section{Performance of the Code}
-\label{sec:code_performance}
-\subsection{Constraint quantities}
+\label{sec:code-performance}
 
-We monitor the constraint violations throughout the evolution.
-In particular, we compute the $L_2$ norms of the Hamiltonian and momentum
-constraints, together with the electromagnetic constraints.
-When evaluating these norms, we excise small neighborhoods around the punctures
-to avoid unduly weighting them by these regions. Representative
-constraint violations for the full simulation are shown in
-Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
+\subsection{Constraint Quantities}
+\label{sec:performance-constraints}
 
-% ---------------------------------------------------------
-% Constraint violations over the full simulation
-% ---------------------------------------------------------
+We monitor the constraint violations throughout the evolution. In particular, we compute the $L_2$ norms of the Hamiltonian and momentum constraints, together with the electromagnetic constraints. When evaluating these norms, we excise small neighborhoods around the punctures to avoid allowing near-puncture behavior to dominate the constraint measure. Representative constraint violations for the full simulation are shown in Figs.~\ref{fig:perf-constraints-ham-mom} and \ref{fig:perf-constraints-em}.
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
   \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint
-  violation measured over the full simulation. The $L_2$ norm is normalized
-  by the number of grid points. The constraints remain controlled throughout
-  the evolution, including the merger phase.
+  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint violation measured over the full simulation. The constraints remain controlled throughout the evolution, including the merger phase.
   }
-  \label{fig:constraint_ham_mom}
+  \label{fig:perf-constraints-ham-mom}
 \end{figure}
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
   \caption{
-  The volume-weighted $L_2$ norms of the electromagnetic constraints measured
-  over the full simulation. These include the magnetic no-monopole constraint,
-  $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$.
+  The volume-weighted $L_2$ norms of the electromagnetic constraints measured over the full simulation. These include the magnetic no-monopole constraint, $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$.
   }
-  \label{fig:constraint_div_constraints}
+  \label{fig:perf-constraints-em}
 \end{figure}
 
-A full convergence study for binary black hole evolutions is computationally
-expensive and is therefore not attempted here. Instead, we assess the behavior
-of the code by varying two parameters that directly affect the adaptive mesh
-refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement
-level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our
-WAMR scheme applied to the coefficients of the wavelet expansion; it determines
-whether refinement or coarsening occurs. The maximum refinement level sets the
-finest grid spacing that can be reached in a simulation. We confirm that making
-these refinement criteria more stringent leads to a corresponding reduction in
-the constraint violations.
+A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $j_{\rm max}$. The wavelet tolerance is the threshold value applied to the coefficients of the wavelet expansion in the WAMR scheme; it determines whether refinement or coarsening occurs. The maximum refinement level sets the finest grid spacing that can be reached in a simulation. We confirm that making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
 
-The tests performed here use the first \(20M\) of a head-on evolution of two
-equal-mass, charged black holes. The black holes have an initial coordinate
-separation of \(16M\), individual masses \(m_1=m_2=0.50\), and charge-to-mass
-ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin
-\(\chi=0.4\) and are initially at rest. In computing the constraints,
-we again exclude a small neighborhood of each puncture from the calculation of
-the norms. Throughout this section, the constraint measure shown is the sum of
-the volume-weighted Hamiltonian constraint and the three volume-weighted
-momentum constraints. This provides a single for the overall
-constraint violation during the evolution.
+The tests performed here use the first $20M$ of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses $m_1=m_2=0.50$, and charge-to-mass ratios $q_1/m_1=q_2/m_2=0.1$. Both black holes have dimensionless spin $\chi=0.4$ and are initially at rest. In computing the constraints, we again exclude a small neighborhood of each puncture from the calculation of the norms. Throughout this section, the constraint measure shown is the sum of the volume-weighted Hamiltonian constraint and the three volume-weighted momentum constraints. This provides a single measure of the overall constraint violation during the evolution.
 
-Comparisons of simulations with different wavelet tolerances are shown in
-Figure~\ref{fig:constraint_wavelet_tolerance}. Decreasing $\varepsilon$ allows
-the grid to refine more aggressively in regions with larger truncation error.
-For the three wavelet tolerances
-\(\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}\),
-the constraints decrease as $\varepsilon$ is lowered.
+Comparisons of simulations with different wavelet tolerances are shown in Fig.~\ref{fig:perf-wavelet-tolerance}. Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error. For the three wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$, the constraints decrease as $\varepsilon$ is lowered.
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
   \caption{
-  The sum of the volume-weighted Hamiltonian and momentum constraint violations
-  over the first \(20M\) of a head-on evolution of two equal-mass charged black
-  holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
-  \(\chi=0.4\). The simulations use wavelet tolerances
-  \(\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}\)
-  and a maximum refinement level of \(\ell_{\rm max}=15\). Lowering the wavelet
-  tolerance improves the resolution of dynamically important regions and
-  reduces the overall constraint violation.
+  The sum of the volume-weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations use wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ and a maximum refinement level of $j_{\rm max}=15$. Lowering the wavelet tolerance improves the resolution of dynamically important regions and reduces the overall constraint violation.
   }
-  \label{fig:constraint_wavelet_tolerance}
+  \label{fig:perf-wavelet-tolerance}
 \end{figure}
 
-Comparing simulations with different maximum refinement levels provides another
-way to test resolution dependence in an AMR setting.
-Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum
-refinement levels \(\ell_{\rm max} \in \{14,15,16,17\}\), corresponding to
-finest grid spacings
-\(h \in \{0.0325,0.0162,0.00813,0.00407\}\), respectively. Increasing the
-allowed maximum depth provides additional resolution near the black holes and
-in regions where the fields develop sharp spatial structures. The resulting
-decrease in the constraints provides further evidence that the simulations
-improve with increased resolution.
+Comparing simulations with different maximum refinement levels provides another way to test resolution dependence in an AMR setting. Figure~\ref{fig:perf-maxdepth} compares simulations with maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
   \caption{
-  The sum of the volume-weighted Hamiltonian and momentum constraint violations
-  over the first \(20M\) of a head-on evolution of two equal-mass charged black
-  holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
-  \(\chi=0.4\). The simulations compare maximum refinement levels
-  \(\ell_{\rm max} \in \{14,15,16,17\}\), corresponding to finest grid spacings
-  \(h \in \{0.0325,0.0162,0.00813,0.00407\}\), respectively. The wavelet
-  tolerance is fixed at \(\varepsilon=1\times10^{-5}\). Increasing the maximum
-  refinement level reduces the overall constraint violation by allowing
-  additional grid refinement in under-resolved regions.
+  The sum of the volume-weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations compare maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. The wavelet tolerance is fixed at $\varepsilon=1\times10^{-5}$. Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under-resolved regions.
   }
-  \label{fig:constraint_maxdepth}
+  \label{fig:perf-maxdepth}
 \end{figure}
 
+\subsection{Inspiral Constraint Quantities}
+\label{sec:performance-inspiral-constraints}
 
+We also monitor the constraint violations for an inspiraling binary. Figure~\ref{fig:perf-inspiral-ham-mom} shows the Hamiltonian and momentum constraint violations for the $q=1$, $\chi=0.4$, $\lambda_{+}^{+}=0.3$ case, while Fig.~\ref{fig:perf-inspiral-em} shows the corresponding electromagnetic constraints. These indicators provide a representative measure of the constraint behavior during the inspiral and merger for a charged binary configuration.
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_2/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
+  \caption{
+  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint violation measured over the full inspiral simulation. The $L_2$ norm is normalized by the volume of the grid. This representative case has $q=1$, $\chi=0.4$, and $\lambda_{+}^{+}=0.3$.
+  }
+  \label{fig:perf-inspiral-ham-mom}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_2/emda_prof_Constraints_DivE_DivB.pdf}
+  \caption{
+  The volume-weighted $L_2$ norms of the electromagnetic constraints measured over the full inspiral simulation. These include the magnetic no-monopole constraint, $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$. This representative case has $q=1$, $\chi=0.4$, and $\lambda_{+}^{+}=0.3$.
+  }
+  \label{fig:perf-inspiral-em}
+\end{figure}

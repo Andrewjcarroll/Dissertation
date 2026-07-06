@@ -1,4 +1,4 @@
-\chapter{EMDA Code Setup on MaryLou}
+\chapter{Running the EMDA Code on MaryLou}
 
 \section{Building \texttt{emda-gr}}
 To build \texttt{emda-gr}, the following external packages are required:
@@ -816,7 +816,7 @@ TPID_CENTER_OFFSET = {X = 0.0, Y = 0.0, Z = 0.0}
 
 For equal-mass binaries, this should usually be left at zero. For unequal-mass
 binaries, the system may need to be recentered so that the center of mass is
-located near the origin.
+located at the origin.
 
 \begin{verbatim}
 TPID_NPOINTS_A   = 40
@@ -825,8 +825,8 @@ TPID_NPOINTS_PHI = 20
 \end{verbatim}
 
 These parameters control the resolution of the TPID grid. The values shown here
-are reasonable defaults for initial testing, but higher values may be needed for
-more accurate initial data.
+are reasonable defaults for a q=1 black hole, but higher values may be needed for
+more accurate initial data and higher mass ratios.
 
 \begin{verbatim}
 TPID_GIVE_BARE_MASS = 1
