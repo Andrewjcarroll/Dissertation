@@ -184,7 +184,7 @@ We now describe the simulations of two broad classes of binary black holes in EM
 
 
 % ---------------------------------------------------------
-% Waveforms (stacked subfigures)
+% Waveforms (2x2 subfigure grid)
 % ---------------------------------------------------------
 \begin{figure}[!htbp]
   \centering
@@ -192,25 +192,32 @@ We now describe the simulations of two broad classes of binary black holes in EM
   \subfloat[Real part of the $(2,0)$ mode of $\Psi_4$ extracted at $R_{\mathrm{ex}} = 100M$.%
     \label{fig:gw_l2m0}%
   ]{%
-    \includegraphics[width=0.5\linewidth]{Figures/Chapter_1/emda_prof_GW_l2_m0_r5.pdf}%
-  }\\[0.4em]
-
+    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_GW_l2_m0_r5.pdf}%
+  }%
+  \hfill
   \subfloat[Real part of the $(2,0)$ mode of $\Phi_1$ extracted at $R_{\mathrm{ex}} = 100M$.%
     \label{fig:phi1_l2m0}%
   ]{%
-    \includegraphics[width=0.5\linewidth]{Figures/Chapter_1/emda_prof_PHI1_l2_m0_r5.pdf}%
-  }\\[0.4em]
+    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI1_l2_m0_r5.pdf}%
+  }%
+
+  \vspace{0.6em}
 
   \subfloat[Real part of the $(2,0)$ mode of $\Phi_2$ extracted at $R_{\mathrm{ex}} = 100M$.%
     \label{fig:phi2_l2m0}%
   ]{%
-    \includegraphics[width=0.5\linewidth]{Figures/Chapter_1/emda_prof_PHI2_l2_m0_r5.pdf}%
-  }
+    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI2_l2_m0_r5.pdf}%
+  }%
+  \hfill
+  \subfloat[Real part of the $(2,0)$ mode of $\phi$ extracted at $R_{\mathrm{ex}} = 100M$.%
+    \label{fig:dil_l2m0}%
+  ]{%
+    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_Dilaton_l2_m0_r5.pdf}%
+  }%
 
-  \caption{The real portions of the $(2,0)$ modes of the gravitational radiation $\Psi_4$, electromagnetic radiation $\Phi_1$, and $\Phi_2$, extracted at $R_{\mathrm{ex}} = 100M$ for a binary with charge-to-mass ratio $q_i/m_i = 0.1$, dimensionless spin $\chi = 0.4$, and an initial coordinate separation of $16M$.}
+  \caption{The real portions of the $(2,0)$ modes of the gravitational radiation $\Psi_4$, electromagnetic radiation $\Phi_1$ and $\Phi_2$, and dilaton field $\phi$, extracted at $R_{\mathrm{ex}} = 100M$ for a binary with charge-to-mass ratio $q_i/m_i = 0.1$, dimensionless spin $\chi = 0.4$, and an initial coordinate separation of $16M$.}
   \label{fig:waveforms_l2m0}
 \end{figure}
-
 
 \subsection{Initially Scalarized Black Holes}
 We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal-mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in two tables as Appendix~\ref{sec:appx:id}. 
@@ -230,7 +237,7 @@ final configuration. Indeed, with these calculated black hole values, we are abl
 % ---------------------------------------------------------
 \begin{figure}[!t]
   \centering
-  \includegraphics[width=\linewidth]{Figures/Chapter_1/combined_flux_linear.pdf}
+  \includegraphics[width=\linewidth]{Figures/Chapter_1/combined_flux_linear_with_inset.pdf}
   \caption{Plot of the radiated energy for the case $\chi = 0.4$ and $q_i/m_i = 0.1$.  The curves have been aligned such that $t = 0$ corresponds to the global maximum. On this plot the axion and dilaton radiation energy remain at least 3 orders of magnitude smaller than the GW or EM contributions}
   \label{fig:flux_chi02_Q05}
 \end{figure}
