@@ -1,7 +1,7 @@
 \section{Wave Extraction}
-\label{sec:app-waveex}
+\label{sec:app waveex}
 
-This appendix summarizes the wave-extraction procedure used for the gravitational, electromagnetic, dilaton, and axion radiation. The gravitational radiation is extracted from the Newman--Penrose scalar $\Psi_4$, while the electromagnetic radiation is extracted from the Maxwell Newman--Penrose scalars $\Phi_1$ and $\Phi_2$. We also define analogous outgoing scalar quantities for the dilaton and axion fields by projecting their gradients along an outgoing null direction.
+This appendix summarizes the wave extraction procedure used for the gravitational, electromagnetic, dilaton, and axion radiation. The gravitational radiation is extracted from the Newman--Penrose scalar $\Psi_4$, while the electromagnetic radiation is extracted from the Maxwell Newman--Penrose scalars $\Phi_1$ and $\Phi_2$. We also define analogous outgoing scalar quantities for the dilaton and axion fields by projecting their gradients along an outgoing null direction.
 
 \subsection{Null Tetrad and Spatial Triad}
 
@@ -10,9 +10,9 @@ The Newman--Penrose scalar $\Psi_4$ is defined by projecting the Weyl tensor ont
     \Psi_4
     =
     C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
-    \label{eq:app-waveex-psi4-def}
+    \label{eq:app waveex psi4-def}
 \end{equation}
-Here $C_{abcd}$ is the Weyl tensor, and $k^a$ and $\bar{m}^a$ are elements of a null tetrad. The tetrad is constructed from the future-directed unit normal $n^a$ to the spatial hypersurface and an orthonormal spatial triad $r^a$, $\theta^a$, and $\varphi^a$, which asymptotically approach the usual radial, polar, and azimuthal directions. We define
+Here $C_{abcd}$ is the Weyl tensor, and $k^a$ and $\bar{m}^a$ are elements of a null tetrad. The tetrad is constructed from the future directed unit normal $n^a$ to the spatial hypersurface and an orthonormal spatial triad $r^a$, $\theta^a$, and $\varphi^a$, which asymptotically approach the usual radial, polar, and azimuthal directions. We define
 \begin{equation}
 \begin{aligned}
     l^a
@@ -21,7 +21,7 @@ Here $C_{abcd}$ is the Weyl tensor, and $k^a$ and $\bar{m}^a$ are elements of a 
     \\
     k^a
     &=
-    \frac{1}{\sqrt{2}}\left(n^a-r^a\right),
+    \frac{1}{\sqrt{2}}\left(n^a r^a\right),
     \\
     m^a
     &=
@@ -29,9 +29,9 @@ Here $C_{abcd}$ is the Weyl tensor, and $k^a$ and $\bar{m}^a$ are elements of a 
     \\
     \bar{m}^a
     &=
-    \frac{1}{\sqrt{2}}\left(\theta^a-i\varphi^a\right).
+    \frac{1}{\sqrt{2}}\left(\theta^a i\varphi^a\right).
 \end{aligned}
-\label{eq:app-waveex-null-tetrad}
+\label{eq:app waveex null tetrad}
 \end{equation}
 With metric signature $(-,+,+,+)$, these vectors satisfy
 \begin{equation}
@@ -39,9 +39,9 @@ With metric signature $(-,+,+,+)$, these vectors satisfy
     \qquad
     m^a \bar{m}_a = 1,
 \end{equation}
-with all other tetrad inner products vanishing. In this appendix, $l^a$ denotes the null tetrad vector, while $\ell$ is reserved for the spherical-harmonic mode index.
+with all other tetrad inner products vanishing. In this appendix, $l^a$ denotes the null tetrad vector, while $\ell$ is reserved for the spherical harmonic mode index.
 
-In practice, the spatial triad is constructed from coordinate vectors that approach the spherical-coordinate basis vectors in the wave zone. We begin with
+In practice, the spatial triad is constructed from coordinate vectors that approach the spherical coordinate basis vectors in the wave zone. We begin with
 \begin{equation}
 \begin{aligned}
     u^a &= (0,x,y,z),
@@ -92,12 +92,12 @@ The orthonormal triad is then obtained by Gram--Schmidt orthonormalization:
         \right|
     }.
 \end{aligned}
-\label{eq:app-waveex-spatial-triad}
+\label{eq:app waveex spatial triad}
 \end{equation}
 
 \subsection{Gravitational Radiation}
 
-The Weyl tensor is the trace-free part of the spacetime curvature. In four dimensions, the Riemann tensor has twenty independent components. Ten of these are determined by the Ricci tensor, while the remaining ten are contained in the Weyl tensor. The Weyl tensor therefore captures the part of the curvature associated with tidal and radiative degrees of freedom.
+The Weyl tensor is the trace free part of the spacetime curvature. In four dimensions, the Riemann tensor has twenty independent components. Ten of these are determined by the Ricci tensor, while the remaining ten are contained in the Weyl tensor. The Weyl tensor therefore captures the part of the curvature associated with tidal and radiative degrees of freedom.
 
 In $n$ spacetime dimensions, with $n\geq 4$, the Weyl tensor is
 \begin{equation}
@@ -126,7 +126,7 @@ In $n$ spacetime dimensions, with $n\geq 4$, the Weyl tensor is
         g_{ad}g_{cb}
     \right)R .
 \end{aligned}
-\label{eq:app-waveex-weyl-nd}
+\label{eq:app waveex weyl nd}
 \end{equation}
 In four dimensions, this reduces to
 \begin{equation}
@@ -155,7 +155,7 @@ In four dimensions, this reduces to
         g_{ad}g_{cb}
     \right)R .
 \end{aligned}
-\label{eq:app-waveex-weyl-4d}
+\label{eq:app waveex weyl-4d}
 \end{equation}
 The Weyl tensor has the same index symmetries as the Riemann tensor:
 \begin{equation}
@@ -195,7 +195,7 @@ is related to $\Psi_4$ by
     i\ddot{h}_\times
     =
     \ddot{h},
-    \label{eq:app-waveex-psi4-strain}
+    \label{eq:app waveex psi4-strain}
 \end{equation}
 up to the overall sign convention chosen for the null tetrad. Therefore, the strain may be obtained by integrating $\Psi_4$ twice in time:
 \begin{equation}
@@ -204,9 +204,9 @@ up to the overall sign convention chosen for the null tetrad. Therefore, the str
     \int^t dt'
     \int^{t'} dt''\,
     \Psi_4(t'') .
-    \label{eq:app-waveex-strain-integral}
+    \label{eq:app waveex strain integral}
 \end{equation}
-In practice, this integration must be performed carefully because direct time-domain integration can introduce secular drifts. Frequency-domain methods, including fixed-frequency integration, are often used to control low-frequency numerical artifacts.
+In practice, this integration must be performed carefully because direct time domain integration can introduce secular drifts. Frequency domain methods, including fixed frequency integration, are often used to control low frequency numerical artifacts.
 
 \subsection{Electromagnetic, Dilaton, and Axion Radiation}
 
@@ -221,12 +221,12 @@ The outgoing electromagnetic radiation is extracted using Newman--Penrose scalar
         +
         \bar{m}^a m^b
     \right),
-    \label{eq:app-waveex-phi1-def}
+    \label{eq:app waveex phi1-def}
     \\
     \Phi_2
     &=
     F_{ab}\bar{m}^a k^b .
-    \label{eq:app-waveex-phi2-def}
+    \label{eq:app waveex phi2-def}
 \end{align}
 At large radius, $\Phi_2$ represents the outgoing radiative electromagnetic degree of freedom.
 
@@ -239,128 +239,12 @@ We define analogous outgoing scalar quantities for the dilaton and axion fields 
     \mathcal{A}
     =
     l^a\nabla_a\kappa .
-    \label{eq:app-waveex-scalar-radiation}
+    \label{eq:app waveex scalar radiation}
 \end{equation}
 Here $\mathcal{D}$ and $\mathcal{A}$ denote the extracted dilaton and axion radiation variables, respectively.
 
 \subsection{Multipolar Decomposition}
 
-At an extraction radius $R_{\mathrm{ex}}$, each radiative quantity is decomposed into spin-weighted spherical harmonics with the appropriate spin weight:
-\begin{align}
-    \Psi_4(t,\theta,\varphi)
-    &=
-    \sum_{\ell,m}
-    \Psi_4^{\ell m}(t)\,
-    {}_{-2}Y_{\ell m}(\theta,\varphi),
-    \label{eq:app-waveex-psi4-decomp}
-    \\
-    \Phi_1(t,\theta,\varphi)
-    &=
-    \sum_{\ell,m}
-    \Phi_1^{\ell m}(t)\,
-    {}_{0}Y_{\ell m}(\theta,\varphi),
-    \label{eq:app-waveex-phi1-decomp}
-    \\
-    \Phi_2(t,\theta,\varphi)
-    &=
-    \sum_{\ell,m}
-    \Phi_2^{\ell m}(t)\,
-    {}_{-1}Y_{\ell m}(\theta,\varphi),
-    \label{eq:app-waveex-phi2-decomp}
-    \\
-    \mathcal{D}(t,\theta,\varphi)
-    &=
-    \sum_{\ell,m}
-    \mathcal{D}^{\ell m}(t)\,
-    {}_{0}Y_{\ell m}(\theta,\varphi),
-    \label{eq:app-waveex-dilaton-decomp}
-    \\
-    \mathcal{A}(t,\theta,\varphi)
-    &=
-    \sum_{\ell,m}
-    \mathcal{A}^{\ell m}(t)\,
-    {}_{0}Y_{\ell m}(\theta,\varphi).
-    \label{eq:app-waveex-axion-decomp}
-\end{align}
-The strain is decomposed similarly as
-\begin{equation}
-    h(t,\theta,\varphi)
-    =
-    \sum_{\ell,m}
-    h_{\ell m}(t)\,
-    {}_{-2}Y_{\ell m}(\theta,\varphi).
-    \label{eq:app-waveex-strain-decomp}
-\end{equation}
-For each gravitational-wave mode, Eq.~\eqref{eq:app-waveex-psi4-strain} implies
-\begin{equation}
-    \Psi_4^{\ell m}(t)
-    =
-    \ddot{h}_{\ell m}(t),
-\end{equation}
-or equivalently
-\begin{equation}
-    h_{\ell m}(t)
-    =
-    \int^t dt'
-    \int^{t'} dt''\,
-    \Psi_4^{\ell m}(t'') .
-\end{equation}
-Waveform comparisons in this work primarily use the dominant $(\ell,m)=(2,2)$ mode.
-
-\subsection{Radiated Energy Fluxes}
-
-The radiated energy fluxes in the gravitational, electromagnetic, dilaton, and axion channels are computed from the multipolar amplitudes. Following Ref.~\cite{Zilhao2012}, we use
-\begin{align}
-    F_{\mathrm{GW}}
-    &=
-    \frac{dE_{\mathrm{GW}}}{dt}
-    =
-    \lim_{r\to\infty}
-    \frac{r^2}{16\pi}
-    \sum_{\ell,m}
-    \left|
-        \int_{-\infty}^{t}
-        \Psi_4^{\ell m}(t')\,dt'
-    \right|^2,
-    \label{eq:app-waveex-gw-flux}
-    \\
-    F_{\mathrm{EM}}
-    &=
-    \frac{dE_{\mathrm{EM}}}{dt}
-    =
-    \lim_{r\to\infty}
-    \frac{r^2}{4\pi}
-    \sum_{\ell,m}
-    \left|
-        \Phi_2^{\ell m}(t)
-    \right|^2,
-    \label{eq:app-waveex-em-flux}
-    \\
-    F_{\mathrm{D}}
-    &=
-    \frac{dE_{\mathrm{D}}}{dt}
-    =
-    \lim_{r\to\infty}
-    \frac{r^2}{4\pi}
-    \sum_{\ell,m}
-    \left|
-        \mathcal{D}^{\ell m}(t)
-    \right|^2,
-    \label{eq:app-waveex-dilaton-flux}
-    \\
-    F_{\mathrm{A}}
-    &=
-    \frac{dE_{\mathrm{A}}}{dt}
-    =
-    \lim_{r\to\infty}
-    \frac{r^2}{4\pi}
-    \sum_{\ell,m}
-    \left|
-        \mathcal{A}^{\ell m}(t)
-    \right|^2 .
-    \label{eq:app-waveex-axion-flux}
-\end{align}
-In numerical simulations, these quantities are evaluated at finite extraction radii. The expressions above should therefore be interpreted as asymptotic large-radius definitions, with the finite-radius values serving as numerical approximations.
 
 \subsection{Relation to the \texorpdfstring{$3+1$}{3+1} Variables}
 
@@ -377,7 +261,7 @@ In numerical relativity, $\Psi_4$ is computed from quantities defined on spatial
     K_{ik}K_{jl}
     -
     K_{il}K_{jk},
-    \label{eq:app-waveex-gauss}
+    \label{eq:app waveex gauss}
 \end{equation}
 \begin{equation}
     \gamma^a{}_{i}
@@ -389,7 +273,7 @@ In numerical relativity, $\Psi_4$ is computed from quantities defined on spatial
     D_j K_{ik}
     -
     D_i K_{jk},
-    \label{eq:app-waveex-codazzi}
+    \label{eq:app waveex codazzi}
 \end{equation}
 and
 \begin{equation}
@@ -403,11 +287,11 @@ and
     K_{ik}K^k{}_{j}
     +
     \frac{1}{\alpha}D_iD_j\alpha .
-    \label{eq:app-waveex-ricci}
+    \label{eq:app waveex ricci}
 \end{equation}
-These identities allow the spacetime curvature appearing in Eq.~\eqref{eq:app-waveex-psi4-def} to be expressed in terms of $3+1$ quantities on each slice.
+These identities allow the spacetime curvature appearing in Eq.~\eqref{eq:app waveex psi4-def} to be expressed in terms of $3+1$ quantities on each slice.
 
-After substituting the Gauss--Codazzi relations, $\Psi_4$ can be written in terms of spatial curvature and extrinsic-curvature quantities. A common schematic form is
+After substituting the Gauss--Codazzi relations, $\Psi_4$ can be written in terms of spatial curvature and extrinsic curvature quantities. A common schematic form is
 \begin{equation}
 \begin{aligned}
     \Psi_4
@@ -430,11 +314,11 @@ After substituting the Gauss--Codazzi relations, $\Psi_4$ can be written in term
     \right)
     r^c \bar{m}^b \bar{m}^d ,
 \end{aligned}
-\label{eq:app-waveex-psi4-3plus1}
+\label{eq:app waveex psi4-3plus1}
 \end{equation}
-where the precise signs depend on the conventions used for the Riemann tensor, the extrinsic curvature, and the null tetrad. In non-vacuum evolutions, matter terms may also enter when the curvature is rewritten using the field equations. The important point is that $\Psi_4$ can be evaluated from the spatial geometry, the extrinsic curvature, and their derivatives on each time slice.
+where the precise signs depend on the conventions used for the Riemann tensor, the extrinsic curvature, and the null tetrad. In non vacuum evolutions, matter terms may also enter when the curvature is rewritten using the field equations. The important point is that $\Psi_4$ can be evaluated from the spatial geometry, the extrinsic curvature, and their derivatives on each time slice.
 
-For BSSN-type formulations, the extrinsic curvature is decomposed as
+For BSSN type formulations, the extrinsic curvature is decomposed as
 \begin{equation}
     K_{ij}
     =
@@ -444,9 +328,9 @@ For BSSN-type formulations, the extrinsic curvature is decomposed as
         +
         \frac{1}{3}\tilde{\gamma}_{ij}K
     \right),
-    \label{eq:app-waveex-bssn-kij}
+    \label{eq:app waveex bssn kij}
 \end{equation}
-where $\tilde{\gamma}_{ij}$ is the conformal spatial metric, $\tilde{A}_{ij}$ is the trace-free conformal extrinsic curvature, $K$ is the trace of the extrinsic curvature, and $\chi$ is the conformal factor used in the evolution system. Equivalently, if $\gamma_{ij}=e^{4\phi}\tilde{\gamma}_{ij}$, then $\chi=e^{-4\phi}$.
+where $\tilde{\gamma}_{ij}$ is the conformal spatial metric, $\tilde{A}_{ij}$ is the trace free conformal extrinsic curvature, $K$ is the trace of the extrinsic curvature, and $\chi$ is the conformal factor used in the evolution system. Equivalently, if $\gamma_{ij}=e^{4\phi}\tilde{\gamma}_{ij}$, then $\chi=e^{-4\phi}$.
 
 The resulting expressions for the real and imaginary parts of $\Psi_4$ in terms of BSSN variables are lengthy. They are therefore evaluated directly in the code using the evolved variables and their spatial derivatives. Symbolically, one may write
 \begin{equation}
@@ -456,11 +340,11 @@ The resulting expressions for the real and imaginary parts of $\Psi_4$ in terms 
     +
     i\,\mathrm{Im}(\Psi_4),
 \end{equation}
-where the real and imaginary parts are obtained by projecting the curvature and extrinsic-curvature terms onto the complex dyad formed from $m^a$ and $\bar{m}^a$.
+where the real and imaginary parts are obtained by projecting the curvature and extrinsic curvature terms onto the complex dyad formed from $m^a$ and $\bar{m}^a$.
 
 \subsection{Waveform Mismatch}
 
-To quantify the similarity between two gravitational waveforms, we compute a mismatch. A purely numerical comparison measures the waveform difference directly, while a detector-based comparison weights the difference by the noise curve of a particular detector.
+To quantify the similarity between two gravitational waveforms, we compute a mismatch. A purely numerical comparison measures the waveform difference directly, while a detector based comparison weights the difference by the noise curve of a particular detector.
 
 For two complex waveforms $h_1(t)$ and $h_2(t)$, a simple normalized overlap is
 \begin{equation}
@@ -476,22 +360,20 @@ For two complex waveforms $h_1(t)$ and $h_2(t)$, a simple normalized overlap is
             \langle h_2,h_2\rangle
         }
     },
-    \label{eq:app-waveex-time-overlap}
 \end{equation}
-where a simple time-domain inner product is
+where a simple time domain inner product is
 \begin{equation}
     \langle h_1,h_2\rangle
     =
     \int_{t_1}^{t_2}
     h_1(t)h_2^*(t)\,dt .
-    \label{eq:app-waveex-time-inner-product}
+    \label{eq:app waveex time inner product}
 \end{equation}
 The mismatch is then
 \begin{equation}
     \mathcal{M}
     =
-    1-\mathcal{O}.
-    \label{eq:app-waveex-mismatch-basic}
+    1-\mathcal{O}
 \end{equation}
 In practice, the overlap is maximized over relative time and phase shifts:
 \begin{equation}
@@ -513,11 +395,11 @@ In practice, the overlap is maximized over relative time and phase shifts:
             \langle h_2,h_2\rangle
         }
     } .
-    \label{eq:app-waveex-mismatch-maximized}
+    \label{eq:app waveex mismatch maximized}
 \end{equation}
 Here $h_2^{\Delta t,\Delta\phi}$ denotes the waveform $h_2$ shifted in time by $\Delta t$ and rotated by an overall phase $\Delta\phi$. This maximization removes trivial offsets in arrival time and phase, leaving a measure of the physical disagreement between the waveform shapes. A smaller mismatch indicates better agreement.
 
-For detector-weighted comparisons, one instead uses the frequency-domain inner product
+For detector weighted comparisons, one instead uses the frequency domain inner product
 \begin{equation}
     \left(h_1,h_2\right)
     =
@@ -528,9 +410,9 @@ For detector-weighted comparisons, one instead uses the frequency-domain inner p
     }{
         S_n(f)
     }\,df ,
-    \label{eq:app-waveex-noise-inner-product}
+    \label{eq:app waveex noise inner product}
 \end{equation}
-where $\tilde{h}(f)$ is the Fourier transform of $h(t)$ and $S_n(f)$ is the one-sided detector noise power spectral density. The detector-weighted overlap is
+where $\tilde{h}(f)$ is the Fourier transform of $h(t)$ and $S_n(f)$ is the one sided detector noise power spectral density. The detector weighted overlap is
 \begin{equation}
     \mathcal{O}
     =
@@ -542,7 +424,7 @@ where $\tilde{h}(f)$ is the Fourier transform of $h(t)$ and $S_n(f)$ is the one-
             \left(h_2,h_2\right)
         }
     },
-    \label{eq:app-waveex-noise-overlap}
+    \label{eq:app waveex noise overlap}
 \end{equation}
 again maximized over relative time and phase shifts. The corresponding mismatch is
 \begin{equation}
@@ -552,6 +434,6 @@ again maximized over relative time and phase shifts. The corresponding mismatch 
     -
     \max_{\Delta t,\Delta\phi}
     \mathcal{O}.
-    \label{eq:app-waveex-noise-mismatch}
+    \label{eq:app waveex noise mismatch}
 \end{equation}
-This detector-weighted mismatch is the more relevant quantity when assessing whether two waveforms could be distinguished by a particular gravitational-wave detector.
+This detector weighted mismatch is the more relevant quantity when assessing whether two waveforms could be distinguished by a particular gravitational wave detector.

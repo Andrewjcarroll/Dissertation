@@ -27,7 +27,7 @@
 
 \newcommand{\cmark}{{\color{green!60!black}\ding{51}}}
 \newcommand{\xmark}{{\color{red!70!black}\ding{55}}}
-% If you'd like to print your thesis using double-sided printing,
+% If you'd like to print your thesis using double sided printing,
 % remove the etd option and change the oneside argument to twoside, like this:
 %
 %\documentclass[twoside,masters]{BYUPhys}
@@ -44,17 +44,17 @@
 % Enter the year your thesis is approved (for senior thesis or capstone)
   \Year{[2026]}
 
-\Title{Black-Hole Dynamics in Einstein--Maxwell--Dilaton--Axion Theory and Compact Finite-Difference Methods}
+\Title{Black Hole Dynamics in Einstein Maxwell Dilaton Axion Theory and Compact Finite Difference Methods}
 % Your research advisor
 \AdvisorTitle{Advisors}
   \Advisor{Eric Hirschmann}
 
 % The text of your abstract
-\Abstract{This dissertation analyzes two complementary aspects of numerical relativity.  First, we generalize our numerical relativity code to evolve black holes in alternative theories of gravity.  In particular, we develop a numerical framework for studying black holes in Einstein--Maxwell--Dilaton--Axion theory.  Black holes in this theory can support additional scalar and pseudoscalar fields, or hair, that are not present for black holes in general relativity.  We present a new method for generating approximate binary black-hole initial data in EMDA theory and use head-on collisions to demonstrate the stability of charged black holes in this setting.  We then develop a modest catalog of inspiraling charged black-hole waveforms and compare these waveforms with general-relativistic reference waveforms.  These comparisons show that the additional fields can produce changes in the gravitational waveform, with differences that generally increase with charge. We then further explore the broader theory space within the EMDA theory. 
+\Abstract{This dissertation studies two complementary aspects of numerical relativity. First, we investigate extensions of general relativity by numerically simulating binary black hole mergers in alternative theories of gravity. In particular, we generalize our numerical relativity code to evolve black holes in Einstein Maxwell Dilaton Axion (EMDA) theory. Black holes in this theory can support additional scalar and pseudoscalar fields, or hair, that are absent in vacuum general relativity. We present a new method for generating approximate binary black hole initial data in EMDA theory and use head on collisions to demonstrate the stability of charged black holes in this setting. We then develop a modest catalog of inspiraling charged black hole waveforms and compare these waveforms with general relativistic reference waveforms. These comparisons show that the additional fields can modify the gravitational waveform, with differences that generally increase with charge. We also explore the broader EMDA theory space by varying the coupling parameters that control the interaction between the dilaton, axion, and electromagnetic fields.
 
-Second, we study compact finite-difference derivative operators for use in adaptive numerical simulations.  These operators are of interest because they have the potential to improve the accuracy and efficiency of numerical relativity calculations.  We construct several novel compact finite-difference operators and test their performance on a variety of problems, including the Maxwell equations, the nonlinear sigma model, and the BSSN equations.  These tests allow us to compare convergence, stability, and robustness across both linear and nonlinear systems.  We show that compact finite-difference operators can improve performance compared to their explicit counterparts.}
+Second, we study compact finite difference derivative operators for use in adaptive numerical simulations. These operators are of interest because they have the potential to improve the accuracy and efficiency of numerical relativity calculations. We construct several novel compact finite difference operators and test their performance on a variety of systems, including the Maxwell equations, the nonlinear sigma model, and the BSSN equations. These tests allow us to compare convergence, stability, and robustness across both linear and nonlinear problems. We show that compact finite difference operators can improve performance compared to their explicit finite difference counterparts.}
 
-\Keywords{Numerical relativity, alternative theories of gravity, black holes, gravitational waves, compact finite-difference methods, adaptive mesh refinement}
+\Keywords{Numerical relativity, alternative theories of gravity, black holes, gravitational waves, compact finite difference methods, adaptive mesh refinement}
 
 % Acknowledge those who helped and supported you
   \Acknowledgments{
@@ -90,16 +90,16 @@ Second, we study compact finite-difference derivative operators for use in adapt
 \chapter{Introduction}
 \include{Introduction}
 
-\chapter{Head-On Collisions and Stability Tests in EMDA Theory}
+\chapter{Head On Collisions and Stability Tests in EMDA Theory}
 \include{EMDA_Chapter_1}
 
-\chapter{Inspiraling Binary Black-Hole Waveforms in EMDA Theory}
+\chapter{Inspiraling Binary Black Hole Waveforms in EMDA Theory}
 \include{EMDA_Chapter_2}
 
 \chapter{Interpolating the EMDA Theory Space}
 \include{EMDA_Chapter_3}
 
-\chapter{Compact Finite-Difference Operators for Adaptive Simulations}
+\chapter{Compact Finite Difference Operators for Adaptive Simulations}
 \include{CFD_Chapter_1}
 
 \chapter{Conclusion}
@@ -109,6 +109,7 @@ Second, we study compact finite-difference derivative operators for use in adapt
 \begin{appendices}
 
 \chapter{Mathematical Overview}
+\label{app:math_overview}
 \include{Mathematical_overview}
 
 \chapter{EMDA Black Holes}
@@ -118,6 +119,7 @@ Second, we study compact finite-difference derivative operators for use in adapt
 \include{EMDA_Initital_data}
 
 \chapter{Computation of \texorpdfstring{$\Psi_4$}{Psi4}}
+\label{sec:appx:wave_extraction}
 \include{appendix_psi_4}
 
 \chapter{Dendro Notes}
