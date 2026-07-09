@@ -89,7 +89,10 @@ solutions. These solutions reduce to Kerr when the electromagnetic charge
 vanishes. In contrast to the Kerr--Newman solution of Einstein--Maxwell
 theory, the Kerr--Sen geometry is accompanied by nontrivial dilaton and
 axion fields whose structure is determined by the black hole charge and
-spin. We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindquist type coordinates. The metric takes the form
+spin. We now summarize the Kerr--Sen black-hole solution, which provides an exact rotating, charged black-hole solution of EMDA theory. This solution serves as a useful analytic reference for the charged rotating black holes we consider.
+
+\subsection{Kerr--Sen Black Holes}
+We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindquist type coordinates. The metric takes the form
 
 \begin{align}
 ds^2 &= -\left(1-\frac{2mr\cosh^2\alpha}{\rho^2}\right)dt^2 + \rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right) \notag \\
@@ -143,10 +146,12 @@ a &= \frac{J}{M}.
 With the aim of studying the nonlinear dynamics of EMDA in black hole
 collisions, we express EMDA as a Cauchy problem and evolve the
 metric using the BSSN formulation~\cite{Shibata1995_BSSN,
-Baumgarte1999_BSSN, Baumgarte2010}, supplemented by evolution equations for the electromagnetic, dilaton, and axion fields. We also employ puncture gauge conditions~\cite{Campanelli2006,Baker2006}. The full equations of motion and the $3+1$ decomposition are presented in the section below:
-\section{EMDA Equations of Motion}
-\label{sec:appx:eom}
+Baumgarte1999_BSSN, Baumgarte2010}, supplemented by evolution equations for the electromagnetic, dilaton, and axion fields. We also employ puncture gauge conditions~\cite{Campanelli2006,Baker2006}.
 
+For completeness, this section presents the full equations of motion and their $3+1$ decomposition.
+
+\section{EMDA Equations of Motion}
+\label{sec:eom}
 The action for EMDA in the Einstein frame is given as:
 \begin{equation}
 S=\int \mathrm{d}^4 x\,\sqrt{-g}
@@ -413,6 +418,39 @@ found in~\cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}.
 
 During the evolutions, we monitor the Hamiltonian and momentum constraints together with the electromagnetic divergence constraints throughout the computational domain. These quantities provide a global check on the consistency of the evolution and are used to assess the efficacy of the WAMR refinement parameters. Representative plots of the constraints and their violation are shown below:
 
+\subsection{Constraint quantities}
+
+We monitor the constraint violations throughout the evolution.
+In particular, we compute the $L_2$ norms of the Hamiltonian and momentum
+constraints, together with the electromagnetic constraints.
+When evaluating these norms, we excise small neighborhoods around the punctures
+to avoid unduly weighting them by these regions. Representative
+constraint violations for the full simulation are shown in
+Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
+
+% ---------------------------------------------------------
+% Constraint violations over the full simulation
+% ---------------------------------------------------------
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
+  \caption{
+  The Hamiltonian constraint $\mathcal{H}$ and summed momentum constraint
+  violation measured over the full simulation. The $L_2$ norm is taken with respect to the number of points  The constraints remain
+  controlled throughout the evolution, including the merger phase.
+  }
+  \label{fig:constraint_ham_mom}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
+  \caption{
+  The volume weighted $L_2$ norms of the electromagnetic constraints, namely the no-monopole constraint that involves the divergence of the magnetic field, $\nabla\cdot B$, and the Gauss constraint that invokes the divergence of the electric field.  Both are measured over the full simulation. 
+  }
+  \label{fig:constraint_divb}
+\end{figure}
 
 We also compute quasilocal quantities on apparent horizons using the
 \texttt{BHaHAHA} apparent horizon finder~\cite{Etienne2026BHaHAHA}, which
@@ -423,53 +461,38 @@ of the conservation of the black hole charges during the evolution.
 As a check on our overall numerical strategy, we perform a limited type of convergence study by varying both the wavelet
 tolerance and maximum refinement level for a short head on binary evolution.  We confirm that with increased numbers of refinement levels and tighter refinement criteria constraint violations are reduced.  
 The details of this study are presented below:
-\subsection{Constraint Quantities}
-\label{sec:performance constraints}
 
-We monitor the constraint violations throughout the evolution. In particular, we compute the $L_2$ norms of the Hamiltonian and momentum constraints, together with the electromagnetic constraints. When evaluating these norms, we excise small neighborhoods around the punctures to avoid allowing near puncture behavior to dominate the constraint measure. Representative constraint violations for the full simulation are shown in Figs.~\ref{fig:perf constraints ham mom} and \ref{fig:perf constraints em}.
+\subsection{Code performance}
+A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our WAMR scheme on the  coefficients of the wavelet expansion that determines whether refinement or coarsening occurs.  The maximum refinement level sets the largest number of refinement levels that can be obtained in a simulation.  We confirm that for both, making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
 
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-  \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint violation measured over the full simulation. The constraints remain controlled throughout the evolution, including the merger phase.
-  }
-  \label{fig:perf constraints ham mom}
-\end{figure}
+The tests done here use the first \(20M\) of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses of \(m_1=m_2=0.50\), and charge-to-mass ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin \(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics, we again exclude a small neighborhood of each puncture from calculation of the norms.
+Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single diagnostic for the overall constraint violation during the evolution.
 
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
-  \caption{
-  The volume weighted $L_2$ norms of the electromagnetic constraints measured over the full simulation. These include the magnetic no monopole constraint, $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$.
-  }
-  \label{fig:perf constraints em}
-\end{figure}
-
-A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $j_{\rm max}$. The wavelet tolerance is the threshold value applied to the coefficients of the wavelet expansion in the WAMR scheme; it determines whether refinement or coarsening occurs. The maximum refinement level sets the finest grid spacing that can be reached in a simulation. We confirm that making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
-
-The tests performed here use the first $20M$ of a head on evolution of two equal mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses $m_1=m_2=0.50$, and charge to mass ratios $q_1/m_1=q_2/m_2=0.1$. Both black holes have dimensionless spin $\chi=0.4$ and are initially at rest. In computing the constraints, we again exclude a small neighborhood of each puncture from the calculation of the norms. Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single measure of the overall constraint violation during the evolution.
-
-Comparisons of simulations with different wavelet tolerances are shown in Fig.~\ref{fig:perf wavelet tolerance}. Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error. For the three wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$, the constraints decrease as $\varepsilon$ is lowered.
+Comparisons of simulations with respect to different wavelet tolerances are shown in Figure~\ref{fig:constraint_wavelet_tolerance}.  Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error.  For the three different wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ we can see that the constraints are indeed reduced as $\varepsilon$ decreases.  
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
   \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head on evolution of two equal mass charged black holes with charge to mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations use wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ and a maximum refinement level of $j_{\rm max}=15$. Lowering the wavelet tolerance improves the resolution of dynamically important regions and reduces the overall constraint violation.
+  The sum of the volume weighted Hamiltonian and momentum constraint violations
+  over the first \(20M\) of a head-on evolution of two equal-mass charged
+  black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
+  \(\chi=0.4\). The simulations use wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6} \}$. These simulations were done with a maximum refinement level of $\ell_{\rm max} = 15$.
+  Lowering the wavelet tolerance improves the resolution of dynamically
+  important regions and reduces the overall constraint violation.
   }
-  \label{fig:perf wavelet tolerance}
+  \label{fig:constraint_wavelet_tolerance}
 \end{figure}
 
-Comparing simulations with different maximum refinement levels provides another way to test resolution dependence in an AMR setting. Figure~\ref{fig:perf maxdepth} compares simulations with maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
+Comparing simulations according to different maximum refinement levels is another means of changing the resolution in an AMR setting.  Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum refinement levels of $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325, 0.0162, 0.00813, 0.00407 \}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
   \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head on evolution of two equal mass charged black holes with charge to mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations compare maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. The wavelet tolerance is fixed at $\varepsilon=1\times10^{-5}$. Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under resolved regions.
+  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first \(20M\) of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin  \(\chi=0.4\) each. The simulations compare maximum refinement levels $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325,0.0162,0.00813,0.00407 \}$, respectively. The wavelet tolerance is set here to $\varepsilon = 1\times 10^{-5}$.  Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under-resolved regions.
   }
-  \label{fig:perf maxdepth}
+  \label{fig:constraint_maxdepth}
 \end{figure}
 
 \subsection{Initial Data}
@@ -494,8 +517,7 @@ respectively.  The latter, in EMDA, take the form
 \rho_E \equiv& \, 2\alpha_0 E^i D_i \phi + e^{2\alpha_0\phi} B^i D_i \kappa \\
 %
 \rho \equiv& \, \Pi^2 + (D\phi)^2
-+ e^{-2 \alpha_0 \phi}\big( E_i E^i + B_i B^i\big),  \nonumber\\
-&+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big(\Xi^2 + (D\kappa)^2\big), \\
++ e^{-2 \alpha_0 \phi}\big( E_i E^i + B_i B^i\big),  \nonumber + \tfrac{1}{4} e^{4 \alpha_1 \phi}\big(\Xi^2 + (D\kappa)^2\big), \\
 %
 S^i \equiv& 2 \Pi D^i \phi
 + 2 e^{-2 \alpha_0 \phi} \epsilon^{ijk} E_j B_k
@@ -583,23 +605,24 @@ for which we define
 \end{align}
 and where $m_i$, $q_i$ and $R_i$ here are the masses, electric charges and the coordinate distances from the origin of the BHs.  This is intended to correspond to two electrically charged BHs with the singular part of the conformal factor separated out with $u$ giving finite corrections, including the necessary corrections for the additional scalar fields. 
 
-On rearranging the Hamiltonian constraint in terms of $u$, we find 
-\begin{multline}
-    \partial_k\partial^k u = -\frac{1}{\bar{\kappa}} \Big(
-    \partial_a \bar{\kappa} \partial^a \bar{\kappa} 
-    - \partial_a \bar{\xi} \partial^a \bar{\xi} 
-    - \partial_a \psi \partial^a \psi \\
-    + \tfrac{1}{8} \psi^{-6} \bar{A}_{ij} \bar{A}^{ij}
-    + 2 \pi \psi^{6} \rho
-    \Big),
-\end{multline}
+Rearranging the Hamiltonian constraint in terms of $u$, we find
+\begin{equation}
+    \partial_k \partial^k u
+    =
+    -\frac{1}{\bar{\kappa}}
+    \left(
+        \partial_a \bar{\kappa} \partial^a \bar{\kappa}
+        - \partial_a \bar{\xi} \partial^a \bar{\xi}
+        - \partial_a \psi \partial^a \psi
+        + \frac{1}{8} \psi^{-6} \bar{A}_{ij} \bar{A}^{ij}
+        + 2\pi \psi^{6} \rho
+    \right).
+\end{equation}
 with
 \begin{equation}
-\begin{split}
-    \rho \equiv\;& \bigl[ \Pi^2 + (D\phi)^2 \bigr]
-    + e^{-2 \alpha_0 \phi}\big[ E_a E^a +  B_a  B^a\big] \\
-    &+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big[\Xi^2 + (D\kappa)^2\big].
-\end{split}
+    \rho \equiv \bigl[ \Pi^2 + (D\phi)^2 \bigr]
+    + e^{-2 \alpha_0 \phi}\big[ E_a E^a +  B_a  B^a\big]
+    + \tfrac{1}{4} e^{4 \alpha_1 \phi}\big[\Xi^2 + (D\kappa)^2\big].
 \end{equation}
 Using simplifying assumptions similar to above, namely a moment of time symmetry and neglecting the magnetic field, $\rho$ reduces to
 \begin{equation}
@@ -784,10 +807,10 @@ We now describe the simulations of two broad classes of binary black holes in EM
 \end{figure}
 
 \subsection{Initially Scalarized Black Holes}
-We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in two tables below:
+We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in subsection below:
 \subsection{Summary of Tests Done}
 \label{sec:appx:sim_tab}
-In addition to some of the tests mentioned in the main body of this paper, we have also performed a broader set of simulations to test how the late time dilaton and axion fields depend on the initial charges and spins of the binary components. In particular, we considered Kerr--Sen binaries with same sign and opposite sign charges, spin aligned and spin anti aligned configurations, as well as mergers involving neutral GR black holes. For binaries with opposite charges, the net charge vanishes and the remnant settles to a Kerr black hole, with neither a persistent dilaton nor axion field. For binaries with same sign charges but oppositely aligned spins, the axion field decays, while the dilaton field remains nontrivial, corresponding to an EMD like remnant. We further find that when charged, spinless black holes are merged with Kerr black holes, both axion and dilaton fields persist. Finally, we find that mergers of initially nonscalarized Kerr--Newman black holes produce remnants with both dilaton and axion hair. The configurations considered are summarized in Table~\ref{tab:bh_hair_combined}, where a green check mark indicates that the corresponding field remains persistent and nontrivial at late times.
+In addition to some of the tests mentioned earlier in the chapter, we have also performed a broader set of simulations to test how the late time dilaton and axion fields depend on the initial charges and spins of the binary components. In particular, we considered Kerr--Sen binaries with same sign and opposite sign charges, spin aligned and spin anti aligned configurations, as well as mergers involving neutral GR black holes. For binaries with opposite charges, the net charge vanishes and the remnant settles to a Kerr black hole, with neither a persistent dilaton nor axion field. For binaries with same sign charges but oppositely aligned spins, the axion field decays, while the dilaton field remains nontrivial, corresponding to an EMD like remnant. We further find that when charged, spinless black holes are merged with Kerr black holes, both axion and dilaton fields persist. Finally, we find that mergers of initially nonscalarized Kerr--Newman black holes produce remnants with both dilaton and axion hair. The configurations considered are summarized in Table~\ref{tab:bh_hair_combined}, where a green check mark indicates that the corresponding field remains persistent and nontrivial at late times.
 
 \begin{center}
 {\label{tab:bh_hair_combined}%
@@ -920,7 +943,7 @@ Figure~\ref{fig:unscalarized} illustrates the evolution of the scalar fields for
   }\\[0.5em]
 
   \subfloat[Dilaton\label{fig:unscalarized_dilaton}]{
-    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar dil.pdf}
+    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar-dil.pdf}
   }
 
   \caption{Scalar fields on the $z=0$ plane for Kerr--Newman black holes with

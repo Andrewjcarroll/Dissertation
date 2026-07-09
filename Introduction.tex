@@ -1,6 +1,6 @@
 \section{Introduction}
 Since Einstein introduced the theory of general relativity in 1915 \cite{Einstein1915}, 
-it has matched well with all experimental tests to date\cite{Will2014,Yunes2025GWTests}. 
+it has passed all observational tests to date\cite{Will2014,Yunes2025GWTests}. 
 General relativity has fundamentally transformed our understanding of space and time, 
 explaining phenomena ranging from the anomalous precession of Mercury to the operation 
 of atomic clocks in GPS satellites\cite{Ashby2003}, and predicting the existence of compact objects 
@@ -29,7 +29,7 @@ Simulating binary black hole mergers is computationally demanding. These simulat
 
 For standard general relativity (GR), substantial progress has been made in modeling binary black hole mergers, and extensive
 waveform catalogs now cover much of the binary black hole parameter space. In GR, the parameter space for binary black holes covers spin and mass ratio. Current catalogs have
-good coverage for near equal mass systems. Here we define the mass ratio as
+good coverage for near equal mass systems for a broad range of spins. Here we define the mass ratio as
 $q=M_{\mathrm{larger}}/M_{\mathrm{smaller}}\ge 1$. The LIGO  Virgo  KAGRA
 (LVK) collaboration has reported hundreds of compact binary candidates using waveform
 models informed by numerical relativity
@@ -49,9 +49,9 @@ would significantly amplify this cost \cite{Boyle2019,Black2025_ORBIT}.
     \label{fig:walltime}
 \end{figure}
 
-To obtain more accurate waveforms, new techniques are needed: running existing codes at higher resolution will be insufficent. A drawback of the brute force approach simply increasing resolution is that the timesteps must also have a corresponding reduction. This, in turn, requires more timesteps, significantly increasing the total runtime and computational expense of the simulation.
+To obtain more accurate waveforms, new techniques are needed: running existing codes at higher resolution will be insufficent. The drawback of the brute force approach simply increasing resolution is twofold. The first is that increasing the number of points inherently increases the simulations cost. The second is that the size of the steps we take in time must also have a corresponding reduction. This, in turn, requires more timesteps, significantly increasing the total runtime and computational expense of the simulation.
 
-One potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods although highly accurate are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. Across a variety of test problems, including the nonlinear sigma model, Maxwell's equations, and Einstein's equations, the compact finite difference schemes generally outperform the corresponding explicit methods.In some cases, the compact schemes achieve comparable accuracy to explicit schemes at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains limited \cite{Daszuta2023}.
+ For numerical relativity codes, spatial derivative operators are a major source of truncation error, since the evolution equations contain many derivative terms while algebraic operations are evaluated locally to roundoff accuracy. Therefore, one potential avenue for improving efficiency in numerical relativity codes lies in the computation of spatial derivatives. Most current implementations rely on explicit finite difference methods, while spectral methods although highly accurate are often difficult to implement. In this work, we explore compact finite difference (CFD) operators as an alternative. Compact schemes are implicit methods that can achieve higher spectral resolution than comparable explicit schemes \cite{Lele1992}. Across a variety of test problems, including the nonlinear sigma model, Maxwell's equations, and Einstein's equations, the compact finite difference schemes generally outperform the corresponding explicit methods.In some cases, the compact schemes achieve comparable accuracy to explicit schemes at approximately half the resolution. Despite their success in computational fluid dynamics and related fields, their use in numerical relativity remains relatively unexplored \cite{Daszuta2023}.
 
 In addition to the need for improved waveform modeling in GR, there is also a need for waveform models in alternative theories of gravity. Gravitational wave observations provide a powerful probe of gravity in the strongly nonlinear, dynamical regime, where deviations from general relativity (GR) may become apparent~\cite{Abbott2016,Abbott2025GWTC3GR,Yunes2025GWTests}. To search for such deviations, waveform templates from alternative theories of gravity are required~\cite{Yunes2009,Nair2019,Berti2015}. While studies have been carried out in theories such as Chern  Simons gravity~\cite{Alexander2009,Okounkova2019}, scalar  tensor theories~\cite{Barausse2013,Shibata2013,Berti2013,Palenzuela2014}, Einstein  Gauss  Bonnet gravity~\cite{Witek2019,Ripley2020b,East2021,Okounkova:2020rqw,Elley2022,Doneva2023sGB}, and Einstein  Maxwell  dilaton theory~\cite{Hirschmann2018,Julie2017}, waveform catalogs in these frameworks remain limited~\cite{Cardoso2012NRHEP,Corman2024NonlinearModificationsGR,Held2025}.
 
@@ -73,7 +73,7 @@ In standard general relativity simulations of binary black hole mergers, we cons
 \begin{equation}
 G_{ab} = 0.
 \end{equation}
-Although this equation appears innocuous, it represents a complex system of partial differential equations. In vacuum GR, these equations determine the spacetime geometry.
+Although this equation appears innocuous, it represents a complex system of partial differential equations. 
 
 The Einstein tensor $G_{ab}$ is constructed from the Ricci tensor $R_{ab}$, the metric tensor $g_{ab}$, and the Ricci scalar $R$ according to
 \begin{equation}
@@ -110,7 +110,7 @@ where $\Gamma^{a}{}_{bc}$ are the Christoffel symbols. These are determined by t
 \end{equation}
 Together, these relations show how the compact equation $G_{ab}=0$ encodes a system of nonlinear partial differential equations for the metric.
 
-Although these geometric definitions expose the underlying structure of the Einstein equations, they still do not immediately resemble the second order system of partial differential equations used in numerical evolution. The equations can be reformulated into a strongly hyperbolic system suitable for time evolution, together with a set of equations that constrain the solution. We defer a complete discussion and expanation of how these evolution equations are formulated into a set of coupled partial differential equations to the Appendix~\ref{app:math_overview}. A key point though is that these constraint equations, such as the Hamiltonian and momentum constraints, must be satisfied by the initial data. In numerical simulations the constraints are not satisfied exactly because of finite resolution and truncation error. However, for a consistent numerical method, the constraint violations should decrease with increasing resolution and vanish in the continuum limit.
+Although these geometric definitions expose the underlying structure of the Einstein equations, they still do not immediately resemble the second order system of partial differential equations used in numerical evolution. The equations can be reformulated into a strongly hyperbolic system of equations suitable for time evolution, together with a sperate set of elliptic equations that constrain the solution. We defer a complete discussion and expanation of how these evolution equations are formulated into a set of coupled partial differential equations to the Appendix~\ref{app:math_overview}. A key point we make here is that these constraint equations, which we call the Hamiltonian and momentum constraints, must be satisfied at all times. The Hamiltonian and momentum constraints can be loosely interpreted as the gravitational analogues of energy and momentum constraints on the initial data. The Hamiltonian constraint relates the intrinsic and extrinsic geometry of a spatial slice to the energy density on that slice, while the momentum constraints relate the extrinsic curvature to the momentum density. In this sense, they play a role analogous to enforcing the consistency of the energy and momentum content of the initial data, although they are not conservation laws in the ordinary Newtonian sense. This is important when we are setting the initial data these constraints must be respected. In numerical simulations the constraints are not satisfied exactly because of finite resolution and truncation error. However, for a consistent numerical method, the constraint violations should decrease with increasing resolution and vanish in the continuum limit.
 
 The preceding discussion is somewhat dense and we have skipped a few steps, so it is useful to consider a simpler example from Maxwell's equations. In vector notation, Maxwell's equations are
 \begin{align}
@@ -120,7 +120,7 @@ The preceding discussion is somewhat dense and we have skipped a few steps, so i
 \frac{\partial \mathbf{B}}{\partial t} &= - \nabla \times \mathbf{E}.
 \end{align}
 
-We present the full $3+1$ decomposition of Maxwell's equations in the Appendix~\ref{app:math_overview}. However, an important feature is already visible in this simpler form. There are eight scalar equations, but only six dynamical variables: $E_x$, $E_y$, $E_z$, $B_x$, $B_y$, and $B_z$. The remaining two equations constrain the allowed solutions.
+We present again the full $3+1$ decomposition of Maxwell's equations in tensor notation in the Appendix~\ref{app:math_overview}. However, an important feature is already visible in this form. There are eight scalar equations, but only six dynamical variables: $E_x$, $E_y$, $E_z$, $B_x$, $B_y$, and $B_z$. The remaining two equations constrain the allowed solutions.
 
 Maxwell's equations can therefore be separated into evolution equations,
 \begin{align}
@@ -141,21 +141,25 @@ The constraint equations may also be written as
 \mathcal{C}_B \equiv \nabla \cdot \mathbf{B} = 0.
 \end{equation}
 
-These equations illustrate an important feature of many systems of partial differential equations. The electric and magnetic fields cannot be chosen arbitrarily. Instead, the initial data must satisfy the constraint equations before the evolution equations can be used to advance the solution in time. If the constraints are satisfied initially, they are preserved by the continuum evolution. In numerical simulations, finite resolution introduces small constraint violations, which should converge to zero as the resolution is increased.
+These equations illustrate an important feature of many systems of partial differential equations. The electric and magnetic fields cannot be chosen arbitrarily. Instead, the initial data must satisfy the constraint equations before the evolution equations can be used to advance the solution in time. If the constraints are satisfied initially, they are preserved by the continuum evolution. 
 
-General relativity has the same mathematical structure. Einstein's equations can be separated into evolution equations and constraint equations, and only initial data that satisfy the constraints represent physically valid solutions. Constructing such initial data is known as solving the Cauchy problem. More generally, the Cauchy problem is the initial value formulation of a system of partial differential equations, in which one specifies data on an initial spatial hypersurface that satisfy the constraint equations and then uses the evolution equations to determine the future development of the system.
+General relativity has the same mathematical structure. As noted before, Einstein's equations can be separated into evolution equations and constraint equations. Therefore only initial data that satisfy the constraints represent physically valid solutions. Constructing such initial data is known as solving the Cauchy problem. More generally, the Cauchy problem is the initial value formulation of a system of partial differential equations, in which one specifies data on an initial spatial hypersurface that satisfy the constraint equations and then uses the evolution equations to determine the future development of the system.
 
-Solving the Cauchy problem for Einstein's equations is nontrivial. In GR, the analogs of Gauss's law and the no monopole constraint are the Hamiltonian and momentum constraints. These constraints can be interpreted loosely as conditions related to energy and momentum conservation, and they must be satisfied by the initial data before the system can be evolved. Established techniques exist for constructing such data. In this work, we use the Bowen York equations to ensure that the initial data satisfy the momentum constraints. The Hamiltonian constraint then reduces to an elliptic equation that must be solved numerically. Further details on this procedure are given in the later chapters on initial data.
+Solving the Cauchy problem for Einstein's equations is nontrivial. In GR, the analogs of Gauss's law and the no monopole constraint are the Hamiltonian and momentum constraints. These constraints can be interpreted loosely as conditions related to energy and momentum conservation, and they must be satisfied by the initial data before the system can be evolved. Established techniques exist for constructing such data. In this work, we use the Bowen York equations. The Bowen York equations are commonly used to ensure that the initial data satisfy the momentum constraints. The Hamiltonian constraint then reduces to an elliptic equation that must be solved numerically. Further details on this procedure are given in the later chapters.
 
-In EMDA theory, the Cauchy problem is further complicated by the presence of additional source terms. The stress energy tensor $T_{ab}$ encodes contributions from matter and nongravitational fields. In vacuum GR, this tensor vanishes, but in EMDA it includes contributions from the electromagnetic field, the dilaton, and the axion. Analytic single black hole solutions are known for special choices of the coupling parameters, such as $\alpha_0=\alpha_1=1$. However, numerical simulations allow us to vary these couplings and study how the resulting evolutions change. This dissertation addresses the challenges associated with constructing consistent initial data and evolving these systems numerically. For a more detailed discussion of the evolution equations and the mathematical machinery used to formulate them, see Appendix~\ref{app:math_overview}.
+In EMDA theory, the Cauchy problem is further complicated by the presence of additional source terms. The stress energy tensor $T_{ab}$ encodes contributions from matter and nongravitational fields. In vacuum GR, this tensor vanishes, but in EMDA it includes contributions from the electromagnetic field, the dilaton, and the axion. 
 
-Once suitable initial data have been constructed and the system has been evolved, we extract the gravitational waveform. In this work, we compute the waveform using the Newman  Penrose formalism, in which outgoing gravitational radiation is represented by the Weyl scalar $\Psi_4$ \cite{Newman1962}. Details of how $\Psi_4$ is calculated are provided in Appendix~\ref{sec:appx:wave_extraction}.
+%Analytic single black hole solutions are known for special choices of the coupling parameters. However, numerical simulations allow us to vary these couplings and study how the resulting evolutions change. This dissertation addresses the challenges associated with constructing consistent initial data and evolving these systems numerically. For a more detailed discussion of the evolution equations and the mathematical machinery used to formulate them, see Appendix~\ref{app:math_overview}.
 
-The scalar $\Psi_4$ is related to the gravitational wave strain $h=h_+ i h_\times$ by
+Once suitable initial data have been constructed and the system has been evolved, we extract the gravitational waveform. In this work, we compute the waveform using the Newman-Penrose formalism, in which outgoing gravitational radiation is represented by the Weyl scalar $\Psi_4$ \cite{Newman1962}. 
+
+$\Psi_4 $ is not what is measured directly by gravitational wave detectors but it is related. Details of how $\Psi_4$ is calculated are provided in Appendix~\ref{sec:appx:wave_extraction}.
+
+The scalar $\Psi_4$ is related to the gravitational wave strain by:
 \begin{equation}
 \Psi_4 = \frac{\partial^2 h}{\partial t^2},
 \end{equation}
-up to the sign conventions used for the null tetrad. From $\Psi_4$, we reconstruct the strain and compare simulated waveforms with one another and, in principle, with observed gravitational wave signals. To quantify the difference between two waveforms, we compute the mismatch:
+with the strain we can compare simulated waveforms with one another and, in principle, with observed gravitational wave signals. To quantify the difference between two waveforms, we compute the mismatch:
 we define the overlap and mismatch as:
 \begin{equation}
     \mathcal{O}
@@ -180,19 +184,22 @@ The mismatch is then
     \label{eq:app-waveex-mismatch-basic}
 \end{equation}
 \begin{equation}
-\mathrm{mismatch}(h_1,h_2) =    \max \mathcal{O}(h_1,h_2),
+\mathcal{M}(h_1,h_2) =    \max \mathcal{O}(h_1,h_2),
 \end{equation}
 
-where $\mathcal{O}$ is the normalized waveform overlap, and the maximum is taken over time shifts and polarization angles. The time shifts account for differences in the time of peak gravitational radiation, while the polarization angles account for rotations of the waveform polarization, equivalently phase rotations of the complex waveform.
+where $\mathcal{O}$ is the normalized waveform overlap, and the maximum is taken over time shifts and polarization angles. The time shifts account for differences in the chosen time origin of the simulations, or equivalently for small differences in the time at which the waveform reaches peak gravitational radiation. Since the absolute time coordinate is arbitrary, two otherwise identical waveforms should not be considered different simply because one is shifted slightly forward or backward in time. We therefore allow a relative time shift when computing the overlap.
+
+The polarization angle accounts for the arbitrary orientation of the waveform polarization basis. A polarization shift is equivalent to multiplying the complex waveform by an overall phase factor. Maximizing over this angle removes differences associated with the choice of polarization, rather than with the intrinsic dynamics of the binary.
 
 The mismatch can be used to estimate the signal to noise ratio required to distinguish two waveforms. In the small mismatch limit, this distinguishability threshold is approximately
 \begin{equation}
-\rho \sim \frac{1}{\sqrt{2 \mathrm{mismatch}(h_1,h_2)}}.
+\rho \sim \frac{1}{\sqrt{2 \mathcal{M}(h_1,h_2)}}.
 \end{equation}
 This estimate provides a useful way to interpret waveform differences, although it should not be regarded as an absolute detection criterion. In practice, interpreting differences between waveforms remains challenging because the parameter space is often degenerate. For example, it may not be immediately clear whether observed differences arise from spin, charge, or other physical effects.
-Improving the accuracy of waveform comparisons requires improving the numerical simulations that produce the waveforms. We therefore also present our work incorporating compact finite difference operators into our numerical relativity code. To begin, we review the finite difference methods currently used in the code.
 
-On a discrete grid, derivatives can be approximated using finite differences. For example, a second order accurate centered approximation to the first derivative is
+Improving the accuracy of waveform comparisons requires improving the numerical simulations that produce the waveforms. There are several approaches that can be taken to improve the accuracy of these simulations. As mentioned above, a significant source of truncation error comes from the numerical approximation of derivatives. We therefore also present our work incorporating compact finite-difference operators into our numerical relativity code. To begin, we review the finite-difference methods currently used in the code.
+
+On a discrete grid, derivatives can be approximated using finite differences. For example, a second-order accurate centered approximation to the first derivative is
 \begin{equation}
 \left.\frac{df}{dx}\right| _{i}
 =
@@ -209,7 +216,7 @@ Higher order accurate formulas can be constructed by matching Taylor series expa
 \end{equation}
 These finite difference approximations are standard tools for numerical solutions of partial differential equations \cite{BaumgarteShapiro2010}.
 
-The above examples are explicit finite difference schemes, since the derivative at grid point $i$ is computed directly from nearby function values. Alternatively, one can approximate the first derivative using a compact, or implicit, finite difference scheme of the form
+The above examples are explicit finite difference schemes, since the derivative at grid point $i$ is computed directly from nearby function values. The derivatives are relatively straightforward to derive and easy to implement. Alternatively, one can approximate the first derivative using a compact, or implicit, finite difference scheme of the form
 \begin{equation}
 \beta f'_{i-2} + \alpha f'_{i-1} + f'_i
 + \alpha f'_{i+1} + \beta f'_{i+2}
@@ -229,7 +236,7 @@ a + 2^2 b + 3^2 c &= 2\frac{3!}{2!}\left(\alpha + 2^2\beta \right),
 a + 2^4 b + 3^4 c &= 2\frac{5!}{4!}\left(\alpha + 2^4\beta \right),
 && \text{sixth order}.
 \end{align}
-This approach is more complex than an explicit finite difference stencil because the derivatives are obtained by solving an implicit system. The tradeoff is that compact schemes can provide improved accuracy and enhanced spectral resolution compared to explicit methods \cite{Lele1992}. This improvement in spectral resolution is illustrated in Fig.~\ref{fig:spectral_resolution}. There are many possible compact finite difference operators that can be constructed. In this work, we describe our methodology for identifying accurate and stable compact derivative operators and evaluate their performance relative to their explicit counterparts.
+This approach is more complex than an explicit finite difference stencil because the derivatives are obtained by solving an implicit system. The tradeoff is that compact schemes can provide improved accuracy and enhanced spectral resolution compared to explicit methods \cite{Lele1992}. This improvement in spectral resolution is illustrated in Fig.~\ref{fig:spectral_resolution}. There are many possible compact finite difference operators that can be constructed. In this work, we describe our methodology for deriving accurate and stable compact derivative operators and evaluate their performance relative to their explicit counterparts.
 
 \begin{figure}[t]
 \centering

@@ -4,7 +4,7 @@ The growing number of detected binary black-hole mergers provides an increasingl
 
 Numerical relativity plays an important role in this effort because the merger regime is highly nonlinear and theory dependent. However, numerical-relativity models for alternative theories of gravity are less mature than their general-relativistic counterparts. Simulating such theories presents several challenges. Some modified theories suffer from pathologies such as ill-posed evolution systems or ghost-like degrees of freedom associated with higher-derivative terms \cite{PapalloReall2017,KovacsReall2020,Woodard2015}. Numerical studies of these theories therefore require formulations in which the initial-value problem can be posed consistently and the subsequent evolution remains well behaved. In particular, one must construct suitable initial data and evolve the system in a way that controls the constraints.
 
-Many tests of gravity can be understood as constraints on additional structure that is absent in vacuum general relativity. Previous work has used gravitational-wave observations to bound higher-curvature corrections, placing limits on the length scales over which such terms can become important \cite{Nair2019,Perkins2021HigherCurvature,Yunes2025GWTests}. Other studies have considered constraints on black-hole charge \cite{Bozzola2021,ferreira2026electromagneticdualitydegeneracydynamical}, as well as tests based on black-hole shadows \cite{Sahoo2024PRD,Sahoo2025}. In this chapter, we investigate another possible extension: Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA theory contains, in addition to the metric and electromagnetic field, a scalar dilaton field and a pseudoscalar axion field. These additional degrees of freedom can modify the structure of charged black holes and may leave observable imprints on binary mergers and their emitted radiation \cite{Sen1992,Sen1995,Horne1992,Hirschmann2018}.
+Many tests of gravity can be understood as constraints on additional features that is absent in vacuum general relativity. As an example previous work has used gravitational-wave observations to bound higher-curvature corrections, placing limits on the length scales over which such terms can become important \cite{Nair2019,Perkins2021HigherCurvature,Yunes2025GWTests}. Other studies have considered constraints on black-hole charge \cite{Bozzola2021,ferreira2026electromagneticdualitydegeneracydynamical}, as well as tests based on black-hole shadows \cite{Sahoo2024PRD,Sahoo2025}. In this chapter, we investigate another possible extension: Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA theory contains, in addition to the metric and electromagnetic field, a scalar dilaton field and a pseudoscalar axion field. These additional degrees of freedom can modify the structure of charged black holes and may leave observable imprints on binary mergers and their emitted radiation \cite{Sen1992,Sen1995,Horne1992,Hirschmann2018}.
 
 Analytic black-hole solutions in EMDA-related theories are known for special choices of the coupling parameters. These include the Kerr--Sen black hole for $\alpha_0=\alpha_1=1$, Einstein--Maxwell--dilaton black holes for $\alpha_1=0$, and Kaluza--Klein black holes for $\alpha_0=\sqrt{3}$ \cite{Sen1992,Sen1995,Horne1992,Mignemi1993_ChargedStringBH}. The stability of Kerr--Sen black holes has recently been studied in both perturbative and fully nonlinear settings \cite{PopeRohrerWhiting2025,Carroll2026KerrSenStability}, and previous numerical work has explored portions of the EMD parameter space \cite{Hirschmann2018}. However, less is known about how varying the EMDA coupling parameters affects the nonlinear dynamics of binary black-hole mergers.
 
@@ -29,9 +29,9 @@ S = \int \mathrm{d}^4 x,\sqrt{-g}\Big[
 \end{aligned}
 \label{eq:emda_action}
 \end{equation}
-where $R$ is the Ricci scalar, $F_{ab}$ is the $U(1)$ field strength, and $({}^{*}F)_{ab}$ is its dual. The constants $\alpha_0$ and $\alpha_1$ determine the coupling strengths between the dilaton, axion, and electromagnetic field. In this chapter, we focus primarily on the one-parameter diagonal sector
+where $R$ is the Ricci scalar, $F_{ab}$ is the $U(1)$ field strength, and $(*F)_{ab}$ is its dual. The constants $\alpha_0$ and $\alpha_1$ determine the coupling strengths between the dilaton, axion, and electromagnetic field. In this chapter, we focus primarily on the one-parameter diagonal sector
 \begin{equation}
-\alpha_0=\alpha_1\equiv\alpha .
+\alpha_0=\alpha_1 .
 \end{equation}
 
 Different choices of $\alpha_0$ and $\alpha_1$ correspond to different members of this class of theories. The choice $(\alpha_0,\alpha_1)=(1,1)$ corresponds to the coupling values associated with the low-energy limit of heterotic string theory and admits the Kerr--Sen black-hole solution \cite{Sen1992,Sen1995}. Setting $\alpha_0 =1, \alpha_1=0$ gives an Einstein--Maxwell--dilaton-type system, with the Kaluza--Klein value corresponding to $\alpha_0=\sqrt{3}$ \cite{Horne1992,Mignemi1993_ChargedStringBH}. The case $(\alpha_0,\alpha_1)=(0,0)$ removes the exponential dilaton dependence from the Maxwell and axion kinetic terms and provides a useful reference point for comparison.
@@ -128,36 +128,36 @@ For the small charge considered in this study, we found that the dominant gravit
 
 These results suggest that coupling-dependent effects in the gravitational radiation are subtle at small charge. Because the simulations use approximate initial data, very small waveform differences may be dominated by relaxation effects, finite-resolution error, and waveform-extraction uncertainty rather than by physical coupling dependence. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to clearly separate physical effects from numerical and initial-data uncertainties.
 
-% \subsection{Mismatch summary}
+\subsection{Mismatch summary}
 
-% \begin{table}[t]
-% \centering
-% \begin{tabular}{lccc}
-% \hline
-% Theory & $q=0.05,\,+0$ & $q=0.05,\,+-$ & $q=0.05,\,++$ \\
-% \hline
-% EMD $(\alpha_0,\alpha_1)=(1,0)$
-% & $3.85\times 10^{-8}$
-% & $2.70\times 10^{-7}$
-% & $4.43\times 10^{-14}$ \\
-% EMD $(\alpha_0,\alpha_1)=(\sqrt{3},0)$
-% & $3.53\times 10^{-12}$
-% & $9.00\times 10^{-8}$
-% & $2.89\times 10^{-12}$ \\
-% EMDA $(\alpha_0,\alpha_1)=(1,1)$
-% & $2.59\times 10^{-8}$
-% & $6.08\times 10^{-8}$
-% & $4.92\times 10^{-14}$ \\
-% EMDA $(\alpha_0,\alpha_1)=(10,10)$
-% & $7.06\times 10^{-8}$
-% & $1.22\times 10^{-6}$
-% & $6.14\times 10^{-10}$ \\
-% EMDA $(\alpha_0,\alpha_1)=(100,100)$
-% & $9.62\times 10^{-6}$
-% & $4.42\times 10^{-5}$
-% & $3.91\times 10^{-6}$ \\
-% \hline
-% \end{tabular}
-% \caption{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational-wave mode.}
-% \label{tab:emda_coupling_mismatches}
-% \end{table}
+\begin{table}[t]
+\centering
+\begin{tabular}{lccc}
+\hline
+Theory & $q=0.05,\,+0$ & $q=0.05,\,+-$ & $q=0.05,\,++$ \\
+\hline
+EMD $(\alpha_0,\alpha_1)=(1,0)$
+& $3.85\times 10^{-8}$
+& $2.70\times 10^{-7}$
+& $4.43\times 10^{-14}$ \\
+EMD $(\alpha_0,\alpha_1)=(\sqrt{3},0)$
+& $3.53\times 10^{-12}$
+& $9.00\times 10^{-8}$
+& $2.89\times 10^{-12}$ \\
+EMDA $(\alpha_0,\alpha_1)=(1,1)$
+& $2.59\times 10^{-8}$
+& $6.08\times 10^{-8}$
+& $4.92\times 10^{-14}$ \\
+EMDA $(\alpha_0,\alpha_1)=(10,10)$
+& $7.06\times 10^{-8}$
+& $1.22\times 10^{-6}$
+& $6.14\times 10^{-10}$ \\
+EMDA $(\alpha_0,\alpha_1)=(100,100)$
+& $9.62\times 10^{-6}$
+& $4.42\times 10^{-5}$
+& $3.91\times 10^{-6}$ \\
+\hline
+\end{tabular}
+\caption{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational-wave mode.}
+\label{tab:emda_coupling_mismatches}
+\end{table}
