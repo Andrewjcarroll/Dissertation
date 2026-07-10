@@ -47,95 +47,100 @@ This construction ensures that $r^a$, $\theta^a$, and $\varphi^a$ are orthonorma
 
 \subsection{Gravitational Radiation}
 
-Gravitational radiation is extracted from the Newman--Penrose scalar $\Psi_4$, which is constructed from the Weyl tensor. The Weyl tensor is the trace free part of the spacetime curvature. In four dimensions, the Riemann tensor has twenty independent components. Ten are determined by the Ricci tensor, while the remaining ten are contained in the Weyl tensor. The Weyl tensor therefore captures the part of the curvature associated with tidal and radiative degrees of freedom.
+Gravitational radiation is extracted from the Newman--Penrose scalar $\Psi_4$, which is constructed from the Weyl tensor. The Weyl tensor is the trace free part of the spacetime curvature. In four dimensions, the Riemann tensor has twenty independent components. Ten are determined by the Ricci tensor, while the remaining ten are contained in the Weyl tensor. Thus, the Weyl tensor captures the part of the curvature associated with tidal fields and gravitational radiation.
 
 With the conventions used here, the four dimensional Weyl tensor is
 \begin{equation}
 \begin{aligned}
-    C_{abcd}
-    &=
-    R_{abcd}
-    +
-    \frac{1}{2}
-    \left(
-        g_{ad} R_{cb}
-        +
-        g_{bc} R_{da}
-        -
-        g_{ac} R_{db}
-        -
-        g_{bd} R_{ca}
-    \right)
-    \\
-    &\quad
-    +
-    \frac{1}{6}
-    \left(
-        g_{ac}g_{db}
-        -
-        g_{ad}g_{cb}
-    \right)R .
+C_{abcd}
+&=
+R_{abcd}
++
+\frac{1}{2}
+\left(
+g_{ad} R_{cb}
++
+g_{bc} R_{da}
+-
+g_{ac} R_{db}
+-
+g_{bd} R_{ca}
+\right)
+\
+&\quad
++
+\frac{1}{6}
+\left(
+g_{ac}g_{db}
+-
+g_{ad}g_{cb}
+\right)R .
 \end{aligned}
-\label{eq:app waveex weyl-4d}
+\label{eq:app_waveex_weyl_4d}
 \end{equation}
-It satisfies the same index symmetries as the Riemann tensor,
+The Weyl tensor satisfies the same index symmetries as the Riemann tensor,
 \begin{equation}
-    C_{abcd}
-    =
-    -C_{abdc}
-    =
-    -C_{bacd}
-    =
-    C_{cdab},
+C_{abcd}
+=
+-C_{bacd}
+=
+-C_{abdc}
+=
+C_{cdab},
 \end{equation}
-together with the cyclic identity
+and obeys the first Bianchi identity,
 \begin{equation}
-    C_{abcd}
-    +
-    C_{adbc}
-    +
-    C_{acdb}
-    =
-    0 .
+C_{abcd}
++
+C_{acdb}
++
+C_{adbc}
+=
+0 .
 \end{equation}
+Unlike the Riemann tensor, however, the Weyl tensor is trace free:
+\begin{equation}
+g^{ac}C_{abcd}=0.
+\end{equation}
+This trace free property removes the Ricci curvature components, leaving the part of the spacetime curvature not determined locally by the matter content through the Einstein equations.
 
 Projecting the Weyl tensor onto the outgoing null tetrad gives
 \begin{equation}
-    \Psi_4
-    =
-    C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
-    \label{eq:app waveex psi4-def-repeat}
+\Psi_4
+=
+C_{abcd} k^a \bar{m}^b k^c \bar{m}^d .
+\label{eq:app_waveex_psi4_def}
 \end{equation}
+
 At future null infinity, and for an appropriate outgoing tetrad, $\Psi_4$ encodes the outgoing gravitational radiation. With the convention used here, the complex strain is
 \begin{equation}
-    h
-    =
-    h_+
-    -
-    i h_\times ,
+h
+=
+h_+
+-
+i h_\times ,
 \end{equation}
-and is related to $\Psi_4$ by
+where $h_+$ and $h_\times$ are the two gravitational wave polarizations. It is related to $\Psi_4$ by
 \begin{equation}
-    \Psi_4
-    =
-    \ddot{h}_+
-    -
-    i\ddot{h}_\times
-    =
-    \ddot{h},
-    \label{eq:app waveex psi4-strain}
+\Psi_4
+=
+\ddot{h}*+
+-
+i\ddot{h}*\times
+=
+\ddot{h},
+\label{eq:app waveex psi4-strain}
 \end{equation}
-up to the overall sign convention chosen for the null tetrad. The strain can therefore be obtained by integrating $\Psi_4$ twice in time:
+up to the overall sign convention chosen for the null tetrad. Here an overdot denotes a derivative with respect to coordinate time, so that $\ddot{h}$ is the second time derivative of the strain. The strain can therefore be obtained by integrating $\Psi_4$ twice in time:
 \begin{equation}
-    h(t)
-    =
-    \int^t dt'
-    \int^{t'} dt''\,
-    \Psi_4(t'') .
-    \label{eq:app waveex strain integral}
+h(t)
+=
+\int^t dt'
+\int^{t'} dt'',
+\Psi_4(t'') .
+\label{eq:app waveex strain integral}
 \end{equation}
 In practice, this integration must be performed carefully because direct time domain integration can introduce secular drifts. We therefore use frequency domain integration methods, such as fixed frequency integration, to control low frequency numerical artifacts.
-
 
 \subsection{Electromagnetic, Dilaton, and Axion Radiation}
 

@@ -11,7 +11,15 @@ Dendro employs wavelet adaptive mesh refinement (WAMR) to construct a sparse rep
         2^{-j} k\,\Delta x
     \right\},
 \end{equation}
-where $j$ denotes the refinement level, $k$ indexes the points on that level, and $\Delta x$ is the spacing on the coarsest grid. The grids are nested, so points present on a coarse level also appear on all finer levels. The multidimensional AMR hierarchy used in the simulations is built from the same dyadic refinement idea.
+where $j$ denotes the refinement level, $k$ indexes the points on that level, and $\Delta x$ is the spacing on the coarsest grid. If the physical domain has length $L$ and the base grid $V_0$ contains $N+1$ points, then
+\begin{equation}
+    \Delta x = \frac{L}{N}.
+\end{equation}
+The grids are nested, so points present on a coarse level also appear on all finer levels. In particular, points with even index on level $j+1$ coincide with points on level $j$,
+\begin{equation}
+    x^{j+1,2k} = x^{j,k}.
+\end{equation}
+The multidimensional AMR hierarchy used in the simulations is built from the same dyadic refinement idea.
 
 Figure~\ref{fig:wamr grid hierarchy} illustrates this nested structure in one dimension. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail spaces $W_j$, which contain the information added when passing from level $j-1$ to level $j$.
 
@@ -69,15 +77,66 @@ The values at newly introduced points may be estimated by interpolation from the
     =
     \sum_m h^{j+1,2k+1}_{j,m}\,u^{j,m},
 \end{equation}
-where $h^{j+1,2k+1}_{j,m}$ are the interpolation weights.
+where $h^{j+1,2k+1}_{j,m}$ are the interpolation weights. In practice only a small number of these coefficients are nonzero. For the fourth order interpolation used here, the interior interpolation stencil is
+\begin{equation}
+    u^{j+1,2k+1}
+    =
+    -\frac{1}{16}u^{j,k-1}
+    +\frac{9}{16}u^{j,k}
+    +\frac{9}{16}u^{j,k+1}
+    -\frac{1}{16}u^{j,k+2}.
+\end{equation}
+Near physical boundaries the same interpolation idea is used, but the stencil is shifted so that it remains inside the domain, leading to modified one sided interpolation weights.
 
 Equivalently, this interpolation can be described in terms of scaling functions. A basis function on level $j$ may be represented using basis functions on the finer level $j+1$ as
 \begin{equation}
     \phi_{j,k}(x)
     =
-    \sum_l c^l\,\phi_{j+1,l}(x),
+    \sum_l c_l\,\phi_{j+1,l}(x),
 \end{equation}
-where the coefficients $c^l$ encode the interpolation stencil. This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A sparse representation of the field can therefore be written schematically as
+where the coefficients $c_l$ encode the interpolation stencil. For the fourth order stencil above, the corresponding nonzero two scale coefficients are
+\begin{equation}
+    c_l
+    =
+    \left\{
+        \ldots,
+        0,
+        -\frac{1}{16},
+        0,
+        \frac{9}{16},
+        1,
+        \frac{9}{16},
+        0,
+        -\frac{1}{16},
+        0,
+        \ldots
+    \right\}.
+\end{equation}
+Each basis function may be viewed as a scaled and translated copy of a single fundamental interpolating function,
+\begin{equation}
+    \phi_{j,k}(x)
+    =
+    \phi\!\left(\frac{2^j x}{\Delta x} - k\right).
+\end{equation}
+
+The nested nature of the grids introduces redundancy if basis functions are included for every point on every level. To avoid this, one introduces alternate grids $W_j$ for $j>0$, consisting only of the points that first appear at level $j$:
+\begin{equation}
+    W_j
+    =
+    \left\{
+        x^{j,k} : x^{j,k}=2^{-j}k\Delta x,
+        \quad k \ \mathrm{odd}
+    \right\}.
+\end{equation}
+Thus the collection $\{V_0,W_1,W_2,\ldots\}$ represents each grid point exactly once. The corresponding index sets are
+\begin{equation}
+    S_0 = \{0,1,\ldots,N\},
+    \qquad
+    S_j = \{1,3,\ldots,2^jN-1\},
+\end{equation}
+where $S_0$ labels the base grid and $S_j$ labels the detail points on level $j$.
+
+This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A field can be expanded as
 \begin{equation}
     u(x)
     =
@@ -86,9 +145,9 @@ where the coefficients $c^l$ encode the interpolation stencil. This nested basis
     +
     \sum_{j=1}^{J}
     \sum_{k \in S_j}
-    d^{j,k}\,\psi_{j,k}(x),
+    d^{j,k}\,\phi_{j,k}(x),
 \end{equation}
-where $S_0$ denotes the set of retained points on the coarsest level, $S_j$ denotes the set of retained detail points on level $j$, $d^{j,k}$ are the wavelet coefficients, and $\psi_{j,k}$ denotes the corresponding detail basis function.
+where $u^{0,k}$ are the base level field values and $d^{j,k}$ are the wavelet coefficients. This is the interpolating wavelet representation of the field. The first term gives the coarse representation on the base grid, while the remaining terms give the corrections required at successively finer levels.
 
 The wavelet coefficient at a detail point is computed by comparing the actual field value to the value predicted by interpolation from the previous refinement level,
 \begin{equation}
@@ -98,16 +157,53 @@ The wavelet coefficient at a detail point is computed by comparing the actual fi
     -
     P\!\left(x^{j,k},j-1\right),
 \end{equation}
-where $P(x^{j,k},j-1)$ denotes the interpolated value obtained from level $j-1$. Thus, the coefficient $d^{j,k}$ measures the local interpolation error associated with omitting the point $x^{j,k}$. Points for which the interpolation error is small can be discarded without significantly changing the represented field, while points with large wavelet coefficients are retained. In practice, refinement is controlled by a tolerance $\varepsilon$, and points are retained when, schematically,
+where $P(x^{j,k},j-1)$ denotes the interpolated value obtained from level $j-1$. Thus, the coefficient $d^{j,k}$ measures the local interpolation error associated with omitting the point $x^{j,k}$. This transformation from point values to wavelet coefficients is the forward wavelet transformation. It can be inverted by reconstructing the field values from the base level values and the wavelet coefficients.
+
+There are therefore two equivalent descriptions of the field on the multi level grid. The first is the point representation, given by the field values $\{u^{j,k}\}$. The second is the wavelet representation, given by the base values and wavelet coefficients,
+\begin{equation}
+    \{u^{0,k},d^{j,k}\}.
+\end{equation}
+The wavelet representation can be made sparse by discarding points whose wavelet coefficients are below a prescribed tolerance $\varepsilon$,
+\begin{equation}
+    |d^{j,k}| < \varepsilon .
+\end{equation}
+These discarded points are well approximated by interpolation from coarser levels. The retained points are called essential points, and all base level points are always retained. The field values on the essential points form the sparse point representation. For interpolating wavelets, thresholding the coefficients also provides an a priori control of the representation error, with constants determined by the interpolation basis.
+
+In practice, refinement is controlled by the tolerance $\varepsilon$, and detail points are retained when, schematically,
 \begin{equation}
     |d^{j,k}| > \varepsilon .
 \end{equation}
 This criterion provides an efficient adaptive representation: smooth regions of the solution are represented using relatively few points, while regions containing sharp gradients, wave propagation, or strong field structure are refined automatically.
 
+In higher dimensions the construction is extended by taking tensor products of the one dimensional basis functions. In three spatial dimensions,
+\begin{equation}
+    \phi_{j,\mathbf{k}}(x,y,z)
+    =
+    \phi_{j,k_x}(x)
+    \phi_{j,k_y}(y)
+    \phi_{j,k_z}(z),
+\end{equation}
+where $\mathbf{k}=(k_x,k_y,k_z)$. Equivalently, interpolation can be performed directly in multiple dimensions. Depending on the location of the new point relative to the previous level, the interpolation stencil may involve $p$, $p^2$, or $p^3$ points, where $p$ is the one dimensional interpolation order. The wavelet coefficient is again computed as the difference between the actual field value and the value interpolated from the previous level.
+
+The multidimensional wavelet expansion has the form
+\begin{equation}
+    u(x,y,z)
+    =
+    \sum_{\mathbf{k}}
+    u^{0,\mathbf{k}}\,
+    \phi_{0,\mathbf{k}}(x,y,z)
+    +
+    \sum_{j=1}^{J}
+    \sum_{\mathbf{k}}
+    d^{j,\mathbf{k}}\,
+    \phi_{j,\mathbf{k}}(x,y,z).
+\end{equation}
+As in one dimension, sparse refinement is obtained by retaining only those points whose wavelet coefficients exceed the chosen tolerance. This produces an adaptive multi level grid that concentrates resolution where the evolved fields are not accurately represented by interpolation from coarser levels.
+
 \section{Sobolev Informed Refinement}
 \label{sec:sobolev amr}
 
-In addition to the standard wavelet criterion, we also consider a Sobolev inspired modification of the refinement indicator. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
+In addition to the standard wavelet criterion, we also consider a Sobolev inspired modification of the refinement. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
 
 For a given evolved variable $u$, the standard wavelet refinement indicator may be denoted by
 \begin{equation}
@@ -201,79 +297,4 @@ where $C_{\nabla E}$ and $C_{\nabla A}$ denote the $L_2$ norms of the correspond
 Mesh size and grid efficiency for the baseline wavelet AMR and Sobolev informed AMR refinement criteria. The left panel shows the number of active mesh points $N_{\mathrm{mesh}}$, which serves as a proxy for computational cost. The right panel shows $\eta = 1/(C_{\mathrm{tot}}N_{\mathrm{mesh}}^2)$. Larger values of $\eta$ indicate smaller constraint violation for a given mesh size, and therefore a more efficient use of grid points.
 }
 \label{fig:sobolev amr efficiency}
-\end{figure}
-
-\section{Performance of the Code}
-\label{sec:code performance}
-
-\subsection{Constraint Quantities}
-\label{sec:performance constraints}
-
-We monitor the constraint violations throughout the evolution. In particular, we compute the $L_2$ norms of the Hamiltonian and momentum constraints, together with the electromagnetic constraints. When evaluating these norms, we excise small neighborhoods around the punctures to avoid allowing near puncture behavior to dominate the constraint measure. Representative constraint violations for the full simulation are shown in Figs.~\ref{fig:perf constraints ham mom} and \ref{fig:perf constraints em}.
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-  \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint violation measured over the full simulation. The constraints remain controlled throughout the evolution, including the merger phase.
-  }
-  \label{fig:perf constraints ham mom}
-\end{figure}
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
-  \caption{
-  The volume weighted $L_2$ norms of the electromagnetic constraints measured over the full simulation. These include the magnetic no monopole constraint, $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$.
-  }
-  \label{fig:perf constraints em}
-\end{figure}
-
-A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $j_{\rm max}$. The wavelet tolerance is the threshold value applied to the coefficients of the wavelet expansion in the WAMR scheme; it determines whether refinement or coarsening occurs. The maximum refinement level sets the finest grid spacing that can be reached in a simulation. We confirm that making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
-
-The tests performed here use the first $20M$ of a head on evolution of two equal mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses $m_1=m_2=0.50$, and charge to mass ratios $q_1/m_1=q_2/m_2=0.1$. Both black holes have dimensionless spin $\chi=0.4$ and are initially at rest. In computing the constraints, we again exclude a small neighborhood of each puncture from the calculation of the norms. Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single measure of the overall constraint violation during the evolution.
-
-Comparisons of simulations with different wavelet tolerances are shown in Fig.~\ref{fig:perf wavelet tolerance}. Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error. For the three wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$, the constraints decrease as $\varepsilon$ is lowered.
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
-  \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head on evolution of two equal mass charged black holes with charge to mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations use wavelet tolerances $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ and a maximum refinement level of $j_{\rm max}=15$. Lowering the wavelet tolerance improves the resolution of dynamically important regions and reduces the overall constraint violation.
-  }
-  \label{fig:perf wavelet tolerance}
-\end{figure}
-
-Comparing simulations with different maximum refinement levels provides another way to test resolution dependence in an AMR setting. Figure~\ref{fig:perf maxdepth} compares simulations with maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
-  \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first $20M$ of a head on evolution of two equal mass charged black holes with charge to mass ratio $q/m=0.1$ and dimensionless spin $\chi=0.4$. The simulations compare maximum refinement levels $j_{\rm max} \in \{14,15,16,17\}$, corresponding to finest grid spacings $h \in \{0.0325,0.0162,0.00813,0.00407\}$, respectively. The wavelet tolerance is fixed at $\varepsilon=1\times10^{-5}$. Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under resolved regions.
-  }
-  \label{fig:perf maxdepth}
-\end{figure}
-
-\subsection{Inspiral Constraint Quantities}
-\label{sec:performance inspiral constraints}
-
-We also monitor the constraint violations for an inspiraling binary. Figure~\ref{fig:perf inspiral ham mom} shows the Hamiltonian and momentum constraint violations for the $q=1$, $\chi=0.4$, $\lambda_{+}^{+}=0.3$ case, while Fig.~\ref{fig:perf inspiral em} shows the corresponding electromagnetic constraints. These indicators provide a representative measure of the constraint behavior during the inspiral and merger for a charged binary configuration.
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_2/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-  \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and the summed momentum constraint violation measured over the full inspiral simulation. The $L_2$ norm is normalized by the volume of the grid. This representative case has $q=1$, $\chi=0.4$, and $\lambda_{+}^{+}=0.3$.
-  }
-  \label{fig:perf inspiral ham mom}
-\end{figure}
-
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_2/emda_prof_Constraints_DivE_DivB.pdf}
-  \caption{
-  The volume weighted $L_2$ norms of the electromagnetic constraints measured over the full inspiral simulation. These include the magnetic no monopole constraint, $\nabla \cdot B$, and the electric Gauss constraint, $\nabla \cdot E$. This representative case has $q=1$, $\chi=0.4$, and $\lambda_{+}^{+}=0.3$.
-  }
-  \label{fig:perf inspiral em}
 \end{figure}

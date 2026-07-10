@@ -74,6 +74,8 @@ We then use the subsequent evolution to study how changing the coupling strength
 
 \subsection{Waveform comparison}
 
+\paragraph{Gravitational waves}
+
 We first compare the gravitational waveforms produced by the different coupling choices. For this comparison, we use the Einstein--Maxwell case, $(\alpha_0,\alpha_1)=(0,0)$, as the reference waveform and compare the dominant $(\ell,m)=(2,2)$ mode against the corresponding modes from the EMD and EMDA evolutions.
 
 For the charge considered here, the gravitational waveforms remain close to the Einstein--Maxwell reference waveform across all of the coupling choices. In most cases, the differences in the dominant strain are too small to interpret as clearly resolved coupling-dependent effects. Because the simulations use approximate initial data, the early relaxation of the black holes and surrounding fields can introduce waveform differences that are unrelated to the intended change in the coupling parameters. These effects, together with finite-resolution error, waveform-extraction error, and the short duration of the evolutions, likely dominate the very small differences observed among most of the runs.
@@ -88,6 +90,23 @@ Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the 
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/em_a0_0_a1_0_vs_emda_a0_100_a1_100_peak_aligned_hplus_notitle.pdf}
 \caption{Peak-aligned comparison of the dominant gravitational-wave strain between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the strongest-coupling EMDA case, $(\alpha_0,\alpha_1)=(100,100)$. The waveforms agree extremely well, the mismatch of this waveform is on the order of $10^{-5}$}
 \label{fig:em_vs_emda_hplus}
+\end{figure}
+ 
+\paragraph{Electromagnetic radiation}
+
+We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced in earlier chapters. Rather than computing a mismatch for these modes, we perform a direct comparison of the electromagnetic waveforms. The results show that the waveform differences increase as the coupling strengths are increased. The electromagnetic signal retains the same basic structure across the coupling choices, but its amplitude changes. We display the $++$ charge configuration here, although the other charge configurations show broadly similar behavior.
+
+\begin{figure}[t]
+\centering
+\subfloat[Real part of $\Phi_2^{22}$.]{
+\includegraphics[width=0.48\textwidth]{Figures/Chapter3/PHI2_l2_m2_r5_real.pdf}
+}
+\hfill
+\subfloat[Absolute difference relative to the Einstein--Maxwell case.]{
+\includegraphics[width=0.48\textwidth]{Figures/Chapter3/PHI2_l2_m2_r5_real_absdiff_vs_EM_log.pdf}
+}
+\caption{Comparison of the $(\ell,m)=(2,2)$ mode of the electromagnetic scalar $\Phi_2$, extracted at $R_{\mathrm{ex}}=100M$. The left panel shows the peak aligned real part of $\Phi_2^{22}$ across the coupling choices considered, while the right panel shows the absolute difference relative to the Einstein--Maxwell reference case, $(\alpha_0,\alpha_1)=(0,0)$, on a logarithmic scale.}
+\label{fig:phi2_l2m2_ch3}
 \end{figure}
 
 \subsection{Constraints}
@@ -119,13 +138,17 @@ The electromagnetic constraints remain bounded throughout the evolutions, indica
 
 \section{Conclusion}
 
-In this chapter, we studied binary black-hole mergers in a broader region of Einstein--Maxwell--dilaton--axion theory by varying the coupling parameters that control the interactions between the electromagnetic, dilaton, and axion fields. We focused primarily on the diagonal sector, $\alpha_0=\alpha_1$, and compared several representative coupling choices against the Einstein--Maxwell reference case. Because exact binary black-hole initial data are not available for these theories, we used approximate charged binary black-hole initial data and allowed the systems to relax dynamically before merger.
+In this chapter, we studied binary black hole mergers in a broader region of Einstein--Maxwell--dilaton--axion theory by varying the coupling parameters that control the interactions between the electromagnetic, dilaton, and axion fields. We focused primarily on the diagonal sector, $\alpha_0=\alpha_1$, and compared several representative coupling choices against the Einstein--Maxwell reference case. Because exact binary black hole initial data are not available for these theories, we used approximate charged binary black hole initial data and allowed the systems to relax dynamically before merger.
 
-The evolutions remained stable for the coupling choices considered here, and the electromagnetic and gravitational constraints remained controlled throughout the simulations. This provides evidence that the numerical framework can be used to explore binary black-hole dynamics beyond the analytically known special cases of EMDA theory. In particular, these simulations provide a first step toward studying how nonlinear merger dynamics depend on the theory's coupling parameters.
+The evolutions remained stable for the coupling choices considered here, and the electromagnetic and gravitational constraints remained controlled throughout the simulations. This provides evidence that the numerical framework can be used to explore binary black hole dynamics beyond the analytically known special cases of EMDA theory. In particular, these simulations provide a first step toward studying how nonlinear merger dynamics depend on the theory's coupling parameters.
 
-For the small charge considered in this study, we found that the dominant gravitational-wave signal is only weakly affected by the choice of coupling. The smaller-coupling EMD and EMDA cases remained effectively indistinguishable from the Einstein--Maxwell reference waveform at the accuracy of the present simulations. The strongest-coupling case, $(\alpha_0,\alpha_1)=(100,100)$, produced the largest departure from the reference waveform, but even this difference remained small in the dominant strain.
+For the small charge considered in this study, we found that the dominant gravitational wave signal is only weakly affected by the choice of coupling. The smaller coupling EMD and EMDA cases remained effectively indistinguishable from the Einstein--Maxwell reference waveform at the accuracy of the present simulations. The strongest coupling case, $(\alpha_0,\alpha_1)=(100,100)$, produced the largest departure from the reference waveform, but even this difference remained small in the dominant strain.
 
-These results suggest that coupling-dependent effects in the gravitational radiation are subtle at small charge. Because the simulations use approximate initial data, very small waveform differences may be dominated by relaxation effects, finite-resolution error, and waveform-extraction uncertainty rather than by physical coupling dependence. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to clearly separate physical effects from numerical and initial-data uncertainties.
+The electromagnetic radiation shows a clearer dependence on the coupling parameters. Rather than computing electromagnetic mismatches, we directly compared the radiative modes $\Phi_2$ against the Einstein--Maxwell reference case. These comparisons show that the electromagnetic waveform differences generally increase as the coupling strengths are increased. The overall structure of the electromagnetic signal remains similar across the coupling choices, but the amplitude changes. This behavior is shown for the $++$ charge configuration, with the other charge configurations exhibiting broadly similar patterns.
+
+Taken together, these results suggest that coupling dependent effects are subtle in the gravitational radiation at small charge, but are more visible in the electromagnetic sector. Because the simulations use approximate initial data, very small waveform differences may be affected by relaxation effects, finite resolution error, and waveform extraction uncertainty rather than only by physical coupling dependence. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to clearly separate physical effects from numerical and initial data uncertainties.
+
+Future work could potentially look at improving the initial data by adding axion contributions and improving the initial electric field used in the TPID solver. We could also perform higher charge or higher spin runs to test a wider range of Kerr--Sen configurations. Another study could examine different parts of the EMDA parameter space, including cases where the two couplings are not equal, $\alpha_0 \neq \alpha_1$.
 
 \subsection{Mismatch summary}
 
