@@ -25,7 +25,7 @@ Interpreting gravitational wave detections requires accurate theoretical models 
 \end{figure}
 Constructing theoretical models of binary black hole mergers is challenging because the relevant dynamics are strongly nonlinear and only partially accessible through analytic methods. In general relativity, exact analytic solutions are typically restricted to highly symmetric systems and cannot describe the full inspiral, merger, and ringdown of a generic binary black hole system. Numerical relativity therefore plays an essential role in modeling the late inspiral, merger, and ringdown, where fully nonlinear effects are important. A number of numerical relativity codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR Athena++, and Dendro GR \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,Daszuta2021_GRAthena,Fernando2023}.
 
-Simulating binary black hole mergers is computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations in three spatial and one time dimension, across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{BaumgarteShapiro2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
+Simulating binary black hole mergers is computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations in three spatial and one time dimension, across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{Baumgarte2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
 
 For standard general relativity (GR), substantial progress has been made in modeling binary black hole mergers, and extensive
 waveform catalogs now cover much of the binary black hole parameter space. In GR, the parameter space for binary black holes covers each black holes spin and the mass ratio of the system. Current catalogs have
@@ -33,7 +33,7 @@ good coverage for near equal mass systems for a broad range of spins. Here we de
 $q=M_{\mathrm{larger}}/M_{\mathrm{smaller}}\ge 1$. The LIGO  Virgo  KAGRA
 (LVK) collaboration has reported hundreds of compact binary candidates using waveform
 models informed by numerical relativity
-\cite{Abbott2019,GWTC3,GWTC4,Boyle2019}.Future gravitational wave detectors, such as the Einstein Telescope and Cosmic Explorer, are expected to achieve significantly greater sensitivity than current ground based detectors \cite{Maggiore2020_ET,Reitze2019_CosmicExplorer,Evans2021_CEHorizon}. This increased sensitivity is expected to improve the signal to noise ratios of observed compact binary signals and to expand the range over which such systems can be detected. Meeting this challenge will require higher fidelity numerical simulations and more accurate waveform models \cite{Purrer2020_AccuracyRequirements,Black2025_ORBIT}.
+\cite{GWTC3,GWTC4,Boyle2019}.Future gravitational wave detectors, such as the Einstein Telescope and Cosmic Explorer, are expected to achieve significantly greater sensitivity than current ground based detectors \cite{Maggiore2020_ET,Reitze2019_CosmicExplorer,Evans2021_CEHorizon}. This increased sensitivity is expected to improve the signal to noise ratios of observed compact binary signals and to expand the range over which such systems can be detected. Meeting this challenge will require higher fidelity numerical simulations and more accurate waveform models \cite{Purrer2020_AccuracyRequirements,Black2025_ORBIT}.
 
 
 In general, higher fidelity simulations, particularly those with larger mass ratios, require
@@ -214,7 +214,7 @@ Higher order accurate formulas can be constructed by matching Taylor series expa
 \frac{-f _{i+2} + 8 f_{i+1} - 8 f_{i-1} + f_{i-2}}{12\Delta x}
 + \mathcal{O}(\Delta x^4).
 \end{equation}
-These finite difference approximations are standard tools for numerical solutions of partial differential equations \cite{BaumgarteShapiro2010}.
+These finite difference approximations are standard tools for numerical solutions of partial differential equations \cite{Baumgarte2010}.
 
 The above examples are explicit finite difference schemes, since the derivative at grid point $i$ is computed directly from nearby function values. The derivatives are relatively straightforward to derive and easy to implement. Alternatively, one can approximate the first derivative using a compact, or implicit, finite difference scheme of the form
 \begin{equation}

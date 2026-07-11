@@ -339,7 +339,7 @@ where tildes designate the Fourier transform.  This is the spectral or transfer 
   \label{fig:4th_spectral_functions}
 \end{figure}
 
-We construct the following error quantity from the spectral function~\cite{yo}, namely 
+We construct the following error quantity from the spectral function, namely 
 \begin{equation}
 E(\alpha_i, a_i) = \int_{0}^{r \pi}{\bigl[ \bar{\kappa} - \kappa \bigr]^2 D(\kappa)^2 \, d\kappa}
 \end{equation}
@@ -534,20 +534,11 @@ In each case, the basic results are similar.  Namely, the use of CFDs at some ac
 
 
 
-\subsection{One-Dimensional Nonlinear Burgers'}
+\subsection{One-dimensional nonlinear Burgers'}
 
 Our first test uses the nonlinear one-dimensional viscous Burgers' Equation,
 \begin{equation}
-\label{eq:BurgersEq}
-\frac{\partial f}{\partial t}
-=
--f\frac{\partial f}{\partial x}
-+
-\frac{\partial^2 f}{\partial x^2},
-\qquad
--\infty < x < \infty,
-\qquad
-t \ge 0.
+    \frac{\partial f}{\partial t} = -f\frac{\partial f}{\partial x} + \frac{\partial^2 f}{\partial x^2}, \quad -\infty < x < \infty, \quad t \ge 0, \label{eq:BurgersEq}
 \end{equation}
 where the solution $f(x,t)$ depends only on $x$ and $t$, and the viscosity coefficient is fixed at $1$ for simplicity.
 
@@ -557,53 +548,70 @@ This admits a closed form solution against which we will compare the numerical s
 \end{equation}
 The initial condition, of course, is thus 
 \begin{equation}
-    \phi(x,t=0) = \frac{2}{1+e^x}.
+    f(x,t=0) = \frac{2}{1+e^x}.
 \end{equation}
 %This initial condition is chosen because it admits a closed-form analytical solution for comparison. The corresponding solution is
 
 In solving this problem numerically, we approximate both first and second spatial derivatives using CFDs and explicit FDs separately.  The time integration is done using a fourth order Runge-Kutta scheme as will be true for all subsequent tests as well.   
 %our tests.  This will leave the equation in a semidiscretized form, from which we may advance the solutions in time using a method-of-lines approach with a stable time-integration method.
 
-To focus in this test problem on the interior parts of the CFDs, we take a domain of $-100 \le x \le 100$ and limit the simulation time to $0 \le t < 50$. Because the solution approaches constant states far from the transition region near $x=t$, fixed Dirichlet boundary conditions provide an accurate approximation on the truncated domain.  Appropriate boundary-closed operators continue to be use
+To focus in this test problem on the interior parts of the CFDs, we take a domain of $-100 \le x \le 100$ and limit the simulation time to $0 \le t < 50$. Because the solution approaches constant states far from the transition region near $x=t$, fixed Dirichlet boundary conditions provide an accurate approximation on the truncated domain.  Appropriate boundary-closed operators continue to be used, but because we are limiting interactions with the boundaries, the results are more reflective of the behavior of the interior CFDs.  
 
-The continuous domain $[-100,100]$ is divided into $N$ uniform cells of width $h$. Using a grid defined at the cell boundaries, we will have $N+1$ grid points to represent the domain. Defining $\phi_i(t) = \phi(-100 + ih,t)$ to be the $i$th point of the solution along the domain, with $i$ ranging from $0$ to $N$, we can write equation \ref{eq:BurgersEq} in the semidiscrete form:
+The continuous domain $[-100,100]$ is divided into $N$ uniform cells of width $h$. Using a grid defined at the cell boundaries, we will have $N+1$ grid points to represent the domain. Defining $f_i(t) = f(-100 + ih,t)$ to be the $i$th point of the solution along the domain, with $i$ ranging from $0$ to $N$, we can write equation \ref{eq:BurgersEq} in the semidiscrete form:
 \begin{equation}
     \frac{d \phi_i}{d t} = -\phi_i \textbf{D}_1 \phi_i + \textbf{D}_2\phi_i,
 \end{equation}
-where $\textbf{D}_1$ and $\textbf{D}_2$ denote the discrete first- and second-derivative operators, respectively
+where $\textbf{D}_1$ and $\textbf{D}_2$ denote the discrete first- and second-derivative operators, respectively.
 
-From here, the standard fourth-order Runge--Kutta (RK4) method is implemented to advance our solution in time. At each time step, including the intermediary stages in the integration, the Dirichlet boundary conditions are imposed on the first and last entries of the solution. This process is repeated for select resolutions of $N$, $2N$, and $4N$, and the $L_2$-norm of the error when compared with the analytic solution is calculated.
+A standard fourth-order Runge--Kutta (RK4) method is implemented to advance our solution in time. At each time step, including the intermediary stages in the integration, the Dirichlet boundary conditions are imposed on the first and last entries of the solution. This process is repeated for select resolutions of $N$, $2N$, and $4N$, and the $L_2$-norm of the error when compared with the analytic solution is calculated.
+Results are plotted in Figures \ref{fig:4th_burgers_error} and \ref{fig:6th_burgers_error}.  
 
-Figures \ref{fig:4th_burgers_error} and \ref{fig:6th_burgers_error} both show the analytic error of these evolutions using 4 different operators at three different resolutions. The values chosen are $N=200,400,800$ for the low, medium, and high resolutions respectively. The E4 and E6 operators are both standard explicit finite difference schemes with 4th- and 6th-order accuracy for both first and second derivatives. The A4 and C4 operators are two of the optimized compacts schemes at 4th order for the first derivative, with the choice of a non-optimized compact tridiagonal scheme for the second derivative. Likewise, the C6 operator is another optimized 6th order compact scheme for the first derivative in tandem with a non-optimized tridiagonal compact scheme in the second derivative. In both cases, the compact schemes at low resolutions perform almost as well or better than the explicit schemes at a resolution with twice as many points. This shows a definite improvement in accuracy with the compact schemes.
+Both figures show the absolute error of these evolutions using CFD and FD (first and second derivative) operators at three different resolutions. The low, medium and high resolutions have $N=200,400,800$, respectively. In Figure \ref{fig:4th_burgers_error}, ``E4" stands for an explicit fourth order operator.  The ``A4" and ``C4" designations are members of two families of fourth order operators that were derived in previous sections.  From the figure, it is clear that within each type of difference operator, there is convergence from low to high resolution.  Indeed, the convergence is fourth order for each as it should be.  But, in addition, the plot shows that CFD operators result in an overall error that is one to two orders of magnitude better than the corresponding explicit FDs.  Even more significantly, it can be seen that the medium resolution CFDs have an improved error profile over the high resolution FD scheme.  Effectively, the CFDs are providing improved accuracy at lower resolution.  
 
-\begin{figure}\centering
-  \includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
-  %\includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
-  \vspace{-.75cm}
-  \caption{
-   Analytic error of Burger's equation at different resolutions with 4th order operators
-}
-  \label{fig:4th_burgers_error}
+A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a standard sixth order explicit (E6) finite difference scheme for both first and second derivatives with an earlier derived sixth order CFD (C6).  Note that the C6 operator is an optimized 6th order compact scheme for the first and second derivatives.  Likewise, the A4 and C4 operators are two of the optimized compacts schemes at 4th order for the first derivative and second derivatives. In both cases, the compact schemes at low resolutions perform almost as well or better than the explicit schemes at a resolution with twice as many points. This shows a definite improvement in accuracy with the compact schemes.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
+    %\includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
+    \vspace{-.75cm}
+    \caption{
+    Analytic error for Burgers' equation at different resolutions using
+    fourth order operators. The dotted lines correspond to the coarsest
+    resolution, the dashed lines correspond to the medium resolution, and the
+    solid lines correspond to the highest resolution. Notice that the compact
+    operators perform comparably to the sixth order explicit operator while
+    using only half the resolution. In the case of the C4 operator, the error
+    is even smaller than that of the comparable explicit scheme at twice the
+    resolution.
+    }
+    \label{fig:4th_burgers_error}
 \end{figure}
 
-\begin{figure}\centering
-  \includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
-  %\includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
-  \vspace{-.75cm}
-  \caption{
-   Analytic error of Burger's equation at different resolutions with 6th order operators
-}
-  \label{fig:6th_burgers_error}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
+    %\includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
+    \vspace{-.75cm}
+    \caption{
+    Analytic error for Burgers' equation at different resolutions using
+    sixth order operators. The dotted lines correspond to the coarsest
+    resolution, the dashed lines correspond to the medium resolution, and the
+    solid lines correspond to the highest resolution. The sixth order compact
+    operators perform almost as well as the comparable explicit operators
+    while again using a grid with half the resolution.
+    }
+    \label{fig:6th_burgers_error}
 \end{figure}
 
 
-\subsection{Maxwell equations}
+\subsection{Maxwell equations in 3D}
 \label{sec:maxwell_equations}
 
-The Maxwell equations provide a useful physical system for testing and
+Our next test involves evolving the Maxwell equations in full 3D.  These provide a useful physical system for testing and
 comparing different computational methods. They form a linear system with
 known solutions, while retaining sufficient structure to make the numerical
-tests nontrivial. For example, the Maxwell equations contain hyperbolic
+tests nontrivial. The Maxwell equations contain hyperbolic
 evolution equations for the electric and magnetic fields, $\mathbf{E}$ and
 $\mathbf{B}$, respectively,
 \begin{equation}
@@ -614,20 +622,16 @@ $\mathbf{B}$, respectively,
 \frac{\partial \mathbf{B}}{\partial t}
     = -\nabla \times \mathbf{E},
 \end{equation}
-as well as constraint equations that must hold at all times,
+as well as constraint equations that must hold at the initial time and all subsequent times in order to have self-consistent fields and sources:  
 \begin{equation}
 \label{eq:maxwell_constraints}
 \nabla \cdot \mathbf{E} = 0,
 \qquad
 \nabla \cdot \mathbf{B} = 0.
 \end{equation}
-Moreover, these equations can be written in different formulations that
-mimic properties of more complicated systems. For example, Knapp
-et al.~\cite{Knapp:2002fm} considered a formulation intended to reproduce
-features encountered when solving the Einstein field equations in numerical
-relativity.
+While the above are most familiar, these equations can be written in a variety of different formulations. For example, Knapp et al.~\cite{Knapp:2002fm} considered a formulation intended to reproduce features encountered when solving the Einstein field equations in numerical relativity.
 
-In this work, we consider the standard Maxwell system with additional
+In our current test, we consider the standard Maxwell system with additional
 constraint damping fields, $\Psi$ and $\Phi$, which are used to damp
 violations of the electric and magnetic constraints:
 \begin{align}
@@ -681,7 +685,7 @@ violations of the electric and magnetic constraints:
 % This system also includes constraint damping, with $\Gamma$ allowing for
 % the elimination of mixed derivatives.
 
-As a test case, we use a dipolar solution of Maxwell's equations. In
+For the current test, we use an exact solution of Maxwell's equations, namely a propagative dipole wave. In
 particular, we choose initial data from the exact solution given by Knapp
 et al.~\cite{Knapp:2002fm}:
 \begin{equation}
@@ -690,10 +694,10 @@ A^{\hat{\phi}}
 =
 \mathcal{A}\sin\theta
 \left[
-\frac{e^{-\lambda v^2}-e^{-\lambda u^2}}{r^2}
+\frac{e^{-\lambda u^2}-e^{-\lambda v^2}}{r^2}
 -
 2\lambda
-\frac{v e^{-\lambda v^2}+u e^{-\lambda u^2}}{r}
+\frac{u e^{-\lambda u^2}+ v e^{-\lambda v^2}}{r}
 \right].
 \end{equation}
 The corresponding electric field is
@@ -703,29 +707,29 @@ The corresponding electric field is
 E^{\hat{\phi}}
 &=
 2\lambda\mathcal{A}\sin\theta
-\biggl[
+\Bigl[
 \frac{
-    v e^{-\lambda v^2}
-    -
     u e^{-\lambda u^2}
+    -
+    v e^{-\lambda v^2}
 }{r^2}
 \\
 &\qquad\qquad
 +
 \frac{1}{r}
 \bigl[
-    (1-2\lambda v^2)e^{-\lambda v^2}
-    +
     (1-2\lambda u^2)e^{-\lambda u^2}
+    +
+    (1-2\lambda v^2)e^{-\lambda v^2}
 \bigr]
-\biggr].
+\Bigr].
 \end{aligned}
 \end{equation}
 Here
 \begin{equation}
-u = t-r,
-\qquad
-v = t+r,
+u = t-r
+\quad {\rm and} \quad 
+v = t+r
 \end{equation}
 are the retarded and advanced time coordinates, respectively.
 The parameter $\mathcal{A}$ sets the initial amplitude, while $\lambda$
@@ -733,11 +737,9 @@ controls the width of the pulse. The corresponding Cartesian components are
 obtained using the standard coordinate transformation from spherical to
 Cartesian coordinates.
 
-The advantage of these initial data is that they admit an analytic solution.
-In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. By comparing
-the evolved solution against the analytic solution, we obtain a direct
-measure of the error associated with each finite difference operator. A
-representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.
+In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.  Again, we calculate the normed difference of the analytic and numerical solutions at three resolutions.  Fig.~\ref{fig:maxwell_fourth_order_error} shows these for fourth order CFDs compared against both fourth and sixth order explicit first derivative FD operators.  While we show the absolute errors associated with the $x$ component of the electric and magnetic fields, the remaining Maxwell fields demonstrate similar behavior.  It is clear that, as with the Burgers' equation test, the CFDs have a better error profile than the standard explicit FD schemes.  They all demonstrate the expected convergence but, in addition, the medium resolution CFDs perform as well or better than the high resolution explicit FDs of the same nominal order of accuracy.  Further, when compared with the explicit operators of higher accuracy (E6), the nominally fourth order CFDs perform almost or as well.  This can be reinterpreted as saying that the CFDs effectively achieve an extra level of resolution with the same order of accuracy.  Fig.~\ref{fig:maxwell_sixth_order_error} shows a similar result for sixth order first derivative CFDs.  
+
+%By comparing the evolved solution against the analytic solution, we obtain a direct measure of the error associated with each finite difference operator. 
 
 \begin{figure}[t]
     \centering
@@ -751,7 +753,7 @@ representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.
     \label{fig:em4_e0_panel}
 \end{figure}
 
-\paragraph{Fourth Order Operators}
+%\paragraph{Fourth Order Operators}
 
 \begin{figure}[t]
     \centering
@@ -778,7 +780,7 @@ representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.
     \label{fig:maxwell_fourth_order_error}
 \end{figure}
 
-\paragraph{Sixth Order Operators}
+%\paragraph{Sixth Order Operators}
 
 \begin{figure}[t]
     \centering
@@ -838,19 +840,19 @@ representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.
 
 \subsection{Nonlinear sigma model}
 
-We next consider the nonlinear sigma model.  This system provides a nonlinear scalar-field test problem and is useful for studying how the different derivative operators behave in the presence of nonlinear source terms.  We evolve the scalar field $\chi$ together with its conjugate momentum $\phi$.
-
-The evolution equations are
+The next problem for which we test our CFDs is a nonlinear sigma model.  In this case, we test our second derivative CFDs in again full 3D, but now with nonlinear source terms.  We write the system as first order in time and a second order in space.  We evolve the scalar field $\chi$ together with its conjugate momentum $\phi$.  The evolution equations are
 \begin{align}
 \partial_t \phi
-&= \partial_i\partial_i \chi - \frac{\sin(2\chi)}{r^2},
+&= \nabla^2 \chi - \frac{\sin(2\chi)}{r^2},
 \\
 \partial_t \chi
 &= \phi .
 \end{align}
-Here $\partial_i\partial_i$ denotes the flat-space Laplacian.  The term $\sin(2\chi)/r^2$ provides a useful test of the stability and accuracy of the numerical method in nonlinear systems.
-In this case we don't have an analytic solution but we do a few convergence tests shown in figure blah. This gives us the change to confirm that our operators work even in a nonlinear system and converge at the expected order.  We use initial data given as follows:
- The scalar field is initialized as
+where $\nabla^2$ denotes the flat space Laplacian.  The term $\sin(2\chi)/r^2$ provides a useful test of the stability and accuracy of the numerical method in nonlinear systems.
+
+The initial scalar profile is taken to be a spherically symmetric Gaussian centered
+at the origin. The wave speeds in all three spatial directions are set to unity.
+In particular, the scalar field is initialized as
 \begin{equation}
 \chi(x,y,z)
 =
@@ -871,10 +873,7 @@ where
 \epsilon_z(z-z_c)^2
 }.
 \end{equation}
-The conjugate momentum is initially set to
-\begin{equation}
-\phi(x,y,z)=0.
-\end{equation}
+The conjugate momentum is initially set to vanish, i.e. $\phi(x,y,z)=0$.
 
 For the simulations considered here, we choose
 \begin{equation}
@@ -888,12 +887,14 @@ together with
 \qquad
 R=0.
 \end{equation}
-Thus, the initial scalar profile is a spherically symmetric Gaussian centered
-at the origin. The wave speeds in all three spatial directions are set to
-unity.
+
+In this case we do not have an analytic solution and do not have a measure of the absolute error.  We can, however, consider the relative difference in the numerical solutions at different resolutions.  These convergence like tests are shown in Figs.~\ref{fig:nlsm_fourth_order_error} and~\ref{fig:nlsm_sixth_order_error}. Again, we see a similar story play out, albeit with respect to the relative errors in the solution between resolution levels.  The explicit fourth order FD scheme sees a decrease in the error on going to higher resolution.  But the two CFD examples, also nominally fourth order, also show evidence of convergence but have at least an order of magnitude better relative error profile as compared to the explicit case.  From Fig.~\ref{fig:nlsm_sixth_order_error} we see similar behavior, if not quite as dramatic.  
+%This gives us the change to confirm that our operators work even in a nonlinear system and converge at the expected order.  We use initial data given as follows:
+ 
+
 %\ajc{I have added in convergence plots, I will probably update these but the story shouldn't change too much}
 
-\paragraph{Fourth Order Operators}
+%\paragraph{Fourth Order Operators}
 
 \begin{figure}[t]
     \centering
@@ -907,12 +908,12 @@ unity.
     denote the low and medium resolution comparison, dashed lines denote the
     medium and high resolution comparison, and solid lines denote the highest
     resolution run. The grid spacing is halved between each successive
-    resolution. The compact operators remain stable in the nonlinear system. Notice that again in this nonlinear system the 4th order A4 and C4 operators perform the same as the Explicit 4th order at half od the resolution. 
+    resolution. The compact operators remain stable in the nonlinear system. Notice that again in this nonlinear system the 4th order A4 and C4 operators perform the same as the Explicit 4th order at half of the resolution. 
     }
     \label{fig:nlsm_fourth_order_error}
 \end{figure}
 
-\paragraph{Sixth Order Operators}
+%\paragraph{Sixth Order Operators}
 
 \begin{figure}[t]
     \centering
@@ -930,9 +931,9 @@ unity.
     }
     \label{fig:nlsm_sixth_order_error}
 \end{figure}
-\subsection{Gravitational Waves}
+\subsection{Gravitational waves}
 
-We also test the derivative operators by evolving Teukolsky-wave initial data with the full BSSN equations.  The BSSN formulation is described in detail elsewhere, for example in Ref.~\cite{Baumgarte2010}.  These data describe a linearized gravitational-wave perturbation of the metric and provide a useful test problem for wave propagation in a numerical relativity setting.
+Our final test for our CFD operators is to evolve Teukolsky-wave initial data within full general relativity using the BSSN formalism and equations. Details on Teukolsky wave initial data and evolutions can be found in~\cite{Teukolsky1982,Baumgarte2013,Hilditch2013_Teukolsky}.  The BSSN formulation is described in detail elsewhere, for example in Ref.~\cite{Baumgarte2010}.  These data describe a wave solution to the linearized Einstein equations.  It represents a linearized gravitational wave.  For sufficiently small amplitude, it is expressible as a small perturbation of the metric.  One can increase the size of the perturbation and enter the nonlinear evolutionary regime.  For our purposes, it provides a useful test problem for wave propagation in a numerical relativity setting.  We emphasize that for the evolution system, we do not solve the linearized Einstein equations but rather the full Einstein equations with these linearized Teukolsky waves as initial data.  Thus we have a propagation problem and with it we test our CFDs.  
 
 For the results shown here, we perform direct convergence tests rather than
 comparing against an analytic solution. The computational domain extends over
@@ -942,6 +943,8 @@ quadrupolar mode $(\ell,m)=(2,0)$ with amplitude $\mathcal{A}=10^{-2}$. The
 radial profile is a compactly supported $C^k$ polynomial with $k=6$ and
 half-width $w=2.0$. A representative visualization of the resulting evolution
 is shown in Fig.~\ref{fig:bssn_gt00_panel}.
+
+The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_fourth_order_error} and~\ref{fig:teukolsky_sixth_order_error}.  Again, these CFDs are for both first and second derivatives and are the optimized operators with boundary closures.  In the plots, one of the metric coefficients and one of the extrinsic curvature coefficients are shown.  Other metric and extrinsic curvature components behave similarly.  For the nominally fourth order CFDs, they again perform comparable to the explicit FDs at half the resolution.  The sixth order CFDs do not perform quite so well, but continue to have almost an order of magnitude improvement in their relative error profiles.  Hence CFDs are promising route to increased accuracy in numerical relativity.  
 
 \begin{figure}[t]
     \centering
@@ -954,7 +957,7 @@ is shown in Fig.~\ref{fig:bssn_gt00_panel}.
     \label{fig:bssn_gt00_panel}
 \end{figure}
 
-\paragraph{Fourth Order Operators}
+%\paragraph{Fourth Order Operators}
 
 \begin{figure}[t]
     \centering
@@ -977,7 +980,7 @@ is shown in Fig.~\ref{fig:bssn_gt00_panel}.
     \label{fig:teukolsky_fourth_order_error}
 \end{figure}
 
-\paragraph{Sixth Order Operators}
+%\paragraph{Sixth Order Operators}
 
 \begin{figure}[t]
     \centering

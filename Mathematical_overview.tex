@@ -1,4 +1,4 @@
-\section{Scalar wave equation in $3+1$ form}
+\section{Scalar Wave Equation In $3+1$ Form}
 
 As a simple example of a $3+1$ decomposition, we first consider the scalar wave equation. This example illustrates the basic idea of rewriting a covariant equation as an initial value problem suitable for numerical time evolution.
 
@@ -219,7 +219,7 @@ For the Levi-Civita connection, which is metric compatible and torsion free, the
 
 A natural question is how to determine whether a given metric describes flat spacetime. A necessary and sufficient local condition is that the Riemann curvature tensor vanishes everywhere. Thus, curvature provides a way, independent of coordinates, to distinguish flat spacetime from genuinely curved spacetime.
 
- We will now build up the mathematical foundation we need to construct the ADM decomposition.  ( the ADM stands for Arnowitt Deser Misner, after Richard Arnowitt, Stanley Deser, and Charles Misner. the ADM are a simple 3+1 decomposition) This freedom is needed to formulate the Cauchy problem in general relativity and in alternative theories of gravity. We foliate the spacetime into a family of spacelike hypersurfaces $\Sigma_t$, which may be interpreted as slices of constant coordinate time $t$.
+ We will now build up the mathematical foundation we need to construct the ADM decomposition.  ( the ADM stands for Arnowitt Deser Misner, after Richard Arnowitt, Stanley Deser, and Charles Misner. the ADM are a simple 3+1 decomposition of Einstein's equations) This freedom is needed to formulate the Cauchy problem in general relativity and in alternative theories of gravity. We foliate the spacetime into a family of spacelike hypersurfaces $\Sigma_t$, which may be interpreted as slices of constant coordinate time $t$.
 
 The gradient of the time function is
 \begin{equation}
@@ -545,10 +545,10 @@ R_{ij}
 \end{alignedat}
 }
 \end{equation}
-\subsection{Reformulating the Einstein Equations}
+\subsection{Reformulating the Einstein equations}
 The ADM equations provide a natural $3+1$ decomposition of Einstein's equations, but the standard ADM system is only weakly hyperbolic and is not generally well suited for stable numerical evolution. It is therefore useful to reformulate the equations into a system with better hyperbolic properties. The Baumgarte--Shapiro--Shibata--Nakamura (BSSN) formulation achieves this by introducing conformal variables and promoting certain combinations of spatial derivatives of the metric to independent evolved quantities \cite{Shibata1995_BSSN,Baumgarte1999_BSSN,Baumgarte2010}.
 
-\subsubsection{A Maxwell Analogy}
+\subsubsection{A Maxwell analogy}
 
 We first illustrate the basic idea with an analogy from electromagnetism. In a flat spacetime $3+1$ decomposition, Maxwell's equations can be written in terms of the electric field $E_i$ and vector potential $A_i$ as
 \begin{equation}

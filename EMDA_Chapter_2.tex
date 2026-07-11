@@ -14,7 +14,7 @@ These comparisons should be interpreted as fixed parameter waveform comparisons 
 
 The catalog presented here is therefore intended as an initial step toward a more complete study of EMDA binary black hole phenomenology. In particular, it identifies regions of parameter space where charged EMDA binaries produce appreciable waveform differences relative to neutral GR and motivates future comparisons among neutral GR, Einstein--Maxwell, and EMDA binaries.
 
-\section{Einstein--Maxwell--dilaton--axion Theory}
+\section{Einstein--Maxwell--Dilaton--Axion Theory}
 \label{sec:emda}
 
 We consider Einstein--Maxwell--dilaton--axion (EMDA) theory, in which the Einstein--Maxwell system is supplemented by a scalar dilaton field $\phi$ and a pseudoscalar axion field $\kappa$. With the conventions used here, the action is
@@ -56,7 +56,7 @@ For the simulations presented here, we evolve the EMDA system using the same cod
 As before, throughout each evolution, we monitor the Hamiltonian and momentum constraints, as well as the electromagnetic divergence constraints. These quantities are used to track the consistency of the numerical solution and to assess whether the chosen refinement parameters adequately resolve the relevant dynamics.
 
 We also extract quasilocal horizon quantities using a modified version of the \texttt{BHaHAHA} apparent-horizon finder \cite{Etienne2026BHaHAHA}. In addition to locating the apparent horizons, this modified version computes the horizon mass, spin, and electric charge during the evolution.
-\subsection{Controlling the Eccentricity}
+\subsection{Controlling the eccentricity}
 \label{sec:eccentricity_control}
 
 In this chapter, we focus on approximately quasicircular inspirals. For uncharged binary black holes, post-Newtonian methods can be used to choose initial momenta that reduce the orbital eccentricity.Post Newtonian methods approximate general relativity by expanding the equations of motion in powers of $v/c$, where $v$ is the characteristic orbital speed. They are most accurate when the objects are moving slowly compared with the speed of light and are separated by distances large compared with their gravitational radii. In compact binary systems, post Newtonian theory provides analytic expressions for the orbital dynamics and gravitational waveform during the inspiral, before the late merger regime where full numerical relativity is needed. In the EMDA system, however, the presence of electromagnetic, dilaton, and axion fields complicates the construction of low-eccentricity initial data. Post-Newtonian treatments have been developed for Einstein--Maxwell theory and for several scalar-modified theories of gravity~\cite{Khalil2018_EMD_EOB,Yagi2012_QuadraticGravityPN,Julie2019_EsGB_PN,Gupta2025_EinsteinMaxwell2PN}. Here we adopt a simpler prescription based on the charged-binary argument used in Ref.~\cite{Bozzola2021}.
@@ -168,7 +168,7 @@ In principle, lower eccentricities could be obtained through an iterative eccent
 
 % \subsection{Simulation Setup}
 
-\subsection{Waveform Mismatch and Distinguishability}
+\subsection{Waveform mismatch and distinguishability}
 \label{sec:waveform_mismatch}
 
 Following Refs.~\cite{Damour1998_ImprovedFilters,Harry2011_TargetedCoherentSearch,Abbott2017_WaveformSystematicsGW150914,Bozzola2021GW150914ChargedBH,Bozzola2021}, we use waveform overlaps and mismatches to quantify differences between the simulated gravitational wave signals.
