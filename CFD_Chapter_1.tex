@@ -329,7 +329,7 @@ where $m_L$ and $m_R$ indicate the number of CFD parameters to be solved for on 
 \label{spectral_function}
 \end{equation}
 where tildes designate the Fourier transform.  This is the spectral or transfer function and measures the dispersion present in this (interior) CFD scheme.  For small $\kappa$, there is little dispersion.  As $\kappa \rightarrow \pi$, clearly ${\bar \kappa} \rightarrow 0$ indicating maximum dispersion for the highest frequency modes.  Figure ~\ref{fig:4th_spectral_functions} plots this for several possible interior schemes. %\nate{Here is a plot of the spectral functions for now, we can change it out easily if we need a better one.}
-
+\FloatBarrier
 \begin{figure}\centering
   \includegraphics[width=\linewidth]{figures/1st_4th_Order_Spectral_Functions.pdf}
   \vspace{-.75cm}
@@ -569,7 +569,7 @@ Results are plotted in Figures \ref{fig:4th_burgers_error} and \ref{fig:6th_burg
 Both figures show the absolute error of these evolutions using CFD and FD (first and second derivative) operators at three different resolutions. The low, medium and high resolutions have $N=200,400,800$, respectively. In Figure \ref{fig:4th_burgers_error}, ``E4" stands for an explicit fourth order operator.  The ``A4" and ``C4" designations are members of two families of fourth order operators that were derived in previous sections.  From the figure, it is clear that within each type of difference operator, there is convergence from low to high resolution.  Indeed, the convergence is fourth order for each as it should be.  But, in addition, the plot shows that CFD operators result in an overall error that is one to two orders of magnitude better than the corresponding explicit FDs.  Even more significantly, it can be seen that the medium resolution CFDs have an improved error profile over the high resolution FD scheme.  Effectively, the CFDs are providing improved accuracy at lower resolution.  
 
 A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a standard sixth order explicit (E6) finite difference scheme for both first and second derivatives with an earlier derived sixth order CFD (C6).  Note that the C6 operator is an optimized 6th order compact scheme for the first and second derivatives.  Likewise, the A4 and C4 operators are two of the optimized compacts schemes at 4th order for the first derivative and second derivatives. In both cases, the compact schemes at low resolutions perform almost as well or better than the explicit schemes at a resolution with twice as many points. This shows a definite improvement in accuracy with the compact schemes.
-
+\FloatBarrier
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
@@ -587,7 +587,7 @@ A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a sta
     }
     \label{fig:4th_burgers_error}
 \end{figure}
-
+\FloatBarrier
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
@@ -603,6 +603,7 @@ A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a sta
     }
     \label{fig:6th_burgers_error}
 \end{figure}
+\FloatBarrier
 
 
 \subsection{Maxwell equations in 3D}
@@ -740,7 +741,7 @@ Cartesian coordinates.
 In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.  Again, we calculate the normed difference of the analytic and numerical solutions at three resolutions.  Fig.~\ref{fig:maxwell_fourth_order_error} shows these for fourth order CFDs compared against both fourth and sixth order explicit first derivative FD operators.  While we show the absolute errors associated with the $x$ component of the electric and magnetic fields, the remaining Maxwell fields demonstrate similar behavior.  It is clear that, as with the Burgers' equation test, the CFDs have a better error profile than the standard explicit FD schemes.  They all demonstrate the expected convergence but, in addition, the medium resolution CFDs perform as well or better than the high resolution explicit FDs of the same nominal order of accuracy.  Further, when compared with the explicit operators of higher accuracy (E6), the nominally fourth order CFDs perform almost or as well.  This can be reinterpreted as saying that the CFDs effectively achieve an extra level of resolution with the same order of accuracy.  Fig.~\ref{fig:maxwell_sixth_order_error} shows a similar result for sixth order first derivative CFDs.  
 
 %By comparing the evolved solution against the analytic solution, we obtain a direct measure of the error associated with each finite difference operator. 
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\columnwidth]{figures/E0_panel.pdf}
@@ -754,7 +755,7 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
 \end{figure}
 
 %\paragraph{Fourth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/U_B0_DIFF__ALL_FAMILIES.pdf}
@@ -781,7 +782,7 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/6th_order_EM4_U_B0_DIFF_ALL_FAMILIES.pdf}
@@ -837,6 +838,7 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
 % }
 %   \label{fig:6th_phi_error}
 % \end{figure}
+\FloatBarrier
 
 \subsection{Nonlinear sigma model}
 
@@ -895,7 +897,7 @@ In this case we do not have an analytic solution and do not have a measure of th
 %\ajc{I have added in convergence plots, I will probably update these but the story shouldn't change too much}
 
 %\paragraph{Fourth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/4th_order_U_CHI_ALL_FAMILIES.pdf}
@@ -914,7 +916,7 @@ In this case we do not have an analytic solution and do not have a measure of th
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/6th_order_U_PHI_ALL_FAMILIES.pdf}
@@ -930,7 +932,9 @@ In this case we do not have an analytic solution and do not have a measure of th
     resolution. We do not seem to get the full order of resolution improvement that we got with the 4th order operators but we do seem to get close to an order of magnitude improvement..
     }
     \label{fig:nlsm_sixth_order_error}
-\end{figure}
+\end{figure}\
+\FloatBarrier
+
 \subsection{Gravitational waves}
 
 Our final test for our CFD operators is to evolve Teukolsky-wave initial data within full general relativity using the BSSN formalism and equations. Details on Teukolsky wave initial data and evolutions can be found in~\cite{Teukolsky1982,Baumgarte2013,Hilditch2013_Teukolsky}.  The BSSN formulation is described in detail elsewhere, for example in Ref.~\cite{Baumgarte2010}.  These data describe a wave solution to the linearized Einstein equations.  It represents a linearized gravitational wave.  For sufficiently small amplitude, it is expressible as a small perturbation of the metric.  One can increase the size of the perturbation and enter the nonlinear evolutionary regime.  For our purposes, it provides a useful test problem for wave propagation in a numerical relativity setting.  We emphasize that for the evolution system, we do not solve the linearized Einstein equations but rather the full Einstein equations with these linearized Teukolsky waves as initial data.  Thus we have a propagation problem and with it we test our CFDs.  
@@ -945,7 +949,7 @@ half-width $w=2.0$. A representative visualization of the resulting evolution
 is shown in Fig.~\ref{fig:bssn_gt00_panel}.
 
 The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_fourth_order_error} and~\ref{fig:teukolsky_sixth_order_error}.  Again, these CFDs are for both first and second derivatives and are the optimized operators with boundary closures.  In the plots, one of the metric coefficients and one of the extrinsic curvature coefficients are shown.  Other metric and extrinsic curvature components behave similarly.  For the nominally fourth order CFDs, they again perform comparable to the explicit FDs at half the resolution.  The sixth order CFDs do not perform quite so well, but continue to have almost an order of magnitude improvement in their relative error profiles.  Hence CFDs are promising route to increased accuracy in numerical relativity.  
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\columnwidth]{figures/GT00_panel.pdf}
@@ -958,7 +962,7 @@ The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_four
 \end{figure}
 
 %\paragraph{Fourth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/4th_order_U_SYMGT0_ALL_FAMILIES.pdf}
@@ -981,7 +985,7 @@ The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_four
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
-
+\FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{figures/6th_order_U_SYMGT0_ALL_FAMILIES.pdf}
@@ -1001,6 +1005,8 @@ The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_four
     }
     \label{fig:teukolsky_sixth_order_error}
 \end{figure}
+\FloatBarrier
+
 \section{Conclusion}
 \label{sec:conclusion}
 

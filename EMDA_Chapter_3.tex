@@ -85,6 +85,7 @@ The main robust conclusion is therefore qualitative. For the smaller-coupling EM
 These results suggest that, for the relatively small charge considered here, coupling-dependent effects in the dominant gravitational-wave mode are subtle. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to separate physical coupling-dependent effects from relaxation and numerical errors. The present comparisons should therefore be interpreted as an exploratory test of the EMDA coupling dependence rather than as precision estimates of waveform distinguishability.
 
 Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the Einstein--Maxwell reference waveform and the strongest-coupling EMDA case. The two waveforms are peak-aligned, there is almost no difference in the wavefrom.
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/em_a0_0_a1_0_vs_emda_a0_100_a1_100_peak_aligned_hplus_notitle.pdf}
@@ -95,7 +96,7 @@ Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the 
 \paragraph{Electromagnetic radiation}
 
 We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced in earlier chapters. Rather than computing a mismatch for these modes, we perform a direct comparison of the electromagnetic waveforms. The results show that the waveform differences increase as the coupling strengths are increased. The electromagnetic signal retains the same basic structure across the coupling choices, but its amplitude changes. We display the $++$ charge configuration here, although the other charge configurations show broadly similar behavior.
-
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \subfloat[Real part of $\Phi_2^{22}$.]{
@@ -109,9 +110,8 @@ We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced 
 \label{fig:phi2_l2m2_ch3}
 \end{figure}
 
-
 \paragraph{Dilaton radiation}
-
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.48\textwidth]
@@ -132,21 +132,21 @@ dilaton radiation also increases.
 \subsection{Constraints}
 
 Because the initial data are approximate, the constraint violations provide an important check on the quality of the evolutions. We monitor the Hamiltonian constraint, together with the electric and magnetic divergence constraints, throughout the simulations. These quantities are shown in Figs.~\ref{fig:chapter3_hamiltonian_constraint}--\ref{fig:chapter3_divb_constraint}. Across the set of coupling choices considered here, the constraints remain controlled during the initial relaxation, inspiral, and merger. The largest features occur during the early relaxation phase and near merger, where the fields vary most rapidly.
-
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_HAM.pdf}
 \caption{Hamiltonian constraint violation for the different coupling choices. The curves show the evolution of the Hamiltonian constraint norm for the Einstein--Maxwell reference case and the corresponding EMD and EMDA evolutions. There is an initial spike as the simulations begin, but the constraint quickly settles to a lower value. The Hamiltonian constraint does not show runaway growth and remains low throughout the evolution.}
 \label{fig:chapter3_hamiltonian_constraint}
 \end{figure}
-
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_DIVE.pdf}
 \caption{Electric divergence constraint violation for the different coupling choices. The curves show the evolution of the electric constraint norm across the Einstein--Maxwell, EMD, and EMDA evolutions. The constraint is initially largest for the strongest coupling, but hyperbolic cleaning reduces it over time. Overall, these constraints remain well behaved throughout the evolution.}
 \label{fig:chapter3_dive_constraint}
 \end{figure}
-
+\FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_DIVB.pdf}
@@ -171,7 +171,7 @@ Taken together, these results suggest that coupling dependent effects are subtle
 Future work could potentially look at improving the initial data by adding axion contributions and improving the initial electric field used in the TPID solver. We could also perform higher charge or higher spin runs to test a wider range of Kerr--Sen configurations. Another study could examine different parts of the EMDA parameter space, including cases where the two couplings are not equal, $\alpha_0 \neq \alpha_1$.
 
 \subsection{Mismatch summary}
-
+\FloatBarrier
 \begin{table}[t]
 \centering
 \begin{tabular}{lccc}

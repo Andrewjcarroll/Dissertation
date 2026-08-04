@@ -6,7 +6,7 @@ For many alternative theories of gravity, analytic approximations are insufficie
 
 In this chapter, we focus on Einstein--Maxwell--dilaton--axion (EMDA) theory. EMDA extends Einstein--Maxwell theory by coupling the electromagnetic field to a dilaton and an axion, and it arises as a low-energy limit of heterotic string theory \cite{Sen1992,Sen1995}. The theory admits rotating charged black hole solutions, such as the Kerr--Sen spacetime, which differs from Kerr--Newman by the presence of nontrivial dilaton and axion fields. In the last chapter we investigated the stability of black holes and black hole hair in EMDA theory \cite{PopeRohrerWhiting2025,Carroll2026KerrSenStability}, and black hole shadow studies using Event Horizon Telescope observations have not ruled out Kerr--Sen black holes \cite{Sahoo2024PRD,Sahoo2025}. These features make EMDA a useful setting in which to study how additional matter fields can influence compact-binary dynamics and gravitational radiation.
 
-Charged binary black holes have also been studied in Einstein--Maxwell gravity \cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021GW150914ChargedBH,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These simulations show that electromagnetic charge can modify the orbital dynamics, emitted radiation, and recoil of the remnant. In one analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $Q/M\sim0.3$ \cite{Bozzola2021GW150914ChargedBH}. These studies demonstrate that charge alone can alter the inspiral, merger, radiation content, and remnant properties. In EMDA theory, charge also sources additional scalar and pseudoscalar fields, so charged binaries provide a natural setting in which to study how electromagnetic and beyond-GR matter jointly affect the gravitational waveform.
+Charged binary black holes have also been studied in Einstein--Maxwell gravity \cite{Bozzola2019,Zilhao2012,Zilhao2014,Bozzola2021,Bozzola2023ExtremalChargedMergers,Luna2022ChargedBBHKicks}. These simulations show that electromagnetic charge can modify the orbital dynamics, emitted radiation, and recoil of the remnant. In one analysis, the GW150914 signal was found to be compatible with charge-to-mass ratios as large as $Q/M\sim0.3$ ~\cite{Bozzola2021}. These studies demonstrate that charge alone can alter the inspiral, merger, radiation content, and remnant properties. In EMDA theory, charge also sources additional scalar and pseudoscalar fields, so charged binaries provide a natural setting in which to study how electromagnetic and beyond-GR matter jointly affect the gravitational waveform.
 
 The goal of this chapter is to take a step toward an exploratory waveform catalog for charged binary black holes within EMDA. We simulate inspiraling charged binary black holes and compare the resulting gravitational waveforms with neutral general relativistic reference waveforms having the same mass ratio and spin. The cases considered here include charge-to-mass ratios much larger than those expected for astrophysical black holes \cite{Gibbons1975VacuumPolarization,Pan2019BlackHoleDischarge}. Our aim is therefore not to construct immediately realistic astrophysical templates, but to identify regimes in which charge and the additional EMDA fields produce appreciable changes in the binary dynamics and gravitational wave signal.
 
@@ -82,7 +82,7 @@ This prescription assumes that the dominant correction to the initial orbital pa
 We focus on quasicircular orbits because gravitational wave emission tends to circularize isolated compact binaries during the inspiral \cite{Peters1964,Pfeiffer2007ReducingEccentricity}.The initial momenta for the corresponding uncharged binaries are computed using the \texttt{NRPyPN} package~\cite{Etienne2023_NRPyPN}. This package provides post-Newtonian estimates for low-eccentricity binary black hole initial data compatible with Bowen--York/TwoPunctures data~\cite{Healy2017_PNQuasicircular,RamosBuades2019_EccRed}. We then apply the charge-dependent rescaling described above to obtain the momenta used in the charged evolutions.
 
 Although approximate, this prescription yields eccentricities that are adequate for the exploratory comparisons performed here, as illustrated in Figs.~\ref{fig:orbital_dynamics_q1_q2} and~\ref{fig:orbital_dynamics_q4_q8}. This figure demonstrates that the black hole trajectories are approximately circular. 
-
+\FloatBarrier
 \begin{figure}[p]
 \centering
 
@@ -109,7 +109,7 @@ Although approximate, this prescription yields eccentricities that are adequate 
 \label{fig:orbital_dynamics_q1_q2}
 
 \end{figure}
-
+\FloatBarrier
 \begin{figure}[p]
 \centering
 
@@ -135,7 +135,7 @@ Although approximate, this prescription yields eccentricities that are adequate 
 \caption{Orbital dynamics for the $q=4$ and $q=8$ configurations. For each mass ratio, the left panel shows the coordinate separation as a function of time, while the right panel shows representative coordinate trajectories in the orbital plane. The charge configuration affects both the inspiral time and the orbital phasing by modifying the effective interaction between the black holes. The trajectories are approximately quasicircular until the final plunge, which begins once the separation drops below roughly $6M$. Here $\lambda$ denotes the magnitude of the charge-to-mass ratio, $|Q|/M$, assigned to each charged black hole; neutral black holes have $\lambda=0$. The superscript and subscript indicate the charge configuration, with the larger black hole assigned the positive charge. Thus, $\lambda^{+}_{+}$ denotes two positively charged black holes, $\lambda^{+}_{-}$ denotes oppositely charged black holes, and $\lambda^{+}_{0}$ denotes one positively charged and one neutral black hole. The $\lambda=0$ case is the GR reference waveform. In the trajectory plots, orange and blue denote the paths of the heavier and lighter black holes, respectively, with the initial data chosen so that the center of mass is near the origin.}
 \label{fig:orbital_dynamics_q4_q8}
 \end{figure}
-
+\FloatBarrier
 We estimate the orbital eccentricity using an estimator based on the orbital frequency~\cite{RamosBuades2019_EccRed},
 \begin{equation}
 \varepsilon_{\Omega}(t)
@@ -171,7 +171,7 @@ In principle, lower eccentricities could be obtained through an iterative eccent
 \subsection{Waveform mismatch and distinguishability}
 \label{sec:waveform_mismatch}
 
-Following Refs.~\cite{Damour1998_ImprovedFilters,Harry2011_TargetedCoherentSearch,Abbott2017_WaveformSystematicsGW150914,Bozzola2021GW150914ChargedBH,Bozzola2021}, we use waveform overlaps and mismatches to quantify differences between the simulated gravitational wave signals.
+Following Refs.~\cite{Damour1998_ImprovedFilters,Harry2011_TargetedCoherentSearch,Abbott2017_WaveformSystematicsGW150914,Bozzola2021}, we use waveform overlaps and mismatches to quantify differences between the simulated gravitational wave signals.
 
 A direct comparison between charged EMDA and neutral GR waveforms does not, by itself, isolate the contribution of the dilaton and axion fields. Part of the measured difference may arise from the electromagnetic charge and the associated change in the orbital dynamics, rather than from the additional EMDA fields alone. A more complete study would compare EMDA waveforms not only with neutral GR waveforms, but also with charged Einstein--Maxwell evolutions having the same charge configurations. Such a comparison is beyond the scope of the present work. Our goal here is instead to quantify the fixed parameter waveform differences between charged EMDA binaries and their neutral GR counterparts.
 
@@ -263,7 +263,7 @@ These results demonstrate that EMDA theory provides a useful numerical-relativit
 \label{sec:simulation_catalog}
 
 The simulations used in this chapter are summarized in Table~\ref{tab:simulation_catalog}. The catalog samples several mass ratios, spin values, charge magnitudes, and charge configurations. For each mass ratio and spin, we include a neutral reference simulation and compare the charged EMDA evolutions against that corresponding neutral case.
-
+\FloatBarrier
 \begin{table*}[htbp]
 \centering
 \caption{EMDA binary black hole simulation catalog. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote like-signed charges, oppositely signed charges, and cases in which only one black hole is charged, respectively. Because the neutral configuration is independent of $\lambda$, it is listed only once for each mass ratio and spin.}
@@ -298,7 +298,7 @@ Mass Ratio $q$ & Spin $\chi$ & Charge Magnitude $\lambda$ & Neutral & $++$ & $+-
 \end{tabular}
 \end{table*}
 The simulations used in this chapter are summarized in Table~\ref{tab:simulation_catalog}. The catalog samples several mass ratios, spin values, charge magnitudes, and charge configurations. For each mass ratio and spin, we include a neutral reference simulation and compare the charged EMDA evolutions against that corresponding neutral case. For the $q=8$ simulations, we choose a negative spin value, $\chi=-0.2$, corresponding to spin anti-aligned with the orbital angular momentum. This choice reduces the inspiral time relative to an aligned-spin configuration, making the high-mass-ratio simulations less computationally expensive.
-
+\FloatBarrier
 \begin{table*}[t]
 \centering
 \caption{Mismatch of charged EMDA binary black hole waveforms relative to the corresponding neutral reference waveform \texttt{Q0}. Here $q=m_1/m_2$, $\chi$ is the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$. The column $|\lambda_i|$ gives the magnitude of the nonzero charge-to-mass ratio used in each charged configuration. The columns $++$, $+-$, and $+0$ denote like-signed charges, oppositely signed charges, and configurations in which only one black hole is charged, respectively. The mismatch is computed from the $(\ell,m)=(2,2)$ gravitational waveform using the numerical-relativity analysis package \texttt{kuibit}, after optimizing over relative time and polarization shifts. The values in parentheses give the approximate fixed parameter critical signal-to-noise ratio, $\rho_{\rm crit}\simeq 1/\sqrt{2\mathcal{M}}$. These values should be interpreted as rough waveform-separation estimates rather than full observational detection thresholds.}
@@ -389,16 +389,14 @@ which the adaptive mesh or finite-difference resolution is insufficient
 to resolve the evolving fields.
 
 Figures~\ref{fig:q1_constraints} and~\ref{fig:q8_constraints} show
-representative constraint histories for the $q=1$ and $q=8$
+representative constraint histories for the $q=1$ ( $\chi = 0.4$ $\lambda^+_+ = 0.1$ ) and $q=8$( $\chi = - 0.2$ $\lambda^+_+ = 0.1$ )
 configurations, respectively. In each case, the plotted quantities are
 the Hamiltonian constraint and the combined momentum-constraint
 violation. The constraint violations remain controlled throughout the
 inspiral.
 
-The unequal-mass $q=8$ simulation provides a more demanding numerical
-test than the equal-mass case because the smaller black hole introduces
-a shorter physical length scale. Nevertheless, the constraints remain
-bounded throughout the evolution.
+The unequal-mass $q=8$ simulation provides a more demanding numerical test than the equal-mass case because the smaller black hole introduces a shorter physical length scale. Nevertheless, the constraints remain bounded throughout the evolution. 
+
 
 \begin{figure}[t]
 \centering

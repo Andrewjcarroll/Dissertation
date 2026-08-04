@@ -424,14 +424,12 @@ We compute the $L_2$ norms of the Hamiltonian and momentum
 constraints, together with the electromagnetic constraints.
 When evaluating these norms, we excise small neighborhoods around the punctures
 to avoid unduly weighting the norms by these regions. Representative
-constraint violations for the full simulation are shown in
-
-Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
+constraint violations for the full simulation are shown in Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
 
 % ---------------------------------------------------------
 % Constraint violations over the full simulation
 % ---------------------------------------------------------
-
+\FloatBarrier
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
@@ -451,7 +449,7 @@ Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
   }
   \label{fig:constraint_divb}
 \end{figure}
-
+\FloatBarrier
 We also compute quasilocal quantities on apparent horizons using the
 \texttt{BHaHAHA} apparent horizon finder~\cite{Etienne2026BHaHAHA}, which
 we have extended to evaluate the horizon mass, spin, and electric charge.
@@ -469,7 +467,7 @@ The tests done here use the first \(20M\) of a head-on evolution of two equal-ma
 Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single diagnostic for the overall constraint violation during the evolution.
 
 Comparisons of simulations with respect to different wavelet tolerances are shown in Figure~\ref{fig:constraint_wavelet_tolerance}.  Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error.  For the three different wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ we can see that the constraints are indeed reduced as $\varepsilon$ decreases.  
-
+\FloatBarrier
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
@@ -483,9 +481,9 @@ Comparisons of simulations with respect to different wavelet tolerances are show
   }
   \label{fig:constraint_wavelet_tolerance}
 \end{figure}
-
+\FloatBarrier
 Comparing simulations according to different maximum refinement levels is another means of changing the resolution in an AMR setting.  Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum refinement levels of $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325, 0.0162, 0.00813, 0.00407 \}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
-
+\FloatBarrier
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
@@ -494,7 +492,7 @@ Comparing simulations according to different maximum refinement levels is anothe
   }
   \label{fig:constraint_maxdepth}
 \end{figure}
-
+\FloatBarrier
 Having checked that the constraint violations decrease as the adaptive refinement criteria are made more stringent, we now turn to the construction of the initial data used in the simulations. The initial data determine the starting geometry and matter fields and must satisfy the Einstein and Maxwell constraint equations.
 
 
