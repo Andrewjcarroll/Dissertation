@@ -379,3 +379,49 @@ Mass Ratio $q$ & Spin $\chi$ & Charge Magnitude $\lambda$ & Neutral & $++$ & $+-
 \end{table*}
 
 The eccentricity estimates for the $q=8$ configurations are poorly constrained compared with the rest of the catalog, as indicated by their large uncertainties. We therefore use these values only as rough indicators of the orbital behavior and do not place significant weight on them when interpreting the mismatch trends.
+\section{Constraint Behavior}
+\label{sec:constraints}
+
+Throughout the evolutions, we monitor the Hamiltonian and momentum
+constraints. These quantities provide an important check of the
+numerical consistency of the simulations and help identify periods in
+which the adaptive mesh or finite-difference resolution is insufficient
+to resolve the evolving fields.
+
+Figures~\ref{fig:q1_constraints} and~\ref{fig:q8_constraints} show
+representative constraint histories for the $q=1$ and $q=8$
+configurations, respectively. In each case, the plotted quantities are
+the Hamiltonian constraint and the combined momentum-constraint
+violation. The constraint violations remain controlled throughout the
+inspiral.
+
+The unequal-mass $q=8$ simulation provides a more demanding numerical
+test than the equal-mass case because the smaller black hole introduces
+a shorter physical length scale. Nevertheless, the constraints remain
+bounded throughout the evolution.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.65\textwidth]
+{Figures/Chapter_2/Constraints/q1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
+\caption{
+Hamiltonian and combined momentum-constraint violations for a
+representative $q=1$ binary evolution. The constraints remain
+controlled throughout the inspiral.
+}
+\label{fig:q1_constraints}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.65\textwidth]
+{Figures/Chapter_2/Constraints/q8/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
+\caption{
+Hamiltonian and combined momentum-constraint violations for the
+$q=8$ binary evolution. Although the unequal-mass system places
+greater demands on the adaptive mesh, the constraints remain
+bounded throughout the simulation.
+}
+\label{fig:q8_constraints}
+\end{figure}
+

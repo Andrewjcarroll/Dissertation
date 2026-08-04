@@ -15,12 +15,38 @@
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{booktabs}
-% Better page breaking / avoid widows and orphans
+% Avoid text widows and orphans
 \usepackage[all]{nowidow}
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
+% Global figure-placement controls
+\usepackage[section]{placeins}
+\usepackage{flafter}
+
+% Default placement for every figure and table
+\makeatletter
+\def\fps@figure{!htbp}
+\def\fps@table{!htbp}
+\makeatother
+
+% Permit figures alongside a reasonable amount of text
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\bottomfraction}{0.80}
+\renewcommand{\textfraction}{0.15}
+
+% Require a mostly full page before LaTeX creates a float-only page
+\renewcommand{\floatpagefraction}{0.80}
+
+% Same rule for two-column floats, harmless in a one-column dissertation
+\renewcommand{\dbltopfraction}{0.90}
+\renewcommand{\dblfloatpagefraction}{0.80}
+
+% Number of permitted floats per page
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
 % Control figure placement
 \usepackage{placeins}
 \everymath{\displaystyle}
@@ -68,7 +94,11 @@ I would also like to thank BYU, in particular the office of research computing f
 
 I am grateful for my family, including the family I married into, for all their interest in and support of my work. I deeply appreciate the time we were able to spend together. I thank my parents for their unwavering belief in me, especially during difficult times.
 
-Lastly, and perhaps most of all, I wish to thank my wonderful wife, whom I met along the way. I thank her for saying yes, for her patience through all of the late nights, and for her constant love and support. I love you forever and always.}
+Lastly, and most of all, I wish to thank my wonderful wife, whom I met along the way. I thank her for saying yes, for her patience through all of the late nights, and for her constant love and support. I love you forever and always.
+
+}
+
+
 
 %% The members of your committee (masters only need A and B, PhD need all 4)
  \MemberA{David Neilsen}
