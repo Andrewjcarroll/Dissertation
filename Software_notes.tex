@@ -342,7 +342,7 @@ EMDA_GW_EXTRACT_FREQ = 25
 \end{verbatim}
 
 This controls how often gravitational-wave quantities are extracted. The same
-output step also includes other useful quantities, such as black-hole positions
+output step also includes other useful quantities, such as black hole positions
 and masses. This output is not especially expensive compared with VTU output,
 so values in the range \texttt{25}--\texttt{100} are usually reasonable.
 
@@ -512,7 +512,7 @@ EMDA_REFINEMENT_MODE = 4
 
 This parameter controls the refinement strategy used by the code. The
 recommended choice is currently \texttt{EMDA\_REFINEMENT\_MODE = 4}, which uses
-black-hole-centered refinement together with wavelet adaptive mesh refinement.
+black hole-centered refinement together with wavelet adaptive mesh refinement.
 \begin{verbatim}
 EMDA_AMR_R_RATIO = 1.618033988749895
 \end{verbatim}
@@ -539,7 +539,7 @@ EMDA_USE_WAVELET_TOL_FUNCTION = 6
 \end{verbatim}
 
 This parameter controls how the wavelet refinement tolerance varies across the
-computational domain. Function~6, developed by William, has worked well in
+computational domain. Function~6, developed by William Black, has worked well in
 practice and is the recommended choice for current EMDA runs. More details can
 be found in Ref.~\cite{Black2025_ORBIT}.
 
@@ -643,19 +643,16 @@ $\alpha_0$ and $\alpha_1$, stored in \texttt{EMDA\_ALPHA\_THEORY}. The choices
 \[
 (\alpha_0,\alpha_1) = (1,1)
 \]
-
 correspond to EMDA,
 
 \[
 (\alpha_0,\alpha_1) = (1,0)
 \]
-
 correspond to EMD, and
 
 \[
 (\alpha_0,\alpha_1) = (0,0)
 \]
-
 correspond to Einstein--Maxwell. The remaining gauge parameters are generally
 safe to leave at their default values.
 
@@ -681,9 +678,9 @@ EMDA_ID_TYPE = 0
 \end{verbatim}
 
 This parameter selects the type of initial data used by the evolution. The
-choice \texttt{EMDA\_ID\_TYPE = 0} uses the TPID solver. Other black-hole
+choice \texttt{EMDA\_ID\_TYPE = 0} uses the TPID solver. Other black hole
 initial-data options are available, but TPID is the standard choice for the
-binary black-hole simulations described here.
+binary black hole simulations described here.
 
 \begin{verbatim}
 ########################################################################
@@ -698,7 +695,7 @@ EMDA_GRID_MIN_Z = -400.0
 EMDA_GRID_MAX_Z = 400.0
 \end{verbatim}
 
-These parameters define the physical extent of the computational domain. The
+These parameters define the extent of the computational domain. The
 values shown here are reasonable defaults for many binary simulations. The outer
 boundary should be placed far enough from the wave-extraction region that
 boundary reflections do not contaminate the extracted waveforms during the time
@@ -726,7 +723,7 @@ SPIN = 0.0, SPIN_THETA = 0.0, SPIN_PHI = 0.0,
 ELECTRIC_CHARGE = 0.05, MAGNETIC_CHARGE = 0.0}
 \end{verbatim}
 
-These parameters define the black-hole properties used by the evolution and by
+These parameters define the black hole properties used by the evolution and by
 the refinement infrastructure. The parameter \texttt{EMDA\_BH1\_AMR\_R} sets
 the radius within which refinement is forced around the first black hole, while
 \texttt{EMDA\_BH1\_CONSTRAINT\_R} sets the radius excluded when computing
@@ -737,23 +734,23 @@ black hole.
 
 The \texttt{X}, \texttt{Y}, and \texttt{Z} entries do not directly determine the
 black holes' initial positions in the TPID solve. Instead, they specify where
-the evolution code begins searching for the black-hole locations and where it
-centers the black-hole refinement regions. For equal-mass binaries, these
+the evolution code begins searching for the black hole locations and where it
+centers the black hole refinement regions. For equal-mass binaries, these
 values should match the corresponding $\pm b$ positions used in the TPID
 parameters.
 
-The electric charge should remain below the black-hole mass in order to avoid
+The electric charge should remain below the black hole mass in order to avoid
 exceeding the extremal limit. Magnetic charge is still under development and
 should not be used for standard production runs. The spin parameter corresponds
 to the dimensionless spin $\chi$, with angular momentum $S=\chi m^2$.
 
-TPID reads the charge and spin from these black-hole parameter blocks, but it
+TPID reads the charge and spin from these black hole parameter blocks, but it
 does not use the listed mass or position values in the same way as the
 evolution code. The TPID mass and separation are set separately by the TPID
 parameters described below.
 
 Finally, note that \texttt{V\_X}, \texttt{V\_Y}, and \texttt{V\_Z} represent
-the black-hole momenta, not their coordinate velocities. This distinction is
+the black hole momenta, not their coordinate velocities. This distinction is
 important when setting up binary initial data.
 
 \begin{verbatim}
