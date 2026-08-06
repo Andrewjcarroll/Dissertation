@@ -22,18 +22,18 @@ S = \int \mathrm{d}^4 x,\sqrt{-g}\Big[
 &\frac{R}{8\pi}
 -2\nabla_a\phi\nabla^a\phi
 -e^{-2\alpha_0\phi}F_{ab}F^{ab} -\frac{1}{2}e^{4\alpha_1\phi}\nabla_a\kappa\nabla^a\kappa
--\kappa F_{ab}({}^{*}F)^{ab}
+-\kappa F_{ab}(*F)^{ab}
 \Big],
 \end{aligned}
 \label{eq:emda_action}
 \end{equation}
-where $R$ is the Ricci scalar, $F_{ab}$ is the $U(1)$ field strength, and $(*F)_{ab}$ is its dual. The constants $\alpha_0$ and $\alpha_1$ determine the coupling strengths between the dilaton, axion, and electromagnetic field. In this chapter, we focus primarily on the one-parameter diagonal sector
+where $R$ is the Ricci scalar, $F_{ab}$ is the $U(1)$ field strength, and $(*F)_{ab}$ is its dual. The constants $\alpha_0$ and $\alpha_1$ determine the coupling strengths between the dilaton, axion, and electromagnetic field. 
+Different choices of $\alpha_0$ and $\alpha_1$ correspond to different members of this class of theories. The choice $(\alpha_0,\alpha_1)=(1,1)$ corresponds to the coupling values associated with the low-energy limit of heterotic string theory and admits the Kerr--Sen black hole solution \cite{Sen1992,Sen1995}. Setting $\alpha_0 =1, \alpha_1=0$ gives an Einstein--Maxwell--dilaton-type system, with the Kaluza--Klein value corresponding to $\alpha_0=\sqrt{3}$ \cite{Horne1992,Mignemi1993_ChargedStringBH}. The case $(\alpha_0,\alpha_1)=(0,0)$ removes the exponential dilaton dependence from the Maxwell and axion kinetic terms and provides a useful reference point for comparison.
+
+In this chapter, we focus primarily on the one-parameter diagonal sector
 \begin{equation}
 \alpha_0=\alpha_1 .
 \end{equation}
-
-Different choices of $\alpha_0$ and $\alpha_1$ correspond to different members of this class of theories. The choice $(\alpha_0,\alpha_1)=(1,1)$ corresponds to the coupling values associated with the low-energy limit of heterotic string theory and admits the Kerr--Sen black-hole solution \cite{Sen1992,Sen1995}. Setting $\alpha_0 =1, \alpha_1=0$ gives an Einstein--Maxwell--dilaton-type system, with the Kaluza--Klein value corresponding to $\alpha_0=\sqrt{3}$ \cite{Horne1992,Mignemi1993_ChargedStringBH}. The case $(\alpha_0,\alpha_1)=(0,0)$ removes the exponential dilaton dependence from the Maxwell and axion kinetic terms and provides a useful reference point for comparison.
-
 For the comparisons presented here, we consider the diagonal EMDA values
 \begin{equation}
 (\alpha_0,\alpha_1)=(0,0),\quad (1,1),\quad (10,10),\quad (100,100).
@@ -44,16 +44,16 @@ We also include selected EMD benchmark cases,
 \end{equation}
 to compare the diagonal EMDA evolutions with representative dilatonic cases. These choices allow us to compare a weakly coupled reference case, the standard EMDA/Kerr--Sen coupling, two larger-coupling EMDA cases, and known EMD limits.
 
-Analytic stationary black-hole solutions are not known for all of the coupling choices considered here. Moreover, even when stationary single-black-hole solutions are known, our binary configurations are constructed using approximate initial data rather than exact binary black-hole solutions. We therefore construct approximate charged binary black-hole initial data and evolve the full EMDA system numerically. During the early part of the evolution, the black holes and surrounding fields are allowed to relax dynamically before inspiral and merger.
+Analytic stationary black hole solutions are not known for all of the coupling choices considered here. Moreover, even when stationary single black hole solutions are known, our binary configurations are constructed using approximate initial data rather than exact binary black hole solutions. We therefore construct approximate charged binary black hole initial data and evolve the full EMDA system numerically. During the early part of the evolution, the black holes and surrounding fields are allowed to relax dynamically before inspiral and merger.
 
-This approach allows us to compare the resulting gravitational waveforms against a common reference waveform and to identify how the electromagnetic, dilaton, and axion fields influence the inspiral and merger dynamics. The known analytic black-hole metrics and associated fields relevant to this theory space are summarized in Appendix~\ref{sec:appx:SchwarzschildBH} with the Kerr-Sen black hole given in in an earlier chapter.
+This approach allows us to compare the resulting gravitational waveforms against a common reference waveform and to identify how the electromagnetic, dilaton, and axion fields influence the inspiral and merger dynamics. The known analytic black hole metrics and associated fields relevant to this theory space are summarized in Appendix~\ref{sec:appx:SchwarzschildBH} with the Kerr--Sen black hole metric presented in an earlier chapter.  {\bf EWH:  Can you reference the actual chapter here?}  
 
 \section{Numerical Methods}
 
-To study the strong-field dynamics and gravitational radiation from inspiraling charged black-hole binaries in Einstein--Maxwell--dilaton--axion theory, we evolve the full EMDA system as a Cauchy initial-value problem. The spacetime metric is evolved using the BSSN formulation \cite{Shibata1995_BSSN,Baumgarte1999_BSSN,Baumgarte2010}, together with puncture gauge conditions \cite{Campanelli2006,Baker2006}. The electromagnetic, dilaton, and axion fields are evolved using the matter evolution equations obtained from the $3+1$ decomposition of the EMDA equations of motion. The full evolution system is summarized in earlier chapters.
-We use the same numerical code used in earlier chapters . In contrast to the head-on collisions considered there, the simulations presented here describe binary black holes with nonzero orbital angular momentum. We use the same assumptions and techniques to set the inititial data that we used in our chapter on inspirirlaing black holes. The black holes are assigned initial linear momenta chosen to approximate quasicircular inspiral. This allows us to follow the late inspiral, merger, and ringdown and to extract gravitational, electromagnetic, dilaton, and axion radiation from the resulting spacetime.
+To study the strong field dynamics and gravitational radiation from inspiraling charged black hole binaries in Einstein--Maxwell--dilaton--axion theory, we evolve the full EMDA system as a Cauchy initial value problem. The spacetime metric is evolved using the BSSN formulation \cite{Shibata1995_BSSN,Baumgarte1999_BSSN,Baumgarte2010}, together with puncture gauge conditions \cite{Campanelli2006,Baker2006}. The electromagnetic, dilaton, and axion fields are evolved using the matter evolution equations obtained from the $3+1$ decomposition of the EMDA equations of motion. The full evolution system is summarized in earlier chapters.
+We use the same numerical code used in earlier chapters. In contrast to the head-on collisions considered there, the simulations presented here describe binary black holes with nonzero orbital angular momentum. We use the same assumptions and techniques to set the inititial data that we used in our chapter on inspiraling black holes. The black holes are assigned initial linear momenta chosen to approximate quasicircular inspiral. This allows us to follow the late inspiral, merger, and ringdown and to extract gravitational, electromagnetic, dilaton, and axion radiation from the resulting spacetime.
 
-Because the initial data are approximate, the electromagnetic constraints do not vanish identically at the initial time. To control these constraint violations, we evolve the electromagnetic fields with hyperbolic divergence cleaning. In this approach, auxiliary damping fields propagate violations of the electric and magnetic constraints away from the strong-field region and damp them during the evolution \cite{Palenzuela2009}. This prevents electromagnetic constraint violations from accumulating during the relaxation, inspiral, and merger. The expected damping of the constraint equations is shown in Figure ~\ref{fig:chapter3_dive_constraint}
+Because the initial data are approximate, the electromagnetic constraints do not vanish identically at the initial time. To control these constraint violations, we evolve the electromagnetic fields with hyperbolic divergence cleaning. In this approach, auxiliary damping fields propagate violations of the electric and magnetic constraints away from the strong field region and damp them during the evolution \cite{Palenzuela2009}. This prevents electromagnetic constraint violations from accumulating during the relaxation, inspiral, and merger. The expected damping of the constraint equations is shown in Figure~\ref{fig:chapter3_dive_constraint}.  
 
 \subsection{Initial data}
 
@@ -63,6 +63,9 @@ Our starting point is a charged binary black hole configuration motivated by Ker
 \begin{align}
     \phi = \alpha_0 \left[\phi_1(r_1,\theta_1) + \phi_2(r_2,\theta_2)\right].
 \end{align}
+
+{\bf EWH:  Sorry, I dont' understand the explanation for this equation now.  Aren't we adding two different dilaton fields and weighting them by the couplings?}  
+
 
 This prescription does not produce an exact solution of the EMDA constraint equations. Instead, it should be viewed as an approximate data construction designed to place the system near the expected charged black hole configuration for each coupling choice. After the evolution begins, the black holes and surrounding fields are allowed to relax dynamically before the late inspiral and merger.
 
@@ -80,11 +83,11 @@ We first compare the gravitational waveforms produced by the different coupling 
 
 For the charge considered here, the gravitational waveforms remain close to the Einstein--Maxwell reference waveform across all of the coupling choices. In most cases, the differences in the dominant strain are too small to interpret as clearly resolved coupling-dependent effects. Because the simulations use approximate initial data, the early relaxation of the black holes and surrounding fields can introduce waveform differences that are unrelated to the intended change in the coupling parameters. These effects, together with finite-resolution error, waveform-extraction error, and the short duration of the evolutions, likely dominate the very small differences observed among most of the runs.
 
-The main robust conclusion is therefore qualitative. For the smaller-coupling EMD and EMDA cases, the dominant gravitational waveform is effectively indistinguishable from the Einstein--Maxwell reference waveform at the accuracy of the present simulations. The strongest-coupling case, $(\alpha_0,\alpha_1)=(100,100)$, produces the largest departure from the reference waveform. Even in this case, however, the dominant strain remains close to the Einstein--Maxwell waveform.
+The main robust conclusion is therefore qualitative. For the smaller coupling EMD and EMDA cases, the dominant gravitational waveform is effectively indistinguishable from the Einstein--Maxwell reference waveform at the accuracy of the present simulations. The strongest-coupling case, $(\alpha_0,\alpha_1)=(100,100)$, produces the largest departure from the reference waveform. Even in this case, however, the dominant strain remains close to the Einstein--Maxwell waveform.
 
-These results suggest that, for the relatively small charge considered here, coupling-dependent effects in the dominant gravitational-wave mode are subtle. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to separate physical coupling-dependent effects from relaxation and numerical errors. The present comparisons should therefore be interpreted as an exploratory test of the EMDA coupling dependence rather than as precision estimates of waveform distinguishability.
+These results suggest that, for the relatively small charge considered here, coupling dependent effects in the dominant gravitational wave mode are subtle. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to separate physical coupling dependent effects from relaxation and numerical errors. The present comparisons should therefore be interpreted as an exploratory test of the EMDA coupling dependence rather than as precision estimates of waveform distinguishability.
 
-Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the Einstein--Maxwell reference waveform and the strongest-coupling EMDA case. The two waveforms are peak-aligned, there is almost no difference in the wavefrom.
+Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the Einstein--Maxwell reference waveform and the strongest coupling EMDA case. The two waveforms are peak-aligned, there is almost no difference in the wavefrom.
 \FloatBarrier
 \begin{figure}[t]
 \centering
@@ -160,7 +163,7 @@ The electromagnetic constraints remain bounded throughout the evolutions, indica
 
 In this chapter, we studied binary black hole mergers in a broader region of Einstein--Maxwell--dilaton--axion theory by varying the coupling parameters that control the interactions between the electromagnetic, dilaton, and axion fields. We focused primarily on the diagonal sector, $\alpha_0=\alpha_1$, and compared several representative coupling choices against the Einstein--Maxwell reference case. Because exact binary black hole initial data are not available for these theories, we used approximate charged binary black hole initial data and allowed the systems to relax dynamically before merger.
 
-The evolutions remained stable for the coupling choices considered here, and the electromagnetic and gravitational constraints remained controlled throughout the simulations. This provides evidence that the numerical framework can be used to explore binary black hole dynamics beyond the analytically known special cases of EMDA theory. In particular, these simulations provide a first step toward studying how nonlinear merger dynamics depend on the theory's coupling parameters.
+The evolutions are stable for the coupling choices considered here, and the electromagnetic and gravitational constraints remain controlled throughout the simulations. This provides evidence that the numerical framework can be used to explore binary black hole dynamics beyond the analytically known special cases of EMDA theory. In particular, these simulations provide a first step toward studying how nonlinear merger dynamics depend on the theory's coupling parameters.
 
 For the small charge considered in this study, we found that the dominant gravitational wave signal is only weakly affected by the choice of coupling. The smaller coupling EMD and EMDA cases remained effectively indistinguishable from the Einstein--Maxwell reference waveform at the accuracy of the present simulations. The strongest coupling case, $(\alpha_0,\alpha_1)=(100,100)$, produced the largest departure from the reference waveform, but even this difference remained small in the dominant strain.
 
