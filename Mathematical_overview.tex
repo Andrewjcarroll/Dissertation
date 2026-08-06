@@ -105,7 +105,7 @@ This equation gives the time evolution of the spatial vector potential once the 
 
 We now consider the spatial components of Maxwell's equations. From the definition
 \begin{equation}
-B^i = \frac{1}{2}\epsilon^{ijk}F_{jk},
+B^i = \frac{1}{2} \, \epsilon^{ijk}F_{jk},
 \end{equation}
 and the relation $F_{ij}=D_iA_j-D_jA_i$, the magnetic field can be written in terms of the vector potential as
 \begin{equation}
@@ -219,7 +219,7 @@ For the Levi-Civita connection, which is metric compatible and torsion free, the
 
 A natural question is how to determine whether a given metric describes flat spacetime. A necessary and sufficient local condition is that the Riemann curvature tensor vanishes everywhere. Thus, curvature provides a way, independent of coordinates, to distinguish flat spacetime from genuinely curved spacetime.
 
- We will now build up the mathematical foundation we need to construct the ADM decomposition.  ( the ADM stands for Arnowitt Deser Misner, after Richard Arnowitt, Stanley Deser, and Charles Misner. the ADM are a simple 3+1 decomposition of Einstein's equations) This freedom is needed to formulate the Cauchy problem in general relativity and in alternative theories of gravity. We foliate the spacetime into a family of spacelike hypersurfaces $\Sigma_t$, which may be interpreted as slices of constant coordinate time $t$.
+ We will now build up the mathematical foundation we need to construct the so-called ADM decomposition and resulting ADM equations.  (ADM stands for Arnowitt--Deser--Misner, after Richard Arnowitt, Stanley Deser, and Charles Misner. The ADM equations emerge from just such a 3+1 decomposition of the Einstein equations.) This freedom {\bf EWH:  What freedom are you referring to? -- and do you wnat to reduce the previous parenthetical to a footnote?  Would that be better or worse?} is needed to formulate the Cauchy problem in general relativity and in alternative theories of gravity. We foliate the spacetime into a family of spacelike hypersurfaces $\Sigma_t$, which may be interpreted as slices of constant coordinate time $t$.
 
 The gradient of the time function is
 \begin{equation}
@@ -489,17 +489,10 @@ R_{ij}
 \mathcal{L}_{\beta}K_{ij}.
 \label{eq:adm-k-evolution}
 \end{equation}
-Here $R_{ij}$ is the Ricci tensor associated with $\gamma_{ij}$,
-\begin{equation}
-S_{ij}
-=
-\gamma^a{}_{i}\gamma^b{}_{j}T_{ab}
-\end{equation}
+Here $R_{ij}$ is the Ricci tensor associated with $\gamma_{ij}$, 
+$S_{ij} = \gamma^a{}_{i}\gamma^b{}_{j}T_{ab}$ 
 is the spatial projection of the stress energy tensor, and
-\begin{equation}
-S = \gamma^{ij}S_{ij}
-\end{equation}
-is its trace.
+$S = \gamma^{ij}S_{ij}$ is its trace.
 
 Together with Eq.~\eqref{eq:adm-gamma-evolution}, these equations form the ADM system. The variables $\gamma_{ij}$ and $K_{ij}$ are the dynamical variables, while $\alpha$ and $\beta^i$ encode the gauge freedom associated with the choice of spacetime coordinates.
 
