@@ -60,7 +60,7 @@ Fully nonlinear simulations of binary BHs in EMDA remain limited. In particular,
 
 In this study, we extend these investigations by simulating head on black hole mergers governed by the full EMDA equations. We analyze the resulting waveforms and examine the stability of the remnants, thereby gaining insight into the persistence of scalar hair within the theory. Specifically, we evolve several head on collisions of BHs in EMDA to determine the conditions under which the dilaton and axion fields survive merger.
 
-The remainder of this chapter is organized as follows. In Sec.~\ref{sec:emda}, we review the EMDA action, equations of motion, and the formulation used for numerical evolution. In Sec.~\ref{sec:methods}, we describe our numerical methods, including the modified \texttt{Dendro GR} infrastructure, the construction of approximate binary BH initial data, and the extraction of gravitational, electromagnetic, dilaton, and axion radiation. In Sec.~\ref{sec:results}, we present simulations of head on Kerr--Sen BH collisions, analyze the emitted radiation, and examine the persistence of scalar hair in the remnant. We also study initially unscalarized configurations to determine whether scalar hair can be generated dynamically. We conclude in Sec.~\ref{sec:conclusion} with a summary of our results and directions for future work. Several important details such as the equations of motion, the analytic form of the Kerr--Sen solution, initial data and wave extraction techniques and issues associated with code performance are relegated to a number of appendices in order not to disrupt the continuity of the discussion.  %When discussing binary configurations, we use lowercase $m$ and $q$ to denote the mass and charge of an individual black hole, while uppercase $M$and $Q$ denote the mass and charge associated with the full spacetime of the binary system.
+The remainder of this chapter is organized as follows. In Sec.~\ref{sec:emda}, we review the EMDA action, equations of motion, and the formulation used for numerical evolution. In Sec.~\ref{sec:methods}, we describe our numerical methods, including the modified \texttt{Dendro-GR} infrastructure, the construction of approximate binary BH initial data, and the extraction of gravitational, electromagnetic, dilaton, and axion radiation. In Sec.~\ref{sec:results}, we present simulations of head on Kerr--Sen BH collisions, analyze the emitted radiation, and examine the persistence of scalar hair in the remnant. We also study initially unscalarized configurations to determine whether scalar hair can be generated dynamically. We conclude in Sec.~\ref{sec:conclusion} with a summary of our results and directions for future work. Several important details such as the equations of motion, the analytic form of the Kerr--Sen solution, initial data and wave extraction techniques and issues associated with code performance are relegated to a number of appendices in order not to disrupt the continuity of the discussion.  %When discussing binary configurations, we use lowercase $m$ and $q$ to denote the mass and charge of an individual black hole, while uppercase $M$and $Q$ denote the mass and charge associated with the full spacetime of the binary system.
 
 \section{Einstein--Maxwell--Dilaton--Axion}
 \label{sec:emda}
@@ -71,6 +71,7 @@ S=\int \mathrm{d}^4 x\,\sqrt{-g}\Big[
 &{R\over8\pi}-2(\nabla\phi)^2-e^{-2\alpha_0\phi}F^2-\tfrac12 e^{4\alpha_1\phi}(\nabla\kappa)^2
 -\kappa\,F_{ab}(*F)^{ab}
 \Big],
+\label{EMDA_action} 
 \end{aligned}
 \end{equation}
 where the first term is the standard Hilbert action and \(\phi\) and \(\kappa\) are the dilaton and axion, respectively.
@@ -88,7 +89,7 @@ solutions. These solutions reduce to Kerr when the electromagnetic charge
 vanishes. In contrast to the Kerr--Newman solution of Einstein--Maxwell
 theory, the Kerr--Sen geometry is accompanied by nontrivial dilaton and
 axion fields whose structure is determined by the black hole charge and
-spin. We now summarize the Kerr--Sen black-hole solution, which provides an exact rotating, charged black-hole solution of EMDA theory. This solution serves as a useful analytic reference for the charged rotating black holes we consider.
+spin. We now summarize the Kerr--Sen black hole solution, which provides an exact rotating, charged black hole solution of EMDA theory. This solution serves as a useful analytic reference for the charged rotating black holes we consider.
 
 \subsection{Kerr--Sen black holes}
 We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindquist type coordinates. The metric takes the form
@@ -139,36 +140,38 @@ a &= \frac{J}{M}.
 \end{align}
 
 The analytic Kerr--Sen solution provides a useful reference for understanding the isolated charged and rotating black holes that appear in EMDA theory. However, the binary systems considered in this work are dynamical, nonlinear, and do not admit closed form solutions. We therefore evolve the EMDA equations numerically. In the next section, we summarize the numerical formulation used in our simulations.
-\section{Numerical Methods}
-\label{sec:methods}
 
+%\section{Numerical Methods}
+%\label{sec:methods}
+
+
+\subsection{The equations of motion for EMDA}
+\label{sec:eom}
 With the aim of studying the nonlinear dynamics of EMDA in black hole
 collisions, we express EMDA as a Cauchy problem and evolve the
 metric using the BSSN formulation~\cite{Shibata1995_BSSN,
-Baumgarte1999_BSSN, Baumgarte2010}, supplemented by evolution equations for the electromagnetic, dilaton, and axion fields. We also employ puncture gauge conditions~\cite{Campanelli2006,Baker2006}.
+Baumgarte1999_BSSN, Baumgarte2010}, supplemented by evolution equations for the electromagnetic, dilaton, and axion fields. 
+We also employ puncture gauge conditions~\cite{Campanelli2006,Baker2006}.
 
-For completeness, we present the full equations of motion and their $3+1$ decomposition.
-
-\subsection{EMDA equations of motion}
-\label{sec:eom}
-The action for EMDA in the Einstein frame is given as:
-\begin{equation}
-S=\int \mathrm{d}^4 x\,\sqrt{-g}
-\left[
-\frac{R}{8\pi}
--2(\nabla\phi)^2
--e^{-2\alpha_0\phi}F^2
--\frac{1}{2}e^{4\alpha_1\phi}(\nabla\kappa)^2
--\kappa F_{ab}({}^*F)^{ab}
-\right].
-\end{equation}
-where $\phi$ and $\kappa$ are the dilaton and axion, respectively.
-The tensor $F_{ab}$ is the U(1) field strength, and $(*F)_{ab}$ is its
-dual. In this work we set the coupling constants to
-$\alpha_0=\alpha_1=1$, corresponding to a low energy limit of heterotic
-string theory.
-
-The Einstein equations are:
+For completeness, we present here the full equations of motion and their $3+1$ decomposition.
+Starting from the action for EMDA as given in Eq.~\ref{EMDA_action}, we can derive the relevant equations of motion.    
+%The action for EMDA in the Einstein frame is given as:
+%\begin{equation}
+%S=\int \mathrm{d}^4 x\,\sqrt{-g}
+%\left[
+%\frac{R}{8\pi}
+%-2(\nabla\phi)^2
+%-e^{-2\alpha_0\phi}F^2
+%-\frac{1}{2}e^{4\alpha_1\phi}(\nabla\kappa)^2
+%-\kappa F_{ab}({}^*F)^{ab}
+%\right].
+%\end{equation}
+%where $\phi$ and $\kappa$ are the dilaton and axion, respectively.
+%The tensor $F_{ab}$ is the U(1) field strength, and $(*F)_{ab}$ is its
+%dual. In this work we set the coupling constants to
+%$\alpha_0=\alpha_1=1$, corresponding to a low energy limit of heterotic
+%string theory.
+These include the Einstein equations:
 \begin{equation}
 G_{ab}
 =
@@ -184,7 +187,7 @@ G_{ab}
 \label{eq:Einstein}
 \end{equation}
 
-while the matter equations can be written
+with the matter equations of motion written as 
 \begin{align}
 0
 &=
@@ -402,17 +405,17 @@ Having written the EMDA system in first order in time form, we now describe how 
 \subsection{Code description}
 \label{sec:code_description}
 
-We perform our black hole merger simulations using \texttt{Dendro GR}, a well developed numerical relativity framework. \texttt{Dendro GR} combines an octree based adaptive
+We perform our black hole merger simulations using \texttt{Dendro-GR}, a well developed numerical relativity framework. \texttt{Dendro-GR} combines an octree based adaptive
 mesh infrastructure with automatic code generation for the evolution
 equations~\cite{Fernando2019,Fernando2019b,Fernando2023}. The computational domain is refined dynamically using wavelet adaptive multiresolution (WAMR) in which the evolved fields are represented on an adaptive hierarchy of octree blocks. Wavelet coefficients computed from the evolved variables provide a local estimate of the truncation error 
 or unresolved field content~\cite{DeBuhr2018RelativisticHydroWavelets,Anderson2006RelativisticMHDAMR, Fernando2023}.
-Regions where these wavelet coefficients exceed a prescribed tolerance are refined, while regions in which wavelet coefficients remain below a coarsening threshold are de refined. This tends to concentrate resolution near the black holes, in the wave extraction region, and in regions where the electromagnetic, dilaton, or axion fields develop large spatial gradients, while smoother regions are evolved on coarser grids.
+Regions where these wavelet coefficients exceed a prescribed tolerance are refined, while regions in which wavelet coefficients remain below a coarsening threshold are coarsened. This tends to concentrate resolution near the black holes, in the wave extraction region, and in regions where the electromagnetic, dilaton, or axion fields develop large spatial gradients, while smoother regions are evolved on coarser grids.
 
 Spatial derivatives are computed using sixth order finite difference
 stencils, and time integration is performed using a fourth order
 Runge--Kutta scheme. We include Kreiss--Oliger dissipation to damp
 poorly resolved high frequency modes and improve numerical stability
-\cite{KreissOliger1973}. Additional details of the \texttt{Dendro GR}
+\cite{KreissOliger1973}. Additional details of the \texttt{Dendro-GR}
 infrastructure, including its WAMR implementation, scalability, and previous applications to binary black hole evolutions, can be
 found in~\cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}.
 
@@ -424,7 +427,8 @@ We compute the $L_2$ norms of the Hamiltonian and momentum
 constraints, together with the electromagnetic constraints.
 When evaluating these norms, we excise small neighborhoods around the punctures
 to avoid unduly weighting the norms by these regions. Representative
-constraint violations for the full simulation are shown in Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
+constraint violations for the full simulation are shown in 
+Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
 
 % ---------------------------------------------------------
 % Constraint violations over the full simulation
@@ -458,12 +462,12 @@ of the conservation of the black hole charges during the evolution.
 
 As a check on our overall numerical strategy, we perform a limited type of convergence study by varying both the wavelet
 tolerance and maximum refinement level for a short head on binary evolution.  We confirm that with increased numbers of refinement levels and tighter refinement criteria constraint violations are reduced.  
-The details of this study are presented below:
+The details of this study are presented below.
 
 \subsection{Code performance}
 A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our WAMR scheme on the  coefficients of the wavelet expansion that determines whether refinement or coarsening occurs.  The maximum refinement level sets the largest number of refinement levels that can be obtained in a simulation.  We confirm that for both, making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
 
-The tests done here use the first \(20M\) of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses of \(m_1=m_2=0.50\), and charge-to-mass ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin \(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics, we again exclude a small neighborhood of each puncture from calculation of the norms.
+The tests done here use the first \(20M\) of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses of \(m_1=m_2=0.50\), and charge-to-mass ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin \(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics, we again exclude a small neighborhood of each puncture when calculating the norms.
 Throughout this section, the constraint measure shown is the sum of the volume weighted Hamiltonian constraint and the three volume weighted momentum constraints. This provides a single diagnostic for the overall constraint violation during the evolution.
 
 Comparisons of simulations with respect to different wavelet tolerances are shown in Figure~\ref{fig:constraint_wavelet_tolerance}.  Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error.  For the three different wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ we can see that the constraints are indeed reduced as $\varepsilon$ decreases.  
@@ -531,7 +535,8 @@ Binary black hole initial data in EMDA have not been extensively studied,
 although several methods have been developed for constructing initial data
 for charged black holes in related settings
 \cite{Alcubierre2009,Mukherjee2022_ConformallyCurvedChargedSpinning,
-Zilhao2014,Zilhao2012,Bozzola2019}. In this work, we adapt some of these techniques to the EMDA system by using an elliptic solver based on a modified version of the two charged punctures solver introduced 
+Zilhao2014,Zilhao2012,Bozzola2019}. In this work, we adapt some of these techniques to the EMDA system by using an elliptic solver based on a modified version of the two 
+charged punctures solver introduced 
 in~\cite{Bozzola2019}.
 Our implementation includes contributions from the dilaton and axion fields. A more detailed discussion of the initial data construction is provided below:
 As usual, we decompose the metric, but using notation slightly modified from the previous appendix.  In particular we define 
@@ -568,6 +573,9 @@ For $V^i_{\text{GR}}$, we use the standard Bowen--York solutions~\cite{Bowen1980
     + \tfrac{1}{2}e^{4 \alpha_1 \phi} \, \Xi \, D^i \kappa.
 \end{equation}
 If we assume a moment of time symmetry and neglect contributions from the magnetic field this source term vanishes.  On imposing asymptotically flat boundary conditions, the solution to the matter part therefore becomes $V^i_{\text{M}}=0$.  
+
+
+\bf{EWH:  Can we update this part with the updates that are in the head-on EMDA paper?  There are changes there that should be pulled into this.} 
 
 We must also impose the electromagnetic constraints. At this point we  depart somewhat from~\cite{Bozzola2019} because the EMDA version of these constraints are no longer linear, containing rather a nontrivial current that couples the dilaton and axion to the electromagnetic fields: 
 \begin{align}
@@ -634,11 +642,12 @@ while the dilaton fields are initially set as:
 \begin{align}
 \phi &= \phi_1(r_1,\theta_1) + \phi_2(r_2, \theta_2)
 \end{align}
-where Eq.~\ref{Kerr Sen_dilaton} gives the form for a dilaton field for a single Kerr--Sen black hole, albeit in Boyer--Lindquist type coordinates, for our current theory parameters of $(\alpha_0,\alpha_1) = (1,1)$.
+where Eq.~\ref{Kerr Sen_dilaton} gives the form for a dilaton field for a single Kerr--Sen black hole, albeit in Boyer--Lindquist type coordinates, for our current theory 
+parameters of $(\alpha_0,\alpha_1) = (1,1)$.
 
 With the initial gravitational, electromagnetic, and scalar fields specified, we can evolve the system and measure the radiation produced during the merger. We now describe the quantities extracted from the simulations and the procedure used to compute the emitted gravitational and electromagnetic radiation.
 
-\section{Radiated Quantities}
+\section{Radiative Quantities}
 
 To analyze the radiation emitted, we compute the Newman--Penrose scalar
 $(\Psi_4)$, along with the electromagnetic radiation. We extract their multipolar components at $(r \approx 100M)$. The extraction procedure is described below. A summary of the initial data parameters used in our simulations is provided in Appendix~\ref{sec:appx:sim_tab}.
@@ -783,13 +792,13 @@ We now describe the simulations of two broad classes of binary black holes in EM
 \end{figure}
 
 \subsection{Initially scalarized black holes}
-We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in subsection below:
+We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in the next subsection. 
 
 Having described the main region of parameter space explored here, we now summarize the specific tests performed and the qualitative late time behavior observed in each case.
 
 \subsection{Summary of tests Done}
 \label{sec:appx:sim_tab}
-In addition to some of the tests mentioned earlier in the chapter, we have also performed a broader set of simulations to test how the late time dilaton and axion fields depend on the initial charges and spins of the binary components. In particular, we considered Kerr--Sen binaries with same sign and opposite sign charges, spin aligned and spin anti aligned configurations, as well as mergers involving neutral GR black holes. For binaries with opposite charges, the net charge vanishes and the remnant settles to a Kerr black hole, with neither a persistent dilaton nor axion field. For binaries with same sign charges but oppositely aligned spins, the axion field decays, while the dilaton field remains nontrivial, corresponding to an EMD like remnant. We further find that when charged, spinless black holes are merged with Kerr black holes, both axion and dilaton fields persist. Finally, we find that mergers of initially nonscalarized Kerr--Newman black holes produce remnants with both dilaton and axion hair. The configurations considered are summarized in Table~\ref{tab:bh_hair_combined}, where a green check mark indicates that the corresponding field remains persistent and nontrivial at late times.
+In addition to some of the tests mentioned earlier in the chapter, we have also performed a broader set of simulations to test how the late time dilaton and axion fields depend on the initial charges and spins of the binary components. In particular, we considered Kerr--Sen binaries with similar and opposite charges, spin aligned and spin anti-aligned configurations, as well as mergers involving neutral GR black holes. For binaries with opposite charges, the net charge vanishes and the remnant settles to a Kerr black hole, with neither a persistent dilaton nor axion field. For binaries with similar charges but oppositely aligned spins, the axion field decays, while the dilaton field remains nontrivial, corresponding to an EMD like remnant. We further find that when charged, spinless black holes are merged with Kerr black holes, both axion and dilaton fields persist. Finally, we find that mergers of initially nonscalarized Kerr--Newman black holes produce remnants with both dilaton and axion hair. The configurations considered are summarized in Table~\ref{tab:bh_hair_combined}, where a green check mark indicates that the corresponding field remains persistent and nontrivial at late times.
 
 \begin{center}
 {\label{tab:bh_hair_combined}%
@@ -847,7 +856,7 @@ black hole with dilaton and axion hair.
 Having summarized the qualitative late time behavior across the full set of configurations, we now examine one representative case in more detail. This example illustrates the gravitational and electromagnetic radiation produced during a head on Kerr--Sen collision and provides a concrete example of the waveform and flux diagnostics used in the simulations.
 
 Figure~\ref{fig:waveforms_l2m0} shows the waveforms from one such representative head on collision of two identical Kerr--Sen black holes.  For this system, both BHs have $\chi = 0.4$ and $q/m = 0.1$, are initially separated by $16M$ and fall together from rest. 
-The waveforms are of the gravitational radiation, $\Psi_4$ and electromagnetic radiation,$\Phi_1$ and $\Phi_2$.  
+The waveforms are of the gravitational radiation, $\Psi_4$ and electromagnetic radiation, $\Phi_1$ and $\Phi_2$.  
 The radiated energy as a function of time is shown in Figure~\ref{fig:flux_chi02_Q05}.  
 In this case, the GW is clearly the dominant form of energy released followed by the electromagnetic radiation. The scalar radiation is much smaller than either the EM or GW radiation. We conclude that there is very little energy radiated in the scalar field channels through the evolution.  In all similar experiments, we find that the scalar fields on the black holes persist and do not  radiate away through or following the merger.  Nontrivial dilaton and axion fields are clearly present and remain attached to the black hole after the merger, as illustrated in Figure~\ref{fig:scalar_fields}.
 
@@ -880,7 +889,8 @@ final configuration. Indeed, with these calculated black hole values, we are abl
     \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/Dilaton_panel.pdf}
   }
 
-  \caption{Scalar fields on the $z=0$ plane for the case $\chi = 0.4$ and $q_i/m_i = 0.1$ Kerr--Sen black holes. We show the amplitudes of the axion, $\kappa$ (top four panels), and dilaton, $\phi$ (bottom four panels), fields at the beginning of the evolution (top left), shortly before merger (top right), just after merger (bottom left), and at a later time after merger (bottom right).}
+  \caption{Scalar fields on the $z=0$ plane for the case of $\chi = 0.4$ and $q_i/m_i = 0.1$ Kerr--Sen black holes. We show the amplitudes of the axion, $\kappa$ (top four 
+  panels), and dilaton, $\phi$ (bottom four panels), fields at the beginning of the evolution (top left), shortly before merger (top right), just after merger (bottom left), and at a later time after merger (bottom right).}
   \label{fig:scalar_fields}
 \end{figure}
 
@@ -910,7 +920,7 @@ final configuration. Indeed, with these calculated black hole values, we are abl
 To further assess the stability of scalar hair, we conducted a series of tests initialized with a Gaussian distribution of axion and dilaton fields centered at the origin, with amplitudes ranging from $10^{-7}$ up to almost $10^{-2}$. 
 Despite not strictly satisfying the constraints, these superposed perturbative scalar fields propagate outward and enable us to examine whether initially unscalarized black holes can dynamically acquire and retain scalar fields. Our results confirm that they do: a Kerr–Newman black hole in EMDA rapidly scalarizes, developing both dilaton and axion hair. In addition, the change to the constraint violations both from the initial perturbations as well as through the subsequent evolution are small enough to leave us confident in our results.  
 
-Even in the absence of any initial scalar fields in the background, the system evolves to generate nontrivial scalar structure. This demonstrates that scalarization occurs dynamically and does not require pre existing scalar hair. The scalarization occurs quickly with initially Kerr--Newman BHs acquiring Kerr--Sen aspects, i.e. scalar hair prior to merger.  Mass and electromagnetic charge get radiated with a very small amount of scalar hair, but the final object is a Kerr--Sen BH.  
+Even in the absence of any initial scalar fields in the background, the system evolves to generate nontrivial scalar structure. This demonstrates that scalarization occurs dynamically and does not require pre-existing scalar hair. The scalarization occurs quickly with initially Kerr--Newman BHs acquiring Kerr--Sen aspects, i.e. scalar hair prior to merger.  Mass and electromagnetic charge get radiated with a very small amount of scalar hair, but the final object is a Kerr--Sen BH.  
 %The conserved quantities, including the total mass and charge, remain effectively constant throughout the evolution. Variations in the conserved quantities over the course of the evolution in both mass and charge are below \(0.2\,\%\). This suggests that these quantities remain stable and conserved over time. 
 Figure~\ref{fig:unscalarized} illustrates the evolution of the scalar fields for the case without initial scalar hair on the BHs.
 
