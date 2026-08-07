@@ -21,7 +21,7 @@ The grids are nested, so points present on a coarse level also appear on all fin
 \end{equation}
 The multidimensional AMR hierarchy used in the simulations is built from the same dyadic refinement idea.
 
-Figure~\ref{fig:wamr grid hierarchy} illustrates this nested structure in one dimension. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail spaces $W_j$, which contain the information added when passing from level $j-1$ to level $j$.
+Figure~\ref{fig:wamr grid hierarchy} illustrates this nested structure in one dimension. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional points form the detail {\bf EWH:  Sorry, what do you mean by detail? Where did you find the use of this word?}  spaces $W_j$, which contain the information added when passing from level $j-1$ to level $j$.
 
 \begin{figure}[t]
 \centering
@@ -203,6 +203,8 @@ As in one dimension, sparse refinement is obtained by retaining only those point
 \section{Sobolev Informed Refinement}
 \label{sec:sobolev amr}
 
+{\bf EWH:  It might be too late now, but I still wonder if having a definition of Sobolev norm might be a good idea, if for no other reason than provide context for the name.  What is here is good overall, but could benefit from more detail.} 
+
 In addition to the standard wavelet criterion, we also consider a Sobolev inspired modification of the refinement. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
 
 For a given evolved variable $u$, the standard wavelet refinement indicator may be denoted by
@@ -224,22 +226,22 @@ This quantity represents the usual WAMR estimate based on the magnitude of the l
 \end{equation}
 where $I_{\nabla u}$ is a local first derivative indicator, $I_{\nabla^2 u}$ is a local second derivative indicator, and $w_1$ and $w_2$ are user controlled weights. Any required normalization of the derivative indicators is absorbed into these weights. The first derivative term increases refinement in regions with large gradients, while the second derivative term increases refinement in regions with large curvature or rapidly changing gradients.
 
-This refinement measure should be interpreted as a \emph{Sobolev inspired} or \emph{Sobolev weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. By contrast, Eq.~\eqref{eq:sobolev amr indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet based refinement algorithm.
+This refinement measure should be interpreted as a \emph{Sobolev inspired} or \emph{Sobolev weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. {\bf EWH:  Give an example?}  By contrast, Eq.~\eqref{eq:sobolev amr indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet based refinement algorithm.
 
-We demonstrate this in action with code evolving Maxwell's equations. The following figures compare the baseline wavelet adaptive mesh refinement criterion with the Sobolev informed refinement criterion. These diagnostics compare both the constraint behavior of the two refinement strategies and the computational cost associated with the resulting adaptive meshes.
+We demonstrate this with code by evolving Maxwell's equations. The following figures compare the baseline wavelet adaptive mesh refinement criterion with the Sobolev informed refinement criterion. These diagnostics compare both the constraint behavior of the two refinement strategies and the computational cost associated with the resulting adaptive meshes.
 
-Figure~\ref{fig:sobolev amr mesh comparison} shows a representative side by side comparison of the adaptive mesh structure produced by the two refinement criteria. The Sobolev informed criterion modifies the local refinement indicator by including derivative information, which changes the distribution of refined regions relative to the baseline wavelet criterion.
+Figure~\ref{fig:sobolev amr mesh comparison} {\bf EWH:  Can you give the parameters of these simulations? e.g. the field being evolved, resolution (maxdepth), grid size, initial data parameters, etc?}  shows a representative side by side comparison of the adaptive mesh structure produced by the two refinement criteria. The Sobolev informed criterion modifies the local refinement indicator by including derivative information, which changes the distribution of refined regions relative to the baseline wavelet criterion.
 \FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Appendix/sobolev_wamr_labeled_side_by_side.pdf}
 \caption{
-Representative comparison of the adaptive mesh generated by the baseline wavelet AMR criterion and the Sobolev informed AMR criterion. The red areas represent areas of higher refinment the blue areas represent the areas with lower refinment. The Sobolev informed criterion includes derivative information in the refinement indicator, which changes where grid points are allocated. The oscillatory ring corresponds to the outward propagating dipole pulse. Notice that the sobolev inspired refinement produces a much more symmetric refinement. The Sobolev inspired criteria is more expensive but refines around the region of interest better.
+Representative comparison of the adaptive mesh generated by the baseline wavelet AMR criterion and the Sobolev informed AMR criterion. The red areas represent areas of higher refinment. Blue areas represent areas with lower refinment. The Sobolev informed criterion includes derivative information in the refinement indicator, which changes where grid points are allocated. The oscillatory ring corresponds to the outward propagating dipole pulse. Notice that the Sobolev inspired refinement produces a much more symmetric refinement. The Sobolev inspired criteria is more expensive but refines around the region of interest better.
 }
 \label{fig:sobolev amr mesh comparison}
 \end{figure}
 \FloatBarrier
-Figure~\ref{fig:sobolev amr constraints} shows the divergence constraints for the electric and vector potential fields. These quantities provide a direct measure of the constraint violation during the evolution. The comparison shows how the Sobolev informed refinement criterion affects the constraint preserving behavior of the evolution relative to the baseline wavelet criterion. Notice how much better the sobolev inspired does relative to the base case.
+Figure~\ref{fig:sobolev amr constraints} shows the divergence constraints for the electric and vector potential fields. These quantities provide a direct measure of the constraint violation during the evolution. The comparison shows how the Sobolev informed refinement criterion affects the constraint preserving behavior of the evolution relative to the baseline wavelet criterion. Notice how much better the Sobolev inspired does relative to the base case.
 \FloatBarrier
 \begin{figure}[t]
 \centering
