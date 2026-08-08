@@ -19,7 +19,7 @@ and a number of codes have adopted octree partitioning to improve
 the distributed aspects of binary inspiral calculations~\cite{Fernando2019,Fernando2023,Radia2022_AMR,Rashti2024_AMR,Daszuta2024_AdaptiveMeshes}.  It is natural to ask
 where accuracy
 improvements for waveform simulation might come from.  Two possible areas
-where improvements in accuracy may be obtainable include moving to GPUs to speed up calculations and using improved, higher order accuracy algorithms~\cite{Lewis2018_GPU,Tootle2025,AthenaK2024_NR,Lele1992,Daszuta2024}.  A number of groups and codes have begun to develop for GPUs as have we~\cite{Fernando2019}.  But in this work we will focus on the latter of these, namely higher accuracy finite
+where improvements in accuracy may be obtainable include moving to GPUs to speed up calculations and using improved, higher order accuracy algorithms~\cite{Lewis2018_GPU,Tootle2025,AthenaK2024_NR,Lele1992,Daszuta2024}.  A number of groups and codes have begun to develop for GPUs as have we~\cite{Fernando2019}.  But in this chapter we will focus on the latter of these, namely higher accuracy finite
 differencing schemes in the form of compact finite differences (CFDs)~\cite{Lele1992,Kim2007,Kim2010,Kim2013,KimSandberg2012,Daszuta2024,WuKim2024}.
 
 
@@ -32,12 +32,12 @@ Nonetheless, CFDs have been used for over thirty years in the engineering
 literature~\cite{Lele1992,Kim2007,WuKim2024,VisbalGaitonde2002,BradyLivescu2019} with impressive accuracy improvements
 in the simulation of both linear and nonlinear systems of equations.  So one might think that use of these in numerical relativity may be one route to improved accuracy in binary simulations and the gravitational radiation they source.
 
-Our aim in the current work is to develop high order compact finite difference schemes together with boundary closures and test them on linear and nonlinear time evolution systems in three dimensions.
+Our aim in the current chapter is to develop high order compact finite difference schemes together with boundary closures and test them on linear and nonlinear time evolution systems in three dimensions.
 Indeed, we are able to demonstrate the utility of these schemes and that, in the test cases considered here, an increase in the effective order of accuracy is possible.
 
 
 %The paper is structured as follows.  ... 
-The paper is structured as follows. Section~II provides background on compact finite difference schemes and discusses their advantages relative to explicit finite difference methods, together with the challenges associated with boundary closures and stability. Section~III describes the construction and optimization of the first derivative operators, including the treatment of interior and boundary stencils and the resulting fourth and sixth order schemes. Section~IV presents the corresponding construction of compact operators for second derivatives. In Sec.~V, we test the operators on a sequence of linear and nonlinear systems, including the classical wave equation, Maxwell's equations, Burgers' equation, the nonlinear sigma model, and Teukolsky gravitational wave evolutions using the BSSN equations. Finally, Sec.~VI summarizes our results and discusses future applications of compact finite differences in numerical relativity.
+The chapter is structured as follows. {\bf EWH:  Can you change these section numbers from the paper to the appropriate section numbering of the chapter?}  Section~II provides background on compact finite difference schemes and discusses their advantages relative to explicit finite difference methods, together with the challenges associated with boundary closures and stability. Section~III describes the construction and optimization of the first derivative operators, including the treatment of interior and boundary stencils and the resulting fourth and sixth order schemes. Section~IV presents the corresponding construction of CFD operators for second derivatives. In Sec.~V, we test the operators on a set of linear and nonlinear systems, including the classical wave equation, Maxwell's equations, Burgers' equation, the nonlinear sigma model, and the Einstein equations using the BSSN formalism. Finally, Sec.~VI summarizes our results and discusses future applications of compact finite differences in numerical relativity.
 
 \section{Background}
 \label{sec:background}
@@ -52,7 +52,7 @@ Compact finite difference (CFD) schemes are a generalization of Pad\'e approxima
 that couple derivatives at neighboring points at different spatial scales.
 In general, for a fixed stencil size, these will be higher-order than standard FD schemes~\cite{Lele1992,Kim2007,Daszuta2024}.  When compared to explicit FDs, compact schemes of similar order require
 smaller stencils and can be significantly
-more accurate--often by a factor of 10--100$\times$ more accurate~\cite{Lele1992,Kim2007,Wang2018,Daszuta2024}.  
+more accurate--often by a factor of 10--100$\times$~\cite{Lele1992,Kim2007,Wang2018,Daszuta2024}.  
 A price to pay for this increase in accuracy is that CFD schemes are
 implicit and therefore require matrix inversion~\cite{Lele1992,Kim2013,KimSandberg2012}.  However, our use of \dendrogr\
 permits us to partially sidestep this issue~\cite{Fernando2019,Fernando2023}.  In particular, 
@@ -114,14 +114,14 @@ $x$ components of the magnetic and electric fields for the evolution of a
 magnetic dipole wave using a first order in time, first order in space
 formulation of the Maxwell equations. Several fourth order compact and
 explicit finite difference operators are compared at different resolutions.
-The key results are that the nominally fourth order compact operators produce
+The key results are that the nominally fourth order CFD operators produce
 error profiles comparable to those of the sixth order explicit scheme and,
 more significantly, perform comparably to the fourth order explicit scheme
 when run at half the resolution.
 
 Comparable improvements are obtained for the sixth order first derivative
 operators, as shown in Fig.~\ref{fig:maxwell_sixth_order_error}. Although the
-sixth order compact operators do not achieve the full factor of two improvement
+sixth order CFD operators do not achieve the full factor of two improvement
 in resolution observed for the fourth order operators, they still reduce the
 error by approximately an order of magnitude relative to the sixth order
 explicit scheme. Similar behavior is also observed in the nonlinear sigma
@@ -258,7 +258,7 @@ model and Teukolsky wave tests presented below.
 Early indications of the accuracy improvements possible suggest that replacing an
 explicit FD with a CFD of the same nominal accuracy results in an evolution with
 comparable error at half the resolution (see Figure~\ref{fig:maxwell_fourth_order_error}).  For a time dependent problem across a 3D grid, this could result in
-a potential speedup or efficiency boost of up to $16\times$.  Indeed, in the aerospace community, there is a rule of thumb that the use of CFDs can result in a factor of $10\times$ improvement even for complex, nonlinear fluid flows.In the event that we don't realize
+a potential speedup or efficiency boost of up to $16\times$.  Indeed, in the aerospace community, there is a rule of thumb that the use of CFDs can result in a factor of $10\times$ improvement even for complex, nonlinear fluid flows.  In the event that we don't realize
 exactly these same performance gains in the nonlinear Einstein equations, we still think that we can make a conservative estimate that the use of CFDs should give us at least a factor $2\times$ improvement.  Coupling this with speedups of $> 2\times$ that we have already seen from an earlier version of our GPU code~\cite{Fernando2019}, should
 allow a class of such BBH evolutions to be evolved that have heretofore been
 inaccessible (see Figure~\ref{fig:walltime}).
@@ -282,12 +282,11 @@ to include values of the derivative at nearby grid points.  For example, one suc
     \alpha_2 f_{i-2}' + \alpha_1 f_{i-1}' + f_i' + \alpha_1 f_{i+1}' + \alpha_2 f_{i+2}' = {1\over 2h} \Bigl[ a_1 ( f_{i+1} - f_{i-1} ) + a_2 ( f_{i+2} - f_{i-2} ) \Bigr] + {\cal O}(h^{2n}) 
 \label{eighth_order_cfd}
 \end{equation}
-
 where the constant coefficients, $\alpha_1, \alpha_2, a_1$ and $a_2$ can be found be demanding a particular order of accuracy for the approximation ($2n$ in this example).  In this case, by matching Taylor coefficients, up to an eighth order scheme ($n=4$) may be defined with four linear conditions on the four coefficients.    
 
-Similar such interior schemes are readily obtained.  Note that one need not solve for all of the coefficients so that some may be left as free parameters thereby becoming subject to conditions other than the order of accuracy of the scheme.  
+Similar such interior schemes are readily obtained.  Of course, one one need not solve for all of the coefficients thereby allowing some of them to be left as free parameters which are then allowed to be subject to conditions other than the order of accuracy of the scheme.  
 
-Potential complications include the treatment of boundaries and that we have begun our illustration with a 1D example.  We will consider boundaries below.  As for considering this in higher dimensions, the extension is straightforward.  
+One might consider potential complications to include the treatment of boundaries and how this might be extended beyond one dimension.  We will consider boundaries below.  The extension to higher dimensions is straightforward with the operators in higher dimensions being the tensor product of the one dimensional versions in each direction.   
 
 %In systems of interest to us, such as the Einstein equations a serious issue arises associated with boundary
 
@@ -298,11 +297,11 @@ P_{ij} f_j' = {1 \over h} Q_{ij} f_j
 where $f_j$ is the vector of function values, $f_j'$ the vector of derivative values, and the matrices $P_{ij}$ and $Q_{ij}$ define the nature of the coupling between neighboring derivative and function values, respectively.  Of course, for an explicit finite difference scheme $P$ would be the identity.  Anything else will constitute some form of what we will refer to as a compact finite difference scheme.  
 As in the example above, the interior points 
 %Assuming a finite grid, the so-called ``interior points" of the scheme 
-are straightforwardly obtained by matching the coefficients of a Taylor expansion of both sides in powers of the grid spacing $h$.  For the interior points, we always choose centered stencils similar to  to use centered stencil such as that in Eq.(\ref{eighth_order_cfd})
+are straightforwardly obtained by matching the coefficients of a Taylor expansion of both sides in powers of the grid spacing $h$.  For the interior points, we always use centered stencils such as that in Eq.(\ref{eighth_order_cfd})
 %\begin{equation}
 %    \beta f_{i-2}' + \alpha f_{i-1}' + f_i' + \alpha f_{i+1}' + \beta f_{i+2}' = {1\over 2h} \Bigl[ {b \over 2} ( f_{i+2} - f_{i-2} ) + a ( f_{i+1} - f_{i-1} ) \Bigr] + {\cal O}(h^n) 
 %\end{equation}
-Note that this particular example will result in the interior portions of $P$ and $Q$ both being pentadiagonal matrices.  As mentioned, if all four coefficients are solved for, the accuracy of the interior scheme would be eighth order.  But if we were to extend this to having septadiagonal $P$ and $Q$ matrices for the interior, we could go to twelfth order accuracy, in principle.  We will find it useful, however, to choose a lower order of accuracy, solve for a subset of the  coefficients by Taylor matching and to allow constraints other than accuracy to fix the remaining or ``free" parameter values in our CFD schemes.    
+Note that this particular example will result in the interior portions of $P$ and $Q$ both being pentadiagonal.  As mentioned, if all four coefficients are solved for, the accuracy of the interior scheme would be eighth order.  But if we were to extend this to having septadiagonal $P$ and $Q$ matrices for the interior, we could go to twelfth order accuracy, in principle.  We will find it useful, however, to choose a lower order of accuracy, solve for a subset of the  coefficients by Taylor matching and to allow constraints other than accuracy to fix the remaining or ``free" parameter values in our CFD schemes.    
 
 Of course, in our $P$ and $Q$ matrices are boundary and near boundary rows or stencils that we must incorporate.  
 %We must also consider boundary and near-boundary points in the construction of our CFD derivatives.  
@@ -310,13 +309,13 @@ Centered stencils, of course, will no longer be usable near  non-periodic bounda
 \begin{equation}
 \beta_{-1} f_{i-1}' + f_i' + \beta_1 f_{i+1}' + \beta_2 f_{i+2}' + \cdots = {1 \over h} \bigl( b_{-1} f_{i-1} + b_0 f_i + b_1 f_{i+1} + \cdots \bigr) + {\cal O}(h^n)
 \end{equation}
-for a right shifted stencil.  (And where a choice of an overall normalization is made with the coefficient of $f'_i$ being 1.)   Were we to choose to maintain the pentadiagonality of $P$, we would have three unknown coefficients.  For an accuracy of order $n$, we would then need $n-3$ coefficients on the right hand side. Depending on other constraints, it is unlikely that $Q$ could likewise remain a pentadiagonal matrix while also having the near boundary derivative CFD scheme retain an order of accuracy comparable to that of the interior.  In general, we will aim to have boundary schemes that have an order of accuracy similar to that of the interior while preserving the tridiagonality or pentadiagonality of $P$.  As a result, the $Q$ matrices will in general not be tri- or pentadiagonal.  This shouldn't matter too much as computationally it is $P$ that we will need to invert and having a simple structure will make the calculation of $P^{-1}$ faster.  The price to pay is that the $Q$ matrix will not share as simple a structure.  
+for a right shifted stencil.  Note that a choice of an overall normalization is made with the coefficient of $f'_i$ being 1.   Were we to choose to maintain the pentadiagonality of $P$, we would have three unknown coefficients.  For an accuracy of order $n$, we would then need $n-3$ coefficients on the right hand side. Depending on other constraints, it is unlikely that $Q$ could likewise remain a pentadiagonal matrix while also having the near boundary derivative CFD scheme retain an order of accuracy comparable to that of the interior.  In general, we will aim to have boundary schemes that have an order of accuracy similar to that of the interior while preserving the tridiagonality or pentadiagonality of $P$.  As a result, the $Q$ matrices will in general not be tri- or pentadiagonal.  This shouldn't matter too much as computationally it is $P$ that we will need to invert and having a simple structure will make the calculation of $P^{-1}$ faster.  The price to pay is that the $Q$ matrix will not share as simple a structure.  
 
 \subsection{Optimization}
 \subsubsection{Interior Scheme}
 
 One advantage of compact finite difference schemes are that they have better spectral characteristics than standard finite differences.  While not as good as spectral methods themselves, we can optimize CFDs for improved behahvior at large wavenumbers.  % can be optimized to provide spectral-like resolution characteristics.  
-We will choose to sacrifice some accuracy in an attempt to improve and optimize for these sorts of properties.  To this end, we will construct the spectral or transfer function associated with the CFD scheme~\cite{}, and optimize on an error measure built from the spectral function.~\cite{} 
+We will choose to sacrifice some accuracy in an attempt to improve and optimize for these sorts of properties.  To this end, we will construct the spectral or transfer function associated with the CFD scheme~\cite{}, and optimize on an error measure built from the spectral function.~\cite{} {\bf EWH:  Do you have any references for these?}  
 
 Consider a general interior (central) CFD scheme such as 
 %On Fourier transforming an interior central scheme such as 
@@ -334,7 +333,7 @@ where tildes designate the Fourier transform.  This is the spectral or transfer 
   \includegraphics[width=\linewidth]{figures/1st_4th_Order_Spectral_Functions.pdf}
   \vspace{-.75cm}
   \caption{
-   Comparison of spectral functions for several 4th order schemes: the explicit 4th order finite difference, a tridiagonal 4th order compact finite difference [ref Tyler], and a spectrally-optimized pentadiagonal 4th order compact finite difference [this work].
+   Comparison of spectral functions for several 4th order schemes. In particular, we note the explicit 4th order finite difference, a tridiagonal 4th order compact finite difference [ref Tyler], and a spectrally-optimized pentadiagonal 4th order compact finite difference [this work].
 }
   \label{fig:4th_spectral_functions}
 \end{figure}
@@ -343,7 +342,7 @@ We construct the following error quantity from the spectral function, namely
 \begin{equation}
 E(\alpha_i, a_i) = \int_{0}^{r \pi}{\bigl[ \bar{\kappa} - \kappa \bigr]^2 D(\kappa)^2 \, d\kappa}
 \end{equation}
-where $D(\kappa)$ is simply the denominator in the spectral function, Eq. (\ref{spectral_function}). In general, an arbitrary weighting function can be used, but this form is chosen so that the integral can be computed analytically [ref Zhou Zhang 2011]. The parameter $r \in (0,1]$ in the upper bound of the integral is referred to as the ``fractional cutoff wavenumber,'' and represents the maximum modified wavenumber $\kappa$ over which the spectral error is optimized. It has been suggested [ref Chen 2023] to have a lower cutoff wavenumber around $0.5$ or $0.75$ to avoid over-optimization on higher-wavenumber modes, while others [ref Kim 2007] have used higher cutoff wavenumbers such as $0.839$. In this work, we develop several families of CFD operators for several values of the cutoff wavenumber from $0.6$ to $0.85$.
+where $D(\kappa)$ is simply the denominator in the spectral function, Eq. (\ref{spectral_function}). In general, an arbitrary weighting function can be used, but this form is chosen so that the integral can be computed analytically [ref Zhou Zhang 2011]. The parameter $r \in (0,1]$ in the upper bound of the integral is referred to as the ``fractional cutoff wavenumber,'' and represents the maximum modified wavenumber $\kappa$ over which the spectral error is optimized. It has been suggested [ref Chen 2023] to have a lower cutoff wavenumber around $0.5$ or $0.75$ to avoid overly optimizing on higher wavenumbers, while others [ref Kim 2007] have used higher cutoff wavenumbers such as $0.839$. In this chapter, we develop several families of CFD operators for several values of the cutoff wavenumber from $0.6$ to $0.85$.
 
 We minimize the error $E$ by substituting the solutions of the Taylor constraint equations up to a given order of accuracy for our ``fixed parameters'' and by imposing constraints of the form
 \begin{equation}
@@ -370,7 +369,7 @@ $$
     \frac{d^n P}{dx^n}(\hat{y}) = 0.
 \end{cases}
 $$
-The parameter $\hat{y}$ is a value which will be used for optimizing the boundary closures later on. The quantity $n$ is an arbitrary integer which should be at least greater than or equal to the order of accuracy of the scheme and at most less than or equal to the order of the extrapolation polynomial. We have found that a lower value of $n$ leads to a larger family of minima in our boundary error quantity and thus a larger family of error-optimized boundary closures.
+The parameter $\hat{y}$ is a value which will be used for optimizing the boundary closures.  The quantity $n$ is an arbitrary integer which should be at least greater than or equal to the order of accuracy of the scheme and at most less than or equal to the order of the extrapolation polynomial. We have found that a lower value of $n$ leads to a larger family of minima in our boundary error quantity and thus a larger family of error-optimized boundary closures.
 
 Once we have solved the system above to find the coefficients of the extrapolation polynomial, we construct a centered stencil for each of the boundary nodes, substituting in the extrapolation polynomial at each of the grid points which lie beyond the domain. Finally, we can rearrange the resulting equations into the shifted stencils which can be implemented, and the shifted stencil boundary coefficients can be read off in terms of the free parameter $\hat{y}$ only.
 
@@ -388,7 +387,7 @@ where:
 
 Note that because the boundary stencils are shifted, their spectral functions have real and imaginary components, corresponding to both dispersive and dissipative behavior in the numerical scheme.
 
-At this point, many different error quantities could be constructed in order to optimize specific features of the boundary closure. For example, an error quantity could be chosen to optimize only on the imaginary part of the spectral function in order to minimize unwanted dissipative modes. In the present work, we use the error quantity
+At this point, many different error quantities could be constructed in order to optimize specific features of the boundary closure. For example, an error quantity could be chosen to optimize only on the imaginary part of the spectral function in order to minimize unwanted dissipative modes. In the present chapter, we use the error quantity  {\bf EWH:  Can you get more of these equations numbered?} 
 $$
 E_m = \int_{0}^{r \pi}{\Big[ \big| \Re(N_m(\kappa)) + i \Im(N_m(\kappa)) \big| - \kappa D_m(\kappa) \Big]^2 \ d\kappa}
 $$
@@ -525,9 +524,9 @@ a_{20} & a_{21} & a_{22} & a_{23} & a_{24} & a_{25} & a_{26} & 0 & \cdots & 0 \\
 
 Having sketched the process of computing boundary-closed CFD operators for a given order of accuracy, we here present several tests of these operators as applied in specific systems of PDEs.  
 
-We begin with a 1D nonlinear system, namely Burgers' equation.  We also consider Maxwell's equations in full 3D together with hyperbolic divergence cleaning.  We return to nonlinear problems with a 3D nonlinear sigma model and conclude with the Einstein equations with the evolution of Teukolsky gravitational waves. 
+We begin with a 1D nonlinear system, namely Burgers' equation.  We also consider Maxwell's equations in full 3D together with hyperbolic divergence cleaning.  We return to nonlinear problems with a 3D nonlinear sigma model and conclude with the Einstein equations with the evolution of linearized Teukolsky gravitational waves. 
 
-In each case, the basic results are similar.  Namely, the use of CFDs at some accuracy order perform better than a comparable explicit FD scheme, sometimes by more than an order of magnitude as measured by.  Effectively, the CFDs are providing comparable error profiles at half the resolution of the FDs.  
+In each case, the basic results are similar.  Namely, the use of CFDs at some accuracy order perform better than a comparable explicit FD scheme, sometimes by more than an order of magnitude.  Effectively, the CFDs are providing comparable error profiles at half the resolution of the FDs.  
 
 
 %\subsection{Classical wave equation}
@@ -557,7 +556,7 @@ In solving this problem numerically, we approximate both first and second spatia
 
 To focus in this test problem on the interior parts of the CFDs, we take a domain of $-100 \le x \le 100$ and limit the simulation time to $0 \le t < 50$. Because the solution approaches constant states far from the transition region near $x=t$, fixed Dirichlet boundary conditions provide an accurate approximation on the truncated domain.  Appropriate boundary-closed operators continue to be used, but because we are limiting interactions with the boundaries, the results are more reflective of the behavior of the interior CFDs.  
 
-The continuous domain $[-100,100]$ is divided into $N$ uniform cells of width $h$. Using a grid defined at the cell boundaries, we will have $N+1$ grid points to represent the domain. Defining $f_i(t) = f(-100 + ih,t)$ to be the $i$th point of the solution along the domain, with $i$ ranging from $0$ to $N$, we can write equation \ref{eq:BurgersEq} in the semidiscrete form:
+The continuous domain $[-100,100]$ is divided into $N$ uniform cells of width $h$. Using a grid defined at the cell boundaries, we will have $N+1$ grid points to represent the domain. Defining $f_i(t) = f(-100 + ih,t)$ to be the $i$th point of the solution along the domain, with $i$ ranging from $0$ to $N$, we can write Eq.~\ref{eq:BurgersEq} in the semidiscrete form:
 \begin{equation}
     \frac{d \phi_i}{d t} = -\phi_i \textbf{D}_1 \phi_i + \textbf{D}_2\phi_i,
 \end{equation}
@@ -566,7 +565,7 @@ where $\textbf{D}_1$ and $\textbf{D}_2$ denote the discrete first- and second-de
 A standard fourth-order Runge--Kutta (RK4) method is implemented to advance our solution in time. At each time step, including the intermediary stages in the integration, the Dirichlet boundary conditions are imposed on the first and last entries of the solution. This process is repeated for select resolutions of $N$, $2N$, and $4N$, and the $L_2$-norm of the error when compared with the analytic solution is calculated.
 Results are plotted in Figures \ref{fig:4th_burgers_error} and \ref{fig:6th_burgers_error}.  
 
-Both figures show the absolute error of these evolutions using CFD and FD (first and second derivative) operators at three different resolutions. The low, medium and high resolutions have $N=200,400,800$, respectively. In Figure \ref{fig:4th_burgers_error}, ``E4" stands for an explicit fourth order operator.  The ``A4" and ``C4" designations are members of two families of fourth order operators that were derived in previous sections.  From the figure, it is clear that within each type of difference operator, there is convergence from low to high resolution.  Indeed, the convergence is fourth order for each as it should be.  But, in addition, the plot shows that CFD operators result in an overall error that is one to two orders of magnitude better than the corresponding explicit FDs.  Even more significantly, it can be seen that the medium resolution CFDs have an improved error profile over the high resolution FD scheme.  Effectively, the CFDs are providing improved accuracy at lower resolution.  
+Both figures show the absolute error of these evolutions using CFD and FD (first and second derivative) operators at three different resolutions. The low, medium and high resolutions have $N=200,400,800$, respectively. In Figure \ref{fig:4th_burgers_error}, ``E4" stands for an explicit fourth order operator.  The ``A4" and ``C4" designations are members of two families of fourth order operators that were derived in previous sections.  From the Figure, it is clear that for a given type of difference operator, there is convergence from low to high resolution.  Indeed, the convergence is fourth order for each as it should be.  But, in addition, the plot shows that CFD operators result in an overall error that is one to two orders of magnitude better than the corresponding explicit FDs.  Even more significantly, it can be seen that the medium resolution CFDs have an improved error profile over the high resolution FD scheme.  Effectively, the CFDs are providing improved accuracy at lower resolution.  
 
 A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a standard sixth order explicit (E6) finite difference scheme for both first and second derivatives with an earlier derived sixth order CFD (C6).  Note that the C6 operator is an optimized 6th order compact scheme for the first and second derivatives.  Likewise, the A4 and C4 operators are two of the optimized compacts schemes at 4th order for the first derivative and second derivatives. In both cases, the compact schemes at low resolutions perform almost as well or better than the explicit schemes at a resolution with twice as many points. This shows a definite improvement in accuracy with the compact schemes.
 \FloatBarrier
@@ -597,7 +596,7 @@ A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a sta
     Analytic error for Burgers' equation at different resolutions using
     sixth order operators. The dotted lines correspond to the coarsest
     resolution, the dashed lines correspond to the medium resolution, and the
-    solid lines correspond to the highest resolution. The sixth order compact
+    solid lines correspond to the highest resolution. The sixth order CFD
     operators perform almost as well as the comparable explicit operators
     while again using a grid with half the resolution.
     }
@@ -686,7 +685,7 @@ violations of the electric and magnetic constraints:
 % This system also includes constraint damping, with $\Gamma$ allowing for
 % the elimination of mixed derivatives.
 
-For the current test, we use an exact solution of Maxwell's equations, namely a propagative dipole wave. In
+For the current test, we use an exact solution of Maxwell's equations, namely a propagating dipole wave. In
 particular, we choose initial data from the exact solution given by Knapp
 et al.~\cite{Knapp:2002fm}:
 \begin{equation}
@@ -701,7 +700,7 @@ A^{\hat{\phi}}
 \frac{u e^{-\lambda u^2}+ v e^{-\lambda v^2}}{r}
 \right].
 \end{equation}
-The corresponding electric field is
+The corresponding electric field is {\bf EWH:  Can you not break up the following equation?}  
 \begin{equation}
 \label{eq:maxwell_dipole_electric_field}
 \begin{aligned}
@@ -738,7 +737,7 @@ controls the width of the pulse. The corresponding Cartesian components are
 obtained using the standard coordinate transformation from spherical to
 Cartesian coordinates.
 
-In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.  Again, we calculate the normed difference of the analytic and numerical solutions at three resolutions.  Fig.~\ref{fig:maxwell_fourth_order_error} shows these for fourth order CFDs compared against both fourth and sixth order explicit first derivative FD operators.  While we show the absolute errors associated with the $x$ component of the electric and magnetic fields, the remaining Maxwell fields demonstrate similar behavior.  It is clear that, as with the Burgers' equation test, the CFDs have a better error profile than the standard explicit FD schemes.  They all demonstrate the expected convergence but, in addition, the medium resolution CFDs perform as well or better than the high resolution explicit FDs of the same nominal order of accuracy.  Further, when compared with the explicit operators of higher accuracy (E6), the nominally fourth order CFDs perform almost or as well.  This can be reinterpreted as saying that the CFDs effectively achieve an extra level of resolution with the same order of accuracy.  Fig.~\ref{fig:maxwell_sixth_order_error} shows a similar result for sixth order first derivative CFDs.  
+In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative evolution is shown in Fig.~\ref{fig:em4_e0_panel}.  Again, we calculate the normed difference of the analytic and numerical solutions at three resolutions.  Fig.~\ref{fig:maxwell_fourth_order_error} shows these for fourth order CFDs compared against both fourth and sixth order explicit first derivative FD operators.  While we show the absolute errors associated with the $x$ component of the electric and magnetic fields, the remaining Maxwell fields demonstrate similar behavior.  It is clear that, as with the Burgers' equation test, the CFDs have a better error profile than the standard explicit FD schemes.  They all demonstrate the expected convergence but, in addition, the medium resolution CFDs perform as well or better than the high resolution explicit FDs of the same nominal order of accuracy.  Further, when compared with the explicit operators of higher accuracy (E6), the nominally fourth order CFDs perform just as well.  This can be reinterpreted as saying that the CFDs effectively achieve an extra level of resolution with the same order of accuracy.  Fig.~\ref{fig:maxwell_sixth_order_error} shows a similar result for sixth order first derivative CFDs.  
 
 %By comparing the evolved solution against the analytic solution, we obtain a direct measure of the error associated with each finite difference operator. 
 \FloatBarrier
@@ -797,7 +796,7 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
     the low resolution runs, dashed lines denote the medium resolution runs,
     and solid lines denote the high resolution runs. The grid spacing is
     halved between each successive resolution. Although the sixth order
-    compact operators do not provide a full factor of two improvement in
+    CFD operators do not provide a full factor of two improvement in
     resolution over their explicit counterparts of the same order, they
     still produce more than an order of magnitude improvement in accuracy.
     This behavior is observed for both the A6 and C6 families of operators
@@ -842,7 +841,7 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
 
 \subsection{Nonlinear sigma model}
 
-The next problem for which we test our CFDs is a nonlinear sigma model.  In this case, we test our second derivative CFDs in again full 3D, but now with nonlinear source terms.  We write the system as first order in time and a second order in space.  We evolve the scalar field $\chi$ together with its conjugate momentum $\phi$.  The evolution equations are
+The next problem for which we test our CFDs is a nonlinear sigma model.  In this case, we test our second derivative CFDs, again in full 3D, but now with nonlinear source terms.  We write the system as first order in time and second order in space.  We evolve the scalar field $\chi$ together with its conjugate momentum $\phi$.  The evolution equations are
 \begin{align}
 \partial_t \phi
 &= \nabla^2 \chi - \frac{\sin(2\chi)}{r^2},
@@ -890,7 +889,7 @@ together with
 R=0.
 \end{equation}
 
-In this case we do not have an analytic solution and do not have a measure of the absolute error.  We can, however, consider the relative difference in the numerical solutions at different resolutions.  These convergence like tests are shown in Figs.~\ref{fig:nlsm_fourth_order_error} and~\ref{fig:nlsm_sixth_order_error}. Again, we see a similar story play out, albeit with respect to the relative errors in the solution between resolution levels.  The explicit fourth order FD scheme sees a decrease in the error on going to higher resolution.  But the two CFD examples, also nominally fourth order, also show evidence of convergence but have at least an order of magnitude better relative error profile as compared to the explicit case.  From Fig.~\ref{fig:nlsm_sixth_order_error} we see similar behavior, if not quite as dramatic.  
+In this case we do not have an analytic solution and do not have a measure of the absolute error.  We can, however, consider the relative difference in the numerical solutions at different resolutions.  These convergence like tests are shown in Figs.~\ref{fig:nlsm_fourth_order_error} and~\ref{fig:nlsm_sixth_order_error}. Again, we see a similar story play out, albeit with respect to the relative errors in the solution between resolution levels.  The explicit fourth order FD scheme sees a decrease in the error on going to higher resolution.  The two nominally fourth order CFD examples also show evidence of convergence. However, they have at least an order of magnitude better relative error profile as compared to the explicit case.  From Fig.~\ref{fig:nlsm_sixth_order_error} we see similar behavior, if not quite as dramatic.  
 %This gives us the change to confirm that our operators work even in a nonlinear system and converge at the expected order.  We use initial data given as follows:
  
 
@@ -910,7 +909,7 @@ In this case we do not have an analytic solution and do not have a measure of th
     denote the low and medium resolution comparison, dashed lines denote the
     medium and high resolution comparison, and solid lines denote the highest
     resolution run. The grid spacing is halved between each successive
-    resolution. The compact operators remain stable in the nonlinear system. Notice that again in this nonlinear system the 4th order A4 and C4 operators perform the same as the Explicit 4th order at half of the resolution. 
+    resolution. The CFD operators remain stable in the nonlinear system. Notice that again in this nonlinear system the 4th order A4 and C4 operators perform the same as the Explicit 4th order at half of the resolution. 
     }
     \label{fig:nlsm_fourth_order_error}
 \end{figure}
@@ -937,24 +936,24 @@ In this case we do not have an analytic solution and do not have a measure of th
 
 \subsection{Gravitational waves}
 
-Our final test for our CFD operators is to evolve Teukolsky-wave initial data within full general relativity using the BSSN formalism and equations. Details on Teukolsky wave initial data and evolutions can be found in~\cite{Teukolsky1982,Baumgarte2013,Hilditch2013_Teukolsky}.  The BSSN formulation is described in detail elsewhere, for example in Ref.~\cite{Baumgarte2010}.  These data describe a wave solution to the linearized Einstein equations.  It represents a linearized gravitational wave.  For sufficiently small amplitude, it is expressible as a small perturbation of the metric.  One can increase the size of the perturbation and enter the nonlinear evolutionary regime.  For our purposes, it provides a useful test problem for wave propagation in a numerical relativity setting.  We emphasize that for the evolution system, we do not solve the linearized Einstein equations but rather the full Einstein equations with these linearized Teukolsky waves as initial data.  Thus we have a propagation problem and with it we test our CFDs.  
+Our final test for our CFD operators is to evolve linear Teukolsky wave initial data within full general relativity using the BSSN formalism.  Details on Teukolsky wave initial data and evolutions can be found in~\cite{Teukolsky1982,Baumgarte2013,Hilditch2013_Teukolsky}.  The BSSN formulation is described in detail elsewhere, for example in Ref.~\cite{Baumgarte2010}.  These data describe a wave solution to the linearized Einstein equations.  It represents a linearized gravitational wave.  For sufficiently small amplitude, it is expressible as a small perturbation of the metric.  One can increase the size of the perturbation and enter the nonlinear evolutionary regime.  For our purposes, it provides a useful test problem for wave propagation in a numerical relativity setting.  We emphasize that for the evolution system, we do not solve the linearized Einstein equations but rather the full Einstein equations with these linearized Teukolsky waves as initial data.  We use this to test our CFDs.  
 
 For the results shown here, we perform direct convergence tests rather than
 comparing against an analytic solution. The computational domain extends over
 $x,y,z\in[-40,40]$, and the initial perturbation is centered at radius
-$r_0=20.0$. We use outgoing, even-parity Teukolsky-wave initial data in the
+$r_0=20.0$. We use outgoing, even-parity Teukolsky wave initial data in the
 quadrupolar mode $(\ell,m)=(2,0)$ with amplitude $\mathcal{A}=10^{-2}$. The
 radial profile is a compactly supported $C^k$ polynomial with $k=6$ and
 half-width $w=2.0$. A representative visualization of the resulting evolution
 is shown in Fig.~\ref{fig:bssn_gt00_panel}.
 
-The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_fourth_order_error} and~\ref{fig:teukolsky_sixth_order_error}.  Again, these CFDs are for both first and second derivatives and are the optimized operators with boundary closures.  In the plots, one of the metric coefficients and one of the extrinsic curvature coefficients are shown.  Other metric and extrinsic curvature components behave similarly.  For the nominally fourth order CFDs, they again perform comparable to the explicit FDs at half the resolution.  The sixth order CFDs do not perform quite so well, but continue to have almost an order of magnitude improvement in their relative error profiles.  Hence CFDs are promising route to increased accuracy in numerical relativity.  
+The relative errors in the evolutions are shown in Figs.~\ref{fig:teukolsky_fourth_order_error} and~\ref{fig:teukolsky_sixth_order_error}.  Again, these CFDs are for both first and second derivatives and are the optimized operators with boundary closures.  In the plots, one of the metric coefficients and one of the extrinsic curvature coefficients are shown.  Other metric and extrinsic curvature components behave similarly.  Again, the nominally fourth order CFDs perform comparably to the explicit FDs at half the resolution.  The sixth order CFDs do not perform quite so well, but continue to have almost an order of magnitude improvement in their relative error profiles.  This provides compelling evidence that CFDs are promising candidates for inclusion in algorithms to improve accuracy in numerical relativity.  
 \FloatBarrier
 \begin{figure}[t]
     \centering
     \includegraphics[width=\columnwidth]{figures/GT00_panel.pdf}
     \caption{
-    Evolution of the metric component $g_{xx}$ for the Teukolsky-wave test problem.
+    Evolution of the metric component $g_{xx}$ for the Teukolsky wave test problem.
     The panels show snapshots at $t=0$, $t=3.33$, $t=6.67$, and $t=10.00$.
     The shared color scale on the right applies to all four panels.
     }
@@ -999,7 +998,7 @@ The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_four
     and medium resolution comparison, dashed lines denote the medium and high
     resolution comparison, and solid lines denote the highest resolution run.
     The grid spacing is halved between each successive resolution. As in the
-    nonlinear sigma model, the sixth order compact operators do not achieve
+    nonlinear sigma model, the sixth order CFD operators do not achieve
     the full resolution improvement seen for the fourth order operators, but
     they still provide close to an order of magnitude improvement in accuracy.
     }
@@ -1010,20 +1009,20 @@ The relative errors of the evolutions are shown in Figs.~\ref{fig:teukolsky_four
 \section{Conclusion}
 \label{sec:conclusion}
 
-The compact operators consistently produced smaller errors than explicit
+The CFD operators consistently produced smaller errors than explicit
 finite difference operators of the same nominal order. In the fourth order
-tests, the compact operators frequently achieved errors comparable to those
+tests, the CFD operators frequently achieved errors comparable to those
 of the explicit operators evaluated at twice the resolution. They also
 produced error levels comparable to sixth order explicit operators in several
-of the Maxwell tests. The sixth order compact operators did not always provide
+of the Maxwell tests. The sixth order CFD operators did not always provide
 a full factor of two improvement in effective resolution, but they commonly
 reduced the error by approximately an order of magnitude relative to their
 explicit counterparts.
 
-These improvements were observed in the Maxwell system, the nonlinear sigma
-model, and evolutions of Teukolsky gravitational wave initial data using the
+These improvements were observed in each of our test system, including the 1D Burger's equation, the 3D Maxwell system, the 3D nonlinear sigma
+model, and 3D evolutions of Teukolsky gravitational wave initial data using the
 BSSN equations. The results therefore indicate that the benefits of the
-compact operators are not limited to simple linear systems. In particular,
+CFD operators are not limited to simple linear systems. In particular,
 the operators remained stable and retained their accuracy improvements in
 nonlinear and numerical relativity test problems.
 
@@ -1036,7 +1035,7 @@ three dimensional time dependent simulations, even a modest reduction in the
 required resolution could lead to substantial savings in computational cost.
 
 The next step is to apply these operators to fully nonlinear binary black hole
-simulations on adaptive meshes. These tests will determine how the operators
+simulations {\bf EWH:  Don't you want to reference the appendix on this?} on adaptive meshes. These tests will determine how the operators
 behave near punctures, across refinement boundaries, and during long
 inspiral evolutions. They will also allow direct comparisons of waveform
 accuracy and computational cost between compact and explicit finite
@@ -1046,4 +1045,4 @@ waveforms without requiring a corresponding increase in computational
 expense. We already have some tentative results showing that CFDs perform well
 in full binary black hole systems, which we present in
 Appendix~\ref{sec:black_hole_merger_tests}. In those cases, we show that the
-fourth order compact operators perform better than their explicit counterparts.
+fourth order CFD operators perform better than their explicit counterparts.
