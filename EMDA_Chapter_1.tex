@@ -1,6 +1,5 @@
 \section{Introduction}
 \label{sec:intro}
-
 While general relativity (GR) has passed all current experimental tests, there exist a large number of potentially viable extensions to it. Ongoing improvements in detector sensitivity, combined with numerical relativity will continue to enable increasingly precise tests of GR and proposed alternatives~\cite{Abbott2025GWTC3GR,Yunes2025GWTests,Abac2025GW250114,
 Giri2025AdSBlackShells,Clough2024,Bambi2025Mimickers,
 Yunes2013_LRR_GRTests,Yagi2016_BHTestsGR,Meidam2014,Berti2015,Yang2017}.
@@ -9,7 +8,7 @@ signals from compact binary mergers, thereby providing access to strongly
 gravitating, nonlinear domains. Since the first detection of gravitational waves, 
 the Advanced LIGO and Virgo detectors have completed multiple
 observing runs, producing a growing catalog of compact binary mergers
-\cite{Abbott2019,GWTC2,GWTC3,GWTC4}. All observed mergers to date are consistent
+~\cite{Abbott2019,GWTC2,GWTC3,GWTC4}. All observed mergers to date are consistent
 with the predictions of GR within current uncertainties~\cite{Abbott2016,Abbott2016b,Abbott2019}. Nevertheless, compact binary coalescences continue to provide one of the most promising arenas for testing gravity beyond GR.
 
 The increasing precision of gravitational wave observations has motivated effort to model compact object dynamics in theories beyond general relativity~\cite{Cardoso2012NRHEP,Corman2024,Afshordi2024BlackHolesInsideOut,Bambi2025Mimickers,Bernard2025GenericEFTGWTests}. Numerical relativity is
@@ -110,9 +109,11 @@ The associated gauge, dilaton, and axion fields are given by
 \begin{align}
 A_a dx^a &= \frac{mr \sinh 2\alpha}{\sqrt{2}\,\rho^2}
 \left(dt - a \sin^2\theta \, d\varphi \right), \\
-\label{Kerr Sen_dilaton}
-e^{-2\phi} &= \frac{\rho^2}{r^2 + a^2 \cos^2\theta}, \\ 
-\kappa &= -2ma \sinh^2\alpha \, \frac{\cos\theta}{r^2 + a^2 \cos^2\theta}.
+e^{-2\phi} &= \frac{\rho^2}{r^2 + a^2 \cos^2\theta},
+\label{Kerr-Sen_dilaton} \\
+\kappa &= -2ma \sinh^2\alpha \,
+\frac{\cos\theta}{r^2 + a^2 \cos^2\theta}.
+\label{Kerr-Sen_axion}
 \end{align}
 
 The parameters $m$, $\alpha$, and $a$ arise as integration constants. The physical mass $M$, electric charge $Q$, angular momentum $J$, and magnetic dipole moment $\mu$ are related to these parameters via
@@ -422,6 +423,7 @@ found in~\cite{Fernando2019,Fernando2019b,Fernando2023,Black2025_ORBIT}.
 We now describe the diagnostic quantities used to monitor the quality of the evolutions. In particular, we track the Hamiltonian and momentum constraints together with the electromagnetic divergence constraints throughout the computational domain. These quantities provide a global check on the consistency of the evolution and are used to assess the efficacy of the WAMR refinement parameters.
 
 \subsection{Constraint quantities}
+\label{sec:constraint_quantities}
 
 We compute the $L_2$ norms of the Hamiltonian and momentum
 constraints, together with the electromagnetic constraints.
@@ -465,6 +467,7 @@ tolerance and maximum refinement level for a short head on binary evolution.  We
 The details of this study are presented below.
 
 \subsection{Code performance}
+\label{sec:code_performance}
 A full convergence study for binary black hole evolutions is computationally expensive and is therefore not attempted here. Instead, we assess the behavior of the code by varying two parameters that directly affect the adaptive mesh refinement: the wavelet tolerance, $\varepsilon$, and the maximum refinement level, $\ell_{\rm max}$. The wavelet tolerance is the threshold value in our WAMR scheme on the  coefficients of the wavelet expansion that determines whether refinement or coarsening occurs.  The maximum refinement level sets the largest number of refinement levels that can be obtained in a simulation.  We confirm that for both, making these refinement criteria more stringent leads to a corresponding reduction in the constraint violations.
 
 The tests done here use the first \(20M\) of a head-on evolution of two equal-mass, charged black holes. The black holes have an initial coordinate separation of $16M$, individual masses of \(m_1=m_2=0.50\), and charge-to-mass ratios \(q_1/m_1=q_2/m_2=0.1\). Both black holes have dimensionless spin \(\chi=0.4\) and are initially at rest. In computing the constraint diagnostics, we again exclude a small neighborhood of each puncture when calculating the norms.
@@ -579,22 +582,20 @@ for which we define
 and where $m_i$, $q_i$ and $R_i$ here are the masses, electric charges and the coordinate distances from the origin of the BHs.  This is intended to correspond to two electrically charged BHs with the singular part of the conformal factor separated out with $u$ giving finite corrections, including the necessary corrections for the additional scalar fields. 
 
 On rearranging the Hamiltonian constraint in terms of $u$, we find 
-\begin{multline}
+\begin{equation}
     \partial_k\partial^k u = -\frac{1}{\bar{\kappa}} \Big(
     \partial_a \bar{\kappa} \partial^a \bar{\kappa} 
     - \partial_a \bar{\xi} \partial^a \bar{\xi} 
-    - \partial_a \psi \partial^a \psi \\
+    - \partial_a \psi \partial^a \psi
     + \tfrac{1}{8} \psi^{-6} \bar{A}_{ij} \bar{A}^{ij}
     + 2 \pi \psi^{6} \rho
     \Big),
-\end{multline}
+\end{equation}
 with
 \begin{equation}
-\begin{split}
-    \rho \equiv\;& \bigl[ \Pi^2 + (D\phi)^2 \bigr]
-    + e^{-2 \alpha_0 \phi}\big[ E_a E^a +  B_a  B^a\big] \\
-    &+ \tfrac{1}{4} e^{4 \alpha_1 \phi}\big[\Xi^2 + (D\kappa)^2\big].
-\end{split}
+    \rho \equiv \bigl[ \Pi^2 + (D\phi)^2 \bigr]
+    + e^{-2 \alpha_0 \phi}\big[ E_a E^a +  B_a  B^a\big] 
+    + \tfrac{1}{4} e^{4 \alpha_1 \phi}\big[\Xi^2 + (D\kappa)^2\big].
 \end{equation}
 Using simplifying assumptions similar to above, namely a moment of time symmetry and neglecting the magnetic field, $\rho$ reduces to
 \begin{equation}
@@ -611,8 +612,10 @@ with a subsequent rescaling by $e^{2 \alpha_0 \phi}$ with the dilaton and axion 
 \phi &= \phi_1(r_1,\theta_1) + \phi_2(r_2, \theta_2) \\
 \kappa &= \kappa_1(r_1,\theta_1) + \kappa_2(r_2, \theta_2)
 \end{align}
-where Eq.~\ref{Kerr-Sen_dilaton} gives the form for an axion and dilaton field for a single Kerr--Sen black hole (albeit in Boyer--Lindquist type coordinates) for our current theory parameters of $(\alpha_0,\alpha_1) = (1,1)$. 
-
+where Eqs.~\eqref{Kerr-Sen_dilaton} and~\eqref{Kerr-Sen_axion}
+give the forms of the dilaton and axion fields, respectively, for a
+single Kerr--Sen black hole (albeit in Boyer--Lindquist-type coordinates)
+for our current theory parameters $(\alpha_0,\alpha_1)=(1,1)$.
 \section{Radiative Quantities}
 
 To analyze the radiation emitted, we compute the Newman--Penrose scalar

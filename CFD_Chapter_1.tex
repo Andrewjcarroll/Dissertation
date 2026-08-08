@@ -37,8 +37,7 @@ Indeed, we are able to demonstrate the utility of these schemes and that, in the
 
 
 %The paper is structured as follows.  ... 
-The chapter is structured as follows. {\bf EWH:  Can you change these section numbers from the paper to the appropriate section numbering of the chapter?}  Section~II provides background on compact finite difference schemes and discusses their advantages relative to explicit finite difference methods, together with the challenges associated with boundary closures and stability. Section~III describes the construction and optimization of the first derivative operators, including the treatment of interior and boundary stencils and the resulting fourth and sixth order schemes. Section~IV presents the corresponding construction of CFD operators for second derivatives. In Sec.~V, we test the operators on a set of linear and nonlinear systems, including the classical wave equation, Maxwell's equations, Burgers' equation, the nonlinear sigma model, and the Einstein equations using the BSSN formalism. Finally, Sec.~VI summarizes our results and discusses future applications of compact finite differences in numerical relativity.
-
+The chapter is structured as follows. Section~5.2 provides background on compact finite difference schemes and discusses their advantages relative to explicit finite difference methods, together with the challenges associated with boundary closures and stability. Section~5.3 describes the construction and optimization of the compact finite difference operators, including the treatment of interior and boundary stencils for first and second derivatives. Section~5.4 tests these operators on a set of linear and nonlinear systems, including Burgers' equation, Maxwell's equations, the nonlinear sigma model, and the Einstein equations using the BSSN formalism. Finally, Sec.~5.5 summarizes our results and discusses future applications of compact finite differences in numerical relativity.
 \section{Background}
 \label{sec:background}
 
@@ -315,7 +314,9 @@ for a right shifted stencil.  Note that a choice of an overall normalization is 
 \subsubsection{Interior Scheme}
 
 One advantage of compact finite difference schemes are that they have better spectral characteristics than standard finite differences.  While not as good as spectral methods themselves, we can optimize CFDs for improved behahvior at large wavenumbers.  % can be optimized to provide spectral-like resolution characteristics.  
-We will choose to sacrifice some accuracy in an attempt to improve and optimize for these sorts of properties.  To this end, we will construct the spectral or transfer function associated with the CFD scheme~\cite{}, and optimize on an error measure built from the spectral function.~\cite{} {\bf EWH:  Do you have any references for these?}  
+We will choose to sacrifice some accuracy in an attempt to improve and optimize for these sorts of properties.  To this end, we will construct the spectral or transfer function associated with the CFD scheme, and optimize on an error measure built from the spectral function.~\cite{Lele1992,Kim2007} 
+
+%{\bf EWH:  Do you have any references for these?}  
 
 Consider a general interior (central) CFD scheme such as 
 %On Fourier transforming an interior central scheme such as 
@@ -374,29 +375,30 @@ The parameter $\hat{y}$ is a value which will be used for optimizing the boundar
 Once we have solved the system above to find the coefficients of the extrapolation polynomial, we construct a centered stencil for each of the boundary nodes, substituting in the extrapolation polynomial at each of the grid points which lie beyond the domain. Finally, we can rearrange the resulting equations into the shifted stencils which can be implemented, and the shifted stencil boundary coefficients can be read off in terms of the free parameter $\hat{y}$ only.
 
 As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:
-\begin{align*}
+\begin{align}
 \bar{\kappa}_m(\kappa) &= \frac{1}{A_m(\kappa)^2 + B_m(\kappa)^2} \big[ A_m(\kappa) D_m(\kappa) - B_m(\kappa) C_m(\kappa)\\
 &  \qquad\qquad\qquad - i (A_m(\kappa) C_m(\kappa) + B_m(\kappa) D_m(\kappa)) \big],
-\end{align*}
+\end{align}
 where:
-\begin{align*}
+\begin{align}
     A_m(\kappa) &= \sum_{j=0}^{3}{\gamma_{mj} \cos{(j \kappa)}}, \quad B_m(\kappa) = \sum_{j=0}^{3}{\gamma_{mj} \sin{(j \kappa)}},\\
     C_m(\kappa) &= \sum_{j=0}^{6}{a_{mj} \cos{(j \kappa)}}, \quad D_m(\kappa) = \sum_{j=0}^{6}{a_{mj} \sin{(j \kappa)}}.
-\end{align*}
+\end{align}
 %\nate{TODO: Need to generalize the upper bounds of the sums, and also explain what $a_{mj}$ and $\gamma_{mj}$ are (the bd coefficients). In general I think I need to be a bit more clear in this section about the indices being used, maybe define some things like $n_L$ and $n_R$ at the beginning.}
 
 Note that because the boundary stencils are shifted, their spectral functions have real and imaginary components, corresponding to both dispersive and dissipative behavior in the numerical scheme.
 
-At this point, many different error quantities could be constructed in order to optimize specific features of the boundary closure. For example, an error quantity could be chosen to optimize only on the imaginary part of the spectral function in order to minimize unwanted dissipative modes. In the present chapter, we use the error quantity  {\bf EWH:  Can you get more of these equations numbered?} 
-$$
-E_m = \int_{0}^{r \pi}{\Big[ \big| \Re(N_m(\kappa)) + i \Im(N_m(\kappa)) \big| - \kappa D_m(\kappa) \Big]^2 \ d\kappa}
-$$
+At this point, many different error quantities could be constructed in order to optimize specific features of the boundary closure. For example, an error quantity could be chosen to optimize only on the imaginary part of the spectral function in order to minimize unwanted dissipative modes. In the present chapter, we use the error quantity  
+%{\bf EWH:  Can you get more of these equations numbered?} 
+\begin{align}
+    E_m = \int_{0}^{r \pi}{\Big[ \big| \Re(N_m(\kappa)) + i \Im(N_m(\kappa)) \big| - \kappa D_m(\kappa) \Big]^2 \ d\kappa}
+\end{align}
 where $N_m(\kappa)$ and $D_m(\kappa)$ represent the numerator and denominator of the spectral function $\bar{\kappa}_m(\kappa)$, respectively; i.e., we have set:
-\begin{align*}
+\begin{align}
     \Re(N_m(\kappa)) &= A(\kappa) D(\kappa) - B(\kappa) C(\kappa),\\
     \Im(N_m(\kappa)) &= -A(\kappa) C(\kappa) - B(\kappa) D(\kappa),\\
     D_m(\kappa) &= A(\kappa)^2 + B(\kappa)^2.
-\end{align*}
+\end{align}
 Note that each boundary node has a spectral function and thus error quantity which is independent from each other. As each of the boundary coefficients $a_{mj}$ and $\gamma_{mj}$ only depend on the free parameter $\hat{y}$, then each error quantity also only depends on $\hat{y}$. Since the error functions are decoupled, we opt to use a separate free parameter $\hat{y}_m$ for each boundary node. Clearly, even with a similar weighting function to the interior scheme, this error integral is not analytically integrable, so we must numerically integrate the error quantity over a grid of possible values for $\hat{y}_m$. [ref Kim 2024] suggests testing $\hat{y}_m \in (-6,6)$, but we have found that the minima in the error are typically found for $\hat{y}_m \in (-1,5)$.
 
 Since each boundary error function $E_m(\hat{y}_m)$ has several minima, we obtain a family of spectrally-optimized boundary closures by taking all possible combinations of optimal $\hat{y}_m$ values.
@@ -700,7 +702,8 @@ A^{\hat{\phi}}
 \frac{u e^{-\lambda u^2}+ v e^{-\lambda v^2}}{r}
 \right].
 \end{equation}
-The corresponding electric field is {\bf EWH:  Can you not break up the following equation?}  
+The corresponding electric field is 
+%{\bf EWH:  Can you not break up the following equation?}  
 \begin{equation}
 \label{eq:maxwell_dipole_electric_field}
 \begin{aligned}
@@ -713,8 +716,6 @@ E^{\hat{\phi}}
     -
     v e^{-\lambda v^2}
 }{r^2}
-\\
-&\qquad\qquad
 +
 \frac{1}{r}
 \bigl[
@@ -1035,7 +1036,7 @@ three dimensional time dependent simulations, even a modest reduction in the
 required resolution could lead to substantial savings in computational cost.
 
 The next step is to apply these operators to fully nonlinear binary black hole
-simulations {\bf EWH:  Don't you want to reference the appendix on this?} on adaptive meshes. These tests will determine how the operators
+simulations. These tests will determine how the operators
 behave near punctures, across refinement boundaries, and during long
 inspiral evolutions. They will also allow direct comparisons of waveform
 accuracy and computational cost between compact and explicit finite
