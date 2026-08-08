@@ -46,7 +46,7 @@ to compare the diagonal EMDA evolutions with representative dilatonic cases. The
 
 Analytic stationary black hole solutions are not known for all of the coupling choices considered here. Moreover, even when stationary single black hole solutions are known, our binary configurations are constructed using approximate initial data rather than exact binary black hole solutions. We therefore construct approximate charged binary black hole initial data and evolve the full EMDA system numerically. During the early part of the evolution, the black holes and surrounding fields are allowed to relax dynamically before inspiral and merger.
 
-This approach allows us to compare the resulting gravitational waveforms against a common reference waveform and to identify how the electromagnetic, dilaton, and axion fields influence the inspiral and merger dynamics. The known analytic black hole metrics and associated fields relevant to this theory space are summarized in Appendix~\ref{sec:appx:SchwarzschildBH} with the Kerr--Sen black hole metric presented in an earlier chapter.  {\bf EWH:  Can you reference the actual chapter here?}  
+This approach allows us to compare the resulting gravitational waveforms against a common reference waveform and to identify how the electromagnetic, dilaton, and axion fields influence the inspiral and merger dynamics. The known analytic black hole metrics and associated fields relevant to this theory space are summarized in Appendix~\ref{sec:appx:SchwarzschildBH}, with the Kerr--Sen black hole metric presented in the chapter ``Head-On Collisions and Stability Tests in EMDA Theory.''
 
 \section{Numerical Methods}
 
@@ -59,13 +59,13 @@ Because the initial data are approximate, the electromagnetic constraints do not
 
 Constructing initial data for binary black holes in EMDA theory is challenging because exact binary black hole solutions are not known. In addition, for general choices of the coupling parameters, the corresponding stationary single black hole solutions are not available in closed analytic form. We therefore use an approximate initial data prescription guided by the known Kerr--Newman and Kerr--Sen solutions \cite{Sen1992,Sen1995}.
 
-Our starting point is a charged binary black hole configuration motivated by Kerr--Newman and constructed using approximate charged puncture data \cite{Bowen1980,Alcubierre2009,Bozzola2019}. We supplement these data with approximate dilaton and axion fields motivated by the Kerr--Sen solution. Since we are interested in varying the coupling parameters, we rescale the scalar and pseudoscalar fields according to the chosen coupling. In particular, for the diagonal choice $\alpha_0=\alpha_1$, we take the initial dilaton profile to scale with $\alpha_0$, so that larger coupling values correspond to larger initial scalar field amplitudes. For the dilaton, we therefore set
+As before, our starting point is a charged binary black hole configuration motivated by Kerr--Newman and constructed using approximate charged puncture data \cite{Bowen1980,Alcubierre2009,Bozzola2019}. We supplement these data with approximate dilaton and axion fields motivated by the Kerr--Sen solution. Since we are interested in varying the coupling parameters, we rescale the scalar and pseudoscalar fields according to the chosen coupling. In particular, for the diagonal choice $\alpha_0=\alpha_1$, we take the initial dilaton and fields to scale with $\alpha_0$ and $\alpha_1$, so that larger coupling values correspond to larger initial scalar field amplitudes. For the dilaton, we therefore set
 \begin{align}
     \phi = \alpha_0 \left[\phi_1(r_1,\theta_1) + \phi_2(r_2,\theta_2)\right].
 \end{align}
-
-{\bf EWH:  Sorry, I dont' understand the explanation for this equation now.  Aren't we adding two different dilaton fields and weighting them by the couplings?}  
-
+\begin{align}
+    \kappa = \alpha_1 \left[\kappa_1(r_1,\theta_1) + \kappa_2(r_2,\theta_2)\right].
+\end{align}
 
 This prescription does not produce an exact solution of the EMDA constraint equations. Instead, it should be viewed as an approximate data construction designed to place the system near the expected charged black hole configuration for each coupling choice. After the evolution begins, the black holes and surrounding fields are allowed to relax dynamically before the late inspiral and merger.
 
