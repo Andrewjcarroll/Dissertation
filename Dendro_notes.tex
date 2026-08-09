@@ -23,8 +23,6 @@ The multidimensional AMR hierarchy used in the simulations is built from the sam
 
 Figure~\ref{fig:wamr grid hierarchy} illustrates this nested structure in one dimension. The black points denote grid points inherited from coarser levels, while the red points denote the additional points introduced at each refinement level. These additional basis functions span the spaces $(W_j)$, which represent the new information introduced when passing from resolution level $(j-1)$ to level $(j)$.
 
-%{\bf EWH:  Sorry, what do you mean by detail? Where did you find the use of this word?}  
-
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=1]
@@ -137,6 +135,7 @@ Thus the collection $\{V_0,W_1,W_2,\ldots\}$ represents each grid point exactly 
     S_j = \{1,3,\ldots,2^jN-1\},
 \end{equation}
 where $S_0$ labels the base grid and $S_j$ labels the detail points on level $j$.
+{\bf EWH:  Sorry, you fixed this elsewhere, but you still use this word "detail" without explanation.  Can we drop it in these other places as well? }  
 
 This nested basis construction allows the field to be represented by a coarse contribution together with corrections from the detail spaces. A field can be expanded as
 \begin{equation}
@@ -218,8 +217,6 @@ Our refinement criterion does not compute this norm directly, but instead uses
 derivative information in a Sobolev-informed manner to identify regions
 requiring additional resolution.
 
-%{\bf EWH:  It might be too late now, but I still wonder if having a definition of Sobolev norm might be a good idea, if for no other reason than provide context for the name.  What is here is good overall, but could benefit from more detail.} 
-
 In addition to the standard wavelet criterion, we also consider a Sobolev inspired modification of the refinement. The purpose of this modification is to make the refinement criterion sensitive not only to the local wavelet truncation estimate of a field, but also to local derivative content. This is useful in regions where the field itself may be relatively smooth in amplitude, while its gradients or curvature contain dynamically relevant structure.
 
 For a given evolved variable $u$, the standard wavelet refinement indicator may be denoted by
@@ -242,7 +239,6 @@ This quantity represents the usual WAMR estimate based on the magnitude of the l
 where $I_{\nabla u}$ is a local first derivative indicator, $I_{\nabla^2 u}$ is a local second derivative indicator, and $w_1$ and $w_2$ are user controlled weights. Any required normalization of the derivative indicators is absorbed into these weights. The first derivative term increases refinement in regions with large gradients, while the second derivative term increases refinement in regions with large curvature or rapidly changing gradients.
 
 This refinement measure should be interpreted as a \emph{Sobolev inspired} or \emph{Sobolev weighted} WAMR indicator rather than as an exact discrete Sobolev norm. A true Sobolev norm is a global or integrated quantity involving a function and its derivatives. 
-%{\bf EWH:  Give an example?}
 By contrast, Eq.~\eqref{eq:sobolev amr indicator} is a local AMR indicator designed to guide mesh refinement. Its role is to bias the adaptive mesh toward regions where derivative information suggests that additional resolution may be needed, while retaining the efficiency of the underlying wavelet based refinement algorithm.
 
 We demonstrate this with code by evolving Maxwell's equations. The following figures compare the baseline wavelet adaptive mesh refinement criterion with the Sobolev informed refinement criterion. These diagnostics compare both the constraint behavior of the two refinement strategies and the computational cost associated with the resulting adaptive meshes.

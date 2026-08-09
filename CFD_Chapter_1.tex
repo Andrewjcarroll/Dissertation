@@ -316,8 +316,6 @@ for a right shifted stencil.  Note that a choice of an overall normalization is 
 One advantage of compact finite difference schemes are that they have better spectral characteristics than standard finite differences.  While not as good as spectral methods themselves, we can optimize CFDs for improved behahvior at large wavenumbers.  % can be optimized to provide spectral-like resolution characteristics.  
 We will choose to sacrifice some accuracy in an attempt to improve and optimize for these sorts of properties.  To this end, we will construct the spectral or transfer function associated with the CFD scheme, and optimize on an error measure built from the spectral function.~\cite{Lele1992,Kim2007} 
 
-%{\bf EWH:  Do you have any references for these?}  
-
 Consider a general interior (central) CFD scheme such as 
 %On Fourier transforming an interior central scheme such as 
 \begin{equation}
@@ -334,7 +332,7 @@ where tildes designate the Fourier transform.  This is the spectral or transfer 
   \includegraphics[width=\linewidth]{figures/1st_4th_Order_Spectral_Functions.pdf}
   \vspace{-.75cm}
   \caption{
-   Comparison of spectral functions for several 4th order schemes. In particular, we note the explicit 4th order finite difference, a tridiagonal 4th order compact finite difference [ref Tyler], and a spectrally-optimized pentadiagonal 4th order compact finite difference [this work].
+   Comparison of spectral functions for several 4th order schemes. In particular, we note the explicit 4th order finite difference, a tridiagonal 4th order compact finite difference~\cite{Tyler2007}, and a spectrally-optimized pentadiagonal 4th order compact finite difference derived in this work.  
 }
   \label{fig:4th_spectral_functions}
 \end{figure}
@@ -343,7 +341,7 @@ We construct the following error quantity from the spectral function, namely
 \begin{equation}
 E(\alpha_i, a_i) = \int_{0}^{r \pi}{\bigl[ \bar{\kappa} - \kappa \bigr]^2 D(\kappa)^2 \, d\kappa}
 \end{equation}
-where $D(\kappa)$ is simply the denominator in the spectral function, Eq. (\ref{spectral_function}). In general, an arbitrary weighting function can be used, but this form is chosen so that the integral can be computed analytically [ref Zhou Zhang 2011]. The parameter $r \in (0,1]$ in the upper bound of the integral is referred to as the ``fractional cutoff wavenumber,'' and represents the maximum modified wavenumber $\kappa$ over which the spectral error is optimized. It has been suggested [ref Chen 2023] to have a lower cutoff wavenumber around $0.5$ or $0.75$ to avoid overly optimizing on higher wavenumbers, while others [ref Kim 2007] have used higher cutoff wavenumbers such as $0.839$. In this chapter, we develop several families of CFD operators for several values of the cutoff wavenumber from $0.6$ to $0.85$.
+where $D(\kappa)$ is simply the denominator in the spectral function, Eq. (\ref{spectral_function}). In general, an arbitrary weighting function can be used, but this form is chosen so that the integral can be computed analytically~\cite{zhou_zhang,deshpande2019}. The parameter $r \in (0,1]$ in the upper bound of the integral is referred to as the ``fractional cutoff wavenumber,'' and represents the maximum modified wavenumber $\kappa$ over which the spectral error is optimized. It has been suggested~\cite{chen2023} to have a lower cutoff wavenumber around $0.5$ or $0.75$ to avoid overly optimizing on higher wavenumbers, while others~\cite{Kim2007} have used higher cutoff wavenumbers such as $0.839$. In this chapter, we develop several families of CFD operators for several values of the cutoff wavenumber from $0.6$ to $0.85$.
 
 We minimize the error $E$ by substituting the solutions of the Taylor constraint equations up to a given order of accuracy for our ``fixed parameters'' and by imposing constraints of the form
 \begin{equation}
@@ -352,13 +350,14 @@ We minimize the error $E$ by substituting the solutions of the Taylor constraint
 for our ``free parameters.'' As the error quantity is quadratic with respect to its arguments, the resulting constraint equations form a linear system with respect to these free parameters, and hence yield a unique solution for a spectrally-optimized CFD scheme.
 
 \subsubsection{Boundary Scheme}
-If we wish to maintain the banded-diagonal form of these CFD operators on the boundary, we must develop a boundary closure using shifted stencils. However, it has been shown [refs] that centered stencils provide greater benefits in terms of accuracy and stability. Following the approach of Wu et al. [ref Kim 2024], we use a polynomial to extrapolate our function to grid points which lie beyond the boundary of our numerical domain.
+If we wish to maintain the banded-diagonal form of these CFD operators on the boundary, we must develop a boundary closure using shifted stencils. However, it has been shown %[refs] 
+that centered stencils provide greater benefits in terms of accuracy and stability. Following the approach of Wu et al.~\cite{WuKim2024}, we use a polynomial to extrapolate our function to grid points which lie beyond the boundary of our numerical domain.
 
 If we have interior coefficients $\alpha_1$ through $\alpha_m$ on the LHS and $a_1$ through $a_k$ on the RHS, then the order of the extrapolation polynomial must be at least $\ell = 3k+m+1$.  
 %$$
 %P_{order} = 3k + m + 1.
 %$$
-We increase the order of this polynomial by one in order to introduce an extra free parameter in order to optimize the spectral behavior at and near the boundary. Following [ref Kim 2024], we construct the extrapolation polynomial, 
+We increase the order of this polynomial by one in order to introduce an extra free parameter in order to optimize the spectral behavior at and near the boundary. Following~\cite{WuKim2024}, we construct the extrapolation polynomial, 
 \begin{equation}
 P(\hat{x}) = \sum_{s=0}^{\ell} p_s {\hat x}^s, 
 \end{equation}
@@ -374,7 +373,7 @@ The parameter $\hat{y}$ is a value which will be used for optimizing the boundar
 
 Once we have solved the system above to find the coefficients of the extrapolation polynomial, we construct a centered stencil for each of the boundary nodes, substituting in the extrapolation polynomial at each of the grid points which lie beyond the domain. Finally, we can rearrange the resulting equations into the shifted stencils which can be implemented, and the shifted stencil boundary coefficients can be read off in terms of the free parameter $\hat{y}$ only.
 
-As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:
+As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:  {\bf EWH:  Can you put this on a single line? It should probably get a number as well.  So, too, some of the subsequent equations. }  
 \begin{align}
 \bar{\kappa}_m(\kappa) &= \frac{1}{A_m(\kappa)^2 + B_m(\kappa)^2} \big[ A_m(\kappa) D_m(\kappa) - B_m(\kappa) C_m(\kappa)\\
 &  \qquad\qquad\qquad - i (A_m(\kappa) C_m(\kappa) + B_m(\kappa) D_m(\kappa)) \big],
@@ -389,7 +388,6 @@ where:
 Note that because the boundary stencils are shifted, their spectral functions have real and imaginary components, corresponding to both dispersive and dissipative behavior in the numerical scheme.
 
 At this point, many different error quantities could be constructed in order to optimize specific features of the boundary closure. For example, an error quantity could be chosen to optimize only on the imaginary part of the spectral function in order to minimize unwanted dissipative modes. In the present chapter, we use the error quantity  
-%{\bf EWH:  Can you get more of these equations numbered?} 
 \begin{align}
     E_m = \int_{0}^{r \pi}{\Big[ \big| \Re(N_m(\kappa)) + i \Im(N_m(\kappa)) \big| - \kappa D_m(\kappa) \Big]^2 \ d\kappa}
 \end{align}
@@ -399,7 +397,7 @@ where $N_m(\kappa)$ and $D_m(\kappa)$ represent the numerator and denominator of
     \Im(N_m(\kappa)) &= -A(\kappa) C(\kappa) - B(\kappa) D(\kappa),\\
     D_m(\kappa) &= A(\kappa)^2 + B(\kappa)^2.
 \end{align}
-Note that each boundary node has a spectral function and thus error quantity which is independent from each other. As each of the boundary coefficients $a_{mj}$ and $\gamma_{mj}$ only depend on the free parameter $\hat{y}$, then each error quantity also only depends on $\hat{y}$. Since the error functions are decoupled, we opt to use a separate free parameter $\hat{y}_m$ for each boundary node. Clearly, even with a similar weighting function to the interior scheme, this error integral is not analytically integrable, so we must numerically integrate the error quantity over a grid of possible values for $\hat{y}_m$. [ref Kim 2024] suggests testing $\hat{y}_m \in (-6,6)$, but we have found that the minima in the error are typically found for $\hat{y}_m \in (-1,5)$.
+Note that each boundary node has a spectral function and thus error quantity which is independent from each other. As each of the boundary coefficients $a_{mj}$ and $\gamma_{mj}$ only depend on the free parameter $\hat{y}$, then each error quantity also only depends on $\hat{y}$. Since the error functions are decoupled, we opt to use a separate free parameter $\hat{y}_m$ for each boundary node. Clearly, even with a similar weighting function to the interior scheme, this error integral is not analytically integrable, so we must numerically integrate the error quantity over a grid of possible values for $\hat{y}_m$. Wu and Kim~\cite{WuKim2024} suggests testing $\hat{y}_m \in (-6,6)$, but we have found that the minima in the error are typically found for $\hat{y}_m \in (-1,5)$.
 
 Since each boundary error function $E_m(\hat{y}_m)$ has several minima, we obtain a family of spectrally-optimized boundary closures by taking all possible combinations of optimal $\hat{y}_m$ values.
 
@@ -535,7 +533,7 @@ In each case, the basic results are similar.  Namely, the use of CFDs at some ac
 
 
 
-\subsection{One-dimensional nonlinear Burgers'}
+\subsection{One-dimensional nonlinear Burgers' equation}
 
 Our first test uses the nonlinear one-dimensional viscous Burgers' Equation,
 \begin{equation}
@@ -702,8 +700,7 @@ A^{\hat{\phi}}
 \frac{u e^{-\lambda u^2}+ v e^{-\lambda v^2}}{r}
 \right].
 \end{equation}
-The corresponding electric field is 
-%{\bf EWH:  Can you not break up the following equation?}  
+The corresponding electric field is {\bf EWH:  Can you put this next equation on a single line?}   
 \begin{equation}
 \label{eq:maxwell_dipole_electric_field}
 \begin{aligned}
