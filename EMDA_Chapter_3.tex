@@ -88,17 +88,19 @@ The main robust conclusion is therefore qualitative. For the smaller coupling EM
 These results suggest that, for the relatively small charge considered here, coupling dependent effects in the dominant gravitational wave mode are subtle. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to separate physical coupling dependent effects from relaxation and numerical errors. The present comparisons should therefore be interpreted as an exploratory test of the EMDA coupling dependence rather than as precision estimates of waveform distinguishability.
 
 Figure~\ref{fig:em_vs_emda_hplus} shows a representative comparison between the Einstein--Maxwell reference waveform and the strongest coupling EMDA case. The two waveforms are peak-aligned, there is almost no difference in the wavefrom.
-\FloatBarrier
+
+ \FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/em_a0_0_a1_0_vs_emda_a0_100_a1_100_peak_aligned_hplus_notitle.pdf}
-\caption{Peak-aligned comparison of the dominant gravitational-wave strain between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the strongest-coupling EMDA case, $(\alpha_0,\alpha_1)=(100,100)$. The waveforms agree extremely well, the mismatch of this waveform is on the order of $10^{-5}$}
+\caption[Einstein--Maxwell and strong-coupling EMDA waveform comparison]{Peak-aligned comparison of the dominant gravitational-wave strain between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the strongest-coupling EMDA case, $(\alpha_0,\alpha_1)=(100,100)$. The waveforms agree extremely well, with a mismatch on the order of $10^{-5}$.}
 \label{fig:em_vs_emda_hplus}
 \end{figure}
- 
+
 \paragraph{Electromagnetic radiation}
 
 We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced in earlier chapters. Rather than computing a mismatch for these modes, we perform a direct comparison of the electromagnetic waveforms. The results show that the waveform differences increase as the coupling strengths are increased. The electromagnetic signal retains the same basic structure across the coupling choices, but its amplitude changes. We display the $++$ charge configuration here, although the other charge configurations show broadly similar behavior.
+
 \FloatBarrier
 \begin{figure}[t]
 \centering
@@ -109,7 +111,7 @@ We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced 
 \subfloat[Absolute difference relative to the Einstein--Maxwell case.]{
 \includegraphics[width=0.48\textwidth]{Figures/Chapter3/PHI2_l2_m2_r5_real_absdiff_vs_EM_log.pdf}
 }
-\caption{Comparison of the $(\ell,m)=(2,2)$ mode of the electromagnetic scalar $\Phi_2$, extracted at $R_{\mathrm{ex}}=100M$. The left panel shows the peak aligned real part of $\Phi_2^{22}$ across the coupling choices considered, while the right panel shows the absolute difference relative to the Einstein--Maxwell reference case, $(\alpha_0,\alpha_1)=(0,0)$, on a logarithmic scale. The differences in the waveform get larger as the coupling is increased, although it is primarily the amplitude that changes.}
+\caption[Electromagnetic $\Phi_2^{22}$ waveform across coupling strengths]{Comparison of the $(\ell,m)=(2,2)$ mode of the electromagnetic scalar $\Phi_2$, extracted at $R_{\mathrm{ex}}=100M$. The left panel shows the peak-aligned real part of $\Phi_2^{22}$ across the coupling choices considered, while the right panel shows the absolute difference relative to the Einstein--Maxwell reference case, $(\alpha_0,\alpha_1)=(0,0)$, on a logarithmic scale. The waveform differences increase as the coupling is increased, although the change is primarily in the amplitude.}
 \label{fig:phi2_l2m2_ch3}
 \end{figure}
 
@@ -119,7 +121,7 @@ We also compare the electromagnetic radiative modes and $\Phi_2$, as introduced 
 \centering
 \includegraphics[width=0.48\textwidth]
 {Figures/Chapter3/Dilaton_l2_m2_r5_real.pdf}
-\caption{
+\caption[Dilaton $(2,2)$ radiation across coupling strengths]{
 Peak-aligned comparison of the real part of the
 $(\ell,m)=(2,2)$ mode of the dilaton radiation,
 extracted at $R_{\mathrm{ex}}=100M$, for the coupling
@@ -128,6 +130,7 @@ choices considered.
 \label{fig:dilaton_l2m2_ch3}
 \end{figure}
 
+
 As the coupling strength increases, the amplitude of the emitted
 dilaton radiation also increases.
 
@@ -135,27 +138,31 @@ dilaton radiation also increases.
 \subsection{Constraints}
 
 Because the initial data are approximate, the constraint violations provide an important check on the quality of the evolutions. We monitor the Hamiltonian constraint, together with the electric and magnetic divergence constraints, throughout the simulations. These quantities are shown in Figs.~\ref{fig:chapter3_hamiltonian_constraint}--\ref{fig:chapter3_divb_constraint}. Across the set of coupling choices considered here, the constraints remain controlled during the initial relaxation, inspiral, and merger. The largest features occur during the early relaxation phase and near merger, where the fields vary most rapidly.
+
 \FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_HAM.pdf}
-\caption{Hamiltonian constraint violation for the different coupling choices. The curves show the evolution of the Hamiltonian constraint norm for the Einstein--Maxwell reference case and the corresponding EMD and EMDA evolutions. There is an initial spike as the simulations begin, but the constraint quickly settles to a lower value. The Hamiltonian constraint does not show runaway growth and remains low throughout the evolution.}
+\caption[Hamiltonian constraint across coupling choices]{Hamiltonian constraint violation for the different coupling choices. The curves show the evolution of the Hamiltonian constraint norm for the Einstein--Maxwell reference case and the corresponding EMD and EMDA evolutions. There is an initial spike as the simulations begin, but the constraint quickly settles to a lower value. The Hamiltonian constraint does not show runaway growth and remains low throughout the evolution.}
 \label{fig:chapter3_hamiltonian_constraint}
 \end{figure}
+
 \FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_DIVE.pdf}
-\caption{Electric divergence constraint violation for the different coupling choices. The curves show the evolution of the electric constraint norm across the Einstein--Maxwell, EMD, and EMDA evolutions. The constraint is initially largest for the strongest coupling, but hyperbolic cleaning reduces it over time. Overall, these constraints remain well behaved throughout the evolution.}
+\caption[Electric divergence constraint across coupling choices]{Electric divergence constraint violation for the different coupling choices. The curves show the evolution of the electric constraint norm across the Einstein--Maxwell, EMD, and EMDA evolutions. The constraint is initially largest for the strongest coupling, but hyperbolic cleaning reduces it over time. Overall, these constraints remain well behaved throughout the evolution.}
 \label{fig:chapter3_dive_constraint}
 \end{figure}
+
 \FloatBarrier
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{Figures/Chapter3/all_runs_C_DIVB.pdf}
-\caption{Magnetic divergence constraint violation for the different coupling choices. The curves show the evolution of the magnetic constraint norm across the Einstein--Maxwell, EMD, and EMDA evolutions. These values remain low throughout the simulation, providing confidence that the magnetic divergence constraint remains well behaved.}
+\caption[Magnetic divergence constraint across coupling choices]{Magnetic divergence constraint violation for the different coupling choices. The curves show the evolution of the magnetic constraint norm across the Einstein--Maxwell, EMD, and EMDA evolutions. These values remain low throughout the simulation, providing confidence that the magnetic divergence constraint remains well behaved.}
 \label{fig:chapter3_divb_constraint}
 \end{figure}
+
 
 The electromagnetic constraints remain bounded throughout the evolutions, indicating that the divergence-cleaning scheme prevents the electric and magnetic constraint violations from growing without bound. The Hamiltonian constraint shows the expected transient behavior during the initial relaxation and near merger, but it does not exhibit runaway growth. These results indicate that the simulations remain sufficiently well controlled for the qualitative waveform comparisons presented above.
 
@@ -206,6 +213,6 @@ EMDA $(\alpha_0,\alpha_1)=(100,100)$
 & $3.91\times 10^{-6}$ \\
 \hline
 \end{tabular}
-\caption{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational strain mode. The mismatches are small, so most of these waveforms should be considered effectively indistinguishable within the accuracy of the present simulations. In this regime, finite resolution, approximate initial data, and other numerical effects may contribute more to the measured mismatch than the scalar and pseudoscalar fields themselves.}
+\caption[EMDA interpolated mismatch table]{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational strain mode. The mismatches are small, so most of these waveforms should be considered effectively indistinguishable within the accuracy of the present simulations. In this regime, finite resolution, approximate initial data, and other numerical effects may contribute more to the measured mismatch than the scalar and pseudoscalar fields themselves.}
 \label{tab:emda_coupling_mismatches}
 \end{table}

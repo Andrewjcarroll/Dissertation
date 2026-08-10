@@ -95,8 +95,7 @@ We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindq
 {\bf EWH:  Can you put the following metric on a single line?}
 
 \begin{align}
-ds^2 &= -\left(1-\frac{2mr\cosh^2\alpha}{\rho^2}\right)dt^2 + \rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right) \notag \\
-&\quad+\frac{\Sigma}{\rho^2}\sin^2\theta\, d\varphi^2
+ds^2 &= -\left(1-\frac{2mr\cosh^2\alpha}{\rho^2}\right)dt^2 + \rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right) +\frac{\Sigma}{\rho^2}\sin^2\theta\, d\varphi^2
 -\frac{4amr\cosh^2\alpha}{\rho^2}\sin^2\theta\, dt\, d\varphi
 \end{align}
 where the metric functions are defined by
@@ -188,7 +187,7 @@ G_{ab}
 \frac{1}{2}e^{4\alpha_1\phi}
 \left(\nabla_a\kappa\nabla_b\kappa-\frac{1}{2}g_{ab}(\nabla\kappa)^2\right)
 \right].
-\label{eq:Einstein}
+\label{eq:emda_first}
 \end{equation}
 
 with the matter equations of motion written as 
@@ -400,6 +399,7 @@ The equations for the electromagnetic fields, including hyperbolic divergence cl
 + \alpha \chi^{-1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} E^l \partial_j \chi
 - \alpha \chi^{1/2}\, \epsilon^{ijk} E^l \partial_j \tilde{\gamma}_{kl}
 - \alpha \chi^{1/2}\, \epsilon^{ijk}\tilde{\gamma}_{kl} \partial_j E^l .
+\label{eq:emda_last}
 \end{aligned}
 \end{equation}
 
@@ -440,25 +440,26 @@ Figs.~\ref{fig:constraint_ham_mom} and \ref{fig:constraint_divb}.
 % ---------------------------------------------------------
 \FloatBarrier
 \begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-  \caption{
-  The Hamiltonian constraint $\mathcal{H}$ and summed momentum constraint
-  violation measured over the full simulation. The $L_2$ norm is taken with respect to the number of points  The constraints remain
-  controlled throughout the evolution, including the merger phase.
-  }
-  \label{fig:constraint_ham_mom}
+\centering
+\includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
+\caption[Hamiltonian and momentum constraint violations]{
+The Hamiltonian constraint $\mathcal{H}$ and summed momentum constraint
+violation measured over the full simulation. The $L_2$ norm is taken with respect to the number of points. The constraints remain
+controlled throughout the evolution, including the merger phase.
+}
+\label{fig:constraint_ham_mom}
 \end{figure}
 
 \begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
-  \caption{
-  The volume weighted $L_2$ norms of the electromagnetic constraints, namely the no-monopole constraint that involves the divergence of the magnetic field, $\nabla\cdot B$, and the Gauss constraint that invokes the divergence of the electric field.  Both are measured over the full simulation. 
-  }
-  \label{fig:constraint_divb}
+\centering
+\includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/emda_prof_Constraints_DivE_DivB.pdf}
+\caption[Electromagnetic constraint violations]{
+The volume-weighted $L_2$ norms of the electromagnetic constraints, namely the no-monopole constraint that involves the divergence of the magnetic field, $\nabla\cdot B$, and the Gauss constraint that involves the divergence of the electric field. Both are measured over the full simulation.
+}
+\label{fig:constraint_divb}
 \end{figure}
 \FloatBarrier
+
 We also compute quasilocal quantities on apparent horizons using the
 \texttt{BHaHAHA} apparent horizon finder~\cite{Etienne2026BHaHAHA}, which
 we have extended to evaluate the horizon mass, spin, and electric charge.
@@ -479,28 +480,30 @@ Throughout this section, the constraint measure shown is the sum of the volume w
 Comparisons of simulations with respect to different wavelet tolerances are shown in Figure~\ref{fig:constraint_wavelet_tolerance}.  Decreasing $\varepsilon$ allows the grid to refine more aggressively in regions with larger truncation error.  For the three different wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}\}$ we can see that the constraints are indeed reduced as $\varepsilon$ decreases.  
 \FloatBarrier
 \begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
-  \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations
-  over the first \(20M\) of a head-on evolution of two equal-mass charged
-  black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin
-  \(\chi=0.4\). The simulations use wavelet tolerances of $\varepsilon \in \{3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6} \}$. These simulations were done with a maximum refinement level of $\ell_{\rm max} = 15$.
-  Lowering the wavelet tolerance improves the resolution of dynamically
-  important regions and reduces the overall constraint violation.
-  }
-  \label{fig:constraint_wavelet_tolerance}
+\centering
+\includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/Wavelet_tolerance.pdf}
+\caption[Constraint violation versus wavelet tolerance]{
+The sum of the volume-weighted Hamiltonian and momentum constraint violations
+over the first $(20M)$ of a head-on evolution of two equal-mass charged
+black holes with charge-to-mass ratio $(q/m=0.1)$ and dimensionless spin
+$(\chi=0.4)$. The simulations use wavelet tolerances of
+$\varepsilon \in {3\times10^{-5}, 1\times10^{-5}, 3\times10^{-6}}$.
+These simulations were performed with a maximum refinement level of
+$\ell_{\rm max}=15$. Lowering the wavelet tolerance improves the resolution
+of dynamically important regions and reduces the overall constraint violation.
+}
+\label{fig:constraint_wavelet_tolerance}
 \end{figure}
 \FloatBarrier
 Comparing simulations according to different maximum refinement levels is another means of changing the resolution in an AMR setting.  Figure~\ref{fig:constraint_maxdepth} compares simulations with maximum refinement levels of $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325, 0.0162, 0.00813, 0.00407 \}$, respectively. Increasing the allowed maximum depth provides additional resolution near the black holes and in regions where the fields develop sharp spatial structures. The resulting decrease in the constraints provides further evidence that the simulations improve with increased resolution.
 \FloatBarrier
 \begin{figure}[tbp]
-  \centering
-  \includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
-  \caption{
-  The sum of the volume weighted Hamiltonian and momentum constraint violations over the first \(20M\) of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio \(q/m=0.1\) and dimensionless spin  \(\chi=0.4\) each. The simulations compare maximum refinement levels $\ell_{\rm max} \in \{14, 15, 16, 17\}$ corresponding to finest grid spacings of $h \in \{ 0.0325,0.0162,0.00813,0.00407 \}$, respectively. The wavelet tolerance is set here to $\varepsilon = 1\times 10^{-5}$.  Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under-resolved regions.
-  }
-  \label{fig:constraint_maxdepth}
+\centering
+\includegraphics[width=0.92\columnwidth]{Figures/Chapter_1/total_hamiltonian_momentum_volume_weighted.pdf}
+\caption[Constraint violation versus maximum refinement level]{
+The sum of the volume-weighted Hamiltonian and momentum constraint violations over the first $(20M)$ of a head-on evolution of two equal-mass charged black holes with charge-to-mass ratio $(q/m=0.1)$ and dimensionless spin $(\chi=0.4)$ each. The simulations compare maximum refinement levels $\ell_{\rm max} \in {14, 15, 16, 17}$, corresponding to finest grid spacings of $h \in {0.0325, 0.0162, 0.00813, 0.00407}$, respectively. The wavelet tolerance is set to $\varepsilon = 1\times 10^{-5}$. Increasing the maximum refinement level reduces the overall constraint violation by allowing additional grid refinement in under-resolved regions.
+}
+\label{fig:constraint_maxdepth}
 \end{figure}
 \FloatBarrier
 Having checked that the constraint violations decrease as the adaptive refinement criteria are made more stringent, we now turn to the construction of the initial data used in the simulations. The initial data determine the starting geometry and matter fields and must satisfy the Einstein and Maxwell constraint equations.
@@ -732,37 +735,38 @@ We now describe the simulations of two broad classes of binary black holes in EM
 % Waveforms (2x2 subfigure grid)
 % ---------------------------------------------------------
 \begin{figure}[!htbp]
-  \centering
+\centering
 
-  \subfloat[Real part of the $(2,0)$ mode of $\Psi_4$ extracted at $R_{\mathrm{ex}} = 100M$.%
-    \label{fig:gw_l2m0}%
-  ]{%
-    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_GW_l2_m0_r5.pdf}%
-  }%
-  \hfill
-  \subfloat[Real part of the $(2,0)$ mode of $\Phi_1$ extracted at $R_{\mathrm{ex}} = 100M$.%
-    \label{fig:phi1_l2m0}%
-  ]{%
-    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI1_l2_m0_r5.pdf}%
-  }%
+\subfloat[Real part of the $(2,0)$ mode of $\Psi_4$ extracted at $R_{\mathrm{ex}} = 100M$.%
+\label{fig:gw_l2m0}%
+]{%
+\includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_GW_l2_m0_r5.pdf}%
+}%
+\hfill
+\subfloat[Real part of the $(2,0)$ mode of $\Phi_1$ extracted at $R_{\mathrm{ex}} = 100M$.%
+\label{fig:phi1_l2m0}%
+]{%
+\includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI1_l2_m0_r5.pdf}%
+}%
 
-  \vspace{0.6em}
+\vspace{0.6em}
 
-  \subfloat[Real part of the $(2,0)$ mode of $\Phi_2$ extracted at $R_{\mathrm{ex}} = 100M$.%
-    \label{fig:phi2_l2m0}%
-  ]{%
-    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI2_l2_m0_r5.pdf}%
-  }%
-  \hfill
-  \subfloat[Real part of the $(2,0)$ mode of $\phi$ extracted at $R_{\mathrm{ex}} = 100M$.%
-    \label{fig:dil_l2m0}%
-  ]{%
-    \includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_Dilaton_l2_m0_r5.pdf}%
-  }%
+\subfloat[Real part of the $(2,0)$ mode of $\Phi_2$ extracted at $R_{\mathrm{ex}} = 100M$.%
+\label{fig:phi2_l2m0}%
+]{%
+\includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_PHI2_l2_m0_r5.pdf}%
+}%
+\hfill
+\subfloat[Real part of the $(2,0)$ mode of $\phi$ extracted at $R_{\mathrm{ex}} = 100M$.%
+\label{fig:dil_l2m0}%
+]{%
+\includegraphics[width=0.48\linewidth]{Figures/Chapter_1/emda_prof_Dilaton_l2_m0_r5.pdf}%
+}%
 
-  \caption{The real portions of the $(2,0)$ modes of the gravitational radiation $\Psi_4$, electromagnetic radiation $\Phi_1$ and $\Phi_2$, and dilaton field $\phi$, extracted at $R_{\mathrm{ex}} = 100M$ for a binary with charge to mass ratio $q_i/m_i = 0.1$, dimensionless spin $\chi = 0.4$, and an initial coordinate separation of $16M$.}
-  \label{fig:waveforms_l2m0}
+\caption[Extracted $(2,0)$ gravitational, electromagnetic, and dilaton modes]{The real parts of the $(2,0)$ modes of the gravitational radiation $\Psi_4$, electromagnetic radiation $\Phi_1$ and $\Phi_2$, and dilaton field $\phi$, extracted at $R_{\mathrm{ex}} = 100M$ for a binary with charge-to-mass ratio $q_i/m_i = 0.1$, dimensionless spin $\chi = 0.4$, and an initial coordinate separation of $16M$.}
+\label{fig:waveforms_l2m0}
 \end{figure}
+
 
 \subsection{Initially scalarized black holes}
 We perform simulations across a range of binary Kerr--Sen black hole configurations in the initial data space.  For the current work, we focus on equal mass binaries with low to moderate charge and low spin.  In particular, the total mass of the system is normalized to $M=1$.  The charge to mass ratio on each black hole ranges between $0.0625 \leq q_i/m_i \leq 0.5$ where $m_i$ and $q_i$ are the initial masses and charges of the individual black holes.  For spinning cases, the spins of both black holes are usually taken to be equal and aligned.  The spin magnitude of each is taken to lie in the range $0.05 \leq \chi \leq 0.4$. A more complete summary of the parameter values used in our tests is provided in the next subsection. 
@@ -844,51 +848,48 @@ final configuration. Indeed, with these calculated black hole values, we are abl
 % Radiated energy / flux figure
 % ---------------------------------------------------------
 \begin{figure}[!t]
-  \centering
-  \includegraphics[width=\linewidth]{Figures/Chapter_1/combined_flux_linear_with_inset.pdf}
-  \caption{Plot of the radiated energy for the case $\chi = 0.4$ and $q_i/m_i = 0.1$.  The curves have been aligned such that $t = 0$ corresponds to the global maximum. On this plot the axion and dilaton radiation energy remain at least 3 orders of magnitude smaller than the GW or EM contributions}
-  \label{fig:flux_chi02_Q05}
+\centering
+\includegraphics[width=\linewidth]{Figures/Chapter_1/combined_flux_linear_with_inset.pdf}
+\caption[Radiated energy in the charged spinning merger]{Plot of the radiated energy for the case $\chi = 0.4$ and $q_i/m_i = 0.1$. The curves have been aligned such that $t = 0$ corresponds to the global maximum. The axion and dilaton radiated energies remain at least three orders of magnitude smaller than the gravitational-wave or electromagnetic contributions.}
+\label{fig:flux_chi02_Q05}
 \end{figure}
-
-
 
 % -------- Scalar field profiles (stacked top to bottom) --------
 \begin{figure}[!htbp]
-  \centering
+\centering
 
-  \subfloat[Axion\label{fig:axion}]{
-    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/Axion_panel.pdf}
-  }\\[0.5em]
+\subfloat[Axion\label{fig:axion}]{
+\includegraphics[width=0.92\linewidth]{Figures/Chapter_1/Axion_panel.pdf}
+}[0.5em]
 
-  \subfloat[Dilaton\label{fig:dilaton}]{
-    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/Dilaton_panel.pdf}
-  }
+\subfloat[Dilaton\label{fig:dilaton}]{
+\includegraphics[width=0.92\linewidth]{Figures/Chapter_1/Dilaton_panel.pdf}
+}
 
-  \caption{Scalar fields on the $z=0$ plane for the case of $\chi = 0.4$ and $q_i/m_i = 0.1$ Kerr--Sen black holes. We show the amplitudes of the axion, $\kappa$ (top four 
-  panels), and dilaton, $\phi$ (bottom four panels), fields at the beginning of the evolution (top left), shortly before merger (top right), just after merger (bottom left), and at a later time after merger (bottom right).}
-  \label{fig:scalar_fields}
+\caption[Axion and dilaton fields during merger]{Scalar fields on the $z=0$ plane for the case of $\chi = 0.4$ and $q_i/m_i = 0.1$ Kerr--Sen black holes. We show the amplitudes of the axion, $\kappa$ (top four panels), and dilaton, $\phi$ (bottom four panels), fields at the beginning of the evolution (top left), shortly before merger (top right), just after merger (bottom left), and at a later time after merger (bottom right).}
+\label{fig:scalar_fields}
 \end{figure}
-
 
 % ---------------------------------------------------------
 % Remnant black hole quasilocal quantities
 % ---------------------------------------------------------
 
 \begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/H2_chi_mass_charge_percent_variation.pdf}
-  \caption{
-  Percent deviation of the remnant black hole's horizon mass $M$, electric
-  charge $Q$, and dimensionless spin $\chi$ from their calculated average values:
-  $\langle M \rangle = 0.9682$, $\langle Q \rangle = 0.2001$, and
-  $\langle \chi \rangle = 0.1961$. These quantities are measured on the
-  apparent horizon of the remnant black hole for an initially spinning and
-  charged binary black hole configuration with individual charge to mass ratios
-  $q_i/m_i = 0.1$, initial dimensionless spins $\chi = 0.4$, and total mass
-  $M = 1$.
-  }
-  \label{fig:ql_m_q_Jz}
+\centering
+\includegraphics[width=0.92\linewidth]{Figures/Chapter_1/H2_chi_mass_charge_percent_variation.pdf}
+\caption[Remnant horizon mass, charge, and spin stability]{
+Percent deviation of the remnant black hole's horizon mass $M$, electric
+charge $Q$, and dimensionless spin $\chi$ from their calculated average values:
+$\langle M \rangle = 0.9682$, $\langle Q \rangle = 0.2001$, and
+$\langle \chi \rangle = 0.1961$. These quantities are measured on the
+apparent horizon of the remnant black hole for an initially spinning and
+charged binary black hole configuration with individual charge-to-mass ratios
+$q_i/m_i = 0.1$, initial dimensionless spins $\chi = 0.4$, and total mass
+$M = 1$.
+}
+\label{fig:ql_m_q_Jz}
 \end{figure}
+
 
 \subsection{Initially unscalarized black holes}
 
@@ -901,27 +902,26 @@ Figure~\ref{fig:unscalarized} illustrates the evolution of the scalar fields for
 
 % -------- Scalar field profiles (stacked top to bottom) --------
 \begin{figure}[!htbp]
-  \centering
+\centering
 
-  \subfloat[Axion\label{fig:unscalarized_axion}]{
-    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar_kappa.pdf}
-  }\\[0.5em]
+\subfloat[Axion\label{fig:unscalarized_axion}]{
+\includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar_kappa.pdf}
+}[0.5em]
 
-  \subfloat[Dilaton\label{fig:unscalarized_dilaton}]{
-    \includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar-dil.pdf}
-  }
+\subfloat[Dilaton\label{fig:unscalarized_dilaton}]{
+\includegraphics[width=0.92\linewidth]{Figures/Chapter_1/scalar-dil.pdf}
+}
 
-  \caption{Scalar fields on the $z=0$ plane for Kerr--Newman black holes with
-  initial dimensionless spin $\chi = 0.4$ and charge to mass ratio
-  $q_i/m_i = 0.1$. Initially, neither black hole carries dilaton or axion
-  hair. Shown are the amplitudes of the scalar fields $\kappa$ and $\phi$
-  at various stages of the evolution: the initial stage (top left), where
-  both fields begin at zero; a short time later as the fields start to
-  develop (top right); just before merger (bottom left); and some time after
-  merger (bottom right).}
-  \label{fig:unscalarized}
+\caption[Scalarization of initially bald Kerr--Newman binaries]{Scalar fields on the $z=0$ plane for Kerr--Newman black holes with
+initial dimensionless spin $\chi = 0.4$ and charge-to-mass ratio
+$q_i/m_i = 0.1$. Initially, neither black hole carries dilaton or axion
+hair. Shown are the amplitudes of the scalar fields $\kappa$ and $\phi$
+at various stages of the evolution: the initial stage (top left), where
+both fields begin at zero; a short time later as the fields start to
+develop (top right); just before merger (bottom left); and some time after
+merger (bottom right).}
+\label{fig:unscalarized}
 \end{figure}
-
 
 \subsection{Constraint and refinement tests}
 \label{sec:numerical_diagnostics}

@@ -16,42 +16,43 @@ toolbar. This button is highlighted in Fig.~\ref{fig:paraview-open}.
 \centering
 
 \begin{tikzpicture}
-    % Image
-    \node[anchor=south west, inner sep=0] (img) at (0,0)
-        {\includegraphics[width=\textwidth]{Paraview/Paraview_1.png}};
+% Image
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+{\includegraphics[width=\textwidth]{Paraview/Paraview_1.png}};
 
-    % Coordinates are scaled so that (0,0) is the bottom-left
-    % of the image and (1,1) is the top-right.
-    \begin{scope}[
-        x={(img.south east)},
-        y={(img.north west)}
-    ]
+% Coordinates are scaled so that (0,0) is the bottom-left
+% of the image and (1,1) is the top-right.
+\begin{scope}[
+    x={(img.south east)},
+    y={(img.north west)}
+]
 
-        % Red box around the Open File icon
-        \draw[red, very thick]
-            (0.003,0.930) rectangle (0.018,0.968);
+    % Red box around the Open File icon
+    \draw[red, very thick]
+        (0.003,0.930) rectangle (0.018,0.968);
 
-        % Arrow and label
-        \draw[red, very thick, ->]
-            (0.120,0.900) -- (0.018,0.955);
+    % Arrow and label
+    \draw[red, very thick, ->]
+        (0.120,0.900) -- (0.018,0.955);
 
-        \node[
-            red,
-            fill=white,
-            draw=red,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.180,0.890)
-            {Open File};
+    \node[
+        red,
+        fill=white,
+        draw=red,
+        thick,
+        rounded corners,
+        font=\small
+    ] at (0.180,0.890)
+        {Open File};
 
-    \end{scope}
+\end{scope}
+
 \end{tikzpicture}
 
-\caption{
+\caption[Opening simulation data in ParaView]{
 The ParaView interface with the \textbf{Open File} icon highlighted.
 }
-\label{fig:paraview-open}
+\label{fig:paraview_open}
 
 \end{figure}
 
@@ -78,63 +79,67 @@ Fig.~\ref{fig:paraview-slice-button}.
 \centering
 
 \begin{tikzpicture}
-    % Main screenshot
-    \node[anchor=south west, inner sep=0] (img) at (0,0)
-        {\includegraphics[width=\textwidth]{Paraview/Paraview_3.png}};
+% Main screenshot
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+{\includegraphics[width=\textwidth]{Paraview/Paraview_3.png}};
 
-    % Normalized image coordinates:
-    % (0,0) = bottom-left, (1,1) = top-right.
-    \begin{scope}[
-        x={(img.south east)},
-        y={(img.north west)}
-    ]
+% Normalized image coordinates:
+% (0,0) = bottom-left, (1,1) = top-right.
+\begin{scope}[
+x={(img.south east)},
+y={(img.north west)}
+]
 
-        % Box around the Slice toolbar button
-        \draw[red, very thick]
-            (0.04415,0.847) rectangle (0.05842,0.877);
+```
+% Box around the Slice toolbar button
+\draw[red, very thick]
+    (0.04415,0.847) rectangle (0.05842,0.877);
 
-        % Arrow and label for Slice
-        \draw[red, very thick, ->]
-            (0.3215,0.70) -- (0.06,0.860);
+% Arrow and label for Slice
+\draw[red, very thick, ->]
+    (0.3215,0.70) -- (0.06,0.860);
 
-        \node[
-            red,
-            fill=white,
-            draw=red,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.33,0.69)
-            {Slice};
+\node[
+    red,
+    fill=white,
+    draw=red,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.33,0.69)
+    {Slice};
 
-        % Box around the Calculator toolbar button
-        \draw[blue, very thick]
-            (0.006,0.84) rectangle (0.018,0.88);
+% Box around the Calculator toolbar button
+\draw[blue, very thick]
+    (0.006,0.84) rectangle (0.018,0.88);
 
-        % Arrow and label for Calculator
-        \draw[blue, very thick, ->]
-            (0.25,0.36) -- (0.018,0.840);
+% Arrow and label for Calculator
+\draw[blue, very thick, ->]
+    (0.25,0.36) -- (0.018,0.840);
 
-        \node[
-            blue,
-            fill=white,
-            draw=blue,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.25,0.36)
-            {Calculator};
+\node[
+    blue,
+    fill=white,
+    draw=blue,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.25,0.36)
+    {Calculator};
+```
 
-    \end{scope}
+\end{scope}
+
 \end{tikzpicture}
 
-\caption{
+\caption[ParaView Slice and Calculator tools]{
 The ParaView interface with the \textbf{Slice} and \textbf{Calculator} tools
 highlighted.
 }
-\label{fig:paraview-slice-button}
+\label{fig:paraview_slice_button}
 
 \end{figure}
+
 
 After selecting the \textbf{Slice} tool, ParaView displays the slice settings
 in the Properties panel. These settings determine the location and orientation
@@ -163,77 +168,80 @@ highlighted in Fig.~\ref{fig:paraview-view-controls}.
 \centering
 
 \begin{tikzpicture}
-    % Main screenshot
-    \node[anchor=south west, inner sep=0] (img) at (0,0)
-        {\includegraphics[width=\textwidth]{Paraview/Paraview_5.png}};
+% Main screenshot
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+{\includegraphics[width=\textwidth]{Paraview/Paraview_5.png}};
 
-    % Normalized image coordinates:
-    % (0,0) = bottom-left, (1,1) = top-right.
-    \begin{scope}[
-        x={(img.south east)},
-        y={(img.north west)}
-    ]
+% Normalized image coordinates:
+% (0,0) = bottom-left, (1,1) = top-right.
+\begin{scope}[
+x={(img.south east)},
+y={(img.north west)}
+]
 
-        % Time controls: play/pause and step forward/backward buttons
-        \draw[red, very thick]
-            (0.18,0.921) rectangle (0.26,0.955);
+```
+% Time controls: play/pause and step forward/backward buttons
+\draw[red, very thick]
+    (0.18,0.921) rectangle (0.26,0.955);
 
-        \draw[red, very thick, ->]
-            (0.330,0.975) -- (0.262,0.93);
+\draw[red, very thick, ->]
+    (0.330,0.975) -- (0.262,0.93);
 
-        \node[
-            red,
-            fill=white,
-            draw=red,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.385,0.975)
-            {Time controls};
+\node[
+    red,
+    fill=white,
+    draw=red,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.385,0.975)
+    {Time controls};
 
-        % Solid Color dropdown
-        \draw[blue, very thick]
-            (0.087,0.885) rectangle (0.150,0.916);
+% Solid Color dropdown
+\draw[blue, very thick]
+    (0.087,0.885) rectangle (0.150,0.916);
 
-        \draw[blue, very thick, ->]
-            (0.055,0.845) -- (0.118,0.883);
+\draw[blue, very thick, ->]
+    (0.055,0.845) -- (0.118,0.883);
 
-        \node[
-            blue,
-            fill=white,
-            draw=blue,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.030,0.840)
-            {Fields};
+\node[
+    blue,
+    fill=white,
+    draw=blue,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.030,0.840)
+    {Fields};
 
-        % Surface/Wireframe dropdown
-        \draw[green, very thick]
-            (0.187,0.880) rectangle (0.245,0.916);
+% Surface/Wireframe dropdown
+\draw[green, very thick]
+    (0.187,0.880) rectangle (0.245,0.916);
 
-        \draw[green, very thick, ->]
-            (0.315,0.83) -- (0.246,0.890);
+\draw[green, very thick, ->]
+    (0.315,0.83) -- (0.246,0.890);
 
-        \node[
-            green,
-            fill=white,
-            draw=green,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.375,0.840)
-            {Surface / Wireframe};
+\node[
+    green,
+    fill=white,
+    draw=green,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.375,0.840)
+    {Surface / Wireframe};
+```
 
-    \end{scope}
+\end{scope}
+
 \end{tikzpicture}
 
-\caption{
+\caption[ParaView visualization and time controls]{
 ParaView controls for stepping through time, selecting the displayed field or
 color option, and switching between representations such as \textbf{Surface}
 and \textbf{Wireframe}.
 }
-\label{fig:paraview-view-controls}
+\label{fig:paraview_view_controls}
 
 \end{figure}
 
@@ -267,59 +275,63 @@ panel, in the same general location as the slice settings.
 \centering
 
 \begin{tikzpicture}
-    \node[anchor=south west, inner sep=0] (img) at (0,0)
-        {\includegraphics[width=\textwidth]{Paraview/Paraview_6.png}};
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+{\includegraphics[width=\textwidth]{Paraview/Paraview_6.png}};
 
-    \begin{scope}[
-        x={(img.south east)},
-        y={(img.north west)}
-    ]
+\begin{scope}[
+x={(img.south east)},
+y={(img.north west)}
+]
 
-        % Scalars dropdown
-        \draw[red, very thick]
-            (0.031,0.380) rectangle (0.084,0.410);
+```
+% Scalars dropdown
+\draw[red, very thick]
+    (0.031,0.380) rectangle (0.084,0.410);
 
-        \draw[red, very thick, ->]
-            (0.200,0.440) -- (0.085,0.410);
+\draw[red, very thick, ->]
+    (0.200,0.440) -- (0.085,0.410);
 
-        \node[
-            red,
-            fill=white,
-            draw=red,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.205,0.450)
-            {Scalars};
+\node[
+    red,
+    fill=white,
+    draw=red,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.205,0.450)
+    {Scalars};
 
-        % Scale Factor control
-        \draw[blue, very thick]
-            (0.000,0.350) rectangle (0.100,0.381);
+% Scale Factor control
+\draw[blue, very thick]
+    (0.000,0.350) rectangle (0.100,0.381);
 
-        \draw[blue, very thick, ->]
-            (0.165,0.360) -- (0.100,0.350);
+\draw[blue, very thick, ->]
+    (0.165,0.360) -- (0.100,0.350);
 
-        \node[
-            blue,
-            fill=white,
-            draw=blue,
-            thick,
-            rounded corners,
-            font=\small
-        ] at (0.235,0.360)
-            {Scale Factor};
+\node[
+    blue,
+    fill=white,
+    draw=blue,
+    thick,
+    rounded corners,
+    font=\small
+] at (0.235,0.360)
+    {Scale Factor};
+```
 
-    \end{scope}
+\end{scope}
+
 \end{tikzpicture}
 
-\caption{
+\caption[ParaView Warp By Scalar settings]{
 The \textbf{Warp By Scalar} settings in the Properties panel. The
 \textbf{Scalars} menu selects the field used for the warping, and the
 \textbf{Scale Factor} controls the strength of the warp.
 }
-\label{fig:paraview-warp-by-scalar}
+\label{fig:paraview_warp_by_scalar}
 
 \end{figure}
+
 
 In the \textbf{Scalars} menu, select the field that should determine the warp.
 The \textbf{Scale Factor} controls the strength of the displacement. Large scale
@@ -337,18 +349,19 @@ opacity, and choose a different color preset.
 \centering
 
 \includegraphics[
-    width=\textwidth,
-    height=0.75\textheight,
-    keepaspectratio
+width=\textwidth,
+height=0.75\textheight,
+keepaspectratio
 ]{Paraview/Paraview_7.png}
 
-\caption{
+\caption[ParaView Color Map Editor]{
 The \textbf{Color Map Editor} panel in ParaView. This panel controls the color
 scale, opacity, and transfer function used to visualize the selected field.
 }
-\label{fig:paraview-color-map-editor}
+\label{fig:paraview_color_map_editor}
 
 \end{figure}
+
 
 By default, the color mapping may not automatically update when stepping
 through time. The easiest way to ensure that the colors match the data range at

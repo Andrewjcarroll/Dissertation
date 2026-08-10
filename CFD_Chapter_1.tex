@@ -97,14 +97,6 @@ Normed error quantities
 are monitored and checked that the CFD operators do, indeed, produce stable
 evolutions.
 
-%\begin{wrapfigure}{r}{0.55\textwidth}
-%    \centering
-%    \includegraphics[width=0.55\textwidth]{figs/Bz_error_first_deriv_CFDs.pdf}
-%    \vspace{-.75cm}
-%    \caption{\small Error curves for the $z$ component of the magnetic field for a propagating dipole using both CFDs and standard FDs at different resolutions on a uniform grid.  A4 and C4 are examples of fourth order CFDs developed for \dendrogr.  WuKim is a fourth order CFD developed by~\cite{WU2024112887}.  E4 and E6 are explicit FD operators.  Two takeaways are that the CFDs exhibit an error profile comparable to the sixth order explicit operators and, even more significantly, the CFDs at nominal fourth order accuracy are comparable to the fourth order explicit FDs at half the resolution.}
-%\label{fig:prior_cfd}
-%\end{wrapfigure}
-
 As a result, we have found families of stable, fourth and sixth order accurate,
 boundary closed operators. They demonstrate improved accuracy over their
 explicit counterparts, as shown in
@@ -125,134 +117,6 @@ in resolution observed for the fourth order operators, they still reduce the
 error by approximately an order of magnitude relative to the sixth order
 explicit scheme. Similar behavior is also observed in the nonlinear sigma
 model and Teukolsky wave tests presented below.
-
-
-
-
-
-%\subsubsection{Compact Finite Differences}
-
-%As explained in Section~\ref{sec:prior_cfd},  we have tested CFD operators
-%in model problems using the Maxwell equations. In comparisons with
-%explicit FD schemes, we have  demonstrated accuracy improvements of one to two
-%orders of magnitude in the solutions.   We will extend these methods
-%for use in solving the Einstein equations with \dendrogr.  To
-%be successful, we will consider the following issues.
-
-%CFD operaters were first used in numerical relativity by
-%Daszuta~\cite{Daszuta:2023qdm}, however this implementation was not completely
-%satisfactory and did not provide the expected performance
-%gains.
-%More generally, most CFD operators derived with linear stability
-%conditions and periodic boundaries are unstable when applied to
-%non-dissipative initial boundary value problems.
-%However, Brady and Livescu recently developed a nonlinear
-%optimization procedure to identify
-
-%stable CFD operators~\cite{BRADY201984}.  We are now using their procedure
-%to construct second-derivative CFD operators for numerical
-%relativity.\footnote{Quite unexpectedly, the Maxwell equations
-%with Dirichlet and Neumann boundary conditions are an acid test
-%for the stability of CFD operators. Indeed, the only CFD
-%operators that passed our long-term stability tests were the
-%Brady-Livescu operators, which require no dissipation.
-%The centered (unbiased) Daszuta operators, for these boundary
-%conditions, were all unstable in these long-term tests.}
-
-%One challenge with using CFD operators in the context of
-%distributed computing, especially with different refinement levels,
-%is minimizing potentially
-%large numerical errors at refinement and domain boundaries,
-%see, e.g., Ref.~\cite{Daszuta:2023qdm, KIM2013168}.
-%Recent work by Wu and Kim significantly reduces this error
-%using a boundary extrapolation method~\cite{WU2024112887}.  We will collaborate
-%with Kim to include this technique in \dendrogr\ to
-%ameliorate these errors (see letter of support).
-
-%Another challenge concerns the fact that the black hole puncture hides the singularity, but the metric
-%functions at this point are not smooth.
-%Explicit FD about the puncture have unphysical oscillations,
-%which, because they are well inside the horizon, are not
-%problematic.  CFDs are coupled in a linear system, however,
-%and unphysical oscillations are not isolated in space.
-%Fortunately, WENO CFD operators are available for
-%compressible fluids with shocks~\cite{LIU2015133,Ghosh_weno,SUBRAMANIAM2019108822}, which we can employ locally about the
-%punctures. (BH locations are tracked at each step of the evolution.)
-%Alternatively, high-order explicit derivatives could also be
-%used locally about the puncture.
-
-%Finally, the multi-scale nature of CFD requires solving
-%a linear system for the coupled derivatives.  This does require
-%additional computational overhead when compared with explicit schemes,
-%but the cost is relatively small.  First, most CFD operators require
-%only solving a tridiagonal system, which can be solved directly.
-
-%Second, the equations of motion in \dendrogr\ are solved on the
-%leaf nodes of the octree, which all have the same size.  Thus,
-%the matrix CFD operator can be inverted one time on a leaf node, and then
-%applied on all others, independent of resolution level.
-%Finally, matrix operations on GPUs are very efficient.  Recalling
-%the previous section, we will implement these new operators to run on GPUs.
-%On current Nvidia GPUs, these can perform up to 256 matrix
-%multiplications (GEMMs) per clock cycle on $4 \times 4$ matrices. The
-%derivatives and RHS equations will need to be modified to make use of
-%these cores, but promise tremendous speedups if successfully transformed.
-%With these developments we expect to have stable CFD operators and improved boundary treatments resulting in an accuracy gain of an order of magnitude with little extra computational cost.
-
-%We will update our code-generation framework to produce code that is capable
-%of utilizing the tensor cores on modern GPUs.
-
-
-
-% \eric{This next paragraph can probably be pulled; certainly from the dissertation and probably the paper.}
-% To this point, our development of stable, boundary-closed CFDs has mostly been
-% done using linear systems, such as the Maxwell equations. We have also tested
-% the operators with a Schwarzschild black hole using the
-% one-dimensional BSSN equations in spherical coordinates.
-% As part of this  project we will extend this work to the Einstein equations,
-% beginning with linearized gravitational waves.
-% %We expect much of this testing to be accomplished
-% %within the first six months of the grant period.
-
-% \eric{The next paragraph should be pulled or put much later.}
-% Based on some preliminary tests, our expectation is that accuracy improvements from
-% using CFDs should largely carry over from the linear case to nonlinear settings.
-% However, an additional issue that will require further exploration is the effect
-% of the black hole puncture on the evolution when an implicit scheme such as CFDs
-% are used.  While the black hole punctures effectively hide the singularities from
-% the evolution it remains the case that the metric functions are not smooth there.
-% Explicit FDs about the puncture will incur unphysical oscillations in the vicinity
-% of the punctures, but because they are inside the horizon are not problematic.
-% We have tested the use of CFDs in black hole spacetimes with a puncture
-% by evolving a Schwarzschild black hole in extended spherical coordinates (along the
-% axis for $\theta=\pm\pi/2$).  The use of adaptive stencils about the puncture
-
-%with filtering allows to use CFDs in black hole spacetimes without loss of accuracy.
-
-% \eric{This should probably be pulled as well.}
-% While some testing of this has been done with initially promising results (we
-% can do a head-on collision of a nonspinning equal mass BBH with boundary-closed
-% first and second derivative CFDs), we still need to test more extensively the
-% effect on accuracy in this more stringent setting.  Once such testing is done and we have confirmed accuracy improvements in
-% \dendrogr\ with the use of these families of CFDs, we will compare older
-% runs with mass ratios $q=2,4,8$ and $16$ against newer versions of such
-% runs using CFDs.  
-
-% Early indications of the accuracy improvements possible suggest that replacing an
-% explicit FD with a CFD of the same nominal accuracy results in an evolution with
-% comparable error at half the resolution (see Figure~\ref{fig:maxwell_fourth_order_error}).  For a time dependent problem across a 3D grid, this could result in
-% a potential speedup or efficiency boost of up to $16\times$.  Indeed, in the aerospace community, there is a rule of thumb that the use of CFDs can result in a factor of $10\times$ improvement even for complex, nonlinear fluid flows.  \eric{Do we have a reference -- is it a personal communication with Kim?}  In the event that we don't realize
-% exactly these same performance gains in the nonlinear Einstein equations, we still think that we can make a conservative estimate that the use of CFDs should give us at least a factor $2\times$ improvement.  Coupling this with speedups of $> 2\times$ that we have already seen from an earlier version of our GPU code~\cite{Fernando2019}, should
-% allow a class of such BBH evolutions to be evolved that have heretofore been
-% inaccessible (see Figure~\ref{fig:time}).
-
-% %in cfd aerospace community there is a rule of thumb of a 10x improvment
-% %if you don't believe ut we will scale back and consider 2x from CFDs and another 2x
-% %from GPUS (that we have already done).
-
-
-
-
 
 Early indications of the accuracy improvements possible suggest that replacing an
 explicit FD with a CFD of the same nominal accuracy results in an evolution with
@@ -327,6 +191,7 @@ where $m_L$ and $m_R$ indicate the number of CFD parameters to be solved for on 
 \label{spectral_function}
 \end{equation}
 where tildes designate the Fourier transform.  This is the spectral or transfer function and measures the dispersion present in this (interior) CFD scheme.  For small $\kappa$, there is little dispersion.  As $\kappa \rightarrow \pi$, clearly ${\bar \kappa} \rightarrow 0$ indicating maximum dispersion for the highest frequency modes.  Figure ~\ref{fig:4th_spectral_functions} plots this for several possible interior schemes. %\nate{Here is a plot of the spectral functions for now, we can change it out easily if we need a better one.}
+
 \FloatBarrier
 \begin{figure}\centering
   \includegraphics[width=\linewidth]{figures/1st_4th_Order_Spectral_Functions.pdf}
@@ -334,8 +199,9 @@ where tildes designate the Fourier transform.  This is the spectral or transfer 
   \caption{
    Comparison of spectral functions for several 4th order schemes. In particular, we note the explicit 4th order finite difference, a tridiagonal 4th order compact finite difference~\cite{Tyler2007}, and a spectrally-optimized pentadiagonal 4th order compact finite difference derived in this work.  
 }
-  \label{fig:4th_spectral_functions}
+\label{fig:4th_spectral_functions}
 \end{figure}
+
 
 We construct the following error quantity from the spectral function, namely 
 \begin{equation}
@@ -375,8 +241,7 @@ Once we have solved the system above to find the coefficients of the extrapolati
 
 As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:  {\bf EWH:  Can you put this on a single line? It should probably get a number as well.  So, too, some of the subsequent equations. }  
 \begin{align}
-\bar{\kappa}_m(\kappa) &= \frac{1}{A_m(\kappa)^2 + B_m(\kappa)^2} \big[ A_m(\kappa) D_m(\kappa) - B_m(\kappa) C_m(\kappa)\\
-&  \qquad\qquad\qquad - i (A_m(\kappa) C_m(\kappa) + B_m(\kappa) D_m(\kappa)) \big],
+\bar{\kappa}_m(\kappa) &= \frac{1}{A_m(\kappa)^2 + B_m(\kappa)^2} \big[ A_m(\kappa) D_m(\kappa) - B_m(\kappa) C_m(\kappa) - i (A_m(\kappa) C_m(\kappa) + B_m(\kappa) D_m(\kappa)) \big],
 \end{align}
 where:
 \begin{align}
@@ -400,50 +265,6 @@ where $N_m(\kappa)$ and $D_m(\kappa)$ represent the numerator and denominator of
 Note that each boundary node has a spectral function and thus error quantity which is independent from each other. As each of the boundary coefficients $a_{mj}$ and $\gamma_{mj}$ only depend on the free parameter $\hat{y}$, then each error quantity also only depends on $\hat{y}$. Since the error functions are decoupled, we opt to use a separate free parameter $\hat{y}_m$ for each boundary node. Clearly, even with a similar weighting function to the interior scheme, this error integral is not analytically integrable, so we must numerically integrate the error quantity over a grid of possible values for $\hat{y}_m$. Wu and Kim~\cite{WuKim2024} suggests testing $\hat{y}_m \in (-6,6)$, but we have found that the minima in the error are typically found for $\hat{y}_m \in (-1,5)$.
 
 Since each boundary error function $E_m(\hat{y}_m)$ has several minima, we obtain a family of spectrally-optimized boundary closures by taking all possible combinations of optimal $\hat{y}_m$ values.
-
-%\nate{Do we need a section talking about stability?}
-
-
-
-%\subsection{Fourth-order operators}
-
-
-
-% \subsection{EM4 Convergence}
-% \begin{table}[p]
-% \centering
-% \small
-% \setlength{\tabcolsep}{3.5pt}
-% \renewcommand{\arraystretch}{1.15}
-% \resizebox{\textwidth}{!}{%
-% \begin{tabular}{lccccccc}
-% \toprule
-% Variable & A4\_3 & A6\_2 & C4\_1 & C6\_4 & E4 & E6 & E8 \\
-% \textbf{Avg over vars} & \textbf{5.158} (6) & \textbf{6.618} (6) & \textbf{4.436} (6) & \textbf{5.788} (6) & \textbf{3.916} (6) & \textbf{5.799} (6) & \textbf{6.883} (6) \\
-% \midrule
-% U\_B0 & 5.088 $\pm$ 0.364 (7) & 6.473 $\pm$ 0.272 (7) & 4.460 $\pm$ 0.178 (7) & 6.075 $\pm$ 0.280 (7) & 3.918 $\pm$ 0.028 (7) & 5.783 $\pm$ 0.073 (7) & 6.574 $\pm$ 0.098 (7) \\
-% U\_B1 & 5.079 $\pm$ 0.391 (7) & 6.472 $\pm$ 0.281 (7) & 4.367 $\pm$ 0.176 (7) & 6.228 $\pm$ 0.225 (7) & 3.918 $\pm$ 0.028 (7) & 5.783 $\pm$ 0.073 (7) & 6.574 $\pm$ 0.098 (7) \\
-% U\_B2 & 5.166 $\pm$ 0.674 (7) & 6.639 $\pm$ 0.314 (7) & 4.241 $\pm$ 0.194 (7) & 6.613 $\pm$ 0.286 (7) & 3.899 $\pm$ 0.058 (7) & 5.779 $\pm$ 0.115 (7) & 6.743 $\pm$ 0.104 (7) \\
-% U\_E0 & 5.390 $\pm$ 0.344 (7) & 6.693 $\pm$ 0.470 (7) & 4.259 $\pm$ 0.123 (7) & 6.548 $\pm$ 0.232 (7) & 3.908 $\pm$ 0.038 (7) & 5.790 $\pm$ 0.084 (7) & 6.822 $\pm$ 0.196 (7) \\
-% U\_E1 & 5.373 $\pm$ 0.346 (7) & 6.679 $\pm$ 0.450 (7) & 4.269 $\pm$ 0.122 (7) & 6.512 $\pm$ 0.257 (7) & 3.908 $\pm$ 0.038 (7) & 5.790 $\pm$ 0.084 (7) & 6.822 $\pm$ 0.196 (7) \\
-% U\_E2 & 4.853 $\pm$ 0.284 (7) & 6.751 $\pm$ 0.292 (7) & 5.018 $\pm$ 0.165 (7) & 2.754 $\pm$ 0.894 (7) & 3.946 $\pm$ 0.012 (7) & 5.869 $\pm$ 0.017 (7) & 7.767 $\pm$ 0.028 (7) \\
-% \bottomrule
-% \end{tabular}%
-% }
-% \caption{A\_05: Evolved variables (cells show mean ± std (N); avg row shows weighted mean over variables, with (\#vars))}
-% \end{table}
-% \begin{figure}\centering
-%   \includegraphics[width=\linewidth]{figures/U_E0_DIFF__ALL_FAMILIES.png}  \includegraphics[width=\linewidth]{figures/U_B1_DIFF__ALL_FAMILIES.png}
-%   \includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.png}
-%   \vspace{-.75cm}
-%   \caption{
-%     Comparison of error in the magnetic field component, $B_y$, for different CFD and explicit schemes.   component  for $q=4$. 
-%     % describe sub-plots
-%     We see .  blah blah blah
-%   }
-%   \label{fig:B_y_allfams}
-% \end{figure}
-
 
 \section*{Symbolic Matrices}
 This is specifically the formulation of the 1A family of matrices.
@@ -568,42 +389,43 @@ Results are plotted in Figures \ref{fig:4th_burgers_error} and \ref{fig:6th_burg
 Both figures show the absolute error of these evolutions using CFD and FD (first and second derivative) operators at three different resolutions. The low, medium and high resolutions have $N=200,400,800$, respectively. In Figure \ref{fig:4th_burgers_error}, ``E4" stands for an explicit fourth order operator.  The ``A4" and ``C4" designations are members of two families of fourth order operators that were derived in previous sections.  From the Figure, it is clear that for a given type of difference operator, there is convergence from low to high resolution.  Indeed, the convergence is fourth order for each as it should be.  But, in addition, the plot shows that CFD operators result in an overall error that is one to two orders of magnitude better than the corresponding explicit FDs.  Even more significantly, it can be seen that the medium resolution CFDs have an improved error profile over the high resolution FD scheme.  Effectively, the CFDs are providing improved accuracy at lower resolution.  
 
 A similar story holds from Figure \ref{fig:6th_burgers_error} on comparing a standard sixth order explicit (E6) finite difference scheme for both first and second derivatives with an earlier derived sixth order CFD (C6).  Note that the C6 operator is an optimized 6th order compact scheme for the first and second derivatives.  Likewise, the A4 and C4 operators are two of the optimized compacts schemes at 4th order for the first derivative and second derivatives. In both cases, the compact schemes at low resolutions perform almost as well or better than the explicit schemes at a resolution with twice as many points. This shows a definite improvement in accuracy with the compact schemes.
-\FloatBarrier
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
-    %\includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Analytic error for Burgers' equation at different resolutions using
-    fourth order operators. The dotted lines correspond to the coarsest
-    resolution, the dashed lines correspond to the medium resolution, and the
-    solid lines correspond to the highest resolution. Notice that the compact
-    operators perform comparably to the sixth order explicit operator while
-    using only half the resolution. In the case of the C4 operator, the error
-    is even smaller than that of the comparable explicit scheme at twice the
-    resolution.
-    }
-    \label{fig:4th_burgers_error}
-\end{figure}
-\FloatBarrier
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
-    %\includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Analytic error for Burgers' equation at different resolutions using
-    sixth order operators. The dotted lines correspond to the coarsest
-    resolution, the dashed lines correspond to the medium resolution, and the
-    solid lines correspond to the highest resolution. The sixth order CFD
-    operators perform almost as well as the comparable explicit operators
-    while again using a grid with half the resolution.
-    }
-    \label{fig:6th_burgers_error}
-\end{figure}
-\FloatBarrier
 
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
+%\includegraphics[width=\linewidth]{figures/4th_order_Burgers.pdf}
+\vspace{-.75cm}
+\caption[Fourth-order Burgers' equation error comparison]{
+Analytic error for Burgers' equation at different resolutions using
+fourth-order operators. The dotted lines correspond to the coarsest
+resolution, the dashed lines correspond to the medium resolution, and the
+solid lines correspond to the highest resolution. Notice that the compact
+operators perform comparably to the sixth-order explicit operator while
+using only half the resolution. In the case of the C4 operator, the error
+is even smaller than that of the comparable explicit scheme at twice the
+resolution.
+}
+\label{fig:4th_burgers_error}
+\end{figure}
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
+%\includegraphics[width=\linewidth]{figures/6th_order_Burgers.pdf}
+\vspace{-.75cm}
+\caption[Sixth-order Burgers' equation error comparison]{
+Analytic error for Burgers' equation at different resolutions using
+sixth-order operators. The dotted lines correspond to the coarsest
+resolution, the dashed lines correspond to the medium resolution, and the
+solid lines correspond to the highest resolution. The sixth-order CFD
+operators perform almost as well as the comparable explicit operators
+while again using a grid with half the resolution.
+}
+\label{fig:6th_burgers_error}
+\end{figure}
+\FloatBarrier
 
 \subsection{Maxwell equations in 3D}
 \label{sec:maxwell_equations}
@@ -660,31 +482,6 @@ violations of the electric and magnetic constraints:
 \label{eq:maxwell_constraint_B}
 \end{align}
 
-% We also consider a formulation analogous to the BSSN formulation of general relativity:
-%
-% \begin{align}
-% \partial_t E_i
-%     &= -\nabla^j \nabla_j A_i + \nabla_i \Gamma - 4\pi J_i,
-% \\
-% \partial_t A_i
-%     &= -E_i - \nabla_i \psi,
-% \\
-% \partial_t \Gamma
-%     &= -4\pi \rho_e - \nabla_i \nabla^i \psi,
-% \\
-% \partial_t \psi
-%     &= -\nabla_i A^i,
-% \\
-% 0
-%     &= \nabla_i E^i - 4\pi \rho_e,
-% \\
-% 0
-%     &= \nabla_i A^i - \Gamma.
-% \end{align}
-%
-% This system also includes constraint damping, with $\Gamma$ allowing for
-% the elimination of mixed derivatives.
-
 For the current test, we use an exact solution of Maxwell's equations, namely a propagating dipole wave. In
 particular, we choose initial data from the exact solution given by Knapp
 et al.~\cite{Knapp:2002fm}:
@@ -740,101 +537,65 @@ In our experiments, we set $\mathcal{A}=1.0$ and $\lambda=0.5$. A representative
 %By comparing the evolved solution against the analytic solution, we obtain a direct measure of the error associated with each finite difference operator. 
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/E0_panel.pdf}
-    \caption{
-    Evolution of the electric field component $E_x$ for the dipolar Maxwell
-    test problem. The panels show representative snapshots during the
-    evolution, with a shared color scale shown on the right. The initial
-    dipolar pulse gradually propagates outward.
-    }
-    \label{fig:em4_e0_panel}
+\centering
+\includegraphics[width=\columnwidth]{figures/E0_panel.pdf}
+\caption[Dipolar Maxwell electric-field evolution]{
+Evolution of the electric field component $E_x$ for the dipolar Maxwell
+test problem. The panels show representative snapshots during the
+evolution, with a shared color scale shown on the right. The initial
+dipolar pulse gradually propagates outward.
+}
+\label{fig:em4_e0_panel}
 \end{figure}
 
 %\paragraph{Fourth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/U_B0_DIFF__ALL_FAMILIES.pdf}
-    \includegraphics[width=\linewidth]{figures/U_E0_DIFF__ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_B1_DIFF__ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_E1_DIFF__ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_E2_DIFF__ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Comparison of the errors in the magnetic and electric field components,
-    $B_x$ and $E_x$, for different fourth order compact and explicit finite
-    difference schemes. We plot the $L_2$ error of the numerical solution
-    across the grid relative to the analytic solution. Dotted lines denote
-    the low resolution runs, dashed lines denote the medium resolution runs,
-    and solid lines denote the high resolution runs. The grid spacing is
-    halved between each successive resolution. The fourth order compact
-    operators perform comparably to their explicit counterparts at half the
-    resolution and achieve error levels comparable to those of the sixth
-    order explicit operators. This behavior is observed for both the A4 and
-    C4 families of operators tested here.
-    }
-    \label{fig:maxwell_fourth_order_error}
+\centering
+\includegraphics[width=\linewidth]{figures/U_B0_DIFF__ALL_FAMILIES.pdf}
+\includegraphics[width=\linewidth]{figures/U_E0_DIFF__ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Fourth-order Maxwell error comparison]{
+Comparison of the errors in the magnetic and electric field components,
+$B_x$ and $E_x$, for different fourth-order compact and explicit finite
+difference schemes. We plot the $L_2$ error of the numerical solution
+across the grid relative to the analytic solution. Dotted lines denote
+the low-resolution runs, dashed lines denote the medium-resolution runs,
+and solid lines denote the high-resolution runs. The grid spacing is
+halved between each successive resolution. The fourth-order compact
+operators perform comparably to their explicit counterparts at half the
+resolution and achieve error levels comparable to those of the sixth-order
+explicit operators. This behavior is observed for both the A4 and
+C4 families of operators tested here.
+}
+\label{fig:maxwell_fourth_order_error}
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/6th_order_EM4_U_B0_DIFF_ALL_FAMILIES.pdf}
-    \includegraphics[width=\linewidth]{figures/6th_order_EM4_U_E0_DIFF_ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Comparison of the errors in the magnetic and electric field components,
-    $B_x$ and $E_x$, for different sixth order compact and explicit finite
-    difference schemes. We plot the $L_2$ error of the numerical solution
-    across the grid relative to the analytic solution. Dotted lines denote
-    the low resolution runs, dashed lines denote the medium resolution runs,
-    and solid lines denote the high resolution runs. The grid spacing is
-    halved between each successive resolution. Although the sixth order
-    CFD operators do not provide a full factor of two improvement in
-    resolution over their explicit counterparts of the same order, they
-    still produce more than an order of magnitude improvement in accuracy.
-    This behavior is observed for both the A6 and C6 families of operators
-    tested here.
-    }
-    \label{fig:maxwell_sixth_order_error}
+\centering
+\includegraphics[width=\linewidth]{figures/6th_order_EM4_U_B0_DIFF_ALL_FAMILIES.pdf}
+\includegraphics[width=\linewidth]{figures/6th_order_EM4_U_E0_DIFF_ALL_FAMILIES.pdf}
+%\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Sixth-order Maxwell error comparison]{
+Comparison of the errors in the magnetic and electric field components,
+$B_x$ and $E_x$, for different sixth-order compact and explicit finite
+difference schemes. We plot the $L_2$ error of the numerical solution
+across the grid relative to the analytic solution. Dotted lines denote
+the low-resolution runs, dashed lines denote the medium-resolution runs,
+and solid lines denote the high-resolution runs. The grid spacing is
+halved between each successive resolution. Although the sixth-order
+CFD operators do not provide a full factor-of-two improvement in
+resolution over their explicit counterparts of the same order, they
+still produce more than an order-of-magnitude improvement in accuracy.
+This behavior is observed for both the A6 and C6 families of operators
+tested here.
+}
+\label{fig:maxwell_sixth_order_error}
 \end{figure}
-% \begin{figure}\centering
-%   \includegraphics[width=\linewidth]{figures/U_B1_DIFF_error_plots.png}
-%   \includegraphics[width=\linewidth]{figures/U_B2_DIFF_error_plots.png}
-%   \vspace{-.75cm}
-%   \caption{
-%     Comparison of error in the magnetic field component, $B_y$, for different CFD and explicit schemes.   component  for $q=4$. 
-%     % describe sub-plots
-%     We see . 
-%   }
-%   \label{fig:B_y_Bz_error}
-% \end{figure}
-% \subsection{Maxwell with second derivatives}
-% \ajc{I include these here the 4th order derivatives are fine but I think that the 6th order derivatives really sell us short so I think we may be better sticking to NLSM... but they are here if we change our mind}
-% \subsection{4th-order operators}
-% \begin{figure}\centering
-%   \includegraphics[width=\linewidth]{figures/4th_order_EM2_U_E0_DIFF__ALL_FAMILIES.pdf}
-%   %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-%   \vspace{-.75cm}
-%   \caption{
-%    Error plot of 4th order derivatives with the second derivative formulation of Maxwell at different resolutions
-% }
-%   \label{fig:4th_phi_error}
-% \end{figure}
-% \subsection{Sixth-order operators}
-% \begin{figure}\centering
-%   \includegraphics[width=\linewidth]{figures/6th_order_EM2_U_E0_DIFF__ALL_FAMILIES.pdf}
-%   %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-%   \vspace{-.75cm}
-%   \caption{
-%  Error plot of 6th order derivatives with the second derivative formulation of Maxwell at different resolutions
-% }
-%   \label{fig:6th_phi_error}
-% \end{figure}
+
 \FloatBarrier
 
 \subsection{Nonlinear sigma model}
@@ -893,43 +654,46 @@ In this case we do not have an analytic solution and do not have a measure of th
 
 %\ajc{I have added in convergence plots, I will probably update these but the story shouldn't change too much}
 
-%\paragraph{Fourth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/4th_order_U_CHI_ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Convergence of the nonlinear sigma model field $\phi$ for the fourth
-    order compact and explicit finite difference schemes. The plotted
-    quantity is the difference between successive resolutions. Dotted lines
-    denote the low and medium resolution comparison, dashed lines denote the
-    medium and high resolution comparison, and solid lines denote the highest
-    resolution run. The grid spacing is halved between each successive
-    resolution. The CFD operators remain stable in the nonlinear system. Notice that again in this nonlinear system the 4th order A4 and C4 operators perform the same as the Explicit 4th order at half of the resolution. 
-    }
-    \label{fig:nlsm_fourth_order_error}
+\centering
+\includegraphics[width=\linewidth]{figures/4th_order_U_CHI_ALL_FAMILIES.pdf}
+%\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Fourth-order nonlinear sigma model convergence]{
+Convergence of the nonlinear sigma model field $\phi$ for the fourth-order
+compact and explicit finite difference schemes. The plotted quantity is the
+difference between successive resolutions. Dotted lines denote the low- and
+medium-resolution comparison, dashed lines denote the medium- and
+high-resolution comparison, and solid lines denote the highest-resolution
+run. The grid spacing is halved between each successive resolution. The CFD
+operators remain stable in this nonlinear system. The fourth-order A4 and C4
+operators perform comparably to the explicit fourth-order operator while
+using approximately half the resolution.
+}
+\label{fig:nlsm_fourth_order_error}
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/6th_order_U_PHI_ALL_FAMILIES.pdf}
-    %\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Convergence of the nonlinear sigma model field $\phi$ for the sixth
-    order compact and explicit finite difference schemes. The plotted
-    quantity is the difference between successive resolutions. Dotted lines
-    denote the low and medium resolution comparison, dashed lines denote the
-    medium and high resolution comparison, and solid lines denote the highest
-    resolution run. The grid spacing is halved between each successive
-    resolution. We do not seem to get the full order of resolution improvement that we got with the 4th order operators but we do seem to get close to an order of magnitude improvement..
-    }
-    \label{fig:nlsm_sixth_order_error}
-\end{figure}\
+\centering
+\includegraphics[width=\linewidth]{figures/6th_order_U_PHI_ALL_FAMILIES.pdf}
+%\includegraphics[width=\linewidth]{figures/U_B2_DIFF__ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Sixth-order nonlinear sigma model convergence]{
+Convergence of the nonlinear sigma model field $\phi$ for the sixth-order
+compact and explicit finite difference schemes. The plotted quantity is the
+difference between successive resolutions. Dotted lines denote the low- and
+medium-resolution comparison, dashed lines denote the medium- and
+high-resolution comparison, and solid lines denote the highest-resolution
+run. The grid spacing is halved between each successive resolution. The
+sixth-order compact operators do not provide the same factor-of-two
+improvement in effective resolution observed for the fourth-order operators,
+but they still achieve close to an order-of-magnitude improvement in error.
+}
+\label{fig:nlsm_sixth_order_error}
+\end{figure}
 \FloatBarrier
 
 \subsection{Gravitational waves}
@@ -948,59 +712,59 @@ is shown in Fig.~\ref{fig:bssn_gt00_panel}.
 The relative errors in the evolutions are shown in Figs.~\ref{fig:teukolsky_fourth_order_error} and~\ref{fig:teukolsky_sixth_order_error}.  Again, these CFDs are for both first and second derivatives and are the optimized operators with boundary closures.  In the plots, one of the metric coefficients and one of the extrinsic curvature coefficients are shown.  Other metric and extrinsic curvature components behave similarly.  Again, the nominally fourth order CFDs perform comparably to the explicit FDs at half the resolution.  The sixth order CFDs do not perform quite so well, but continue to have almost an order of magnitude improvement in their relative error profiles.  This provides compelling evidence that CFDs are promising candidates for inclusion in algorithms to improve accuracy in numerical relativity.  
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/GT00_panel.pdf}
-    \caption{
-    Evolution of the metric component $g_{xx}$ for the Teukolsky wave test problem.
-    The panels show snapshots at $t=0$, $t=3.33$, $t=6.67$, and $t=10.00$.
-    The shared color scale on the right applies to all four panels.
-    }
-    \label{fig:bssn_gt00_panel}
+\centering
+\includegraphics[width=\columnwidth]{figures/GT00_panel.pdf}
+\caption[Teukolsky-wave metric evolution]{
+Evolution of the metric component $g_{xx}$ for the Teukolsky wave test problem.
+The panels show snapshots at $t=0$, $t=3.33$, $t=6.67$, and $t=10.00$.
+The shared color scale on the right applies to all four panels.
+}
+\label{fig:bssn_gt00_panel}
 \end{figure}
 
 %\paragraph{Fourth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/4th_order_U_SYMGT0_ALL_FAMILIES.pdf}
-    \includegraphics[width=\linewidth]{figures/4th_order_U_SYMAT0_ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Convergence of the metric component $g_{xx}$ and the conformal extrinsic
-    curvature component $\tilde{A}_{xx}$ for the fourth order compact and
-    explicit finite difference schemes. The plotted quantities are the
-    differences between successive resolutions. Dotted lines denote the low
-    and medium resolution comparison, dashed lines denote the medium and high
-    resolution comparison, and solid lines denote the highest resolution run.
-    The grid spacing is halved between each successive resolution. The compact
-    operators remain stable during the Teukolsky wave evolution. Notice that,
-    as in the nonlinear sigma model, the fourth order A4 and C4 operators
-    perform comparably to the explicit fourth order operator at half the
-    resolution.
-    }
-    \label{fig:teukolsky_fourth_order_error}
+\centering
+\includegraphics[width=\linewidth]{figures/4th_order_U_SYMGT0_ALL_FAMILIES.pdf}
+\includegraphics[width=\linewidth]{figures/4th_order_U_SYMAT0_ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Fourth-order Teukolsky-wave convergence]{
+Convergence of the metric component $g_{xx}$ and the conformal extrinsic
+curvature component $\tilde{A}_{xx}$ for the fourth-order compact and
+explicit finite difference schemes. The plotted quantities are the
+differences between successive resolutions. Dotted lines denote the low-
+and medium-resolution comparison, dashed lines denote the medium- and
+high-resolution comparison, and solid lines denote the highest-resolution
+run. The grid spacing is halved between each successive resolution. The
+compact operators remain stable during the Teukolsky wave evolution.
+As in the nonlinear sigma model, the fourth-order A4 and C4 operators
+perform comparably to the explicit fourth-order operator while using
+approximately half the resolution.
+}
+\label{fig:teukolsky_fourth_order_error}
 \end{figure}
 
 %\paragraph{Sixth Order Operators}
 \FloatBarrier
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/6th_order_U_SYMGT0_ALL_FAMILIES.pdf}
-    \includegraphics[width=\linewidth]{figures/6th_order_U_SYMAT0_ALL_FAMILIES.pdf}
-    \vspace{-.75cm}
-    \caption{
-    Convergence of the metric component $g_{xx}$ and the conformal extrinsic
-    curvature component $\tilde{A}_{xx}$ for the sixth order compact and
-    explicit finite difference schemes. The plotted quantities are the
-    differences between successive resolutions. Dotted lines denote the low
-    and medium resolution comparison, dashed lines denote the medium and high
-    resolution comparison, and solid lines denote the highest resolution run.
-    The grid spacing is halved between each successive resolution. As in the
-    nonlinear sigma model, the sixth order CFD operators do not achieve
-    the full resolution improvement seen for the fourth order operators, but
-    they still provide close to an order of magnitude improvement in accuracy.
-    }
-    \label{fig:teukolsky_sixth_order_error}
+\centering
+\includegraphics[width=\linewidth]{figures/6th_order_U_SYMGT0_ALL_FAMILIES.pdf}
+\includegraphics[width=\linewidth]{figures/6th_order_U_SYMAT0_ALL_FAMILIES.pdf}
+\vspace{-.75cm}
+\caption[Sixth-order Teukolsky-wave convergence]{
+Convergence of the metric component $g_{xx}$ and the conformal extrinsic
+curvature component $\tilde{A}_{xx}$ for the sixth-order compact and
+explicit finite difference schemes. The plotted quantities are the
+differences between successive resolutions. Dotted lines denote the low-
+and medium-resolution comparison, dashed lines denote the medium- and
+high-resolution comparison, and solid lines denote the highest-resolution
+run. The grid spacing is halved between each successive resolution. As in
+the nonlinear sigma model, the sixth-order CFD operators do not achieve
+the full resolution improvement seen for the fourth-order operators, but
+they still provide close to an order-of-magnitude improvement in accuracy.
+}
+\label{fig:teukolsky_sixth_order_error}
 \end{figure}
 \FloatBarrier
 

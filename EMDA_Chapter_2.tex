@@ -44,7 +44,7 @@ To simulate inspiraling binary black holes, we construct approximate charged bin
 \section{Numerical Methods}
 \label{sec:methods}
 
-To study the strong-field dynamics and gravitational radiation from inspiraling charged black hole binaries in Einstein--Maxwell--dilaton--axion (EMDA) theory, we evolve the full EMDA system as a Cauchy initial-value problem. The EMDA field equations and their $3+1$ decomposition are given in Eqs.~\ref{eq:YOUR_FIRST_EQ}--\ref{eq:YOUR_LAST_EQ} of the previous chapter. {\bf EWH:  This last equation reference don't show for me.  You may want to check these again.}  The spacetime metric is evolved using the BSSN formulation \cite{Shibata1995_BSSN,Baumgarte1999_BSSN,Baumgarte2010}, together with puncture gauge conditions \cite{Campanelli2006,Baker2006}. The electromagnetic, dilaton, and axion fields are evolved using the corresponding matter evolution equations obtained from this $3+1$ decomposition.
+To study the strong-field dynamics and gravitational radiation from inspiraling charged black hole binaries in Einstein--Maxwell--dilaton--axion (EMDA) theory, we evolve the full EMDA system as a Cauchy initial-value problem. The EMDA field equations and their $3+1$ decomposition are given in Eqs.~\ref{eq:emda_first}--\ref{eq:emda_last} of the previous chapter. The spacetime metric is evolved using the BSSN formulation \cite{Shibata1995_BSSN,Baumgarte1999_BSSN,Baumgarte2010}, together with puncture gauge conditions \cite{Campanelli2006,Baker2006}. The electromagnetic, dilaton, and axion fields are evolved using the corresponding matter evolution equations obtained from this $3+1$ decomposition.
 
 The simulations are initialized with approximate charged binary black hole initial data and evolved through the late inspiral, merger, and ringdown. During the evolution, we extract gravitational radiation and monitor the matter fields, constraints, and quasilocal horizon quantities in order to assess the dynamics and numerical consistency of the solutions.
 
@@ -85,57 +85,50 @@ Although approximate, this prescription yields eccentricities that are adequate 
 \FloatBarrier
 \begin{figure}[p]
 \centering
-
-
 \subfloat[$q=1$: black hole separation.\label{fig:bh_separation_q1}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q1_SPIN_04_high_charge_separation_comparison.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q1_SPIN_04_high_charge_separation_comparison.pdf}%
 }
 \hfill
 \subfloat[$q=1$: orbital trajectories.\label{fig:bh_xy_q1}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q1_SPIN_04_high_charge_Q0p1_pp_xy_trajectory.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q1_SPIN_04_high_charge_Q0p1_pp_xy_trajectory.pdf}%
 }
-
 \vspace{1.0em}
-
 \subfloat[$q=2$: black hole separation.\label{fig:bh_separation_q2}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q2_SPIN_04_high_charge_separation_comparison.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q2_SPIN_04_high_charge_separation_comparison.pdf}%
 }
 \hfill
 \subfloat[$q=2$: orbital trajectories.\label{fig:bh_xy_q2}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q2_SPIN_04_high_charge_Q0p15_pp_xy_trajectory.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q2_SPIN_04_high_charge_Q0p15_pp_xy_trajectory.pdf}%
 }
 
-\caption{Orbital dynamics for the $q=1$ and $q=2$ configurations. For each mass ratio, the left panel shows the coordinate separation as a function of time, while the right panel shows representative coordinate trajectories in the orbital plane. The charge configuration affects both the inspiral time and the orbital phasing by modifying the effective interaction between the black holes. The trajectories are approximately quasicircular until the final plunge, which begins once the separation drops below roughly $6M$. Here $\lambda$ denotes the magnitude of the charge-to-mass ratio, $|Q|/M$, assigned to each charged black hole; neutral black holes have $\lambda=0$. The superscript and subscript indicate the charge configuration, with the larger black hole assigned the positive charge in unequal mass cases. Thus, $\lambda^{+}_{+}$ denotes two positively charged black holes, $\lambda^{+}_{-}$ denotes oppositely charged black holes, and $\lambda^{+}_{0}$ denotes one positively charged and one neutral black hole. The $\lambda=0$ case is the GR reference waveform. In the trajectory plots, orange and blue denote the paths of the heavier and lighter black holes, respectively, with the initial data chosen so that the center of mass is at the origin.}
-\label{fig:orbital_dynamics_q1_q2}
 
+\caption[Orbital dynamics for the $q=1$ and $q=2$ binaries]{Orbital dynamics for the $q=1$ and $q=2$ configurations. For each mass ratio, the left panel shows the coordinate separation as a function of time, while the right panel shows representative coordinate trajectories in the orbital plane. The charge configuration affects both the inspiral time and the orbital phasing by modifying the effective interaction between the black holes. The trajectories are approximately quasicircular until the final plunge, which begins once the separation drops below roughly $6M$. Here $\lambda$ denotes the magnitude of the charge-to-mass ratio, $|Q|/M$, assigned to each charged black hole; neutral black holes have $\lambda=0$. The superscript and subscript indicate the charge configuration, with the larger black hole assigned the positive charge in unequal mass cases. Thus, $\lambda^{+}_{+}$ denotes two positively charged black holes, $\lambda^{+}_{-}$ denotes oppositely charged black holes, and $\lambda^{+}_{0}$ denotes one positively charged and one neutral black hole. The $\lambda=0$ case is the GR reference waveform. In the trajectory plots, orange and blue denote the paths of the heavier and lighter black holes, respectively, with the initial data chosen so that the center of mass is at the origin.}
+\label{fig:orbital_dynamics_q1_q2}
 \end{figure}
 \FloatBarrier
+
 \begin{figure}[p]
 \centering
-
-
 \subfloat[$q=4$: black hole separation.\label{fig:bh_separation_q4}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_separation_comparison.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_separation_comparison.pdf}%
 }
 \hfill
 \subfloat[$q=4$: orbital trajectories.\label{fig:bh_xy_q4}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_Q0p1_pp_xy_trajectory.png}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q4_spin04_high_charge_Q0p1_pp_xy_trajectory.png}%
 }
-
 \vspace{1.0em}
-
 \subfloat[$q=8$: black hole separation.\label{fig:bh_separation_q8}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q8_SPIN_04_high_charge_separation_comparison.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q8_SPIN_04_high_charge_separation_comparison.pdf}%
 }
 \hfill
 \subfloat[$q=8$: orbital trajectories.\label{fig:bh_xy_q8}]{%
-    \includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q8_SPIN_04_high_charge_Q0p1_pp_xy_trajectory.pdf}%
+\includegraphics[height=0.22\textheight,keepaspectratio]{Figures/Chapter_2/Q8_SPIN_04_high_charge_Q0p1_pp_xy_trajectory.pdf}%
 }
-
-\caption{Orbital dynamics for the $q=4$ and $q=8$ configurations. For each mass ratio, the left panel shows the coordinate separation as a function of time, while the right panel shows representative coordinate trajectories in the orbital plane. The charge configuration affects both the inspiral time and the orbital phasing by modifying the effective interaction between the black holes. The trajectories are approximately quasicircular until the final plunge, which begins once the separation drops below roughly $6M$. Here $\lambda$ denotes the magnitude of the charge-to-mass ratio, $|Q|/M$, assigned to each charged black hole; neutral black holes have $\lambda=0$. The superscript and subscript indicate the charge configuration, with the larger black hole assigned the positive charge. Thus, $\lambda^{+}_{+}$ denotes two positively charged black holes, $\lambda^{+}_{-}$ denotes oppositely charged black holes, and $\lambda^{+}_{0}$ denotes one positively charged and one neutral black hole. The $\lambda=0$ case is the GR reference waveform. In the trajectory plots, orange and blue denote the paths of the heavier and lighter black holes, respectively, with the initial data chosen so that the center of mass is near the origin.}
+\caption[Orbital dynamics for the $q=4$ and $q=8$ binaries]{Orbital dynamics for the $q=4$ and $q=8$ configurations. For each mass ratio, the left panel shows the coordinate separation as a function of time, while the right panel shows representative coordinate trajectories in the orbital plane. The charge configuration affects both the inspiral time and the orbital phasing by modifying the effective interaction between the black holes. The trajectories are approximately quasicircular until the final plunge, which begins once the separation drops below roughly $6M$. Here $\lambda$ denotes the magnitude of the charge-to-mass ratio, $|Q|/M$, assigned to each charged black hole; neutral black holes have $\lambda=0$. The superscript and subscript indicate the charge configuration, with the larger black hole assigned the positive charge. Thus, $\lambda^{+}*{+}$ denotes two positively charged black holes, $\lambda^{+}*{-}$ denotes oppositely charged black holes, and $\lambda^{+}_{0}$ denotes one positively charged and one neutral black hole. The $\lambda=0$ case is the GR reference waveform. In the trajectory plots, orange and blue denote the paths of the heavier and lighter black holes, respectively, with the initial data chosen so that the center of mass is near the origin.}
 \label{fig:orbital_dynamics_q4_q8}
 \end{figure}
 \FloatBarrier
+
 We estimate the orbital eccentricity using an estimator based on the orbital frequency~\cite{RamosBuades2019_EccRed},
 \begin{equation}
 \varepsilon_{\Omega}(t)
@@ -162,7 +155,7 @@ In principle, lower eccentricities could be obtained through an iterative eccent
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/EMDA_eccentricity.png}
-\caption{Measured orbital frequency eccentricity and fitted eccentricity model for a binary black hole inspiral with $q=1$, $\chi=0.4$, $\lambda=0.3$, and charge configuration $++$. The fit is performed from $t_{\mathrm{min}}=200M$ to $t_{\mathrm{max}}=1300M$, excluding early gauge-settling effects and ending before the onset of plunge. The measured eccentricity extrapolated to $t=0$ is $\varepsilon_\Omega=(14.44\pm0.33)\times10^{-3}$.}
+\caption[Orbital eccentricity fit for a charged binary]{Measured orbital-frequency eccentricity and fitted eccentricity model for a binary black hole inspiral with $q=1$, $\chi=0.4$, $\lambda=0.3$, and charge configuration $++$. The fit is performed from $t_{\mathrm{min}}=200M$ to $t_{\mathrm{max}}=1300M$, excluding early gauge-settling effects and ending before the onset of plunge. The measured eccentricity extrapolated to $t=0$ is $\varepsilon_\Omega=(14.44\pm0.33)\times10^{-3}$.}
 \label{fig:bh_eccentricity}
 \end{figure}
 
@@ -216,24 +209,24 @@ Representative peak-aligned waveforms are shown in Fig.~\ref{fig:peak_aligned_hp
 \centering
 
 \subfloat[$q=1$.\label{fig:q1_peak_aligned_hplus}]{%
-    \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q1_Q0_vs_Q0p15_pn_peak_aligned_hplus_notitle.pdf}%
+\includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q1_Q0_vs_Q0p15_pn_peak_aligned_hplus_notitle.pdf}%
 }
 \hfill
 \subfloat[$q=2$.\label{fig:q2_peak_aligned_hplus}]{%
-    \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q2_Q0_vs_Q0p15_pp_peak_aligned_hplus_notitle.pdf}%
+\includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q2_Q0_vs_Q0p15_pp_peak_aligned_hplus_notitle.pdf}%
 }
 
 \vspace{0.5em}
 
 \subfloat[$q=4$.\label{fig:q4_peak_aligned_hplus}]{%
-    \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/Q0_vs_Q0p1_pp_peak_aligned_hplus_notitle.png}%
+\includegraphics[width=0.48\textwidth]{Figures/Chapter_2/Q0_vs_Q0p1_pp_peak_aligned_hplus_notitle.png}%
 }
 \hfill
 \subfloat[$q=8$.\label{fig:q8_peak_aligned_hplus}]{%
-    \includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q8_Q0_vs_Q0p1_pp_peak_aligned_hplus_notitle.png}%
+\includegraphics[width=0.48\textwidth]{Figures/Chapter_2/q8_Q0_vs_Q0p1_pp_peak_aligned_hplus_notitle.png}%
 }
 
-\caption{Peak-aligned comparisons of the gravitational wave strain component $r h_{+}$ for representative charged EMDA configurations against the corresponding neutral GR reference waveforms. In each panel, the time coordinate is shifted so that the waveform peak occurs at $t-t_{\mathrm{peak}}=0$. The remaining differences after peak alignment reflect changes in the accumulated phase, merger time, and waveform morphology.}
+\caption[Peak-aligned gravitational waveforms across mass ratios]{Peak-aligned comparisons of the gravitational-wave strain component $r h_{+}$ for representative charged EMDA configurations against the corresponding neutral GR reference waveforms. In each panel, the time coordinate is shifted so that the waveform peak occurs at $t-t_{\mathrm{peak}}=0$. The remaining differences after peak alignment reflect changes in the accumulated phase, merger time, and waveform morphology.}
 \label{fig:peak_aligned_hplus_all_mass_ratios}
 
 \end{figure*}
@@ -266,7 +259,7 @@ The simulations used in this chapter are summarized in Table~\ref{tab:simulation
 \FloatBarrier
 \begin{table*}[htbp]
 \centering
-\caption{EMDA binary black hole simulation catalog. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote similar charges, opposite charges, and cases in which only one black hole is charged, respectively. Because the neutral configuration is independent of $\lambda$, it is listed only once for each mass ratio and spin.}
+\caption[EMDA binary black hole simulation catalog]{EMDA binary black hole simulation catalog. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote similar charges, opposite charges, and cases in which only one black hole is charged, respectively. Because the neutral configuration is independent of $\lambda$, it is listed only once for each mass ratio and spin.}
 \label{tab:simulation_catalog}
 \begin{tabular}{ccccccc}
 \toprule
@@ -301,7 +294,7 @@ The simulations used in this chapter are summarized in Table~\ref{tab:simulation
 \FloatBarrier
 \begin{table*}[t]
 \centering
-\caption{Mismatch of charged EMDA binary black hole waveforms relative to the corresponding neutral reference waveform \texttt{Q0}. Here $q=m_1/m_2$, $\chi$ is the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$. The column $|\lambda_i|$ gives the magnitude of the nonzero charge-to-mass ratio used in each charged configuration. The columns $++$, $+-$, and $+0$ denote similar, opposite charges, and configurations in which only one black hole is charged, respectively. The mismatch is computed from the $(\ell,m)=(2,2)$ gravitational waveform using the numerical relativity analysis package \texttt{kuibit}, after optimizing over relative time and polarization shifts. The values in parentheses give the approximate fixed parameter critical signal-to-noise ratio, $\rho_{\rm crit}\simeq 1/\sqrt{2\mathcal{M}}$. These values should be interpreted as rough waveform-separation estimates rather than full observational detection thresholds.}
+\caption[EMDA binary black hole mismatch simulation catalog]{Mismatch of charged EMDA binary black hole waveforms relative to the corresponding neutral reference waveform. Here $q=m_1/m_2$, $\chi$ is the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$. The column $|\lambda_i|$ gives the magnitude of the nonzero charge-to-mass ratio used in each charged configuration. The columns $++$, $+-$, and $+0$ denote similar, opposite charges, and configurations in which only one black hole is charged, respectively. The mismatch is computed from the $(\ell,m)=(2,2)$ gravitational waveform using the numerical relativity analysis package \texttt{kuibit}, after optimizing over relative time and polarization shifts. The values in parentheses give the approximate fixed parameter critical signal-to-noise ratio, $\rho_{\rm crit}\simeq 1/\sqrt{2\mathcal{M}}$. These values should be interpreted as rough waveform-separation estimates rather than full observational detection thresholds.}
 \label{tab:waveform_mismatches_combined}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -346,7 +339,7 @@ Table~\ref{tab:eccentricity_catalog} summarizes the measured orbital eccentricit
 
 \begin{table*}[htbp]
 \centering
-\caption{Measured orbital eccentricities for the EMDA waveform catalog. The entries are reported as $(\varepsilon_\Omega \pm \delta\varepsilon_\Omega)\times10^3$. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote similar charges, opposite charges, and cases in which only one black hole is charged, respectively.}
+\caption[EMDA binary black hole simulation eccentricities]{Measured orbital eccentricities for the EMDA waveform catalog. The entries are reported as $(\varepsilon_\Omega \pm \delta\varepsilon_\Omega)\times10^3$. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote similar charges, opposite charges, and cases in which only one black hole is charged, respectively.}
 \label{tab:eccentricity_catalog}
 \begin{tabular}{ccccccc}
 \toprule
@@ -406,7 +399,7 @@ The unequal mass $q=8$ simulation provides a more demanding numerical test than 
 \centering
 \includegraphics[width=0.65\textwidth]
 {Figures/Chapter_2/Constraints/q1/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-\caption{
+\caption[Constraint violations for the $q=1$ binary]{
 Hamiltonian and combined momentum-constraint violations for a
 representative $q=1$ binary evolution. The constraints remain
 controlled throughout the inspiral.
@@ -418,7 +411,7 @@ controlled throughout the inspiral.
 \centering
 \includegraphics[width=0.65\textwidth]
 {Figures/Chapter_2/Constraints/q8/emda_prof_Constraints_Hamiltonian_plus_MomentumSum.pdf}
-\caption{
+\caption[Constraint violations for the $q=8$ binary]{
 Hamiltonian and combined momentum-constraint violations for the
 $q=8$ binary evolution. Although the unequal mass system places
 greater demands on the adaptive mesh, the constraints remain
@@ -426,4 +419,5 @@ bounded throughout the simulation.
 }
 \label{fig:q8_constraints}
 \end{figure}
+
 

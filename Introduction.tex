@@ -16,13 +16,13 @@ with a network matched filter SNR of approximately $80$ \cite{Abac2025GW250114}.
 
 Interpreting gravitational wave detections requires accurate theoretical models of the expected signals. In practice, this is achieved by comparing observational data against waveform templates constructed from a combination of analytical approximations, phenomenological models, and numerical simulations. This template based comparison allows the physical properties of the source, including the component masses and spins, to be inferred statistically \cite{Veitch2015,Khan2016_IMRPhenomD}. Figure~\ref{fig:gw150914} shows the observed GW150914 signal compared with a numerical relativity waveform for a binary black hole merger.
 
-
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Figures/LIGO_measurement_of_gravitational_waves.svg.png}
-    \caption{The first gravitational wave signal detected by LIGO, GW150914. The observed strain data from the two LIGO detectors are shown together with a numerical relativity waveform, identifying the source as a binary black hole merger.}
-    \label{fig:gw150914}
+\centering
+\includegraphics[width=0.8\textwidth]{Figures/LIGO_measurement_of_gravitational_waves.svg.png}
+\caption[First gravitational wave detection, GW150914]{The first gravitational wave signal detected by LIGO, GW150914. The observed strain data from the two LIGO detectors are shown together with a numerical relativity waveform, identifying the source as a binary black hole merger.}
+\label{fig:gw150914}
 \end{figure}
+
 Constructing theoretical models of binary black hole mergers is challenging because the relevant dynamics are strongly nonlinear and only partially accessible through analytic methods. In general relativity, exact analytic solutions are typically restricted to highly symmetric systems and cannot describe the full inspiral, merger, and ringdown of a generic binary black hole system. Numerical relativity therefore plays an essential role in modeling the late inspiral, merger, and ringdown, where fully nonlinear effects are important. A number of numerical relativity codes have been developed for this purpose, including the Einstein Toolkit, SpEC, GRChombo, BAM, GR Athena++, and Dendro-GR \cite{Loffler2012,Boyle2019,Brugmann2008,Clough2015,Daszuta2021_GRAthena,Fernando2023}.
 
 Simulating binary black hole mergers is computationally demanding. These simulations require solving a coupled system of nonlinear partial differential equations in three spatial and one time dimension, across multiple length scales, including the scale of the individual black holes, the orbital scale of the binary, and the radiation zone where gravitational waves are extracted \cite{Baumgarte2010,BaumgarteShapiro2021}. In this work, we make use of the Dendro numerical relativity framework, which combines adaptive mesh refinement with scalable parallel algorithms for binary black hole simulations \cite{Fernando2019,Fernando2019b,Fernando2023}.
@@ -45,7 +45,7 @@ would significantly amplify this cost \cite{Boyle2019,Black2025_ORBIT}.
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/walltime.pdf}
-    \caption{Wall time of numerical relativity simulations as a function of mass ratio. As the mass ratio increases, the computational cost increases dramatically because the smaller black hole must be resolved with sufficient grid points. With current codes, performing a large number of high mass ratio simulations would therefore be prohibitively expensive.}
+    \caption[Simulation wall time versus mass ratio]{Wall time of numerical relativity simulations as a function of mass ratio. As the mass ratio increases, the computational cost increases dramatically because the smaller black hole must be resolved with sufficient grid points. With current codes, performing a large number of high mass ratio simulations would therefore be prohibitively expensive.}
     \label{fig:walltime}
 \end{figure}
 
@@ -237,7 +237,7 @@ This approach is more complicated than an explicit finite difference stencil bec
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{Figures/1stDerivativeSpectralIntTest.png}
-\caption{Spectral resolution of explicit and compact fourth order first derivative operators. The solid reference curve represents perfect resolution, and the dashed vertical line marks the cutoff frequency used in the optimization. The compact finite difference operator maintains better agreement with the ideal resolution curve over a wider range of wavenumbers.}
+\caption[Spectral resolution of fourth-order derivative operators]{Spectral resolution of explicit and compact fourth order first derivative operators. The solid reference curve represents perfect resolution, and the dashed vertical line marks the cutoff frequency used in the optimization. The compact finite difference operator maintains better agreement with the ideal resolution curve over a wider range of wavenumbers.}
 \label{fig:spectral_resolution}
 \end{figure}
 
