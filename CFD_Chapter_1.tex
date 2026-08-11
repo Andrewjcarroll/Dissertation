@@ -239,7 +239,7 @@ The parameter $\hat{y}$ is a value which will be used for optimizing the boundar
 
 Once we have solved the system above to find the coefficients of the extrapolation polynomial, we construct a centered stencil for each of the boundary nodes, substituting in the extrapolation polynomial at each of the grid points which lie beyond the domain. Finally, we can rearrange the resulting equations into the shifted stencils which can be implemented, and the shifted stencil boundary coefficients can be read off in terms of the free parameter $\hat{y}$ only.
 
-As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:  {\bf EWH:  Can you put this on a single line? It should probably get a number as well.  So, too, some of the subsequent equations. }  
+As with the approach to optimizing the interior scheme, we Fourier transform the shifted boundary stencils to define a spectral function. For the $m$th boundary node, we find:  %{\bf EWH:  Can you put this on a single line? It should probably get a number as well.  So, too, some of the subsequent equations. }  
 \begin{align}
 \bar{\kappa}_m(\kappa) &= \frac{1}{A_m(\kappa)^2 + B_m(\kappa)^2} \big[ A_m(\kappa) D_m(\kappa) - B_m(\kappa) C_m(\kappa) - i (A_m(\kappa) C_m(\kappa) + B_m(\kappa) D_m(\kappa)) \big],
 \end{align}
@@ -497,7 +497,8 @@ A^{\hat{\phi}}
 \frac{u e^{-\lambda u^2}+ v e^{-\lambda v^2}}{r}
 \right].
 \end{equation}
-The corresponding electric field is {\bf EWH:  Can you put this next equation on a single line?}   
+The corresponding electric field is 
+%{\bf EWH:  Can you put this next equation on a single line?}   
 \begin{equation}
 \label{eq:maxwell_dipole_electric_field}
 \begin{aligned}

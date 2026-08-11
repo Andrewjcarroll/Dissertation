@@ -336,14 +336,38 @@ Table~\ref{tab:waveform_mismatches_combined} summarizes the fixed parameter wave
 \label{sec:measured_eccentricities}
 
 Table~\ref{tab:eccentricity_catalog} summarizes the measured orbital eccentricities for the EMDA waveform catalog. The values are obtained from the orbital frequency eccentricity estimator described in Sec.~\ref{sec:eccentricity_control} and are reported as $(\varepsilon_\Omega \pm \delta\varepsilon_\Omega)\times10^3$.
-
+\FloatBarrier
 \begin{table*}[htbp]
 \centering
-\caption[EMDA binary black hole simulation eccentricities]{Measured orbital eccentricities for the EMDA waveform catalog. The entries are reported as $(\varepsilon_\Omega \pm \delta\varepsilon_\Omega)\times10^3$. Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the charge-to-mass ratio of black hole $i$. The neutral case corresponds to $Q_1=Q_2=0$. For charged configurations, the magnitude of the nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign structure indicated by the charge configuration. The configurations $++$, $+-$, and $+0$ denote similar charges, opposite charges, and cases in which only one black hole is charged, respectively.}
+\caption[EMDA binary black hole simulation eccentricities]
+{Measured orbital eccentricities for the EMDA waveform catalog.
+The entries are reported as
+$(\varepsilon_\Omega \pm \delta\varepsilon_\Omega)\times10^3$.
+Here $q=m_1/m_2$ denotes the mass ratio, $\chi$ denotes the
+dimensionless spin parameter, and $\lambda_i=Q_i/M_i$ denotes the
+charge-to-mass ratio of black hole $i$. The neutral case corresponds
+to $Q_1=Q_2=0$. For charged configurations, the magnitude of the
+nonzero charge-to-mass ratios is denoted by $\lambda$, with the sign
+structure indicated by the charge configuration. The configurations
+$++$, $+-$, and $+0$ denote similar charges, opposite charges, and
+cases in which only one black hole is charged, respectively.}
 \label{tab:eccentricity_catalog}
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{ccccccc}
 \toprule
-Mass Ratio $q$ & Spin $\chi$ & Charge Magnitude $\lambda$ & Neutral & $++$ & $+-$ & $+0$ \\
+Mass Ratio $q$ &
+Spin $\chi$ &
+Charge $\lambda$ &
+Neutral &
+$++$ &
+$+-$ &
+$+0$ \\
 \midrule
 1 & 0.0 & 0.10 & $1.59 \pm 0.21$ & $2.57 \pm 0.17$ & $1.97 \pm 0.27$ & $2.54 \pm 0.23$ \\
 1 & 0.0 & 0.20 & -- & $6.26 \pm 0.26$ & $3.52 \pm 0.35$ & $4.41 \pm 0.24$ \\
@@ -368,14 +392,17 @@ Mass Ratio $q$ & Spin $\chi$ & Charge Magnitude $\lambda$ & Neutral & $++$ & $+-
 \midrule
 8 & -0.2 & 0.10 & $4.88 \pm 61.91$ & $1.45 \pm 5.10$ & -- & -- \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
+
+\endgroup
 \end{table*}
 
-The eccentricity estimates for the $q=8$ configurations are poorly constrained compared with the rest of the catalog, as indicated by their large uncertainties. We therefore use these values only as rough indicators of the orbital behavior and do not place significant weight on them when interpreting the mismatch trends.
-
-{\bf EWH:  The table 3.3 leaks over the margins.  I don't care about it, but will the department/college/grad studies?  } 
-
-
+The eccentricity estimates for the $q=8$ configurations are poorly
+constrained compared with the rest of the catalog, as indicated by
+their large uncertainties. We therefore use these values only as rough
+indicators of the orbital behavior and do not place significant weight
+on them when interpreting the mismatch trends.
 \section{Constraint Behavior}
 \label{sec:constraints}
 

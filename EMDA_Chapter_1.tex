@@ -92,7 +92,7 @@ spin. We now summarize the Kerr--Sen black hole solution, which provides an exac
 
 \subsection{Kerr--Sen black holes}
 We present the Kerr--Sen solution in the Einstein frame, written in Boyer--Lindquist type coordinates. The metric takes the form
-{\bf EWH:  Can you put the following metric on a single line?}
+%{\bf EWH:  Can you put the following metric on a single line?}
 
 \begin{align}
 ds^2 &= -\left(1-\frac{2mr\cosh^2\alpha}{\rho^2}\right)dt^2 + \rho^2\left(\frac{dr^2}{\Delta}+d\theta^2\right) +\frac{\Sigma}{\rho^2}\sin^2\theta\, d\varphi^2
@@ -173,7 +173,7 @@ Starting from the action for EMDA as given in Eq.~\ref{EMDA_action}, we can deri
 %$\alpha_0=\alpha_1=1$, corresponding to a low energy limit of heterotic
 %string theory.
 These include the Einstein equations:
-{\bf EWH:  For the next, let's break this up on to two lines.}  
+%{\bf EWH:  For the next, let's break this up on to two lines.}  
 
 \begin{equation}
 G_{ab}
@@ -588,7 +588,7 @@ for which we define
 and where $m_i$, $q_i$ and $R_i$ here are the masses, electric charges and the coordinate distances from the origin of the BHs.  This is intended to correspond to two electrically charged BHs with the singular part of the conformal factor separated out with $u$ giving finite corrections, including the necessary corrections for the additional scalar fields. 
 
 On rearranging the Hamiltonian constraint in terms of $u$, we find
-{\bf EWH:  Fix the next two equations.  Put each on a single line if possible in an aligned environment.} 
+%{\bf EWH:  Fix the next two equations.  Put each on a single line if possible in an aligned environment.} 
 \begin{equation}
     \partial_k\partial^k u = -\frac{1}{\bar{\kappa}} \Big(
     \partial_a \bar{\kappa} \partial^a \bar{\kappa} 
@@ -619,7 +619,8 @@ with a subsequent rescaling by $e^{2 \alpha_0 \phi}$ with the dilaton and axion 
 \phi &= \phi_1(r_1,\theta_1) + \phi_2(r_2, \theta_2) \\
 \kappa &= \kappa_1(r_1,\theta_1) + \kappa_2(r_2, \theta_2)
 \end{align}
-where {\bf EWH:  Check this equation reference.  For me it was broken.}  Eqs.~\eqref{Kerr-Sen_dilaton} and~\eqref{Kerr-Sen_axion}
+where Eqs.~\eqref{Kerr-Sen_dilaton} and~\eqref{Kerr-Sen_axion}
+%{\bf EWH:  Check this equation reference.  For me it was broken.}
 give the forms of the dilaton and axion fields, respectively, for a
 single Kerr--Sen black hole (albeit in Boyer--Lindquist-type coordinates)
 for our current theory parameters $(\alpha_0,\alpha_1)=(1,1)$.
@@ -776,61 +777,95 @@ Having described the main region of parameter space explored here, we now summar
 \subsection{Summary of tests done}
 \label{sec:appx:sim_tab}
 In addition to some of the tests mentioned earlier in the chapter, we have also performed a broader set of simulations to test how the late time dilaton and axion fields depend on the initial charges and spins of the binary components. In particular, we considered Kerr--Sen binaries with similar and opposite charges, spin aligned and spin anti-aligned configurations, as well as mergers involving neutral GR black holes. For binaries with opposite charges, the net charge vanishes and the remnant settles to a Kerr black hole, with neither a persistent dilaton nor axion field. For binaries with similar charges but oppositely aligned spins, the axion field decays, while the dilaton field remains nontrivial, corresponding to an EMD like remnant. We further find that when charged, spinless black holes are merged with Kerr black holes, both axion and dilaton fields persist. Finally, we find that mergers of initially nonscalarized Kerr--Newman black holes produce remnants with both dilaton and axion hair. The configurations considered are summarized in Table~\ref{tab:bh_hair_combined}, where a green check mark indicates that the corresponding field remains persistent and nontrivial at late times.
-{\bf EWH:  The next two tables appear across a page break.  It would be well to have them on a single page.  Also, it appears to be too wide in my pdf version.  Will that be a problem for the department or graduate studies?} 
 
+\FloatBarrier
+\begin{table}[p]
+\centering
+\caption{Binary black hole configurations.}
+\label{tab:bh_hair_combined}
 
-\begin{center}
-{\label{tab:bh_hair_combined}%
-Binary black hole configurations }
 \begingroup
 \footnotesize
-\setlength{\tabcolsep}{8pt}
-\renewcommand{\arraystretch}{1.1}
-
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
 
 % ---------- FIRST SECTION ----------
-\textbf{(a) Kerr--Sen Same Sign Charge and Spin Aligned Black Hole Tests} \\[0.4em]
-\begin{tabular}{lllcc}
-$(\chi_1, q_1)$ & $(\chi_2, q_2)$ & \textrm{Dilaton $\boldsymbol{\phi}$} & \textrm{Axion $\boldsymbol{\kappa}$} \\ \hline
-$\chi_1 = 0.10$, $q_1 \in \{0.0624, 0.125, 0.25, 0.50\}$ &
-$\chi_2 = 0.10$, $q_2 \in \{0.0624, 0.125, 0.25, 0.50\}$ &
-\cmark & \cmark \\[0.3em]
-$\chi_1 = 0.20$, $q_1 \in \{0.0624, 0.125, 0.25, 0.50\}$ &
-$\chi_2 \in \{0.10, 0.20\}$, $q_2$ as above &
-\cmark & \cmark \\[0.3em]
-$\chi_1 = 0.40$, $q_1 \in \{0.0624, 0.125, 0.25, 0.50\}$ &
-$\chi_2 \in \{0.10, 0.20, 0.40\}$, $q_2 \in \{0.0624, 0.125, 0.25, 0.50\}$ &
-\cmark & \cmark \\
-\end{tabular}
+\textbf{(a) Kerr--Sen Same-Sign Charge and Spin-Aligned Black Hole Tests}
+\vspace{0.4em}
 
-\vspace{1.2em} % spacing between subtables
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X
+                                  >{\raggedright\arraybackslash}X
+                                  cc@{}}
+\toprule
+$(\chi_1,q_1)$ &
+$(\chi_2,q_2)$ &
+\textrm{Dilaton $\boldsymbol{\phi}$} &
+\textrm{Axion $\boldsymbol{\kappa}$} \\
+\midrule
+
+$\chi_1=0.10$, 
+$q_1\in\{0.0624,0.125,0.25,0.50\}$ &
+$\chi_2=0.10$, 
+$q_2\in\{0.0624,0.125,0.25,0.50\}$ &
+\cmark & \cmark \\[0.3em]
+
+$\chi_1=0.20$, 
+$q_1\in\{0.0624,0.125,0.25,0.50\}$ &
+$\chi_2\in\{0.10,0.20\}$, 
+$q_2$ as above &
+\cmark & \cmark \\[0.3em]
+
+$\chi_1=0.40$, 
+$q_1\in\{0.0624,0.125,0.25,0.50\}$ &
+$\chi_2\in\{0.10,0.20,0.40\}$,
+$q_2\in\{0.0624,0.125,0.25,0.50\}$ &
+\cmark & \cmark \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1em}
 
 % ---------- SECOND SECTION ----------
-\textbf{(b) Collisions with Other Black Holes} \\[0.4em]
-\begin{tabular}{llcc}
-\textrm{Black Hole 1 $(q,\chi)$} & \textrm{Black Hole 2 $(q,\chi)$} & $\boldsymbol{\phi}$ & $\boldsymbol{\kappa}$ \\
-\hline
-Kerr--Sen $(0.5,\,0.4)$   & Kerr--Sen $(0.5,\,0.4)$   & \cmark & \cmark \\
-Kerr--Sen $(0.5,\,0.4)$   & Kerr $(0.0,\,0.4)$        & \cmark & \cmark \\
-Kerr--Sen $(0.5,\,0.4)$   & Kerr--Sen $(-0.5,\,0.4)$  & \xmark & \xmark \\
-Kerr--Sen $(0.5,\,-0.4)$  & Kerr--Sen $(0.5,\,0.4)$   & \cmark & \xmark \\
-EMD $(0.5,\,0.0)$          & Kerr $(0.0,\,0.4)$        & \cmark & \cmark \\
-KN $(0.5,\,0.4)^{\dagger}$& KN $(0.5,\,0.4)^{\dagger}$& \cmark & \cmark \\
-\end{tabular}
+\textbf{(b) Collisions with Other Black Holes}
+\vspace{0.4em}
 
-\endgroup
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X
+                                  >{\raggedright\arraybackslash}X
+                                  cc@{}}
+\toprule
+\textrm{Black Hole 1 $(q,\chi)$} &
+\textrm{Black Hole 2 $(q,\chi)$} &
+$\boldsymbol{\phi}$ &
+$\boldsymbol{\kappa}$ \\
+\midrule
+Kerr--Sen $(0.5,\,0.4)$    & Kerr--Sen $(0.5,\,0.4)$    & \cmark & \cmark \\
+Kerr--Sen $(0.5,\,0.4)$    & Kerr $(0.0,\,0.4)$         & \cmark & \cmark \\
+Kerr--Sen $(0.5,\,0.4)$    & Kerr--Sen $(-0.5,\,0.4)$   & \xmark & \xmark \\
+Kerr--Sen $(0.5,\,-0.4)$   & Kerr--Sen $(0.5,\,0.4)$    & \cmark & \xmark \\
+EMD $(0.5,\,0.0)$           & Kerr $(0.0,\,0.4)$         & \cmark & \cmark \\
+KN $(0.5,\,0.4)^{\dagger}$ & KN $(0.5,\,0.4)^{\dagger}$ & \cmark & \cmark \\
+\bottomrule
+\end{tabularx}
 
 \vspace{0.5em}
+
+\begin{minipage}{\textwidth}
 \footnotesize
-\noindent
-$^{\dagger}$ These configurations were initialized as nonscalarized
+$^{\dagger}$These configurations were initialized as nonscalarized
 Kerr--Newman black holes.
 
+\medskip
+
+\noindent
 Abbreviations: EMD denotes Einstein--Maxwell--dilaton, corresponding here to
 a charged black hole with dilaton hair; KN denotes Kerr--Newman, corresponding
 to a black hole with charge and spin; and Kerr--Sen denotes a rotating charged
 black hole with dilaton and axion hair.
-\end{center}
+\end{minipage}
+
+\endgroup
+\end{table}
+\FloatBarrier
 
 Having summarized the qualitative late time behavior across the full set of configurations, we now examine one representative case in more detail. This example illustrates the gravitational and electromagnetic radiation produced during a head on Kerr--Sen collision and provides a concrete example of the waveform and flux diagnostics used in the simulations.
 

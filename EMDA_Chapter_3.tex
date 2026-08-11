@@ -179,14 +179,13 @@ The electromagnetic radiation shows a clearer dependence on the coupling paramet
 Taken together, these results suggest that coupling dependent effects are subtle in the gravitational radiation at small charge, but are more visible in the electromagnetic sector. Because the simulations use approximate initial data, very small waveform differences may be affected by relaxation effects, finite resolution error, and waveform extraction uncertainty rather than only by physical coupling dependence. Larger charges, longer inspirals, improved initial data, and explicit convergence tests may be required to clearly separate physical effects from numerical and initial data uncertainties.
 
 Future work could potentially look at improving the initial data by adding axion contributions and improving the initial electric field used in the TPID solver. We could also perform higher charge or higher spin runs to test a wider range of Kerr--Sen configurations. Another study could examine different parts of the EMDA parameter space, including cases where the two couplings are not equal, $\alpha_0 \neq \alpha_1$.
-
 \subsection{Mismatch summary}
 
-{\bf EWH:  Perhaps you intended this with the FloatBarrier below, but on my pdf, the section heading is in the top 20\% of the page and the actual table is on the next page.  If you wanted that, I guess it's fine, but it does seem like an awful lot of white space for a table I would think should fit on a single page.} 
-
-\FloatBarrier
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
+\caption[EMDA interpolated mismatch table]{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational strain mode. The mismatches are small, so most of these waveforms should be considered effectively indistinguishable within the accuracy of the present simulations. In this regime, finite resolution, approximate initial data, and other numerical effects may contribute more to the measured mismatch than the scalar and pseudoscalar fields themselves.}
+\label{tab:emda_coupling_mismatches}
+
 \begin{tabular}{lccc}
 \hline
 Theory & $q=0.05,\,+0$ & $q=0.05,\,+-$ & $q=0.05,\,++$ \\
@@ -213,6 +212,4 @@ EMDA $(\alpha_0,\alpha_1)=(100,100)$
 & $3.91\times 10^{-6}$ \\
 \hline
 \end{tabular}
-\caption[EMDA interpolated mismatch table]{Mismatch between the Einstein--Maxwell reference waveform, $(\alpha_0,\alpha_1)=(0,0)$, and the waveforms obtained for different coupling choices. The comparisons use the dominant $\ell=m=2$ gravitational strain mode. The mismatches are small, so most of these waveforms should be considered effectively indistinguishable within the accuracy of the present simulations. In this regime, finite resolution, approximate initial data, and other numerical effects may contribute more to the measured mismatch than the scalar and pseudoscalar fields themselves.}
-\label{tab:emda_coupling_mismatches}
 \end{table}
