@@ -102,7 +102,7 @@
         Department of Physics and Astronomy\\[\baselineskip]
         Brigham Young University\\[\baselineskip]
         \vfill
-        Copyright \copyright\ \BYUField@Year~~\BYUField@Author\\[\baselineskip]
+        Copyright \copyright\ \BYUField@Year\ \BYUField@Author\\[\baselineskip]
         All Rights Reserved\par
         }
         \clearemptydoublepage
@@ -114,7 +114,10 @@
         \providecommand\pdfbookmark[3][]{} \pdfbookmark[0]{Abstract}{bm:Abstract}
         ABSTRACT\\[1\baselineskip]\par
         \renewcommand{\baselinestretch}{1} \small\normalsize
-        \parbox{\textwidth}{\centering\BYUField@Title}\\[1\baselineskip]\par
+        \parbox{\textwidth}{\centering
+        Black Hole Dynamics and Improving Waveforms in Einstein--Maxwell--Dilaton--Axion\\
+        Theory
+        }\\[1\baselineskip]\par
         \mbox{\BYUField@Author}\\
         Department of Physics and Astronomy, BYU\\
         \mbox{\BYUField@Degree}\par
